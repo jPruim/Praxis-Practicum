@@ -1,7 +1,11 @@
 extends Node2D
 
+# Signals
 signal hovered
 signal hovered_off
+
+# Properties
+var hand_position: Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

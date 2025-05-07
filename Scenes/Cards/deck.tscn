@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvfwf0hvp8bep"]
+
+[ext_resource type="Texture2D" uid="uid://42543ow2lye3" path="res://Assets/Cards/Card Back.png" id="1_h2grd"]
+[ext_resource type="Script" path="res://Scripts/deck.gd" id="1_thb5r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_163l4"]
+size = Vector2(152, 231)
+
+[node name="Deck" type="Node2D"]
+z_index = -5
+script = ExtResource("1_thb5r")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1, -1.5)
+shape = SubResource("RectangleShape2D_163l4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(5, 5)
+texture = ExtResource("1_h2grd")
+
+[node name="DeckCount" type="RichTextLabel" parent="."]
+modulate = Color(0.282353, 0.282353, 0.282353, 1)
+offset_left = -70.0
+offset_top = -115.0
+offset_right = -30.0
+offset_bottom = -75.0
+text = "0
+"

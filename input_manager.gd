@@ -1,0 +1,53 @@
+extends Node2D
+
+
+signal left_mouse_button_clicked
+signal left_mouse_button_released
+
+
+# Masks
+const CARD_COLLISION_MASK = 1
+const CARD_SLOT_COLLISION_MASK = 2
+const DECK_COLLISION_MASK = 4
+
+# Properties
+var card_manager
+var deck
+
+
+func _ready() -> void:
+	card_manager = $"../CardManager"
+	deck = $"../Deck"
+	
+
+func _input(event: InputEvent) -> void:
+	#mouse events
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				raycast_check_at_cursor()
+				emit_signal("left_mouse_button_clicked")
+			else:
+				emit_signal("left_mouse_button_released")
+				pass
+			
+
+func raycast_check_at_cursor():
+	var space_state = get_world_2d().direct_space_state
+	var parameters = PhysicsPointQueryParameters2D.new()
+	parameters.position = get_global_mouse_position()
+	parameters.collide_with_areas = true
+	var result = space_state.intersect_point(parameters)
+	
+	# if over an area
+	if result.size() > 0:
+		var collision_mask = result[0].collider.collision_mask
+		if collision_mask == CARD_COLLISION_MASK:
+				# Cursor on Card
+			var card_found = result[0].collider.get_parent()
+			if card_found:
+				card_manager.start_drag(card_found)
+		elif collision_mask == DECK_COLLISION_MASK:
+				# Cursor on Deck
+				deck.draw_card()
+	return null	

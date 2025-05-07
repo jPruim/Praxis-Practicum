@@ -1,2 +1,19 @@
+Guides:
 https://www.youtube.com/watch?v=WjT5sLMD7Kw&ab_channel=AdventuresinGodot
 https://www.youtube.com/watch?v=2jMcuKdRh2w&ab_channel=Barry%27sDevelopmentHell
+
+Backgrounds:
+https://brullov.itch.io/oak-woods
+
+Effects:
+https://ragnapixel.itch.io/particle-fx
+
+
+
+
+Z-Index:
+	Background -100
+	Deck -5
+	Card 1
+	Card Hovered 10
+	
