@@ -1,0 +1,183 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2gbemxiigrbl"]
+
+[ext_resource type="Script" path="res://Scenes/Cards/card_base.gd" id="1_knr6q"]
+[ext_resource type="Texture2D" uid="uid://decv31wtj1g4v" path="res://Assets/Cards/Card Borders etc/cardborder.png" id="2_un6ic"]
+[ext_resource type="Texture2D" uid="uid://c82uy1r65nnb3" path="res://Assets/Cards/Card Borders etc/background shade.png" id="3_8slf0"]
+[ext_resource type="FontFile" uid="uid://pmmon68xju6f" path="res://Assets/font/Comfortaa-Bold.ttf" id="4_r8idb"]
+
+[node name="CardBase" type="MarginContainer"]
+custom_minimum_size = Vector2(250, 350)
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(125, 175)
+script = ExtResource("1_knr6q")
+cardName = null
+
+[node name="CardArt" type="Sprite2D" parent="."]
+centered = false
+
+[node name="Border" type="Sprite2D" parent="."]
+texture = ExtResource("2_un6ic")
+centered = false
+
+[node name="Zones" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TopMargin" type="MarginContainer" parent="Zones"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="CardNameBox" type="HBoxContainer" parent="Zones"]
+custom_minimum_size = Vector2(25, 20)
+layout_mode = 2
+
+[node name="LeftMargin" type="MarginContainer" parent="Zones/CardNameBox"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="NameBox" type="MarginContainer" parent="Zones/CardNameBox"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Zones/CardNameBox/NameBox"]
+layout_mode = 2
+texture = ExtResource("3_8slf0")
+
+[node name="CenterContainer" type="CenterContainer" parent="Zones/CardNameBox/NameBox"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="Zones/CardNameBox/NameBox/CenterContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_r8idb")
+text = "Footman"
+
+[node name="MarginContainer" type="MarginContainer" parent="Zones/CardNameBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NameBox2" type="MarginContainer" parent="Zones/CardNameBox"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Zones/CardNameBox/NameBox2"]
+layout_mode = 2
+texture = ExtResource("3_8slf0")
+
+[node name="CenterContainer" type="CenterContainer" parent="Zones/CardNameBox/NameBox2"]
+layout_mode = 2
+
+[node name="Cost" type="Label" parent="Zones/CardNameBox/NameBox2/CenterContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_r8idb")
+text = "1
+"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Zones/CardNameBox"]
+custom_minimum_size = Vector2(25, 18)
+layout_mode = 2
+
+[node name="ImageSpacer" type="MarginContainer" parent="Zones"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CardTypeBox" type="HBoxContainer" parent="Zones"]
+custom_minimum_size = Vector2(25, 20)
+layout_mode = 2
+
+[node name="LeftMargin" type="MarginContainer" parent="Zones/CardTypeBox"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="NameBox" type="MarginContainer" parent="Zones/CardTypeBox"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Zones/CardTypeBox/NameBox"]
+layout_mode = 2
+texture = ExtResource("3_8slf0")
+
+[node name="CenterContainer" type="CenterContainer" parent="Zones/CardTypeBox/NameBox"]
+layout_mode = 2
+
+[node name="Type" type="Label" parent="Zones/CardTypeBox/NameBox/CenterContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_r8idb")
+text = "Summon
+"
+
+[node name="MarginContainer" type="MarginContainer" parent="Zones/CardTypeBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NameBox2" type="MarginContainer" parent="Zones/CardTypeBox"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Zones/CardTypeBox/NameBox2"]
+layout_mode = 2
+texture = ExtResource("3_8slf0")
+
+[node name="CenterContainer" type="CenterContainer" parent="Zones/CardTypeBox/NameBox2"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Zones/CardTypeBox"]
+custom_minimum_size = Vector2(25, 18)
+layout_mode = 2
+
+[node name="TypeMargin" type="MarginContainer" parent="Zones"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="CardTextBox" type="HBoxContainer" parent="Zones"]
+custom_minimum_size = Vector2(25, 20)
+layout_mode = 2
+
+[node name="LeftMargin" type="MarginContainer" parent="Zones/CardTextBox"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="NameBox" type="MarginContainer" parent="Zones/CardTextBox"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Zones/CardTextBox/NameBox"]
+layout_mode = 2
+texture = ExtResource("3_8slf0")
+
+[node name="CenterContainer" type="CenterContainer" parent="Zones/CardTextBox/NameBox"]
+layout_mode = 2
+
+[node name="Attack" type="Label" parent="Zones/CardTextBox/NameBox/CenterContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_r8idb")
+text = "1"
+
+[node name="MarginContainer" type="MarginContainer" parent="Zones/CardTextBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NameBox2" type="MarginContainer" parent="Zones/CardTextBox"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Zones/CardTextBox/NameBox2"]
+layout_mode = 2
+texture = ExtResource("3_8slf0")
+
+[node name="CenterContainer" type="CenterContainer" parent="Zones/CardTextBox/NameBox2"]
+layout_mode = 2
+
+[node name="Health" type="Label" parent="Zones/CardTextBox/NameBox2/CenterContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_r8idb")
+text = "1
+"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Zones/CardTextBox"]
+custom_minimum_size = Vector2(25, 18)
+layout_mode = 2
+
+[node name="BotMargin" type="MarginContainer" parent="Zones"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2

@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://dws2mhcfu18v7"]
+
+[ext_resource type="Script" path="res://Scenes/Playspace/playspace.gd" id="1_bvhmv"]
+[ext_resource type="Texture2D" uid="uid://dnrptv1yxcyvv" path="res://Assets/Background/Background.jpg" id="2_5icol"]
+[ext_resource type="Script" path="res://Scenes/Cards/card_base.gd" id="3_seso1"]
+[ext_resource type="PackedScene" uid="uid://c2gbemxiigrbl" path="res://Scenes/Cards/card_base.tscn" id="4_7jkbm"]
+
+[node name="Playspace" type="Node2D"]
+script = ExtResource("1_bvhmv")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(961, 565)
+texture = ExtResource("2_5icol")
+
+[node name="CardManager" type="Node2D" parent="."]
+script = ExtResource("3_seso1")
+
+[node name="Card" parent="CardManager" instance=ExtResource("4_7jkbm")]
+position = Vector2(606, 369)
