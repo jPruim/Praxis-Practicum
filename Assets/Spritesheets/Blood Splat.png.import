@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blpkd3ubifqrb"
-path="res://.godot/imported/BackgroundImage.png-c050505afdd24c52c4a151faa9c55f02.ctex"
+uid="uid://cwx4twsnpjir7"
+path="res://.godot/imported/Blood Splat.png-89ec0ecaf3be79328471dead28edce37.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Cards/Card Borders etc/BackgroundImage.png"
-dest_files=["res://.godot/imported/BackgroundImage.png-c050505afdd24c52c4a151faa9c55f02.ctex"]
+source_file="res://Assets/Spritesheets/Blood Splat.png"
+dest_files=["res://.godot/imported/Blood Splat.png-89ec0ecaf3be79328471dead28edce37.ctex"]
 
 [params]
 

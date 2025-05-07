@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c82uy1r65nnb3"
-path="res://.godot/imported/background shade.png-76ef9c808b5dd06d961cd3062529708c.ctex"
+uid="uid://bcpqw7k1rbwts"
+path="res://.godot/imported/Eletric A-Sheet.png-be31eb410d70501655ada96f2b6213c4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Cards/Card Borders etc/background shade.png"
-dest_files=["res://.godot/imported/background shade.png-76ef9c808b5dd06d961cd3062529708c.ctex"]
+source_file="res://Assets/Spritesheets/Eletric A-Sheet.png"
+dest_files=["res://.godot/imported/Eletric A-Sheet.png-be31eb410d70501655ada96f2b6213c4.ctex"]
 
 [params]
 

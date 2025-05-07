@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvwwrr48vw8u4"
-path="res://.godot/imported/Gold_Border.png-eb60a39a845bdb6b0ac9287f205254a1.ctex"
+uid="uid://b3m7eljm0f2qf"
+path="res://.godot/imported/Smoke2-Sheet.png-3959b5b343176907ed1e88bc7a5e0521.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Cards/Card Borders etc/Gold_Border.png"
-dest_files=["res://.godot/imported/Gold_Border.png-eb60a39a845bdb6b0ac9287f205254a1.ctex"]
+source_file="res://Assets/Spritesheets/Smoke2-Sheet.png"
+dest_files=["res://.godot/imported/Smoke2-Sheet.png-3959b5b343176907ed1e88bc7a5e0521.ctex"]
 
 [params]
 

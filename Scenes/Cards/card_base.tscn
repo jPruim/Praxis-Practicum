@@ -1,184 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://c2gbemxiigrbl"]
+[gd_scene load_steps=4 format=3 uid="uid://c2gbemxiigrbl"]
 
 [ext_resource type="Script" path="res://Scenes/Cards/card_base.gd" id="1_knr6q"]
-[ext_resource type="Script" path="res://Scenes/Cards/visuals.gd" id="2_jk8dk"]
-[ext_resource type="Texture2D" uid="uid://decv31wtj1g4v" path="res://Assets/Cards/Card Borders etc/cardborder.png" id="2_un6ic"]
-[ext_resource type="Texture2D" uid="uid://c82uy1r65nnb3" path="res://Assets/Cards/Card Borders etc/background shade.png" id="3_8slf0"]
-[ext_resource type="FontFile" uid="uid://pmmon68xju6f" path="res://Assets/font/Comfortaa-Bold.ttf" id="4_r8idb"]
+[ext_resource type="Texture2D" uid="uid://c1nji5xbl2vhg" path="res://Assets/Cards/Card Borders etc/Card Border.png" id="2_ckbpb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qs3p7"]
+size = Vector2(320, 466)
 
 [node name="CardBase" type="Node2D"]
-position = Vector2(112, 153)
 script = ExtResource("1_knr6q")
 
-[node name="Visuals" type="MarginContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("2_jk8dk")
+[node name="Area2D" type="Area2D" parent="."]
 
-[node name="CardArt" type="Sprite2D" parent="Visuals"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_qs3p7")
 
-[node name="Border" type="Sprite2D" parent="Visuals"]
-texture = ExtResource("2_un6ic")
-
-[node name="Zones" type="VBoxContainer" parent="Visuals"]
-visible = false
-layout_mode = 2
-
-[node name="TopMargin" type="MarginContainer" parent="Visuals/Zones"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-
-[node name="CardNameBox" type="HBoxContainer" parent="Visuals/Zones"]
-custom_minimum_size = Vector2(25, 20)
-layout_mode = 2
-
-[node name="LeftMargin" type="MarginContainer" parent="Visuals/Zones/CardNameBox"]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-
-[node name="TextBoxName" type="MarginContainer" parent="Visuals/Zones/CardNameBox"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Visuals/Zones/CardNameBox/TextBoxName"]
-layout_mode = 2
-texture = ExtResource("3_8slf0")
-
-[node name="CenterContainer" type="CenterContainer" parent="Visuals/Zones/CardNameBox/TextBoxName"]
-layout_mode = 2
-
-[node name="Name" type="Label" parent="Visuals/Zones/CardNameBox/TextBoxName/CenterContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_r8idb")
-text = "Footman"
-
-[node name="MarginContainer" type="MarginContainer" parent="Visuals/Zones/CardNameBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="TextBoxCost" type="MarginContainer" parent="Visuals/Zones/CardNameBox"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Visuals/Zones/CardNameBox/TextBoxCost"]
-layout_mode = 2
-texture = ExtResource("3_8slf0")
-
-[node name="CenterContainer" type="CenterContainer" parent="Visuals/Zones/CardNameBox/TextBoxCost"]
-layout_mode = 2
-
-[node name="Cost" type="Label" parent="Visuals/Zones/CardNameBox/TextBoxCost/CenterContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_r8idb")
-text = "1
-"
-
-[node name="MarginContainer2" type="MarginContainer" parent="Visuals/Zones/CardNameBox"]
-custom_minimum_size = Vector2(25, 18)
-layout_mode = 2
-
-[node name="ImageSpacer" type="MarginContainer" parent="Visuals/Zones"]
-custom_minimum_size = Vector2(0, 120)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="CardTextBox" type="HBoxContainer" parent="Visuals/Zones"]
-custom_minimum_size = Vector2(25, 20)
-layout_mode = 2
-
-[node name="LeftMargin" type="MarginContainer" parent="Visuals/Zones/CardTextBox"]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-
-[node name="TextBoxText" type="MarginContainer" parent="Visuals/Zones/CardTextBox"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Visuals/Zones/CardTextBox/TextBoxText"]
-layout_mode = 2
-texture = ExtResource("3_8slf0")
-
-[node name="CenterContainer" type="CenterContainer" parent="Visuals/Zones/CardTextBox/TextBoxText"]
-layout_mode = 2
-
-[node name="Text" type="Label" parent="Visuals/Zones/CardTextBox/TextBoxText/CenterContainer"]
-layout_mode = 2
-
-[node name="RightMargin" type="MarginContainer" parent="Visuals/Zones/CardTextBox"]
-custom_minimum_size = Vector2(25, 18)
-layout_mode = 2
-
-[node name="CardStatBox" type="HBoxContainer" parent="Visuals/Zones"]
-custom_minimum_size = Vector2(25, 20)
-layout_mode = 2
-
-[node name="LeftMargin" type="MarginContainer" parent="Visuals/Zones/CardStatBox"]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-
-[node name="TextBoxAttack" type="MarginContainer" parent="Visuals/Zones/CardStatBox"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Visuals/Zones/CardStatBox/TextBoxAttack"]
-layout_mode = 2
-texture = ExtResource("3_8slf0")
-
-[node name="CenterContainer" type="CenterContainer" parent="Visuals/Zones/CardStatBox/TextBoxAttack"]
-layout_mode = 2
-
-[node name="Attack" type="Label" parent="Visuals/Zones/CardStatBox/TextBoxAttack/CenterContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_r8idb")
-text = "1"
-
-[node name="MarginContainer" type="MarginContainer" parent="Visuals/Zones/CardStatBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="TextBoxType" type="MarginContainer" parent="Visuals/Zones/CardStatBox"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Visuals/Zones/CardStatBox/TextBoxType"]
-layout_mode = 2
-texture = ExtResource("3_8slf0")
-
-[node name="CenterContainer" type="CenterContainer" parent="Visuals/Zones/CardStatBox/TextBoxType"]
-layout_mode = 2
-
-[node name="Type" type="Label" parent="Visuals/Zones/CardStatBox/TextBoxType/CenterContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_r8idb")
-text = "Summon
-"
-
-[node name="MarginContainer3" type="MarginContainer" parent="Visuals/Zones/CardStatBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="TextBoxHealth" type="MarginContainer" parent="Visuals/Zones/CardStatBox"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Visuals/Zones/CardStatBox/TextBoxHealth"]
-layout_mode = 2
-texture = ExtResource("3_8slf0")
-
-[node name="CenterContainer" type="CenterContainer" parent="Visuals/Zones/CardStatBox/TextBoxHealth"]
-layout_mode = 2
-
-[node name="Health" type="Label" parent="Visuals/Zones/CardStatBox/TextBoxHealth/CenterContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_r8idb")
-text = "1
-"
-
-[node name="MarginContainer2" type="MarginContainer" parent="Visuals/Zones/CardStatBox"]
-custom_minimum_size = Vector2(25, 18)
-layout_mode = 2
-
-[node name="BotMargin" type="MarginContainer" parent="Visuals/Zones"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
+[node name="CardBorder" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(3.8147e-06, -2)
+scale = Vector2(10, 9.671)
+texture = ExtResource("2_ckbpb")

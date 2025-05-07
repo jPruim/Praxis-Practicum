@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkg26tfog6oh"
-path="res://.godot/imported/background shade.png-ad00668130d98b8f783a2df76ced6f58.ctex"
+uid="uid://c7bur00e2dtcp"
+path="res://.godot/imported/Flamethrower-Sheet.png-d61d61ad33aee631a2f268427240a7ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/GUI/background shade.png"
-dest_files=["res://.godot/imported/background shade.png-ad00668130d98b8f783a2df76ced6f58.ctex"]
+source_file="res://Assets/Spritesheets/Flamethrower-Sheet.png"
+dest_files=["res://.godot/imported/Flamethrower-Sheet.png-d61d61ad33aee631a2f268427240a7ee.ctex"]
 
 [params]
 

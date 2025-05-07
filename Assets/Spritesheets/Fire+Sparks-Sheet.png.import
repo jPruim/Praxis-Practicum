@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dl3hhnh861d1t"
-path="res://.godot/imported/CardBase2.png-8ee2408aae55f3a026ba868c3d428101.ctex"
+uid="uid://b86eno3qbpy5v"
+path="res://.godot/imported/Fire+Sparks-Sheet.png-f9d5159877397804b138a1dc048227bf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/GUI/CardBase2.png"
-dest_files=["res://.godot/imported/CardBase2.png-8ee2408aae55f3a026ba868c3d428101.ctex"]
+source_file="res://Assets/Spritesheets/Fire+Sparks-Sheet.png"
+dest_files=["res://.godot/imported/Fire+Sparks-Sheet.png-f9d5159877397804b138a1dc048227bf.ctex"]
 
 [params]
 
