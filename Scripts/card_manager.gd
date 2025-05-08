@@ -87,12 +87,17 @@ func on_hovered_off_card(card):
 	
 # Change card affects
 func card_affects(card, hovered: bool):
+	var animation_sprite = card.get_node("Container").get_node("AnimatedSprite2D")
 	if hovered:
 		card.scale = Vector2(1.05, 1.05)
 		card.z_index = 10
+		# Play Animation
+		animation_sprite.play()
 	else:
 		card.scale  = Vector2( 1, 1)
 		card.z_index = 1
+		# Pause Animation
+		animation_sprite.pause()
 		
 # Returns the top card from a raycast result
 func get_top_card(results):
@@ -137,4 +142,5 @@ func end_drag():
 func on_left_click_release():
 	if card_being_dragged:
 		end_drag()
-	
+		
+		
