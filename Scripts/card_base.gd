@@ -34,19 +34,35 @@ func _on_area_2d_mouse_exited() -> void:
 # Order (database ENUM) { DISPLAY_NAME, CARD_TYPE, CAST_TIME, SUMMON_ATTACK, SUMMON_HEALTH, DIRECT_DAMAGE, DAMAGE_TYPE, DIRECT_BLOCK, CARD_TEXT, ANIMATION }
 func set_all(array):
 	card_database = preload("res://Scripts/CardDatabase.gd") # No idea why this needs to be called here TODO: move ENUM to an autoload
-	$Name.text = str(array[card_database.CARD_INFO.DISPLAY_NAME])
-	$Attack.text = str(array[card_database.CARD_INFO.SUMMON_ATTACK])
-	$Health.text = str(array[card_database.CARD_INFO.SUMMON_HEALTH])
-	$Details.text = str(array[card_database.CARD_INFO.CARD_TEXT])
-	$Cost.text = str(array[card_database.CARD_INFO.CAST_TIME])
-	$Type.text = str(array[card_database.CARD_INFO.DISPLAY_NAME])
-	$DirectDamage.text = str(array[card_database.CARD_INFO.DIRECT_DAMAGE])
-	$DamageType.text = str(array[card_database.CARD_INFO.DAMAGE_TYPE])
-	$DirectBlock.text = str(array[card_database.CARD_INFO.DIRECT_BLOCK])
+	$CardFront/Name.text = str(array[card_database.CARD_INFO.DISPLAY_NAME])
+	$CardFront/Attack.text = str(array[card_database.CARD_INFO.SUMMON_ATTACK])
+	$CardFront/Health.text = str(array[card_database.CARD_INFO.SUMMON_HEALTH])
+	$CardFront/Details.text = str(array[card_database.CARD_INFO.CARD_TEXT])
+	$CardFront/Cost.text = str(array[card_database.CARD_INFO.CAST_TIME])
+	$CardFront/Type.text = str(array[card_database.CARD_INFO.DISPLAY_NAME])
+	$CardFront/DirectDamage.text = str(array[card_database.CARD_INFO.DIRECT_DAMAGE])
+	$CardFront/DamageType.text = str(array[card_database.CARD_INFO.DAMAGE_TYPE])
+	$CardFront/DirectBlock.text = str(array[card_database.CARD_INFO.DIRECT_BLOCK])
+	
+	# Handle Animations not being added yet ( So I can add them over time)
 	if array[card_database.CARD_INFO.DIRECT_BLOCK]:
-		$Container/AnimatedSprite2D.animation = str(array[card_database.CARD_INFO.DIRECT_BLOCK])
+		$CardFront/Container/AnimatedSprite2D.animation = str(array[card_database.CARD_INFO.ANIMATION])
 	else:
-		$Container/AnimatedSprite2D.animation = "FireSparks"
+		$CardFront/Container/AnimatedSprite2D.animation = "FireSparks" # TODO: make an empty spriteframe at some point
+	
 # Create Array from Card
 func store_card():
 	return [$Name.text, $Type.text, $Cost.text, $Attack.text, $Health.text, $DirectDamage.text, $DamageType.text, $DirectBlock.text, $Details.text, $Container/AnimatedSprite2D.animation]
+
+# Flip card to front from back
+func animation_reveal():
+	# Check if card back is visible
+	if $CardFront.z_index < $CardBack.z_index:
+		$AnimationPlayer.play("card_flip")
+
+# Flip card to back	
+func animation_conceal():
+	# Check if Card front is visible
+	if $CardFront.z_index > $CardBack.z_index:
+		$AnimationPlayer.play_backwards("card_flip")
+	

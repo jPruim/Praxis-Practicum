@@ -87,7 +87,7 @@ func on_hovered_off_card(card):
 	
 # Change card affects
 func card_affects(card, hovered: bool):
-	var animation_sprite = card.get_node("Container").get_node("AnimatedSprite2D")
+	var animation_sprite = card.get_node("CardFront").get_node("Container").get_node("AnimatedSprite2D")
 	if hovered:
 		card.scale = Vector2(1.05, 1.05)
 		card.z_index = 10
@@ -127,7 +127,6 @@ func end_drag():
 	var card_slot = raycast_check_for_card_slot()
 	# Check for room in the CardSlot
 	if card_slot and card_slot.max_cards > card_slot.cards.size():
-		print("Placed card in slot")
 		card_being_dragged.position = card_slot.position
 		card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
 		

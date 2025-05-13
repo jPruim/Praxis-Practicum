@@ -1,19 +1,22 @@
 Guides:
-https://www.youtube.com/watch?v=WjT5sLMD7Kw&ab_channel=AdventuresinGodot
-https://www.youtube.com/watch?v=2jMcuKdRh2w&ab_channel=Barry%27sDevelopmentHell
+	https://www.youtube.com/watch?v=WjT5sLMD7Kw&ab_channel=AdventuresinGodot
+	https://www.youtube.com/watch?v=2jMcuKdRh2w&ab_channel=Barry%27sDevelopmentHell
 
 Backgrounds:
-https://brullov.itch.io/oak-woods
+	https://brullov.itch.io/oak-woods
 
 Effects:
-https://ragnapixel.itch.io/particle-fx
+	https://ragnapixel.itch.io/particle-fx
 
-
+Fonts:
+	https://fonts.google.com/specimen/Grenze?categoryFilters=Appearance:%2FTheme%2FBlackletter
 
 
 Z-Index:
-	Background -100
-	Deck -5
-	Card 1
-	Card Hovered 10
+	-100 Background
+	-5 Deck
+	0 Card Animations
+	1 Card
+	2 Card Back #default to showing card back
+	10 Card Hovered
 	

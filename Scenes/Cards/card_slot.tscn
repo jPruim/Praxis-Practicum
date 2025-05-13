@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://brqd7qlj1sonb"]
 
 [ext_resource type="Script" path="res://Scripts/card_slot.gd" id="1_8kf81"]
-[ext_resource type="Texture2D" uid="uid://dyxfoiin6xm8x" path="res://Assets/Cards/Card Borders etc/Card Slot.png" id="1_qxd1k"]
+[ext_resource type="Texture2D" uid="uid://cr5yo5vebnlgh" path="res://Assets/Cards/Card Borders etc/Card Outline.png" id="2_q2dei"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kkorq"]
-size = Vector2(258, 258)
+size = Vector2(161, 240)
 
 [node name="CardSlot" type="Node2D"]
 texture_filter = 1
@@ -12,8 +12,8 @@ script = ExtResource("1_8kf81")
 
 [node name="CardSlotImage" type="Sprite2D" parent="."]
 texture_filter = 1
-scale = Vector2(8, 8)
-texture = ExtResource("1_qxd1k")
+scale = Vector2(5, 5)
+texture = ExtResource("2_q2dei")
 
 [node name="Area2D" type="Area2D" parent="."]
 texture_filter = 1
@@ -22,5 +22,5 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 texture_filter = 1
-position = Vector2(-1, -1)
+position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_kkorq")

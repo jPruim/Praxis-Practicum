@@ -5,8 +5,9 @@ extends Node2D
 # Consts
 const CARD_SCENE_PATH = "res://Scenes/Cards/card_base.tscn"
 const CARD_DRAW_ASPEED = 0.2 # animation speed
+const CARD_SPAWN = Vector2(-300,-300)
 # Properties
-var player_deck = ["Knight"] # Array of JSON Card Info
+var player_deck = [] # Array of JSON Card Info
 var card_scene
 var card_database
 
@@ -26,8 +27,8 @@ func _process(delta: float) -> void:
 
 func draw_card():
 	# "Draw the card"
-	var card_drawn = player_deck[0]
-	player_deck.erase(card_drawn)
+	var card_drawn = player_deck.pop_front()
+	#player_deck.erase(card_drawn)
 	$DeckCount.text = str(player_deck.size())
 
 
@@ -35,13 +36,11 @@ func draw_card():
 	if player_deck.size() == 0:
 		hide_deck()
 		
-	# Create the card that was drawn
-	var new_card = card_scene.instantiate()
-	# Set card origin to deck position
-	new_card.position = $".".position
-	$"../CardManager".add_child(new_card)
-	new_card.name =  "Card"
-	$"../PlayerHand".add_card_to_hand(new_card, CARD_DRAW_ASPEED)
+	# Add Card to hand
+	card_drawn.position = $".".position
+	$"../PlayerHand".add_card_to_hand(card_drawn, CARD_DRAW_ASPEED)
+	# Reveal Card
+	card_drawn.animation_reveal()
 	pass # Replace with function body.
 
 # Remove all visible parts of the deck
@@ -59,15 +58,18 @@ func reveal_deck():
 
 # Initialize deck
 func initialize_deck():
+	player_deck = []
 	for key in card_database.CARDS.keys():
 		#card_database
 		add_card_to_deck(card_database.CARDS[key])
 		pass
+	player_deck.shuffle()
+	$DeckCount.text = str(player_deck.size())
 
 # Add Card to Deck, Accepts Array
 func add_card_to_deck(data):
 	var new_card = card_scene.instantiate()
-	new_card.position = $".".position
+	new_card.position = CARD_SPAWN
 	new_card.set_all(data)
 	$"../CardManager".add_child(new_card)
 	player_deck.append(new_card)

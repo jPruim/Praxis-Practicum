@@ -13,11 +13,13 @@ const DECK_COLLISION_MASK = 4
 # Properties
 var card_manager
 var deck
+var player_hand
 
 
 func _ready() -> void:
 	card_manager = $"../CardManager"
 	deck = $"../Deck"
+	player_hand = $"../PlayerHand"
 	
 
 func _input(event: InputEvent) -> void:

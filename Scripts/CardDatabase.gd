@@ -4,8 +4,8 @@ const FIRE = "FIRE"
 const SHIELD = "SHIELD"
 const CARDS = {
 	"Firebolt": ["Firebolt", "spell", 1, 0, 0, 4, FIRE, 0, "Deal 4 " + FIRE + " damage", ""],
-	"Arcane Barrier": ["Arcane Barrier", "spell", 1, 0, 0, 0, "", 4, "Gain 4 " + SHIELD, ""],
+	"Arcane Barrier": ["Arcane", "spell", 1, 0, 0, 4, "", 0, "Gain 4 " + SHIELD + " damage", ""],
 	"Icebolt": ["Icebolt", "spell", 1, 0, 0, 4, ICE, 0, "Deal 4 " + ICE +  " damage", ""],
 	"Blank Spell": ["", "spell", 0, 0, 0, 0, "", 0, "", ""],
-	"Blank Summon": ["", "summon", 0, 0, 1, 1, "", 0, "", ""]
+	"Blank Summon": ["", "summon", 0, 1, 1, 0, "", 0, "", ""]
 }
