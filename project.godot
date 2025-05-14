@@ -25,6 +25,10 @@ window/vsync/vsync_mode=0
 
 project/assembly_name="Praxis & Practicum"
 
+[gui]
+
+theme/custom_font="res://Assets/font/Grenze/Grenze-Regular.ttf"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

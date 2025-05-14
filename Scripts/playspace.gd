@@ -2,18 +2,35 @@ extends Node2D
 
 #load
 const cardBase = preload("res://Scenes/Cards/card_base.tscn")
+const cardSlot = preload("res://Scenes/Cards/card_slot.tscn")
 var PlayerHand = preload("res://Scenes/Cards/player_hand.tscn")
-const cardSize = Vector2(100,160)
-var cardSelected = []
-#var deckSize = 1
-var playerHand
-@onready var deckSize = 4
 
-
+# Dimensions of the Card Slots ( Horizontal, Vertical)
+@export var boardDimensions = Vector2(3, 2)
+@export var centerPoint : Vector2
+@export var slotMargin = Vector2( 25, 25)
+@export var slotSize = 0.9 * Vector2( 32 * 5, 48 * 5 )
 # Called when the node enters the scene tree for the first time.
 
+
+
+
 func _ready() -> void:
-	#var playerHand = PlayerHand.instantiate()
+	var newSlot = cardSlot.instantiate() 
+	var x_pos
+	var y_pos
+	
+	# Calculate the initial position of the top left most cardSlot
+	centerPoint = get_viewport_rect().size / 2
+	var x_pos_first = centerPoint.x - (boardDimensions.x / 2) * (slotSize.x + slotMargin.x)
+	var y_pos_first = centerPoint.y - (boardDimensions.x / 2) * (slotSize.y + slotMargin.y)
+	for i in range(0, boardDimensions.x):
+		for j in range(0, boardDimensions.y):
+			newSlot = cardSlot.instantiate() 
+			x_pos = x_pos_first + (i * (slotSize.x + slotMargin.x))
+			y_pos = y_pos_first + (j * (slotSize.y + slotMargin.y))
+			newSlot.position = Vector2(x_pos,y_pos)
+			$".".add_child(newSlot)
 	pass # Replace with function body.
 
 func _input(event: InputEvent) -> void:
