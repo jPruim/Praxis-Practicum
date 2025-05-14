@@ -348,7 +348,7 @@ texture = ExtResource("2_b5jx4")
 offset_left = -75.0
 offset_top = 96.0
 offset_right = -53.0
-offset_bottom = 119.0
+offset_bottom = 129.0
 text = "0"
 
 [node name="Health" type="RichTextLabel" parent="CardFront"]
