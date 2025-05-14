@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dws2mhcfu18v7"]
+[gd_scene load_steps=11 format=3 uid="uid://dws2mhcfu18v7"]
 
 [ext_resource type="Script" path="res://Scripts/playspace.gd" id="1_t02ni"]
 [ext_resource type="Texture2D" uid="uid://dfen2tb0rf3nh" path="res://Assets/Background/background_layer_1.png" id="2_mgru5"]
@@ -8,6 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://vlo6uno0t1dc" path="res://Scenes/Cards/player_hand.tscn" id="8_l370m"]
 [ext_resource type="PackedScene" uid="uid://dvfwf0hvp8bep" path="res://Scenes/Cards/deck.tscn" id="9_x8cfl"]
 [ext_resource type="Script" path="res://input_manager.gd" id="10_bbo5u"]
+
+[sub_resource type="Gradient" id="Gradient_dttap"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_di84m"]
+gradient = SubResource("Gradient_dttap")
+width = 4
+height = 4
 
 [node name="Playspace" type="Node2D"]
 script = ExtResource("1_t02ni")
@@ -40,3 +47,8 @@ position = Vector2(100, 900)
 
 [node name="InputManager" type="Node2D" parent="."]
 script = ExtResource("10_bbo5u")
+
+[node name="Centerpoint" type="Sprite2D" parent="."]
+z_index = 15
+scale = Vector2(2, 2)
+texture = SubResource("GradientTexture2D_di84m")

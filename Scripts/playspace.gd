@@ -8,7 +8,7 @@ var PlayerHand = preload("res://Scenes/Cards/player_hand.tscn")
 # Dimensions of the Card Slots ( Horizontal, Vertical)
 @export var boardDimensions = Vector2(3, 2)
 @export var centerPoint : Vector2
-@export var slotMargin = Vector2( 25, 25)
+@export var slotMargin = Vector2( 20, 20)
 @export var slotSize = 0.9 * Vector2( 32 * 5, 48 * 5 )
 # Called when the node enters the scene tree for the first time.
 
@@ -22,8 +22,13 @@ func _ready() -> void:
 	
 	# Calculate the initial position of the top left most cardSlot
 	centerPoint = get_viewport_rect().size / 2
-	var x_pos_first = centerPoint.x - (boardDimensions.x / 2) * (slotSize.x + slotMargin.x)
-	var y_pos_first = centerPoint.y - (boardDimensions.x / 2) * (slotSize.y + slotMargin.y)
+	var x_pos_first = centerPoint.x - (0.5 * ((boardDimensions.x -1) * slotSize.x))
+	var y_pos_first = centerPoint.y - (0.5 * ((boardDimensions.y -1) * slotSize.y))
+	# Handle Margins
+	x_pos_first -= 0.5 * (boardDimensions.x - 1) * slotMargin.x
+	y_pos_first -= 0.5 * (boardDimensions.y - 1) * slotMargin.y
+	
+	# Generate and calculate positions for each card slot
 	for i in range(0, boardDimensions.x):
 		for j in range(0, boardDimensions.y):
 			newSlot = cardSlot.instantiate() 
@@ -31,6 +36,8 @@ func _ready() -> void:
 			y_pos = y_pos_first + (j * (slotSize.y + slotMargin.y))
 			newSlot.position = Vector2(x_pos,y_pos)
 			$".".add_child(newSlot)
+			
+	$Centerpoint.position = centerPoint
 	pass # Replace with function body.
 
 func _input(event: InputEvent) -> void:

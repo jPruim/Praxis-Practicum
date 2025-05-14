@@ -19,4 +19,4 @@ Z-Index:
 	1 Card
 	2 Card Back #default to showing card back
 	10 Card Hovered
-	
+	15	Centerpoint
