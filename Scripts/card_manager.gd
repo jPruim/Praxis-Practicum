@@ -85,7 +85,7 @@ func on_hovered_off_card(card):
 		else:
 			is_hovering_card = false
 	
-# Change card affects
+# Change card affects TODO: Decide if cards in cardslots need animations (go and add a new mask for animations, and separate from card detection)
 func card_affects(card, hovered: bool):
 	var animation_sprite = card.get_node("CardFront").get_node("Container").get_node("AnimatedSprite2D")
 	if hovered:
