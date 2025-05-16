@@ -13,7 +13,7 @@ const CARD_SLOT_COLLISION_MASK = 2
 
 # Consts
 const DECK_POSITION = Vector2(100, 900)
-const CARD_SCALE_PlACED = Vector2( 0.6, 0.6)
+const CARD_SCALE_PlACED = Vector2( 0.7, 0.7)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -77,25 +77,30 @@ func on_hovered_card(card):
 
 # Handle card being hovered
 func on_hovered_off_card(card):
-	if !card_being_dragged:
-		card_affects(card, false)
-		#check if transitioning onto a new card
-		var new_card = raycast_check_for_card()
-		if new_card:
-			card_affects(new_card, true)
-		else:
-			is_hovering_card = false
+	# Check if card is NOT in a card slot
+	if !card.in_slot:
+		if !card_being_dragged:
+			#check if transitioning onto a new card
+			var new_card = raycast_check_for_card()
+			if new_card:
+				card_affects(new_card, true)
+			else:
+				is_hovering_card = false
+	# Turn off card affects
+	card_affects(card, false)
 	
 # Change card affects TODO: Decide if cards in cardslots need animations (go and add a new mask for animations, and separate from card detection)
 func card_affects(card, hovered: bool):
 	var animation_sprite = card.get_node("CardFront").get_node("Container").get_node("AnimatedSprite2D")
 	if hovered:
-		card.scale = Vector2(1.05, 1.05)
-		card.z_index = 10
-		# Play Animation
+		if !card.in_slot:
+			card.scale = Vector2(1.05, 1.05)
+			card.z_index = 10
+			# Play Animation
 		animation_sprite.play()
 	else:
-		card.scale  = Vector2( 1, 1)
+		if !card.in_slot:
+			card.scale  = Vector2( 1, 1)
 		card.z_index = 1
 		# Pause Animation
 		animation_sprite.pause()
@@ -128,11 +133,13 @@ func end_drag():
 	var card_slot = raycast_check_for_card_slot()
 	# Check for room in the CardSlot
 	if card_slot and card_slot.max_cards > card_slot.cards.size():
+		card_being_dragged.in_slot = true
 		card_being_dragged.position = card_slot.position
 		card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
+		
 		# Add card to card slot and remove from hand (THIS ASSUMES CARD CAME FROM HAND)
 		card_slot.cards.append(card_being_dragged)
-		card_being_dragged.scale = Vector2( 0.5, 0.5) # TODO: Figure out why this isn't working Seems like a race condition
+		card_being_dragged.scale = CARD_SCALE_PlACED
 		player_hand.remove_card_from_hand(card_being_dragged)
 	else:
 		player_hand.add_card_to_hand(card_being_dragged)

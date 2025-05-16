@@ -7,7 +7,7 @@ signal hovered_off
 # Properties
 var hand_position: Vector2
 var card_database
-
+var in_slot = false # Boolean for being in the card_slot
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	card_database = preload("res://Scripts/CardDatabase.gd")
