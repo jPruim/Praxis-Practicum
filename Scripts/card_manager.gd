@@ -11,8 +11,9 @@ var player_hand
 const CARD_COLLISION_MASK = 1
 const CARD_SLOT_COLLISION_MASK = 2
 
+# Consts
 const DECK_POSITION = Vector2(100, 900)
-
+const CARD_SCALE_PlACED = Vector2( 0.6, 0.6)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -129,9 +130,9 @@ func end_drag():
 	if card_slot and card_slot.max_cards > card_slot.cards.size():
 		card_being_dragged.position = card_slot.position
 		card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
-		
 		# Add card to card slot and remove from hand (THIS ASSUMES CARD CAME FROM HAND)
 		card_slot.cards.append(card_being_dragged)
+		card_being_dragged.scale = Vector2( 0.5, 0.5) # TODO: Figure out why this isn't working Seems like a race condition
 		player_hand.remove_card_from_hand(card_being_dragged)
 	else:
 		player_hand.add_card_to_hand(card_being_dragged)

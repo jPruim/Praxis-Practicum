@@ -4,7 +4,7 @@ Guides:
 
 Backgrounds:
 	https://brullov.itch.io/oak-woods
-	https://www.enworld.org/media/artwork-fantasy-art-castle-landscape-wallpaper-preview-jpg.69973/
+	https://www.enworld.org/media/artwork-fantasy-art-castle-landscape-wallpaper-preview-jpg.69973/ # TODO: unliscened, placeholder only
 
 Sprites:
 	https://elthen.itch.io/2d-pixel-art-fox-sprites

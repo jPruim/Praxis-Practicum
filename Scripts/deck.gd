@@ -6,13 +6,17 @@ extends Node2D
 const CARD_SCENE_PATH = "res://Scenes/Cards/card_base.tscn"
 const CARD_DRAW_ASPEED = 0.2 # animation speed
 const CARD_SPAWN = Vector2(-300,-300)
+
 # Properties
+var ai_deck = false # Check if the deck is NOT owned by the player
 var player_deck = [] # Array of JSON Card Info
 var card_scene
 var card_database
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if (ai_deck):
+		return 
 	card_scene = preload(CARD_SCENE_PATH)
 	$DeckCount.text = str(player_deck.size())
 	card_database = preload("res://Scripts/CardDatabase.gd")
@@ -26,6 +30,8 @@ func _process(delta: float) -> void:
 	pass
 
 func draw_card():
+	if (ai_deck):
+		return
 	# "Draw the card"
 	var card_drawn = player_deck.pop_front()
 	#player_deck.erase(card_drawn)
@@ -58,6 +64,8 @@ func reveal_deck():
 
 # Initialize deck
 func initialize_deck():
+	if (ai_deck):
+		return
 	player_deck = []
 	for key in card_database.CARDS.keys():
 		#card_database
@@ -68,6 +76,8 @@ func initialize_deck():
 
 # Add Card to Deck, Accepts Array
 func add_card_to_deck(data):
+	if (ai_deck):
+		return
 	var new_card = card_scene.instantiate()
 	new_card.position = CARD_SPAWN
 	new_card.set_all(data)
