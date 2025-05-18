@@ -21,6 +21,10 @@ func _ready() -> void:
 	screen_size = get_viewport_rect().size
 	$"../InputManager".connect("left_mouse_button_released", on_left_click_release)
 	$"../Deck".position = DECK_POSITION
+	$"../Deck".ai_deck = false
+	$"../Deck".initialize()
+	$"../OpponentDeck".ai_deck = true
+	$"../OpponentDeck".initialize()
 	
 	pass # Replace with function body.
 
