@@ -19,7 +19,8 @@ func _ready() -> void:
 	card_scene = preload(CARD_SCENE_PATH)
 	$DeckCount.text = str(deck.size())
 	card_database = preload("res://Scripts/CardDatabase.gd")
-	# Initialize the deck
+	# Initialize the deck ai_deck is assigned in the parent _ready() function
+	initialize()
 	pass # Replace with function body.
 
 
@@ -49,8 +50,7 @@ func initialize_player(hand_size = 5):
 func initialize_player_hand(hand_size = 5):
 	for i in range(hand_size):
 		draw_card()
-		print("Current Hand Size: ", str($"../PlayerHand".player_hand.size()) , $"../PlayerHand".player_hand)
-	print("Hand Initialized")
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -70,7 +70,7 @@ func draw_card():
 		
 	# Add Card to hand
 	card_drawn.position = $".".position
-	$"../PlayerHand".add_card_to_hand(card_drawn, CARD_DRAW_ASPEED)
+	$"../../PlayerHand".add_card_to_hand(card_drawn, CARD_DRAW_ASPEED)
 	# Reveal Card
 	card_drawn.animation_reveal()
 	pass # Replace with function body.
@@ -108,5 +108,5 @@ func add_card_to_deck(data):
 	var new_card = card_scene.instantiate()
 	new_card.position = CARD_SPAWN
 	new_card.set_all(data)
-	$"../CardManager".add_child(new_card)
+	$"..".add_child(new_card)
 	deck.append(new_card)

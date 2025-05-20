@@ -43,9 +43,11 @@ script = ExtResource("3_n5cyu")
 [node name="PlayerHand" parent="." instance=ExtResource("8_l370m")]
 
 [node name="Deck" parent="." instance=ExtResource("9_x8cfl")]
+visible = false
 position = Vector2(125, 925)
 
 [node name="OpponentDeck" parent="." instance=ExtResource("9_x8cfl")]
+visible = false
 position = Vector2(1800, 150)
 
 [node name="InputManager" type="Node2D" parent="."]

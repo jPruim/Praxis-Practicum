@@ -6,6 +6,7 @@ var card_being_dragged = null # Card object being grabbed (NOT a bool)
 var screen_size: Vector2
 var is_hovering_card :bool = false
 var player_hand
+var deck_scene
 
 # Masks
 const CARD_COLLISION_MASK = 1
@@ -13,19 +14,23 @@ const CARD_SLOT_COLLISION_MASK = 2
 
 # Consts
 const DECK_POSITION = Vector2(100, 900)
+const OPPONENT_DECK_POSITION = Vector2(1800, 150)
 const CARD_SCALE_PlACED = Vector2( 0.7, 0.7)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	deck_scene = preload("res://Scenes/Cards/deck.tscn")
 	player_hand = $"../PlayerHand"
 	screen_size = get_viewport_rect().size
 	$"../InputManager".connect("left_mouse_button_released", on_left_click_release)
-	$"../Deck".position = DECK_POSITION
-	$"../Deck".ai_deck = false
-	$"../Deck".initialize()
-	$"../OpponentDeck".ai_deck = true
-	$"../OpponentDeck".initialize()
-	
+	var deck = deck_scene.instantiate()
+	deck.position = DECK_POSITION
+	deck.ai_deck = false
+	add_child(deck)
+	deck = deck_scene.instantiate()
+	deck.position = OPPONENT_DECK_POSITION
+	deck.ai_deck = true
+	add_child(deck)
 	pass # Replace with function body.
 
 # Card Collision detector
