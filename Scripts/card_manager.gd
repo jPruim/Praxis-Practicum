@@ -26,8 +26,10 @@ func _ready() -> void:
 	var deck = deck_scene.instantiate()
 	deck.position = DECK_POSITION
 	deck.ai_deck = false
+	deck.name = "PlayerDeck"
 	add_child(deck)
 	deck = deck_scene.instantiate()
+	deck.name = "OpponentDeck"
 	deck.position = OPPONENT_DECK_POSITION
 	deck.ai_deck = true
 	add_child(deck)

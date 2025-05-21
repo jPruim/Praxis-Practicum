@@ -8,6 +8,7 @@ const CARD_DRAW_ASPEED = 0.2 # animation speed
 const CARD_SPAWN = Vector2(-300,-300)
 
 # Properties
+var hand_limit = 6 # Note this is a var as it might be changed over the course of game
 var ai_deck = true # Check if the deck is NOT owned by the player
 var deck = [] # Array of JSON Card Info
 var card_scene
@@ -30,6 +31,7 @@ func initialize(hand_size = 5):
 		initialize_enemy()
 	else:
 		initialize_player(hand_size)
+		#$"../PlayerHand"
 
 # Setup function for AI
 func initialize_enemy( type: int = 0):
@@ -43,14 +45,13 @@ func initialize_enemy_deck(type: int = 0):
 # Setup function for the player
 func initialize_player(hand_size = 5):
 	initialize_player_deck()
-	print("Deck Initialized")
 	initialize_player_hand(hand_size)
 	
 # Setup function for the player's hand
 func initialize_player_hand(hand_size = 5):
 	for i in range(hand_size):
 		draw_card()
-
+	#$"../../PlayerHand".update_hand_positions()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -58,6 +59,8 @@ func _process(delta: float) -> void:
 func draw_card():
 	# Handle cases where deck shouldn't draw
 	if (ai_deck || !valid_draw):
+		return
+	if ($"../../PlayerHand".player_hand.size() > hand_limit - 1):
 		return
 	# "Draw the card"
 	var card_drawn = deck.pop_front()
@@ -95,7 +98,7 @@ func initialize_player_deck():
 	deck = []
 	
 	#initialize deck
-	for i in range (0,5):
+	for i in range (0,2):
 		for key in card_database.CARDS.keys():
 			#card_database
 			add_card_to_deck(card_database.CARDS[key])

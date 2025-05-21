@@ -21,9 +21,8 @@ func _ready() -> void:
 func add_card_to_hand(card, speed = DEFAULT_ASPEED):
 	if card not in player_hand:
 		player_hand.insert(0,card)
-		update_hand_positions(speed)
-	else:
-		animate_card_to_position(card, card.hand_position, speed)
+	# Always edit hand positions
+	update_hand_positions(speed)
 	pass
 
 # Remove Card from player_hand
@@ -44,6 +43,9 @@ func update_hand_positions( speed = DEFAULT_ASPEED):
 
 # Calculate the offset (for x) in the hand	
 func calculate_card_position(i):
+	# Apprently, this needs to also be defined here for the function 
+	# to work on initial loading (otherwise center_screen_x is 0)
+	center_screen_x = floor(get_viewport().size.x / 2) 
 	var total_width = (player_hand.size() - 1) * CARD_WIDTH
 	var x_offset = center_screen_x + i * CARD_WIDTH - total_width / 2
 	return x_offset

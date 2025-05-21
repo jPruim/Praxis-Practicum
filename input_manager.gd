@@ -12,13 +12,13 @@ const DECK_COLLISION_MASK = 4
 
 # Properties
 var card_manager
-var deck
+var player_deck
 var player_hand
 
 
 func _ready() -> void:
 	card_manager = $"../CardManager"
-	deck = $"../Deck"
+	player_deck = $"../CardManager/PlayerDeck"
 	player_hand = $"../PlayerHand"
 	
 
@@ -51,5 +51,5 @@ func raycast_check_at_cursor():
 				card_manager.start_drag(card_found)
 		elif collision_mask == DECK_COLLISION_MASK:
 				# Cursor on Deck
-				deck.draw_card()
+				player_deck.draw_card()
 	return null	
