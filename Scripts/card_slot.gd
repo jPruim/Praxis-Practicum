@@ -8,7 +8,7 @@ const SLOT_SCALE = Vector2(0.9, 0.9)
 # Properties
 var cards = []
 var max_cards = 1
-
+var player_owned = false # True if the owner is the player
 
 
 # Called when the node enters the scene tree for the first time.

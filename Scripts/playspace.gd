@@ -31,7 +31,9 @@ func _ready() -> void:
 	# Generate and calculate positions for each card slot
 	for i in range(0, boardDimensions.x):
 		for j in range(0, boardDimensions.y):
-			newSlot = cardSlot.instantiate() 
+			newSlot = cardSlot.instantiate()
+			if (j >= boardDimensions.y / 2):
+				newSlot.player_owned = true
 			x_pos = x_pos_first + (i * (slotSize.x + slotMargin.x))
 			y_pos = y_pos_first + (j * (slotSize.y + slotMargin.y))
 			newSlot.position = Vector2(x_pos,y_pos)

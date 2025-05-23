@@ -143,7 +143,7 @@ func end_drag():
 	# Check if final location is a CardSlot
 	var card_slot = raycast_check_for_card_slot()
 	# Check for room in the CardSlot
-	if card_slot and card_slot.max_cards > card_slot.cards.size():
+	if card_slot and card_slot.max_cards > card_slot.cards.size() && card_slot.player_owned:
 		card_being_dragged.in_slot = true
 		card_being_dragged.position = card_slot.position
 		card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
@@ -152,8 +152,10 @@ func end_drag():
 		card_slot.cards.append(card_being_dragged)
 		card_being_dragged.scale = CARD_SCALE_PlACED
 		player_hand.remove_card_from_hand(card_being_dragged)
-	else:
-		player_hand.add_card_to_hand(card_being_dragged)
+		card_being_dragged = null
+		return
+	
+	player_hand.add_card_to_hand(card_being_dragged)
 	card_being_dragged = null
 	
 # Function called on Signal being received from Input Manager
