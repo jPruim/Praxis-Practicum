@@ -1,3 +1,5 @@
+extends Node
+
 enum CARD_INFO { DISPLAY_NAME, CARD_TYPE, CAST_TIME, SUMMON_ATTACK, SUMMON_HEALTH, DIRECT_DAMAGE, DAMAGE_TYPE, DIRECT_BLOCK, CARD_TEXT, ANIMATION, STACKABLE}
 const ICE = "ICE"
 const FIRE = "FIRE"
@@ -13,3 +15,12 @@ const CARDS = {
 	"Bee": ["Bee", "summon", 0, 1, 1, 0, NEUTRAL, 0, "Attack matches Health. Stackable", "", true],
 	"Snowy Owl": ["Snowy Owl", "summon", 0, 2, 4, 0, ICE, 2, "Also gains 2 shield. Stackable", "", true],
 }
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass

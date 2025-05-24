@@ -134,10 +134,12 @@ func get_top_card(results):
 		
 func start_drag(card):
 	card_being_dragged = card
+	card_being_dragged.z_index = 15
 	card_being_dragged.scale = Vector2( 1, 1)
 	
 	
 func end_drag():
+	card_being_dragged.z_index = 15
 	card_being_dragged.scale = Vector2( 1.05, 1.05)
 	
 	# Check if final location is a CardSlot
@@ -147,7 +149,6 @@ func end_drag():
 		card_being_dragged.in_slot = true
 		card_being_dragged.position = card_slot.position
 		card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
-		
 		# Add card to card slot and remove from hand (THIS ASSUMES CARD CAME FROM HAND)
 		card_slot.cards.append(card_being_dragged)
 		card_being_dragged.scale = CARD_SCALE_PlACED
@@ -156,6 +157,7 @@ func end_drag():
 		return
 	
 	player_hand.add_card_to_hand(card_being_dragged)
+	card_being_dragged.z_index = 1
 	card_being_dragged = null
 	
 # Function called on Signal being received from Input Manager

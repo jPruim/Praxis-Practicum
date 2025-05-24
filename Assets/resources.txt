@@ -20,7 +20,8 @@ Z-Index:
 	-100 Background
 	-5 Deck
 	0 Card Animations
-	1 Card
-	2 Card Back #default to showing card back
+	1 Card in Slot
+	4 Card
+	5 Card Back #default to showing card back
 	10 Card Hovered
 	15	Centerpoint
