@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dws2mhcfu18v7"]
+[gd_scene load_steps=12 format=3 uid="uid://dws2mhcfu18v7"]
 
 [ext_resource type="Script" path="res://Scripts/playspace.gd" id="1_t02ni"]
 [ext_resource type="Texture2D" uid="uid://dfen2tb0rf3nh" path="res://Assets/Background/background_layer_1.png" id="2_mgru5"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://sdapeo05l5jd" path="res://Assets/Background/background_layer_3.png" id="4_n0cij"]
 [ext_resource type="PackedScene" uid="uid://vlo6uno0t1dc" path="res://Scenes/Cards/player_hand.tscn" id="8_l370m"]
 [ext_resource type="PackedScene" uid="uid://crv6rsiuh0gi1" path="res://Scenes/Playspace/opponent_manager.tscn" id="8_o8vo8"]
+[ext_resource type="Script" path="res://Scripts/battle_manager.gd" id="9_uwahy"]
 [ext_resource type="Script" path="res://input_manager.gd" id="10_bbo5u"]
 
 [sub_resource type="Gradient" id="Gradient_dttap"]
@@ -53,3 +54,18 @@ scale = Vector2(2, 2)
 texture = SubResource("GradientTexture2D_di84m")
 
 [node name="OpponentManager" parent="." instance=ExtResource("8_o8vo8")]
+
+[node name="OpponentTimer" type="Timer" parent="OpponentManager"]
+
+[node name="PassButton" type="Button" parent="."]
+offset_left = 1564.0
+offset_top = 516.0
+offset_right = 1617.0
+offset_bottom = 535.0
+text = "Pass
+"
+
+[node name="BattleManager" type="Node2D" parent="."]
+script = ExtResource("9_uwahy")
+
+[connection signal="pressed" from="PassButton" to="BattleManager" method="_on_pass_button_pressed"]
