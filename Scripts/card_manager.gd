@@ -106,13 +106,13 @@ func card_affects(card, hovered: bool):
 	if hovered:
 		if !card.in_slot:
 			card.scale = Vector2(1.05, 1.05)
-			card.z_index = 10
+			card.z_index = Globals.Z_INDEX["card_hovered"]
 			# Play Animation
 		animation_sprite.play()
 	else:
 		if !card.in_slot:
 			card.scale  = Vector2( 1, 1)
-		card.z_index = 1
+		card.z_index = Globals.Z_INDEX["card"]
 		# Pause Animation
 		animation_sprite.pause()
 		
@@ -134,13 +134,14 @@ func get_top_card(results):
 		
 func start_drag(card):
 	card_being_dragged = card
-	card_being_dragged.z_index = 15
+	card_being_dragged.z_index = Globals.Z_INDEX["card_being_dragged"]
 	card_being_dragged.scale = Vector2( 1, 1)
 	
 	
 func end_drag():
-	card_being_dragged.z_index = 15
 	card_being_dragged.scale = Vector2( 1.05, 1.05)
+	# Disable collision shape during animations
+	card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
 	
 	# Check if final location is a CardSlot
 	var card_slot = raycast_check_for_card_slot()
@@ -148,16 +149,19 @@ func end_drag():
 	if card_slot and card_slot.max_cards > card_slot.cards.size() && card_slot.player_owned:
 		card_being_dragged.in_slot = true
 		card_being_dragged.position = card_slot.position
-		card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
+		
 		# Add card to card slot and remove from hand (THIS ASSUMES CARD CAME FROM HAND)
 		card_slot.cards.append(card_being_dragged)
 		card_being_dragged.scale = CARD_SCALE_PlACED
 		player_hand.remove_card_from_hand(card_being_dragged)
+		card_being_dragged.z_index = Globals.Z_INDEX["card_in_slot"]
+		card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = false
 		card_being_dragged = null
 		return
 	
 	player_hand.add_card_to_hand(card_being_dragged)
-	card_being_dragged.z_index = 1
+	# Re-enable Animations
+	card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = false
 	card_being_dragged = null
 	
 # Function called on Signal being received from Input Manager

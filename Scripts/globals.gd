@@ -3,7 +3,7 @@ extends Node
 # Global Constants
 
 # Z_index
-const z_index = {
+const Z_INDEX = {
 	"background": -100,
 	"deck": -5,
 	"card_animation": 0,
@@ -11,6 +11,7 @@ const z_index = {
 	"card": 4,
 	"card_back": 5,
 	"card_hovered": 10,
+	"card_being_dragged": 11,
 	"centerpoint": 15
 }
 

@@ -58,8 +58,12 @@ func _process(delta: float) -> void:
 
 func draw_card():
 	# Handle cases where deck shouldn't draw
-	if (ai_deck || !valid_draw):
+	if (!valid_draw):
 		return
+	# Check if the hand is full
+	if (ai_deck):
+		if ($"../../OpponentHand".player_hand.size() > hand_limit - 1):
+			return
 	if ($"../../PlayerHand".player_hand.size() > hand_limit - 1):
 		return
 	# "Draw the card"
@@ -70,13 +74,15 @@ func draw_card():
 	# Handle a just emptied deck
 	if deck.size() == 0:
 		hide_deck()
-		
-	# Add Card to hand
 	card_drawn.position = $".".position
-	$"../../PlayerHand".add_card_to_hand(card_drawn, CARD_DRAW_ASPEED)
-	# Reveal Card
-	card_drawn.animation_reveal()
-	pass # Replace with function body.
+	# Add Card to hand
+	if (ai_deck):
+		$"../../OpponentHand".add_card_to_hand(card_drawn, CARD_DRAW_ASPEED)
+	else:
+		$"../../PlayerHand".add_card_to_hand(card_drawn, CARD_DRAW_ASPEED)
+		# Reveal Card
+		card_drawn.animation_reveal()
+	pass
 
 # Remove all visible parts of the deck
 func hide_deck():
