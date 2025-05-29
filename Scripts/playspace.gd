@@ -13,13 +13,16 @@ var PlayerHand = preload("res://Scenes/Cards/player_hand.tscn")
 # Called when the node enters the scene tree for the first time.
 
 
+func _enter_tree() -> void:
+	# Needs to happen before some of the ready() functions of children
+	initialize_card_slots()
 
 
-func _ready() -> void:
+
+func initialize_card_slots():
 	var newSlot = cardSlot.instantiate() 
 	var x_pos
 	var y_pos
-	
 	# Calculate the initial position of the top left most cardSlot
 	centerPoint = get_viewport_rect().size / 2
 	var x_pos_first = centerPoint.x - (0.5 * ((boardDimensions.x -1) * slotSize.x))
@@ -40,6 +43,9 @@ func _ready() -> void:
 			$".".add_child(newSlot)
 			
 	$Centerpoint.position = centerPoint
+
+
+func _ready() -> void:
 	pass # Replace with function body.
 
 func _input(event: InputEvent) -> void:
