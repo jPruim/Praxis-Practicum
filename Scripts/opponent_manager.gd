@@ -35,10 +35,14 @@ func make_ai_play():
 	# Choose Random Card in hand
 	var i = randi() % $"../OpponentHand".player_hand.size
 	var choice = $"../OpponentHand".player_hand.pop_at(i)
-	
-	
+	if choice[Globals.CARD_INFO.CARD_TYPE] == "summon":
+		#$"../CardManager".play_card(choice,)
+		pass
+	elif choice[Globals.CARD_INFO.CARD_TYPE] == "spell":
+		pass
 
-
+func summon_target():
+	pass
 # Theoretically only needs to be called once, 
 func identify_slots():
 	var card_slot = preload("res://Scenes/Cards/card_slot.tscn")

@@ -40,7 +40,7 @@ func update_hand_positions( speed = DEFAULT_ASPEED):
 		var new_position = Vector2(calculate_card_position(i), PLAYER_HAND_Y_POS)
 		var card = player_hand[i]
 		card.hand_position = new_position
-		animate_card_to_position(card, new_position, speed)
+		card.animate_card_to_position(new_position, speed)
 	pass
 
 # Calculate the offset (for x) in the hand	
@@ -55,11 +55,6 @@ func calculate_card_position(i):
 
 # Animations
 
-# Animate card to position
-func animate_card_to_position(card, position, speed = DEFAULT_ASPEED):
-	var tween = get_tree().create_tween()
-	tween.tween_property(card, "position", position, speed)
-	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

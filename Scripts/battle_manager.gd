@@ -22,6 +22,9 @@ func opponent_turn():
 	$"../OpponentManager".start_turn()
 
 
+func play_card(card, caster = "player", cardslot = "", player = "opponent", cast_time_mod = 0, cast_damage_mod = 0):
+	pass
+
 func player_turn():
 	$"../PassButton".visible = true
 	$"../PassButton".disabled = false

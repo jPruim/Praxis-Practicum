@@ -4,6 +4,9 @@ extends Node2D
 signal hovered
 signal hovered_off
 
+
+const DEFAULT_ASPEED = 0.25
+
 # Properties
 var hand_position: Vector2
 var card_database
@@ -65,4 +68,10 @@ func animation_conceal():
 	# Check if Card front is visible
 	if $CardFront.z_index > $CardBack.z_index:
 		$AnimationPlayer.play_backwards("card_flip")
+	
+# Animate card to position
+func animate_card_to_position(position, speed = DEFAULT_ASPEED):
+
+	var tween = get_tree().create_tween()
+	tween.tween_property($".", "position", position, speed)
 	

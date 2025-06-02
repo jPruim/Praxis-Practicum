@@ -31,6 +31,7 @@ func _ready() -> void:
 	deck = deck_scene.instantiate()
 	deck.name = "OpponentDeck"
 	deck.position = OPPONENT_DECK_POSITION
+	deck.get_node("Area2D").collision_mask = Globals.DECK_COLLISION_MASK_OPPONENT
 	deck.ai_deck = true
 	add_child(deck)
 	pass # Replace with function body.

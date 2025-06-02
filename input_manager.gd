@@ -44,12 +44,13 @@ func raycast_check_at_cursor():
 	# if over an area
 	if result.size() > 0:
 		var collision_mask = result[0].collider.collision_mask
-		if collision_mask == CARD_COLLISION_MASK:
+		if collision_mask == Globals.CARD_COLLISION_MASK:
 				# Cursor on Card
 			var card_found = result[0].collider.get_parent()
 			if card_found:
 				card_manager.start_drag(card_found)
-		elif collision_mask == DECK_COLLISION_MASK:
-				# Cursor on Deck
-				player_deck.draw_card()
+		elif collision_mask == Globals.DECK_COLLISION_MASK:
+			print(result[0])
+			# Cursor on Deck
+			player_deck.draw_card()
 	return null	

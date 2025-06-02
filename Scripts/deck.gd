@@ -68,6 +68,9 @@ func draw_card():
 		return
 	# "Draw the card"
 	var card_drawn = deck.pop_front()
+	if(!card_drawn):
+		# Deck is empty
+		return
 	$DeckCount.text = str(deck.size())
 
 
