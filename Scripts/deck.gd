@@ -36,14 +36,15 @@ func initialize(hand_size = 5):
 		#$"../PlayerHand"
 
 # Setup function for AI
-func initialize_enemy( type: int = 0):
+func initialize_enemy( type: int = 0, hand_size = 5):
 	initialize_enemy_deck(type)
+	initialize_player_hand(hand_size)
 	pass
 
 # TODO: Make this different from player deck
-func initialize_enemy_deck(type: int = 0, hand_size = 5):
+func initialize_enemy_deck(type: int = 0):
 	initialize_player_deck()
-	initialize_player_hand(hand_size)
+
 	
 # Setup function for the player
 func initialize_player(hand_size = 5):
@@ -119,5 +120,8 @@ func add_card_to_deck(data):
 	var new_card = card_scene.instantiate()
 	new_card.position = CARD_SPAWN
 	new_card.set_all(data)
+	if(ai_deck):
+		new_card.ai_card = true
+		new_card.get_node("Area2D").collision_mask = Globals.CARD_COLLISION_MASK_OPPONENT
 	$"..".add_child(new_card)
 	deck.append(new_card)

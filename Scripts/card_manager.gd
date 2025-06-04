@@ -22,6 +22,7 @@ const CARD_SCALE_PlACED = Vector2( 0.7, 0.7)
 func _ready() -> void:
 	deck_scene = preload("res://Scenes/Cards/deck.tscn")
 	player_hand = $"PlayerHand"
+	player_hand.ai_hand = false
 	opponent_hand = $OpponentHand
 	opponent_hand.ai_hand = true
 	screen_size = get_viewport_rect().size
@@ -147,13 +148,22 @@ func end_drag():
 		# Add card to card slot and remove from hand (THIS ASSUMES CARD CAME FROM HAND)
 		card_slot.cards.append(card_being_dragged)
 		card_being_dragged.scale = CARD_SCALE_PlACED
-		player_hand.remove_card_from_hand(card_being_dragged)
+		if(card_being_dragged.ai_card):
+			# Should never be called
+			opponent_hand.remove_card_from_hand(card_being_dragged) 
+		else:
+			player_hand.remove_card_from_hand(card_being_dragged)
 		card_being_dragged.z_index = Globals.Z_INDEX["card_in_slot"]
 		card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = false
 		card_being_dragged = null
 		return
 	
-	player_hand.add_card_to_hand(card_being_dragged)
+	
+	if(card_being_dragged.ai_card):
+		# Should never be called
+		opponent_hand.add_card_to_hand(card_being_dragged)
+	else:
+		player_hand.add_card_to_hand(card_being_dragged)
 	# Re-enable Animations
 	card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = false
 	card_being_dragged = null

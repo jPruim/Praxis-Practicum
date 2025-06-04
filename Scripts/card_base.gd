@@ -11,6 +11,7 @@ const DEFAULT_ASPEED = 0.25
 var hand_position: Vector2
 var card_database
 var in_slot = false # Boolean for being in the card_slot
+var ai_card = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	card_database = preload("res://Scripts/CardDatabase.gd")
