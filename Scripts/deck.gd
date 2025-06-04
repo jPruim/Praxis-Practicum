@@ -21,12 +21,14 @@ func _ready() -> void:
 	$DeckCount.text = str(deck.size())
 	card_database = preload("res://Scripts/CardDatabase.gd")
 	# Initialize the deck ai_deck is assigned in the parent _ready() function
-	initialize()
+	#initialize()
 	pass # Replace with function body.
 
 
 
 func initialize(hand_size = 5):
+	card_scene = preload(CARD_SCENE_PATH)
+	card_database = preload("res://Scripts/CardDatabase.gd")
 	if ai_deck:
 		initialize_enemy()
 	else:
@@ -39,8 +41,9 @@ func initialize_enemy( type: int = 0):
 	pass
 
 # TODO: Make this different from player deck
-func initialize_enemy_deck(type: int = 0):
+func initialize_enemy_deck(type: int = 0, hand_size = 5):
 	initialize_player_deck()
+	initialize_player_hand(hand_size)
 	
 # Setup function for the player
 func initialize_player(hand_size = 5):
@@ -62,9 +65,9 @@ func draw_card():
 		return
 	# Check if the hand is full
 	if (ai_deck):
-		if ($"../../OpponentHand".player_hand.size() > hand_limit - 1):
+		if ($"../OpponentHand".player_hand.size() > hand_limit - 1):
 			return
-	if ($"../../PlayerHand".player_hand.size() > hand_limit - 1):
+	if ($"../PlayerHand".player_hand.size() > hand_limit - 1):
 		return
 	# "Draw the card"
 	var card_drawn = deck.pop_front()
@@ -80,9 +83,9 @@ func draw_card():
 	card_drawn.position = $".".position
 	# Add Card to hand
 	if (ai_deck):
-		$"../../OpponentHand".add_card_to_hand(card_drawn, CARD_DRAW_ASPEED)
+		$"../OpponentHand".add_card_to_hand(card_drawn, CARD_DRAW_ASPEED)
 	else:
-		$"../../PlayerHand".add_card_to_hand(card_drawn, CARD_DRAW_ASPEED)
+		$"../PlayerHand".add_card_to_hand(card_drawn, CARD_DRAW_ASPEED)
 		# Reveal Card
 		card_drawn.animation_reveal()
 	pass
@@ -101,11 +104,7 @@ func reveal_deck():
 	
 
 # Initialize deck
-func initialize_player_deck():
-	if (ai_deck):
-		return
-	deck = []
-	
+func initialize_player_deck():	
 	#initialize deck
 	for i in range (0,2):
 		for key in card_database.CARDS.keys():

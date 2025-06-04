@@ -4,12 +4,13 @@ extends Node2D
 const CARD_SCENE_PATH = "res://Scenes/Cards/card_base.tscn"
 const CARD_WIDTH = 200
 const PLAYER_HAND_Y_POS = 900
+const OPPONENT_HAND_Y_POS = 150
 const DEFAULT_ASPEED = 0.25
 
 # Properties
 var player_hand = []
 var center_screen_x: int
-
+var ai_hand = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -36,8 +37,13 @@ func remove_card_from_hand(card):
 
 # update_hand_position
 func update_hand_positions( speed = DEFAULT_ASPEED):
+	var y_pos
+	if(ai_hand):
+		y_pos = OPPONENT_HAND_Y_POS
+	else:
+		y_pos = PLAYER_HAND_Y_POS
 	for i in range(player_hand.size()):
-		var new_position = Vector2(calculate_card_position(i), PLAYER_HAND_Y_POS)
+		var new_position = Vector2(calculate_card_position(i), y_pos)
 		var card = player_hand[i]
 		card.hand_position = new_position
 		card.animate_card_to_position(new_position, speed)

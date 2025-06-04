@@ -20,6 +20,7 @@ func opponent_turn():
 	$"../PassButton".visible = false
 	# Initialize Opponent Turn
 	$"../OpponentManager".start_turn()
+	$"../OpponentManager".end_turn()
 
 
 func play_card(card, caster = "player", cardslot = "", player = "opponent", cast_time_mod = 0, cast_damage_mod = 0):

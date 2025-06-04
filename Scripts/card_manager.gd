@@ -6,6 +6,7 @@ var card_being_dragged = null # Card object being grabbed (NOT a bool)
 var screen_size: Vector2
 var is_hovering_card :bool = false
 var player_hand
+var opponent_hand
 var deck_scene
 
 # Masks
@@ -20,20 +21,12 @@ const CARD_SCALE_PlACED = Vector2( 0.7, 0.7)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	deck_scene = preload("res://Scenes/Cards/deck.tscn")
-	player_hand = $"../PlayerHand"
+	player_hand = $"PlayerHand"
+	opponent_hand = $OpponentHand
+	opponent_hand.ai_hand = true
 	screen_size = get_viewport_rect().size
 	$"../InputManager".connect("left_mouse_button_released", on_left_click_release)
-	var deck = deck_scene.instantiate()
-	deck.position = DECK_POSITION
-	deck.ai_deck = false
-	deck.name = "PlayerDeck"
-	add_child(deck)
-	deck = deck_scene.instantiate()
-	deck.name = "OpponentDeck"
-	deck.position = OPPONENT_DECK_POSITION
-	deck.get_node("Area2D").collision_mask = Globals.DECK_COLLISION_MASK_OPPONENT
-	deck.ai_deck = true
-	add_child(deck)
+	initialize_decks()
 	pass # Replace with function body.
 
 # Card Collision detector
@@ -165,6 +158,22 @@ func end_drag():
 	card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = false
 	card_being_dragged = null
 	
+	
+func initialize_decks():
+	var deck = deck_scene.instantiate()
+	deck.position = DECK_POSITION
+	deck.ai_deck = false
+	deck.name = "PlayerDeck"
+	add_child(deck)
+	deck.initialize()
+	deck = deck_scene.instantiate()
+	deck.name = "OpponentDeck"
+	deck.position = OPPONENT_DECK_POSITION
+	deck.get_node("Area2D").collision_mask = Globals.DECK_COLLISION_MASK_OPPONENT
+	deck.ai_deck = true
+	add_child(deck)
+	deck.initialize()
+
 # Function called on Signal being received from Input Manager
 func on_left_click_release():
 	if card_being_dragged:

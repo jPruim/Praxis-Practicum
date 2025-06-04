@@ -41,9 +41,9 @@ texture = ExtResource("4_n0cij")
 [node name="CardManager" type="Node2D" parent="."]
 script = ExtResource("3_n5cyu")
 
-[node name="PlayerHand" parent="." instance=ExtResource("8_l370m")]
+[node name="PlayerHand" parent="CardManager" instance=ExtResource("8_l370m")]
 
-[node name="OpponentHand" parent="." instance=ExtResource("8_l370m")]
+[node name="OpponentHand" parent="CardManager" instance=ExtResource("8_l370m")]
 
 [node name="InputManager" type="Node2D" parent="."]
 script = ExtResource("10_bbo5u")
