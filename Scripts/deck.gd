@@ -120,6 +120,7 @@ func add_card_to_deck(data):
 	var new_card = card_scene.instantiate()
 	new_card.position = CARD_SPAWN
 	new_card.set_all(data)
+	new_card.set_display(data)
 	if(ai_deck):
 		new_card.ai_card = true
 		new_card.get_node("Area2D").collision_mask = Globals.CARD_COLLISION_MASK_OPPONENT

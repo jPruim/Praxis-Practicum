@@ -55,7 +55,13 @@ func calculate_card_position(i):
 	# to work on initial loading (otherwise center_screen_x is 0)
 	center_screen_x = floor(get_viewport().size.x / 2) 
 	var total_width = (player_hand.size() - 1) * CARD_WIDTH
-	var x_offset = center_screen_x + i * CARD_WIDTH - total_width / 2
+	var x_offset
+	
+	# Reverse the directions of enemy hands
+	if (!ai_hand):
+		x_offset = center_screen_x + i * CARD_WIDTH - total_width / 2
+	else:
+		x_offset = center_screen_x - i * CARD_WIDTH + total_width / 2
 	return x_offset
 
 

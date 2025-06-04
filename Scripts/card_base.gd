@@ -12,6 +12,7 @@ var hand_position: Vector2
 var card_database
 var in_slot = false # Boolean for being in the card_slot
 var ai_card = false
+var card_info
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	card_database = preload("res://Scripts/CardDatabase.gd")
@@ -34,9 +35,15 @@ func _on_area_2d_mouse_exited() -> void:
 	emit_signal("hovered_off", self)
 	pass # Replace with function body.
 
+
 # Set Card from Array
 # Order (database ENUM) { DISPLAY_NAME, CARD_TYPE, CAST_TIME, SUMMON_ATTACK, SUMMON_HEALTH, DIRECT_DAMAGE, DAMAGE_TYPE, DIRECT_BLOCK, CARD_TEXT, ANIMATION }
 func set_all(array):
+	card_info = array
+
+# Set Card from Array
+# Order (database ENUM) { DISPLAY_NAME, CARD_TYPE, CAST_TIME, SUMMON_ATTACK, SUMMON_HEALTH, DIRECT_DAMAGE, DAMAGE_TYPE, DIRECT_BLOCK, CARD_TEXT, ANIMATION }
+func set_display(array):
 	card_database = preload("res://Scripts/CardDatabase.gd") # No idea why this needs to be called here TODO: move ENUM to an autoload
 	$CardFront/Name.text = str(array[card_database.CARD_INFO.DISPLAY_NAME])
 	$CardFront/Attack.text = str(array[card_database.CARD_INFO.SUMMON_ATTACK])
@@ -49,14 +56,14 @@ func set_all(array):
 	$CardFront/DirectBlock.text = str(array[card_database.CARD_INFO.DIRECT_BLOCK])
 	
 	# Handle Animations not being added yet ( So I can add them over time)
-	if array[card_database.CARD_INFO.DIRECT_BLOCK]:
+	if array[card_database.CARD_INFO.ANIMATION]:
 		$CardFront/Container/AnimatedSprite2D.animation = str(array[card_database.CARD_INFO.ANIMATION])
 	else:
 		$CardFront/Container/AnimatedSprite2D.animation = "FireSparks" # TODO: make an empty spriteframe at some point
 	
 # Create Array from Card
-func store_card():
-	return [$Name.text, $Type.text, $Cost.text, $Attack.text, $Health.text, $DirectDamage.text, $DamageType.text, $DirectBlock.text, $Details.text, $Container/AnimatedSprite2D.animation]
+func get_card_info():
+	return card_info
 
 # Flip card to front from back
 func animation_reveal():

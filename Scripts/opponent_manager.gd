@@ -6,13 +6,15 @@ const THOUGHT_DELAY = 0.7
 
 # Propterties
 var timer
-var is_casting = false
+var cast_time = 0
 var ai_slots = [] # Storage for on board slots
 var player_slots = [] # Storage for on board slots
+var opponent_hand
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	timer = $OpponentTimer
 	timer.one_shot = true
+	opponent_hand = $"../CardManager/OpponentHand"
 	identify_slots()
 	pass # Replace with function body.
 
@@ -23,26 +25,41 @@ func _process(delta: float) -> void:
 
 # Any automatic "start of turn" affects
 func start_turn():
+	print("AI turn Start")
 	$"../CardManager".get_node("OpponentDeck").draw_card()
-	if is_casting:
-		return
-	else:
-		make_ai_play()
+	make_ai_play()
+
+# For furture end turn effects (currently there aren't any)
+func end_turn():
+	print("AI turn End")
+	pass
 
 func make_ai_play():
 	# Basic AI
 	
+	# Do nothing if hand is empty
+	if (opponent_hand.player_hand.size() == 0):
+		return
+	# Do nothing if already casting
+	if (cast_time > 0):
+		return
+	
 	# Choose Random Card in hand
-	var i = randi() % $"../OpponentHand".player_hand.size
-	var choice = $"../OpponentHand".player_hand.pop_at(i)
-	if choice[Globals.CARD_INFO.CARD_TYPE] == "summon":
-		#$"../CardManager".play_card(choice,)
+	var i = randi() % opponent_hand.player_hand.size()
+	var choice = opponent_hand.player_hand.pop_at(i)
+	var card_info = choice.get_card_info()
+	cast_time = card_info[Globals.CARD_INFO.CAST_TIME]
+	# Cast card
+	if card_info[Globals.CARD_INFO.CARD_TYPE] == "summon":
 		pass
-	elif choice[Globals.CARD_INFO.CARD_TYPE] == "spell":
+	elif choice.get_card_info()[Globals.CARD_INFO.CARD_TYPE] == "spell":
 		pass
+	if (cast_time == 0):
+		make_ai_play()
 
 func summon_target():
 	pass
+	
 # Theoretically only needs to be called once, 
 func identify_slots():
 	var card_slot = preload("res://Scenes/Cards/card_slot.tscn")
