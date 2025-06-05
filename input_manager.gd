@@ -1,10 +1,6 @@
 extends Node2D
 
 
-signal left_mouse_button_clicked
-signal left_mouse_button_released
-
-
 # Masks
 const CARD_COLLISION_MASK = 1
 const CARD_SLOT_COLLISION_MASK = 2
@@ -28,9 +24,9 @@ func _input(event: InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
 				raycast_check_at_cursor()
-				emit_signal("left_mouse_button_clicked")
+				SignalBus.emit_signal("left_mouse_button_clicked")
 			else:
-				emit_signal("left_mouse_button_released")
+				SignalBus.emit_signal("left_mouse_button_released")
 				pass
 			
 

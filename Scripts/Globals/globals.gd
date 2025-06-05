@@ -1,7 +1,10 @@
 extends Node
 
 # Global Constants
+
+# Card Info order
 enum CARD_INFO { DISPLAY_NAME, CARD_TYPE, CAST_TIME, SUMMON_ATTACK, SUMMON_HEALTH, DIRECT_DAMAGE, DAMAGE_TYPE, DIRECT_BLOCK, CARD_TEXT, ANIMATION, STACKABLE}
+
 # Z_index
 const Z_INDEX = {
 	"background": -100,
@@ -22,11 +25,11 @@ const DECK_COLLISION_MASK = 4
 const DECK_COLLISION_MASK_OPPONENT = 8
 const CARD_COLLISION_MASK_OPPONENT = 16
 
-
-# Consts
+# Graphic Constants
 const DECK_POSITION = Vector2(100, 900)
 const OPPONENT_DECK_POSITION = Vector2(1800, 150)
 const CARD_SCALE_PlACED = Vector2( 0.7, 0.7)
+const DEFAULT_ASPEED = 0.25
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

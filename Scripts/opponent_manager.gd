@@ -8,7 +8,9 @@ const THOUGHT_DELAY = 0.7
 var timer
 var cast_time = 0
 var ai_slots = [] # Storage for on board slots
+var empty_ai_slots = []
 var player_slots = [] # Storage for on board slots
+var full_player_slots = []
 var opponent_hand
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -58,7 +60,11 @@ func make_ai_play():
 		make_ai_play()
 
 func summon_target():
-	pass
+	find_empty_slots()
+	
+	# Select Random valid target
+	var target = empty_ai_slots[randi() % empty_ai_slots.size()]
+	return target
 	
 # Theoretically only needs to be called once, 
 func identify_slots():
@@ -70,6 +76,20 @@ func identify_slots():
 			elif i.player_owned:
 				player_slots.append(i)
 	return
+
+
+
+func find_empty_slots():
+	empty_ai_slots = ai_slots
+	for i in ai_slots:
+		if (i.cards.size() > 0):
+			empty_ai_slots.erase(i)
+
+func find_full_slots():
+	full_player_slots = ai_slots
+	for i in ai_slots:
+		if (i.cards.size() == 0):
+			full_player_slots.erase(i)
 
 # Time function
 func decision_delay(delay = THOUGHT_DELAY):

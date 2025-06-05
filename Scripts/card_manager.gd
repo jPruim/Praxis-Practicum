@@ -26,7 +26,7 @@ func _ready() -> void:
 	opponent_hand = $OpponentHand
 	opponent_hand.ai_hand = true
 	screen_size = get_viewport_rect().size
-	$"../InputManager".connect("left_mouse_button_released", on_left_click_release)
+	SignalBus.connect("left_mouse_button_released", on_left_click_release)
 	initialize_decks()
 	pass # Replace with function body.
 
@@ -72,8 +72,8 @@ func _process(delta: float) -> void:
 
 #Handle card Signals
 func connect_card_signals(card):
-	card.connect("hovered", on_hovered_card)
-	card.connect("hovered_off", on_hovered_off_card)
+	SignalBus.connect("hovered", on_hovered_card)
+	SignalBus.connect("hovered_off", on_hovered_off_card)
 
 # Handle card being hovered
 func on_hovered_card(card):
