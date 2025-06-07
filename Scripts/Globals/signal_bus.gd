@@ -2,10 +2,15 @@ extends Node
 
 # Will through warnings if unused_signal warning is allowed in project settings
 
-# AI signals
+# AI Signals
 signal opponent_targeting_slot(slot, card)
 signal opponent_targeting_player(card)
 signal opponent_targeting_self(card)
+
+# Player Signals
+signal player_targeting_slot(slot, card)
+signal player_targeting_player(card)
+signal player_targeting_self(card)
 
 # Keybind signals
 signal left_mouse_button_clicked

@@ -30,6 +30,8 @@ const DECK_POSITION = Vector2(100, 900)
 const OPPONENT_DECK_POSITION = Vector2(1800, 150)
 const CARD_SCALE_PlACED = Vector2( 0.7, 0.7)
 const DEFAULT_ASPEED = 0.25
+const PLAYER_POSITION = Vector2(100,750)
+const ENEMY_POSITION = Vector2(1800,250)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

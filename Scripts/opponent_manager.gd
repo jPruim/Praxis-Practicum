@@ -17,7 +17,6 @@ func _ready() -> void:
 	timer = $OpponentTimer
 	timer.one_shot = true
 	opponent_hand = $"../CardManager/OpponentHand"
-	identify_slots()
 	pass # Replace with function body.
 
 
@@ -25,11 +24,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-# Any automatic "start of turn" affects
+# Any automatic "start of turn" affects (e.g. draw a card)
 func start_turn():
 	print("AI turn Start")
 	$"../CardManager".get_node("OpponentDeck").draw_card()
-	make_ai_play()
 
 # For furture end turn effects (currently there aren't any)
 func end_turn():
@@ -53,19 +51,35 @@ func make_ai_play():
 	cast_time = card_info[Globals.CARD_INFO.CAST_TIME]
 	# Cast card
 	if card_info[Globals.CARD_INFO.CARD_TYPE] == "summon":
+		summon_target(choice)
 		pass
-	elif choice.get_card_info()[Globals.CARD_INFO.CARD_TYPE] == "spell":
+	elif card_info[Globals.CARD_INFO.CARD_TYPE] == "spell":
+		spell_target(choice)
 		pass
 	if (cast_time == 0):
 		make_ai_play()
 
-func summon_target():
+func summon_target(card):
 	find_empty_slots()
 	
-	# Select Random valid target
+	# Select Random valid target TODO: Make an actually AI choice
 	var target = empty_ai_slots[randi() % empty_ai_slots.size()]
-	return target
+	SignalBus.opponent_targeting_slot.emit(target, card)
+	return
+
+func spell_target(card):
+	find_full_slots()
 	
+	# TODO: Make this "smart"
+	if (randi() % 2 == 0 || full_player_slots.size() == 0):
+		# Target Opponent
+		SignalBus.opponent_targeting_player.emit(card) 
+	else: # Target A summon
+		# Select Random valid target TODO: Make an actually AI choice
+		var target = full_player_slots[randi() % empty_ai_slots.size()]
+		SignalBus.opponent_targeting_slot.emit(target, card) 
+	return
+
 # Theoretically only needs to be called once, 
 func identify_slots():
 	var card_slot = preload("res://Scenes/Cards/card_slot.tscn")
