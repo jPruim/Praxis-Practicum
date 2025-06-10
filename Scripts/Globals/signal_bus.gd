@@ -9,7 +9,7 @@ signal opponent_targeting_self(card)
 
 # Player Signals
 signal player_targeting_slot(slot, card)
-signal player_targeting_player(card)
+signal player_targeting_opponent(card)
 signal player_targeting_self(card)
 
 # Keybind signals
