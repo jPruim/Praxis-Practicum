@@ -7,16 +7,16 @@ const THOUGHT_DELAY = 0.7
 # Propterties
 var timer
 var cast_time = 0
-var ai_slots = [] # Storage for on board slots
-var empty_ai_slots = []
-var player_slots = [] # Storage for on board slots
-var full_player_slots = []
 var opponent_hand
+
+
+var battle_manager
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	timer = $OpponentTimer
 	timer.one_shot = true
 	opponent_hand = $"../CardManager/OpponentHand"
+	battle_manager = $"../BattleManager"
 	pass # Replace with function body.
 
 
@@ -60,50 +60,27 @@ func make_ai_play():
 		make_ai_play()
 
 func summon_target(card):
-	find_empty_slots()
+	battle_manager.find_empty_slots()
 	
 	# Select Random valid target TODO: Make an actually AI choice
-	var target = empty_ai_slots[randi() % empty_ai_slots.size()]
+	var target = battle_manager.empty_ai_slots[randi() % battle_manager.empty_ai_slots.size()]
 	SignalBus.opponent_targeting_slot.emit(target, card)
 	return
 
 func spell_target(card):
-	find_full_slots()
+	battle_manager.find_full_slots()
 	
 	# TODO: Make this "smart"
-	if (randi() % 2 == 0 || full_player_slots.size() == 0):
+	if (randi() % 2 == 0 || battle_manager.full_player_slots.size() == 0):
 		# Target Opponent
 		SignalBus.opponent_targeting_player.emit(card) 
 	else: # Target A summon
 		# Select Random valid target TODO: Make an actually AI choice
-		var target = full_player_slots[randi() % empty_ai_slots.size()]
+		var target = battle_manager.full_player_slots[randi() % battle_manager.empty_ai_slots.size()]
 		SignalBus.opponent_targeting_slot.emit(target, card) 
 	return
 
-# Theoretically only needs to be called once, 
-func identify_slots():
-	var card_slot = preload("res://Scenes/Cards/card_slot.tscn")
-	for i in $"..".get_children():
-		if i is CardSlot:
-			if !i.player_owned:
-				ai_slots.append(i)
-			elif i.player_owned:
-				player_slots.append(i)
-	return
 
-
-
-func find_empty_slots():
-	empty_ai_slots = ai_slots
-	for i in ai_slots:
-		if (i.cards.size() > 0):
-			empty_ai_slots.erase(i)
-
-func find_full_slots():
-	full_player_slots = ai_slots
-	for i in ai_slots:
-		if (i.cards.size() == 0):
-			full_player_slots.erase(i)
 
 # Time function
 func decision_delay(delay = THOUGHT_DELAY):

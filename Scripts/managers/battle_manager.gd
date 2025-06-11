@@ -8,6 +8,13 @@ var in_combat = false
 var player_cast_time = 0
 var spell_manager
 
+# Board State Variables
+var ai_slots = [] # Storage for on board slots
+var player_slots = [] # Storage for on board slots
+var empty_ai_slots = []
+var full_player_slots = []
+
+
 const DEFAULT_DELAY = 1
 
 # Called when the node enters the scene tree for the first time.
@@ -30,7 +37,7 @@ func _process(delta: float) -> void:
 
 
 func setup_combat(enemy):
-	opponent_manager.identify_slots()
+	identify_slots()
 	in_combat = true	
 	
 
@@ -66,6 +73,8 @@ func increment_time():
 func start_turn():
 	$"../CardManager/PlayerHand".draw()
 	$"../OpponentManager".start_turn()
+	find_empty_slots()
+	find_full_slots()
 
 func opponent_turn():
 		# Make the button unclickable and invisible
@@ -142,3 +151,27 @@ func delay(delay = DEFAULT_DELAY):
 	$BattleTimer.start()
 	await $BattleTimer.timeout
 	return
+
+# Theoretically only needs to be called once, 
+func identify_slots():
+	var card_slot = preload("res://Scenes/Cards/card_slot.tscn")
+	for i in $"..".get_children():
+		if i is CardSlot:
+			if !i.player_owned:
+				ai_slots.append(i)
+			elif i.player_owned:
+				player_slots.append(i)
+	return
+
+
+func find_empty_slots():
+	empty_ai_slots = ai_slots
+	for i in ai_slots:
+		if (i.cards.size() > 0):
+			empty_ai_slots.erase(i)
+
+func find_full_slots():
+	full_player_slots = player_slots
+	for i in ai_slots:
+		if (i.cards.size() == 0):
+			full_player_slots.erase(i)

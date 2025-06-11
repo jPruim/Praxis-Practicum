@@ -24,6 +24,19 @@ func resolve_spells():
 	var player_spell_ready = false
 	if battle_manager.opponent_manager.cast_time == 0:
 		opponent_spell_ready = true
+		if opponent_target == "self":
+			
+			opponent_target = null
+			pass
+		elif opponent_target == "Player":
+			
+			opponent_target = null
+			pass
+		else:
+			if (opponent_target.cards.size() > 0):
+				var target = opponent_target.cards[0]
+		
+		
 	if player_cast_time == 0:
 		player_spell_ready = true
 	
