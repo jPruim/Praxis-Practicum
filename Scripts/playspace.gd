@@ -25,6 +25,8 @@ func initialize_card_slots():
 	var y_pos
 	# Calculate the initial position of the top left most cardSlot
 	centerPoint = get_viewport_rect().size / 2
+	# Shift the board up to skew for more player space
+	centerPoint += Vector2(0, -50) 
 	var x_pos_first = centerPoint.x - (0.5 * ((boardDimensions.x -1) * slotSize.x))
 	var y_pos_first = centerPoint.y - (0.5 * ((boardDimensions.y -1) * slotSize.y))
 	# Handle Margins
@@ -46,6 +48,12 @@ func initialize_card_slots():
 
 
 func _ready() -> void:
+	$OpponentSlot.is_opponent = true
+	$OpponentSlot.player_owned = false
+	$OpponentSlot.position = Vector2((get_viewport_rect().size / 2).x, 125)
+	$PlayerSlot.is_player = true
+	$PlayerSlot.player_owned = false
+	$PlayerSlot.position = Vector2((get_viewport_rect().size / 2).x, 850)
 	pass # Replace with function body.
 
 func _input(event: InputEvent) -> void:

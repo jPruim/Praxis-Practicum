@@ -3,8 +3,8 @@ extends Node2D
 # Consts
 const CARD_SCENE_PATH = "res://Scenes/Cards/card_base.tscn"
 const CARD_WIDTH = 200
-const PLAYER_HAND_Y_POS = 900
-const OPPONENT_HAND_Y_POS = 150
+const PLAYER_HAND_Y_POS = 1000
+const OPPONENT_HAND_Y_POS = -25
 const DEFAULT_ASPEED = 0.25
 
 # Properties

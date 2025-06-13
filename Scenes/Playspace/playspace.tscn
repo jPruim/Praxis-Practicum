@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dws2mhcfu18v7"]
+[gd_scene load_steps=27 format=3 uid="uid://dws2mhcfu18v7"]
 
 [ext_resource type="Script" path="res://Scripts/playspace.gd" id="1_t02ni"]
 [ext_resource type="Texture2D" uid="uid://dfen2tb0rf3nh" path="res://Assets/Background/background_layer_1.png" id="2_mgru5"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://gx36j0hxpfg2" path="res://Scenes/Graphic Elements/target.tscn" id="10_330af"]
 [ext_resource type="Script" path="res://input_manager.gd" id="10_bbo5u"]
 [ext_resource type="Script" path="res://Scripts/managers/spell_manager.gd" id="10_vwsko"]
+[ext_resource type="PackedScene" uid="uid://brqd7qlj1sonb" path="res://Scenes/Cards/card_slot.tscn" id="12_r2h81"]
+[ext_resource type="Texture2D" uid="uid://ba411usipidba" path="res://Assets/Characters/Knight/_Idle.png" id="13_aq3wy"]
 
 [sub_resource type="Gradient" id="Gradient_dttap"]
 
@@ -18,6 +20,84 @@
 gradient = SubResource("Gradient_dttap")
 width = 4
 height = 4
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_64vpn"]
+atlas = ExtResource("13_aq3wy")
+region = Rect2(0, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6ace"]
+atlas = ExtResource("13_aq3wy")
+region = Rect2(120, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tabat"]
+atlas = ExtResource("13_aq3wy")
+region = Rect2(240, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5ux6"]
+atlas = ExtResource("13_aq3wy")
+region = Rect2(360, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_087gk"]
+atlas = ExtResource("13_aq3wy")
+region = Rect2(480, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwj3r"]
+atlas = ExtResource("13_aq3wy")
+region = Rect2(600, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qw6jv"]
+atlas = ExtResource("13_aq3wy")
+region = Rect2(720, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_24poh"]
+atlas = ExtResource("13_aq3wy")
+region = Rect2(840, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4drr"]
+atlas = ExtResource("13_aq3wy")
+region = Rect2(960, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2m20e"]
+atlas = ExtResource("13_aq3wy")
+region = Rect2(1080, 0, 120, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5q441"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_64vpn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6ace")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tabat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l5ux6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_087gk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwj3r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qw6jv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_24poh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r4drr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2m20e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Playspace" type="Node2D"]
 script = ExtResource("1_t02ni")
@@ -51,6 +131,7 @@ script = ExtResource("3_n5cyu")
 script = ExtResource("10_bbo5u")
 
 [node name="Centerpoint" type="Sprite2D" parent="."]
+visible = false
 z_index = 15
 scale = Vector2(2, 2)
 texture = SubResource("GradientTexture2D_di84m")
@@ -76,5 +157,18 @@ script = ExtResource("9_uwahy")
 script = ExtResource("10_vwsko")
 
 [node name="Target" parent="." instance=ExtResource("10_330af")]
+
+[node name="PlayerSlot" parent="." instance=ExtResource("12_r2h81")]
+position = Vector2(1008, 1071)
+
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="PlayerSlot"]
+position = Vector2(19, -83)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_5q441")
+autoplay = "default"
+frame_progress = 0.243326
+
+[node name="OpponentSlot" parent="." instance=ExtResource("12_r2h81")]
+position = Vector2(1028, 22)
 
 [connection signal="pressed" from="PassButton" to="BattleManager" method="_on_pass_button_pressed"]
