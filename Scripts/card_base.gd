@@ -58,6 +58,9 @@ func set_display(array):
 func get_card_info():
 	return card_info
 
+func get_card_type():
+	return card_info[Globals.CARD_INFO.CARD_TYPE]
+
 # Flip card to front from back
 func animation_reveal():
 	# Check if card back is visible

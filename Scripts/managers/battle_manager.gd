@@ -2,7 +2,6 @@ extends Node2D
 
 
 var target_scene
-var current_target
 var opponent_manager
 var in_combat = false
 var player_cast_time = 0
@@ -13,7 +12,8 @@ var ai_slots = [] # Storage for on board slots
 var player_slots = [] # Storage for on board slots
 var empty_ai_slots = []
 var full_player_slots = []
-
+var current_player_targets = []
+var current_opponent_targets = []
 
 const DEFAULT_DELAY = 1
 
@@ -21,7 +21,7 @@ const DEFAULT_DELAY = 1
 func _ready() -> void:
 	target_scene = preload("res://Scenes/Graphic Elements/target.tscn")
 	opponent_manager = $"../OpponentManager"
-	spell_manager = $SpellManager
+	spell_manager = $".".find_child("SpellManager")
 	SignalBus.opponent_targeting_player.connect(_on_opponent_targeting_player)
 	SignalBus.opponent_targeting_self.connect(_on_opponent_targeting_self)
 	SignalBus.opponent_targeting_slot.connect(_on_opponent_targeting_slot)
@@ -93,58 +93,40 @@ func player_turn():
 
 
 func _on_opponent_targeting_player(card):
-	if current_target:
-		current_target.free()
-	current_target = target_scene.instantiate()
-	current_target.position = Globals.PLAYER_POSITION
+	create_target(Globals.PLAYER_POSITION, false)
 	spell_manager.opponent_spell = card
-	spell_manager.opponent_target = "Player"
-	$".".add_child(current_target)
+	spell_manager.opponent_targets.append($"../PlayerSlot")
+	print("Opponent targeting Player")
 
 func _on_opponent_targeting_self(card):
-	if current_target:
-		current_target.free()
-	current_target = target_scene.instantiate()
-	current_target.position = Globals.ENEMY_POSITION
+	create_target(Globals.ENEMY_POSITION, false)
 	spell_manager.opponent_spell = card
-	spell_manager.opponent_target = "Opponent"
-	$".".add_child(current_target)
+	spell_manager.opponent_targets.append($"../OpponentSlot")
+	print("Opponent targeting self")
 	
 func _on_opponent_targeting_slot(slot, card):
-	if current_target:
-		current_target.free()
-	current_target = target_scene.instantiate()
-	current_target.position = slot.position
+	create_target(slot.position, false)
 	spell_manager.opponent_spell = card
-	spell_manager.opponent_target = slot
-	$".".add_child(current_target)
+	spell_manager.opponent_targets.append(slot)
+	print("Opponent targeting slot")
 
 func _on_player_targeting_opponent(card):
-	if current_target:
-		current_target.free()
-	current_target = target_scene.instantiate()
-	current_target.position = Globals.PLAYER_POSITION
+	create_target(Globals.ENEMY_POSITION, true)
 	spell_manager.player_spell = card
-	spell_manager.player_target = "Opponent"
-	$".".add_child(current_target)
+	spell_manager.player_targets.append($"../PlayerSlot")
+	print("Player targeting self")
 
 func _on_player_targeting_self(card):
-	if current_target:
-		current_target.free()
-	current_target = target_scene.instantiate()
-	current_target.position = Globals.ENEMY_POSITION
+	create_target(Globals.PLAYER_POSITION, true)
 	spell_manager.player_spell = card
-	spell_manager.player_target = "Player"
-	$".".add_child(current_target)
+	spell_manager.player_targets.append($"../PlayerSlot")
+	print("Player targeting self")
 	
 func _on_player_targeting_slot(slot, card):
-	if current_target:
-		current_target.free()
-	current_target = target_scene.instantiate()
-	current_target.position = slot.position
+	create_target(slot.position, true)
 	spell_manager.player_spell = card
-	spell_manager.player_target = slot
-	$".".add_child(current_target)
+	spell_manager.player_targets.append(slot)
+	print("Player targeting slot")
 
 func delay(delay = DEFAULT_DELAY):
 	$BattleTimer.wait_time = delay
@@ -163,7 +145,6 @@ func identify_slots():
 				player_slots.append(i)
 	return
 
-
 func find_empty_slots():
 	empty_ai_slots = ai_slots
 	for i in ai_slots:
@@ -175,3 +156,27 @@ func find_full_slots():
 	for i in ai_slots:
 		if (i.cards.size() == 0):
 			full_player_slots.erase(i)
+
+# Create a target at a location, allows for multiple targets per "player"
+func create_target(location, player_owned = false):
+	var current_target = target_scene.instantiate()
+	current_target.position = location
+	$".".add_child(current_target)
+	if (player_owned):
+		current_target.get_node("EnemySprite").visible = false
+		current_target.get_node("PlayerSprite").visible = true
+		current_player_targets.append(current_target)
+	else:
+		current_target.get_node("EnemySprite").visible = true
+		current_target.get_node("PlayerSprite").visible = false
+		current_opponent_targets.append(current_target)
+	return
+
+func clear_target(player_owned):
+	if player_owned:
+		for x in current_player_targets:
+			x.free()
+	else:
+		for y in current_opponent_targets:
+			y.free()
+	return

@@ -92,6 +92,9 @@ func on_hovered_off_card(card):
 				card_affects(new_card, true)
 			else:
 				is_hovering_card = false
+	# Make sure cards are in the right spot, only needed if card clamping
+	#$PlayerHand.update_hand_positions()
+	#$OpponentHand.update_hand_positions()
 	# Turn off card affects
 	card_affects(card, false)
 	
@@ -101,6 +104,8 @@ func card_affects(card, hovered: bool):
 	if hovered:
 		if !card.in_slot:
 			card.scale = Vector2(1.05, 1.05)
+			# TODO: Decide if we want card clamping
+			# card.position = card.position.clamp(Vector2(80,120), Vector2(1800-80,1080-120))
 			card.z_index = Globals.Z_INDEX["card_hovered"]
 			# Play Animation
 		animation_sprite.play()
@@ -138,26 +143,48 @@ func end_drag():
 	# Disable collision shape during animations
 	card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
 	
+	var card_type = card_being_dragged.get_card_type()
+	
 	# Check if final location is a CardSlot
 	var card_slot = raycast_check_for_card_slot()
-	# Check for room in the CardSlot
-	if card_slot and card_slot.max_cards > card_slot.cards.size() && card_slot.player_owned:
-		card_being_dragged.in_slot = true
-		card_being_dragged.position = card_slot.position
-		
-		# Add card to card slot and remove from hand (THIS ASSUMES CARD CAME FROM HAND)
-		card_slot.cards.append(card_being_dragged)
-		card_being_dragged.scale = CARD_SCALE_PlACED
+	if (card_slot && card_slot.is_player):
 		if(card_being_dragged.ai_card):
 			# Should never be called
 			opponent_hand.remove_card_from_hand(card_being_dragged) 
 		else:
 			player_hand.remove_card_from_hand(card_being_dragged)
-		card_being_dragged.z_index = Globals.Z_INDEX["card_in_slot"]
-		card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = false
+		SignalBus.emit_signal("player_targeting_self", card_being_dragged)
 		card_being_dragged = null
 		return
-	
+	elif (card_slot && card_slot.is_opponent):
+		if(card_being_dragged.ai_card):
+			# Should never be called
+			opponent_hand.remove_card_from_hand(card_being_dragged) 
+		else:
+			player_hand.remove_card_from_hand(card_being_dragged)
+		SignalBus.emit_signal("player_targeting_opponent", card_being_dragged)
+		card_being_dragged = null
+		return
+	elif(card_slot and card_slot.max_cards > card_slot.cards.size()):
+		# Check for room in the CardSlot
+		if  (card_type == "summon" and card_slot.player_owned) or \
+			(card_type == "spell" and !card_slot.player_owned):
+			#card_being_dragged.in_slot = true
+			#card_being_dragged.position = card_slot.position
+			
+			# Add card to card slot and remove from hand (THIS ASSUMES CARD CAME FROM HAND)
+			card_slot.cards.append(card_being_dragged)
+			card_being_dragged.scale = CARD_SCALE_PlACED
+			if(card_being_dragged.ai_card):
+				# Should never be called
+				opponent_hand.remove_card_from_hand(card_being_dragged) 
+			else:
+				player_hand.remove_card_from_hand(card_being_dragged)
+			SignalBus.emit_signal("player_targeting_slot", card_slot, card_being_dragged)
+			#card_being_dragged.z_index = Globals.Z_INDEX["card_in_slot"]
+			#card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = false
+			card_being_dragged = null
+			return
 	
 	if(card_being_dragged.ai_card):
 		# Should never be called
