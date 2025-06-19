@@ -94,38 +94,26 @@ func player_turn():
 
 func _on_opponent_targeting_player(card):
 	create_target(Globals.PLAYER_POSITION, false)
-	spell_manager.opponent_spell = card
-	spell_manager.opponent_targets.append($"../PlayerSlot")
 	print("Opponent targeting Player")
 
 func _on_opponent_targeting_self(card):
 	create_target(Globals.ENEMY_POSITION, false)
-	spell_manager.opponent_spell = card
-	spell_manager.opponent_targets.append($"../OpponentSlot")
 	print("Opponent targeting self")
 	
 func _on_opponent_targeting_slot(slot, card):
 	create_target(slot.position, false)
-	spell_manager.opponent_spell = card
-	spell_manager.opponent_targets.append(slot)
 	print("Opponent targeting slot")
 
 func _on_player_targeting_opponent(card):
 	create_target(Globals.ENEMY_POSITION, true)
-	spell_manager.player_spell = card
-	spell_manager.player_targets.append($"../PlayerSlot")
 	print("Player targeting self")
 
 func _on_player_targeting_self(card):
 	create_target(Globals.PLAYER_POSITION, true)
-	spell_manager.player_spell = card
-	spell_manager.player_targets.append($"../PlayerSlot")
 	print("Player targeting self")
 	
 func _on_player_targeting_slot(slot, card):
 	create_target(slot.position, true)
-	spell_manager.player_spell = card
-	spell_manager.player_targets.append(slot)
 	print("Player targeting slot")
 
 func delay(delay = DEFAULT_DELAY):

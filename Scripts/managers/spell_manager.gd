@@ -3,13 +3,19 @@ extends Node2D
 var player_cast_time = 0
 var player_spell
 var opponent_spell
-var player_target_slots
-var opponent_target_slots
+var player_target_slots = []
+var opponent_target_slots = []
 var battle_manager
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	battle_manager = $".."
+	SignalBus.opponent_targeting_player.connect(_on_opponent_targeting_player)
+	SignalBus.opponent_targeting_self.connect(_on_opponent_targeting_self)
+	SignalBus.opponent_targeting_slot.connect(_on_opponent_targeting_slot)
+	SignalBus.player_targeting_opponent.connect(_on_player_targeting_opponent)
+	SignalBus.player_targeting_self.connect(_on_player_targeting_self)
+	SignalBus.player_targeting_slot.connect(_on_player_targeting_slot)
 	pass # Replace with function body.
 
 
@@ -27,14 +33,47 @@ func resolve_spells():
 		if opponent_target_slots.size() > 0:
 			for slot in opponent_target_slots:
 				resolve_spell_at(opponent_spell, slot)
-			opponent_target_slots = null
+			opponent_target_slots = []
 	if player_spell && player_cast_time == 0:
 		opponent_spell_ready = true
 		if player_target_slots.size() > 0:
 			for slot in player_target_slots:
 				resolve_spell_at(player_spell, slot)
-			player_target_slots = null
+			player_target_slots = []
 
 
 func resolve_spell_at(spell, slot):
 	pass
+
+func add_player_target(slot):
+	player_target_slots.append(slot)
+	
+func add_opponent_target(slot):
+	opponent_target_slots.append(slot)
+
+
+# Signals
+func _on_opponent_targeting_player(card):
+	opponent_spell = card
+	opponent_target_slots.append($"../../OpponentSlot")
+
+func _on_opponent_targeting_self(card):
+	opponent_spell = card
+	opponent_target_slots.append($"../../PlayerSlot")
+	
+func _on_opponent_targeting_slot(slot, card):
+	opponent_spell = card
+	opponent_target_slots.append(slot)
+
+func _on_player_targeting_opponent(card):
+	opponent_spell = card
+	opponent_target_slots.append($"../../OpponentSlot")
+
+func _on_player_targeting_self(card):
+	opponent_spell = card
+	opponent_target_slots.append($"../../PlayerSlot")
+	
+func _on_player_targeting_slot(slot, card):
+	opponent_spell = card
+	opponent_target_slots.append(slot)
+	
