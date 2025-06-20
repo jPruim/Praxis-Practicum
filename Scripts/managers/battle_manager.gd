@@ -7,6 +7,7 @@ var in_combat = false
 var player_cast_time = 0
 var spell_manager
 
+
 # Board State Variables
 var ai_slots = [] # Storage for on board slots
 var player_slots = [] # Storage for on board slots
@@ -29,6 +30,7 @@ func _ready() -> void:
 	SignalBus.player_targeting_self.connect(_on_player_targeting_self)
 	SignalBus.player_targeting_slot.connect(_on_player_targeting_slot)
 	setup_combat("default")
+	time_loop()
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -46,12 +48,15 @@ func _on_pass_button_pressed() -> void:
 
 func time_loop():
 	start_turn()
+	delay()
 	if(opponent_manager.cast_time == 0):
 		opponent_manager.make_ai_play()
 	if(player_cast_time == 0):
-		return
+		# Break loop if player needs to cast something
+		return 
 	else:
 		increment_time()
+		clean_up()
 		time_loop()
 		
 # Function to hold to setup the end of the time step
@@ -71,8 +76,10 @@ func increment_time():
 	
 # Hold the beginning of the time increment setup
 func start_turn():
-	$"../CardManager/PlayerHand".draw()
+	$"../CardManager/".get_node("PlayerDeck").draw_card()
 	$"../OpponentManager".start_turn()
+	$"../CardManager/PlayerHand".update_hand_positions()
+	$"../CardManager/OpponentHand".update_hand_positions()
 	find_empty_slots()
 	find_full_slots()
 
@@ -106,15 +113,15 @@ func _on_opponent_targeting_slot(slot, card):
 
 func _on_player_targeting_opponent(card):
 	create_target(Globals.ENEMY_POSITION, true)
-	print("Player targeting self")
+	time_loop()
 
 func _on_player_targeting_self(card):
 	create_target(Globals.PLAYER_POSITION, true)
-	print("Player targeting self")
+	time_loop()
 	
 func _on_player_targeting_slot(slot, card):
 	create_target(slot.position, true)
-	print("Player targeting slot")
+	time_loop()
 
 func delay(delay = DEFAULT_DELAY):
 	$BattleTimer.wait_time = delay
@@ -168,3 +175,14 @@ func clear_target(player_owned):
 		for y in current_opponent_targets:
 			y.free()
 	return
+
+func clean_up():
+	# TODO make this actually check things
+	if(check_game_end()):
+		return
+	else:
+		return
+
+func check_game_end():
+	# TODO make this actually check things
+	return false

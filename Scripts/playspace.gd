@@ -50,10 +50,10 @@ func initialize_card_slots():
 func _ready() -> void:
 	$OpponentSlot.is_opponent = true
 	$OpponentSlot.player_owned = false
-	$OpponentSlot.position = Vector2((get_viewport_rect().size / 2).x, 125)
+	$OpponentSlot.position = Globals.ENEMY_POSITION
 	$PlayerSlot.is_player = true
 	$PlayerSlot.player_owned = false
-	$PlayerSlot.position = Vector2((get_viewport_rect().size / 2).x, 850)
+	$PlayerSlot.position = Globals.PLAYER_POSITION
 	pass # Replace with function body.
 
 func _input(event: InputEvent) -> void:

@@ -76,7 +76,7 @@ func spell_target(card):
 		SignalBus.opponent_targeting_player.emit(card) 
 	else: # Target A summon
 		# Select Random valid target TODO: Make an actually AI choice
-		var target = battle_manager.full_player_slots[randi() % battle_manager.empty_ai_slots.size()]
+		var target = battle_manager.full_player_slots[randi() % battle_manager.full_player_slots.size()]
 		SignalBus.opponent_targeting_slot.emit(target, card) 
 	return
 

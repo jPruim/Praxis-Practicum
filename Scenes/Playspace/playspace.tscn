@@ -157,6 +157,7 @@ script = ExtResource("9_uwahy")
 script = ExtResource("10_vwsko")
 
 [node name="Target" parent="." instance=ExtResource("10_330af")]
+visible = false
 
 [node name="PlayerSlot" parent="." instance=ExtResource("12_r2h81")]
 position = Vector2(1008, 1071)
