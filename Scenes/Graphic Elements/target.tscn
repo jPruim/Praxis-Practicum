@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://b4ydulmicvmmk" path="res://Assets/GUI/target.png" id="1_644jy"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2hvfs"]
-load_path = "res://.godot/imported/target.png-4d6d67d222cd2e60d3971bb92a47119b.ctex"
 
 [sub_resource type="Animation" id="Animation_ye1ji"]
 resource_name = "Idle"
