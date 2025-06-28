@@ -116,7 +116,7 @@ func initialize_player_deck():
 	$DeckCount.text = str(deck.size())
 
 # Add Card to Deck, Accepts Array
-func add_card_to_deck(data):
+func add_card_to_deck(data: CardData):
 	var new_card = card_scene.instantiate()
 	new_card.position = CARD_SPAWN
 	new_card.set_all(data)

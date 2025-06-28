@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://djevrlreboepw"]
+
+[ext_resource type="Script" path="res://Resources/CardData.gd" id="1_u0o3j"]
+
+[resource]
+script = ExtResource("1_u0o3j")
+display_name = "Arcane Barrier"
+card_type = "spell"
+cast_time = 1
+summon_attack = 0
+summon_health = 0
+direct_damage = 0
+damage_type = ""
+direct_block = 4
+card_text = "Gain 4 BARRIER"
+animation = ""
+stackable = true
+ally_target = "Single"
+enemy_target = "Single"
+effects = Array[String]([])
+effect_strength = 0
+spell_level = 1
+spell_rarity = "Common"

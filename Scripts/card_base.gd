@@ -1,14 +1,15 @@
+class_name CardBase
 extends Node2D
 
 # Properties
+var card_data:CardData = null
 var hand_position: Vector2
-var card_database
 var in_slot = false # Boolean for being in the card_slot
 var ai_card = false
-var card_info
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	card_database = preload("res://Scripts/CardDatabase.gd")
 	get_parent().connect_card_signals(self)
 	pass
 
@@ -29,37 +30,34 @@ func _on_area_2d_mouse_exited() -> void:
 	pass # Replace with function body.
 
 
-# Set Card from Array
-# Order (database ENUM) { DISPLAY_NAME, CARD_TYPE, CAST_TIME, SUMMON_ATTACK, SUMMON_HEALTH, DIRECT_DAMAGE, DAMAGE_TYPE, DIRECT_BLOCK, CARD_TEXT, ANIMATION }
-func set_all(array):
-	card_info = array
+# Set Card from a CardData object
+func set_all(data: CardData):
+	card_data = data
 
-# Set Card from Array
-# Order (database ENUM) { DISPLAY_NAME, CARD_TYPE, CAST_TIME, SUMMON_ATTACK, SUMMON_HEALTH, DIRECT_DAMAGE, DAMAGE_TYPE, DIRECT_BLOCK, CARD_TEXT, ANIMATION }
-func set_display(array):
-	card_database = preload("res://Scripts/CardDatabase.gd") # No idea why this needs to be called here TODO: move ENUM to an autoload
-	$CardFront/Name.text = str(array[card_database.CARD_INFO.DISPLAY_NAME])
-	$CardFront/Attack.text = str(array[card_database.CARD_INFO.SUMMON_ATTACK])
-	$CardFront/Health.text = str(array[card_database.CARD_INFO.SUMMON_HEALTH])
-	$CardFront/Details.text = str(array[card_database.CARD_INFO.CARD_TEXT])
-	$CardFront/Cost.text = str(array[card_database.CARD_INFO.CAST_TIME])
-	$CardFront/Type.text = str(array[card_database.CARD_INFO.DISPLAY_NAME])
-	$CardFront/DirectDamage.text = str(array[card_database.CARD_INFO.DIRECT_DAMAGE])
-	$CardFront/DamageType.text = str(array[card_database.CARD_INFO.DAMAGE_TYPE])
-	$CardFront/DirectBlock.text = str(array[card_database.CARD_INFO.DIRECT_BLOCK])
+# Set Display and CardData from a CardData object
+func set_display(data: CardData):
+	$CardFront/Name.text = data.display_name
+	$CardFront/Attack.text = data.summon_attack
+	$CardFront/Health.text = data.summon_health
+	$CardFront/Details.text = data.card_text
+	$CardFront/Cost.text = data.cast_time
+	$CardFront/Type.text = data.card_type
+	$CardFront/DirectDamage.text = data.direct_damage
+	$CardFront/DamageType.text = data.damage_type
+	$CardFront/DirectBlock.text = data.direct_block
 	
 	# Handle Animations not being added yet ( So I can add them over time)
-	if array[card_database.CARD_INFO.ANIMATION]:
-		$CardFront/Container/AnimatedSprite2D.animation = str(array[card_database.CARD_INFO.ANIMATION])
+	if data.animation != "":
+		$CardFront/Container/AnimatedSprite2D.animation = data.animation
 	else:
 		$CardFront/Container/AnimatedSprite2D.animation = "FireSparks" # TODO: make an empty spriteframe at some point
 	
 # Create Array from Card
 func get_card_info():
-	return card_info
+	return card_data
 
 func get_card_type():
-	return card_info[Globals.CARD_INFO.CARD_TYPE]
+	return card_data.card_type
 
 # Flip card to front from back
 func animation_reveal():
