@@ -4,17 +4,17 @@
 
 [resource]
 script = ExtResource("1_5b5am")
-display_name = "Fire Fox"
+display_name = "Firebolt"
 card_type = "spell"
 cast_time = 1
-summon_attack = 3
+summon_attack = 0
 summon_health = 4
 direct_damage = 0
 damage_type = "FIRE"
 direct_block = 0
-card_text = ""
+card_text = "Deal 4 FIRE damage"
 animation = ""
-stackable = true
+stackable = false
 ally_target = "Single"
 enemy_target = "Single"
 effects = Array[String]([])

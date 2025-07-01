@@ -19,7 +19,7 @@ var valid_draw = true # Check if a card can be drawn
 func _ready() -> void:
 	card_scene = preload(CARD_SCENE_PATH)
 	$DeckCount.text = str(deck.size())
-	card_database = preload("res://Scripts/CardDatabase.gd")
+	card_database = $
 	# Initialize the deck ai_deck is assigned in the parent _ready() function
 	#initialize()
 	pass # Replace with function body.
@@ -108,7 +108,7 @@ func reveal_deck():
 func initialize_player_deck():	
 	#initialize deck
 	for i in range (0,2):
-		for key in card_database.CARDS.keys():
+		for key in card_database.cards.keys():
 			#card_database
 			add_card_to_deck(card_database.CARDS[key])
 			pass

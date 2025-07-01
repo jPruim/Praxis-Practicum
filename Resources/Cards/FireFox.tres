@@ -4,15 +4,15 @@
 
 [resource]
 script = ExtResource("1_8hcir")
-display_name = "Firebolt"
-card_type = "spell"
-cast_time = 1
-summon_attack = 0
-summon_health = 0
-direct_damage = 4
+display_name = "Fire Fox"
+card_type = "Summon"
+cast_time = 2
+summon_attack = 3
+summon_health = 4
+direct_damage = 3
 damage_type = "FIRE"
 direct_block = 0
-card_text = "Deal 4 FIRE Damage"
+card_text = ""
 animation = ""
 stackable = true
 ally_target = "Single"

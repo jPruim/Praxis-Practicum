@@ -20,6 +20,13 @@ var cards: Array[CardData] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	var dir := DirAccess.open("res://Resources/Cards/")
+	if dir == null: printerr("Could not open folder"); return
+	dir.list_dir_begin()
+	for file: String in dir.get_files():
+		var resource := load(dir.get_current_dir() + "/" + file)
+		cards.append(resource)
+		print(resource)
 	pass # Replace with function body.
 
 
