@@ -19,7 +19,7 @@ var valid_draw = true # Check if a card can be drawn
 func _ready() -> void:
 	card_scene = preload(CARD_SCENE_PATH)
 	$DeckCount.text = str(deck.size())
-	card_database = $
+	card_database = $'../CardDatabase'
 	# Initialize the deck ai_deck is assigned in the parent _ready() function
 	#initialize()
 	pass # Replace with function body.
@@ -28,7 +28,7 @@ func _ready() -> void:
 
 func initialize(hand_size = 5):
 	card_scene = preload(CARD_SCENE_PATH)
-	card_database = preload("res://Scripts/CardDatabase.gd")
+	card_database = $'../CardDatabase'
 	if ai_deck:
 		initialize_enemy()
 	else:
@@ -108,9 +108,9 @@ func reveal_deck():
 func initialize_player_deck():	
 	#initialize deck
 	for i in range (0,2):
-		for key in card_database.cards.keys():
+		for data in card_database.cards:
 			#card_database
-			add_card_to_deck(card_database.CARDS[key])
+			add_card_to_deck(data)
 			pass
 	deck.shuffle()
 	$DeckCount.text = str(deck.size())

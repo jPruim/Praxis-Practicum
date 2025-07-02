@@ -48,12 +48,12 @@ func make_ai_play():
 	var i = randi() % opponent_hand.player_hand.size()
 	var choice = opponent_hand.player_hand.pop_at(i)
 	var card_info = choice.get_card_info()
-	cast_time = card_info[Globals.CARD_INFO.CAST_TIME]
+	cast_time = card_info.cast_time
 	# Cast card
-	if card_info[Globals.CARD_INFO.CARD_TYPE] == "summon":
+	if card_info.card_type == "summon":
 		summon_target(choice)
 		pass
-	elif card_info[Globals.CARD_INFO.CARD_TYPE] == "spell":
+	elif card_info.card_type == "spell":
 		spell_target(choice)
 		pass
 	if (cast_time == 0):

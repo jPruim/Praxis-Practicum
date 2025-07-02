@@ -3,8 +3,9 @@
 [ext_resource type="Script" path="res://Scripts/playspace.gd" id="1_t02ni"]
 [ext_resource type="Texture2D" uid="uid://dfen2tb0rf3nh" path="res://Assets/Background/background_layer_1.png" id="2_mgru5"]
 [ext_resource type="Texture2D" uid="uid://blidm0gf4b13l" path="res://Assets/Background/background_layer_2.png" id="3_d5p4b"]
+[ext_resource type="Script" path="res://Scripts/managers/card_manager.gd" id="3_n5cyu"]
 [ext_resource type="Texture2D" uid="uid://sdapeo05l5jd" path="res://Assets/Background/background_layer_3.png" id="4_n0cij"]
-[ext_resource type="Script" path="res://Scenes/Playspace/card_database.gd" id="7_ojqhm"]
+[ext_resource type="Script" path="res://Scripts/card_database.gd" id="7_ojqhm"]
 [ext_resource type="PackedScene" uid="uid://vlo6uno0t1dc" path="res://Scenes/Cards/player_hand.tscn" id="8_l370m"]
 [ext_resource type="PackedScene" uid="uid://crv6rsiuh0gi1" path="res://Scenes/Playspace/opponent_manager.tscn" id="8_o8vo8"]
 [ext_resource type="Script" path="res://Scripts/managers/battle_manager.gd" id="9_uwahy"]
@@ -13,44 +14,6 @@
 [ext_resource type="Script" path="res://Scripts/managers/spell_manager.gd" id="10_vwsko"]
 [ext_resource type="PackedScene" uid="uid://brqd7qlj1sonb" path="res://Scenes/Cards/card_slot.tscn" id="12_r2h81"]
 [ext_resource type="Texture2D" uid="uid://ba411usipidba" path="res://Assets/Characters/Knight/_Idle.png" id="13_aq3wy"]
-
-[sub_resource type="GDScript" id="GDScript_54mij"]
-script/source = "extends Node
-
-const ICE = \"ICE\"
-const FIRE = \"FIRE\"
-const SHIELD = \"SHIELD\"
-const NATURE = \"NATURE\"
-const NEUTRAL = \"\"
-var cards: Array[CardData] = []
-
-#{
-	#\"Firebolt\": [\"Firebolt\", \"spell\", 1, 0, 0, 4, FIRE, 0, \"Deal 4 \" + FIRE + \" damage\", \"\", false, 'single','single', [], 0],
-	#\"Arcane Barrier\": [\"Arcane\", \"spell\", 1, 0, 0, 4, \"\", 0, \"Gain 4 \" + SHIELD + \" damage\", \"\", false, 'single','single', [], 0],
-	#\"Icebolt\": [\"Icebolt\", \"spell\", 1, 0, 0, 4, ICE, 0, \"Deal 4 \" + ICE +  \" damage\", \"\", false, 'single','single', [], 0],
-	#\"Blank Spell\": [\"\", \"spell\", 0, 0, 0, 0, \"\", 0, \"\", \"\", false, 'single','single', [], 0],
-	#\"Blank Summon\": [\"\", \"summon\", 0, 1, 1, 0, \"\", 0, \"\", \"\", false, 'single','single', [], 0],
-	#\"Fire Fox\": [\"Fire Fox\", \"summon\", 1, 3, 4, 0, FIRE, 0, \"Stackable\", \"\", true, 'single','single', [], 0],
-	#\"Bee\": [\"Bee\", \"summon\", 0, 1, 1, 0, NEUTRAL, 0, \"Attack matches Health. Stackable\", \"\", true, 'single','single', [], 0],
-	#\"Snowy Owl\": [\"Snowy Owl\", \"summon\", 0, 2, 4, 0, ICE, 2, \"Also gains 2 shield. Stackable\", \"\", true, 'single','single', [], 0],
-#}
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	var dir := DirAccess.open(\"res://Resources/Cards/\")
-	if dir == null: printerr(\"Could not open folder\"); return
-	dir.list_dir_begin()
-	for file: String in dir.get_files():
-		var resource := load(dir.get_current_dir() + \"/\" + file)
-		cards.append(resource)
-		print(resource)
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-"
 
 [sub_resource type="Gradient" id="Gradient_dttap"]
 
@@ -159,7 +122,7 @@ scale = Vector2(10, 10)
 texture = ExtResource("4_n0cij")
 
 [node name="CardManager" type="Node2D" parent="."]
-script = SubResource("GDScript_54mij")
+script = ExtResource("3_n5cyu")
 
 [node name="PlayerHand" parent="CardManager" instance=ExtResource("8_l370m")]
 

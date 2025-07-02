@@ -37,14 +37,14 @@ func set_all(data: CardData):
 # Set Display and CardData from a CardData object
 func set_display(data: CardData):
 	$CardFront/Name.text = data.display_name
-	$CardFront/Attack.text = data.summon_attack
-	$CardFront/Health.text = data.summon_health
+	$CardFront/Attack.text = str(data.summon_attack)
+	$CardFront/Health.text = str(data.summon_health)
 	$CardFront/Details.text = data.card_text
-	$CardFront/Cost.text = data.cast_time
+	$CardFront/Cost.text = str(data.cast_time)
 	$CardFront/Type.text = data.card_type
-	$CardFront/DirectDamage.text = data.direct_damage
+	$CardFront/DirectDamage.text = str(data.direct_damage)
 	$CardFront/DamageType.text = data.damage_type
-	$CardFront/DirectBlock.text = data.direct_block
+	$CardFront/DirectBlock.text = str(data.direct_block)
 	
 	# Handle Animations not being added yet ( So I can add them over time)
 	if data.animation != "":
