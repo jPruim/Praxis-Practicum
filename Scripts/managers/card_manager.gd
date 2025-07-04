@@ -100,7 +100,7 @@ func on_hovered_off_card(card):
 	
 # Change card affects TODO: Decide if cards in cardslots need animations (go and add a new mask for animations, and separate from card detection)
 func card_affects(card, hovered: bool):
-	var animation_sprite = card.get_node("CardFront").get_node("Container").get_node("AnimatedSprite2D")
+	var animation_sprite = card.get_node("CardFront/Container/AnimatedSprite2D")
 	if hovered:
 		if !card.in_slot:
 			card.scale = Vector2(1.05, 1.05)
