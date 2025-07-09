@@ -125,8 +125,10 @@ texture = ExtResource("4_n0cij")
 script = ExtResource("3_n5cyu")
 
 [node name="PlayerHand" parent="CardManager" instance=ExtResource("8_l370m")]
+position = Vector2(1014, 1151)
 
 [node name="OpponentHand" parent="CardManager" instance=ExtResource("8_l370m")]
+position = Vector2(1146, 29)
 
 [node name="CardDatabase" type="Node2D" parent="CardManager"]
 script = ExtResource("7_ojqhm")

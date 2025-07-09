@@ -3,19 +3,18 @@ extends Node2D
 # Consts
 const CARD_SCENE_PATH = "res://Scenes/Cards/card_base.tscn"
 const CARD_WIDTH = 200
-const PLAYER_HAND_Y_POS = 950
-const OPPONENT_HAND_Y_POS = -25
 const DEFAULT_ASPEED = 0.25
 
 # Properties
 var player_hand = []
 var center_screen_x: int
-var ai_hand = false
-
+var ai_hand:bool = false
+var offset_value: int = - 150
+var hovered: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	center_screen_x = floor(get_viewport().size.x / 2)
-
+	connect_signals()
 
 
 # Add card to player hand
@@ -37,11 +36,15 @@ func remove_card_from_hand(card):
 
 # update_hand_position
 func update_hand_positions( speed = DEFAULT_ASPEED):
+	animate_hand_border()
 	var y_pos
 	if(ai_hand):
-		y_pos = OPPONENT_HAND_Y_POS
+		y_pos = Globals.OPPONENT_HAND_Y_POS
 	else:
-		y_pos = PLAYER_HAND_Y_POS
+		if(hovered):
+			y_pos = Globals.PLAYER_HAND_Y_POS + offset_value
+		else:
+			y_pos = Globals.PLAYER_HAND_Y_POS
 	for i in range(player_hand.size()):
 		var new_position = Vector2(calculate_card_position(i), y_pos)
 		var card = player_hand[i]
@@ -65,8 +68,45 @@ func calculate_card_position(i):
 	return x_offset
 
 
-# Animations
 
+
+#Handle Signals
+func connect_signals():
+	SignalBus.connect("player_hand_hovered", on_hover)
+	SignalBus.connect("player_hand_hovered_off", on_hover_off)
+
+func on_hover():
+	if(ai_hand):
+		return
+	hovered = true
+	update_hand_positions()
+	
+func on_hover_off():
+	if(ai_hand):
+		return
+	hovered = false
+	update_hand_positions()
+	
+func _on_area_2d_mouse_entered() -> void:
+	SignalBus.emit_signal("player_hand_hovered")
+	pass # Replace with function body.
+
+
+func _on_area_2d_mouse_exited() -> void:
+	SignalBus.emit_signal("player_hand_hovered_off")
+
+	pass # Replace with function body.
+
+func animate_hand_border(speed = Globals.DEFAULT_ASPEED):
+	if(ai_hand):
+		return
+	var tween = get_tree().create_tween()
+	var position
+	if(hovered):
+		position = Globals.PLAYER_HAND_Y_POS + offset_value
+	else: 
+		position = Globals.PLAYER_HAND_Y_POS
+	tween.tween_property($"Area2D", "position", position, speed)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

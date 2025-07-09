@@ -15,8 +15,10 @@ signal player_targeting_self(card)
 # Keybind signals
 signal left_mouse_button_clicked
 signal left_mouse_button_released
-signal hovered
-signal hovered_off
+signal card_hovered
+signal card_hovered_off
+signal player_hand_hovered
+signal player_hand_hovered_off
 
 
 # Shop Signals

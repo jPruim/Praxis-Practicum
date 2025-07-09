@@ -65,11 +65,11 @@ func increment_time():
 		player_cast_time -= 1
 	elif player_cast_time < 0:
 		player_cast_time = 0
-		print("Player cast_time is negative") # TODO: Remove this comment
+		printerr("Player cast_time is negative") # TODO: Remove this comment
 	if(opponent_manager.cast_time > 0):
 		opponent_manager.cast_time -= 1
 	elif opponent_manager.cast_time < 0:
-		print("Opponent cast_time is negative") # TODO: Remove this comment
+		printerr("Opponent cast_time is negative") # TODO: Remove this comment
 	delay()
 	spell_manager.resolve_spells()
 
@@ -101,15 +101,15 @@ func player_turn():
 
 func _on_opponent_targeting_player(card):
 	create_target(Globals.PLAYER_POSITION, false)
-	print("Opponent targeting Player")
+
 
 func _on_opponent_targeting_self(card):
 	create_target(Globals.ENEMY_POSITION, false)
-	print("Opponent targeting self")
+
 	
 func _on_opponent_targeting_slot(slot, card):
 	create_target(slot.position, false)
-	print("Opponent targeting slot")
+
 
 func _on_player_targeting_opponent(card):
 	create_target(Globals.ENEMY_POSITION, true)

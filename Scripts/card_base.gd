@@ -21,12 +21,12 @@ func _process(delta: float) -> void:
 
 
 func _on_area_2d_mouse_entered() -> void:
-	SignalBus.emit_signal("hovered", self)
+	SignalBus.emit_signal("card_hovered", self)
 	pass # Replace with function body.
 
 
 func _on_area_2d_mouse_exited() -> void:
-	SignalBus.emit_signal("hovered_off", self)
+	SignalBus.emit_signal("card_hovered_off", self)
 	pass # Replace with function body.
 
 

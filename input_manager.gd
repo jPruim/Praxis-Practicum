@@ -46,7 +46,6 @@ func raycast_check_at_cursor():
 			if card_found:
 				card_manager.start_drag(card_found)
 		elif collision_mask == Globals.DECK_COLLISION_MASK:
-			print(result[0])
 			# Cursor on Deck
-			player_deck.draw_card()
+			pass
 	return null	

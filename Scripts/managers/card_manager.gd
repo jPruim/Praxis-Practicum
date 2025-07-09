@@ -9,10 +9,6 @@ var player_hand
 var opponent_hand
 var deck_scene
 
-# Masks
-const CARD_COLLISION_MASK = 1
-const CARD_SLOT_COLLISION_MASK = 2
-
 # Consts
 const DECK_POSITION = Vector2(100, 900)
 const OPPONENT_DECK_POSITION = Vector2(1800, 150)
@@ -23,7 +19,11 @@ func _ready() -> void:
 	deck_scene = preload("res://Scenes/Cards/deck.tscn")
 	player_hand = $"PlayerHand"
 	player_hand.ai_hand = false
+	player_hand.position = Vector2(get_viewport_rect().size.x / 2, Globals.PLAYER_HAND_Y_POS)
 	opponent_hand = $OpponentHand
+	opponent_hand.get_node("Sprite2D").visible = false
+	opponent_hand.get_node("Area2D/CollisionShape2D").disabled = true
+	opponent_hand.position = Vector2(get_viewport_rect().size.x / 2, Globals.OPPONENT_HAND_Y_POS)
 	opponent_hand.ai_hand = true
 	screen_size = get_viewport_rect().size
 	SignalBus.connect("left_mouse_button_released", on_left_click_release)
@@ -32,13 +32,7 @@ func _ready() -> void:
 
 # Card Collision detector
 func raycast_check_for_card():
-	var space_state = get_world_2d().direct_space_state
-	var parameters = PhysicsPointQueryParameters2D.new()
-	parameters.position = get_global_mouse_position()
-	parameters.collide_with_areas = true
-	parameters.collision_mask = CARD_COLLISION_MASK
-	var result = space_state.intersect_point(parameters)
-	
+	var result = raycast_check_mask(Globals.CARD_COLLISION_MASK)
 	# if over an area
 	if result.size() > 0:
 		# make sure to highlight return top card only
@@ -47,19 +41,29 @@ func raycast_check_for_card():
 
 # Card Slot Collision Detector
 func raycast_check_for_card_slot():
-	var space_state = get_world_2d().direct_space_state
-	var parameters = PhysicsPointQueryParameters2D.new()
-	parameters.position = get_global_mouse_position()
-	parameters.collide_with_areas = true
-	parameters.collision_mask = CARD_SLOT_COLLISION_MASK
-	var result = space_state.intersect_point(parameters)
-	
+	var result = raycast_check_mask(Globals.CARD_SLOT_COLLISION_MASK)
 	# if over an area
 	if result.size() > 0:
 		# make sure to highlight return top card only
 		return result[0].collider.get_parent()
 	return null	
+	
+func raycast_check_mask( mask: int):
+	var space_state = get_world_2d().direct_space_state
+	var parameters = PhysicsPointQueryParameters2D.new()
+	parameters.position = get_global_mouse_position()
+	parameters.collide_with_areas = true
+	parameters.collision_mask = mask
+	return space_state.intersect_point(parameters)
 
+# Player Hand Collision Detector
+func raycast_check_for_player_hand():
+	var result = raycast_check_mask(Globals.HAND_COLLISION_MASK_PLAYER)
+	# if over an area
+	if result.size() > 0:
+		# make sure to highlight return top card only
+		return result[0].collider.get_parent()
+	return null	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -72,11 +76,12 @@ func _process(delta: float) -> void:
 
 #Handle card Signals
 func connect_card_signals(card):
-	SignalBus.connect("hovered", on_hovered_card)
-	SignalBus.connect("hovered_off", on_hovered_off_card)
+	SignalBus.connect("card_hovered", on_hovered_card)
+	SignalBus.connect("card_hovered_off", on_hovered_off_card)
 
 # Handle card being hovered
 func on_hovered_card(card):
+	card.position.y = clamp(card.position.y, 150, get_viewport_rect().size.y - 150)
 	if !is_hovering_card:
 		is_hovering_card = true
 		card_affects(card, true)
@@ -93,8 +98,8 @@ func on_hovered_off_card(card):
 			else:
 				is_hovering_card = false
 	# Make sure cards are in the right spot, only needed if card clamping
-	#$PlayerHand.update_hand_positions()
-	#$OpponentHand.update_hand_positions()
+	$PlayerHand.update_hand_positions()
+	$OpponentHand.update_hand_positions()
 	# Turn off card affects
 	card_affects(card, false)
 	

@@ -26,7 +26,6 @@ func _ready() -> void:
 	for file: String in dir.get_files():
 		var resource := load(dir.get_current_dir() + "/" + file)
 		cards.append(resource)
-		print(resource)
 	pass # Replace with function body.
 
 

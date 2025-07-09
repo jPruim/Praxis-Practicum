@@ -35,6 +35,7 @@ const CARD_SLOT_COLLISION_MASK = 2
 const DECK_COLLISION_MASK = 4
 const DECK_COLLISION_MASK_OPPONENT = 8
 const CARD_COLLISION_MASK_OPPONENT = 16
+const HAND_COLLISION_MASK_PLAYER = 32
 
 # Graphic Constants
 const DECK_POSITION = Vector2(100, 900)
@@ -43,6 +44,9 @@ const CARD_SCALE_PlACED = Vector2( 0.7, 0.7)
 const DEFAULT_ASPEED = 0.25
 const PLAYER_POSITION = Vector2((VIEWPORT_SIZE/ 2).x, 850)
 const ENEMY_POSITION = Vector2((VIEWPORT_SIZE/ 2).x, 125)
+
+const PLAYER_HAND_Y_POS = 1100
+const OPPONENT_HAND_Y_POS = -75
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
