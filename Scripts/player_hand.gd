@@ -11,11 +11,11 @@ var center_screen_x: int
 var ai_hand:bool = false
 var offset_value: int = - 150
 var hovered: bool = false
+var count: int = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	center_screen_x = floor(get_viewport().size.x / 2)
-	connect_signals()
-
 
 # Add card to player hand
 func add_card_to_hand(card, speed = DEFAULT_ASPEED):
@@ -36,7 +36,6 @@ func remove_card_from_hand(card):
 
 # update_hand_position
 func update_hand_positions( speed = DEFAULT_ASPEED):
-	animate_hand_border()
 	var y_pos
 	if(ai_hand):
 		y_pos = Globals.OPPONENT_HAND_Y_POS
@@ -69,45 +68,22 @@ func calculate_card_position(i):
 
 
 
+func update_hand_border(hovered: bool = false):
+	var tween = get_tree().create_tween()
+	var new_position = $".".position
+	new_position.y = Globals.PLAYER_HAND_Y_POS
+	if hovered:
+		new_position.y += offset_value
+	count += 1
+	print("new border position", count, ": ",new_position)
+	tween.tween_property($".", "position", new_position, Globals.DEFAULT_ASPEED)
 
-#Handle Signals
-func connect_signals():
-	SignalBus.connect("player_hand_hovered", on_hover)
-	SignalBus.connect("player_hand_hovered_off", on_hover_off)
-
-func on_hover():
-	if(ai_hand):
-		return
-	hovered = true
-	update_hand_positions()
-	
-func on_hover_off():
-	if(ai_hand):
-		return
-	hovered = false
-	update_hand_positions()
-	
 func _on_area_2d_mouse_entered() -> void:
 	SignalBus.emit_signal("player_hand_hovered")
 	pass # Replace with function body.
 
-
 func _on_area_2d_mouse_exited() -> void:
 	SignalBus.emit_signal("player_hand_hovered_off")
-
-	pass # Replace with function body.
-
-func animate_hand_border(speed = Globals.DEFAULT_ASPEED):
-	if(ai_hand):
-		return
-	var tween = get_tree().create_tween()
-	var position
-	if(hovered):
-		position = Globals.PLAYER_HAND_Y_POS + offset_value
-	else: 
-		position = Globals.PLAYER_HAND_Y_POS
-	tween.tween_property($"Area2D", "position", position, speed)
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

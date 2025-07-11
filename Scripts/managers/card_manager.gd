@@ -27,6 +27,7 @@ func _ready() -> void:
 	opponent_hand.ai_hand = true
 	screen_size = get_viewport_rect().size
 	SignalBus.connect("left_mouse_button_released", on_left_click_release)
+	connect_signals()
 	initialize_decks()
 	pass # Replace with function body.
 
@@ -74,14 +75,18 @@ func _process(delta: float) -> void:
 		card_being_dragged.position = Vector2(clamp(mouse_pos.x, 0, screen_size.x),clamp(mouse_pos.y, 0, screen_size.y))		
 	pass
 
-#Handle card Signals
+#Handle Signals
+func connect_signals():
+	SignalBus.connect("player_hand_hovered", on_hover_hand)
+	SignalBus.connect("player_hand_hovered_off", on_hover_hand_off)
+	
 func connect_card_signals(card):
 	SignalBus.connect("card_hovered", on_hovered_card)
 	SignalBus.connect("card_hovered_off", on_hovered_off_card)
 
+
 # Handle card being hovered
 func on_hovered_card(card):
-	card.position.y = clamp(card.position.y, 150, get_viewport_rect().size.y - 150)
 	if !is_hovering_card:
 		is_hovering_card = true
 		card_affects(card, true)
@@ -94,7 +99,7 @@ func on_hovered_off_card(card):
 			#check if transitioning onto a new card
 			var new_card = raycast_check_for_card()
 			if new_card:
-				card_affects(new_card, true)
+				on_hovered_card(new_card)
 			else:
 				is_hovering_card = false
 	# Make sure cards are in the right spot, only needed if card clamping
@@ -161,6 +166,7 @@ func end_drag():
 				opponent_hand.remove_card_from_hand(card_being_dragged) 
 			else:
 				player_hand.remove_card_from_hand(card_being_dragged)
+				player_hand.update_hand_border(false)
 			SignalBus.emit_signal("player_targeting_self", card_being_dragged)
 			card_being_dragged = null
 			return
@@ -169,7 +175,9 @@ func end_drag():
 				# Should never be called
 				opponent_hand.remove_card_from_hand(card_being_dragged) 
 			else:
+				$PlayerHand.hovered = false
 				player_hand.remove_card_from_hand(card_being_dragged)
+				player_hand.update_hand_border(false)
 			SignalBus.emit_signal("player_targeting_opponent", card_being_dragged)
 			card_being_dragged = null
 			return
@@ -185,9 +193,13 @@ func end_drag():
 				card_being_dragged.scale = CARD_SCALE_PlACED
 				if(card_being_dragged.ai_card):
 					# Should never be called
-					opponent_hand.remove_card_from_hand(card_being_dragged) 
+					$PlayerHand.hovered = false
+					opponent_hand.remove_card_from_hand(card_being_dragged)
+					player_hand.update_hand_border(false) 
 				else:
+					$PlayerHand.hovered = false
 					player_hand.remove_card_from_hand(card_being_dragged)
+					player_hand.update_hand_border(false)
 				SignalBus.emit_signal("player_targeting_slot", card_slot, card_being_dragged)
 				#card_being_dragged.z_index = Globals.Z_INDEX["card_in_slot"]
 				#card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = false
@@ -198,7 +210,9 @@ func end_drag():
 		# Should never be called
 		opponent_hand.add_card_to_hand(card_being_dragged)
 	else:
+		$PlayerHand.hovered = false
 		player_hand.add_card_to_hand(card_being_dragged)
+		player_hand.update_hand_border(false)
 	# Re-enable Animations
 	card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = false
 	card_being_dragged = null
@@ -218,6 +232,31 @@ func initialize_decks():
 	deck.ai_deck = true
 	add_child(deck)
 	deck.initialize()
+
+func on_hover_hand():
+	$PlayerHand.hovered = true
+	$PlayerHand.update_hand_border(true)
+	$PlayerHand.update_hand_positions()
+	
+func on_hover_hand_off():
+	if(raycast_check_for_player_hand()):
+		print("Miscall saved")
+		return
+	if(!card_being_dragged):
+		$PlayerHand.hovered = false
+		$PlayerHand.update_hand_border(false)
+		$PlayerHand.update_hand_positions()
+
+func animate_hand_border(speed = Globals.DEFAULT_ASPEED):
+	var tween = get_tree().create_tween()
+	var position
+	if($PlayerHand.hovered):
+		$PlayerHand.position = Globals.PLAYER_HAND_Y_POS + $PlayerHand.offset_value
+	else: 
+		$PlayerHand.position = Globals.PLAYER_HAND_Y_POS
+	tween.tween_property($"PlayerHand", "position", position, speed)
+
+
 
 # Function called on Signal being received from Input Manager
 func on_left_click_release():
