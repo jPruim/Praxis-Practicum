@@ -11,7 +11,6 @@ var center_screen_x: int
 var ai_hand:bool = false
 var offset_value: int = - 150
 var hovered: bool = false
-var count: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -74,8 +73,6 @@ func update_hand_border(hovered: bool = false):
 	new_position.y = Globals.PLAYER_HAND_Y_POS
 	if hovered:
 		new_position.y += offset_value
-	count += 1
-	print("new border position", count, ": ",new_position)
 	tween.tween_property($".", "position", new_position, Globals.DEFAULT_ASPEED)
 
 func _on_area_2d_mouse_entered() -> void:
