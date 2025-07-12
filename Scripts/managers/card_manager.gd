@@ -240,7 +240,8 @@ func on_hover_hand():
 	
 func on_hover_hand_off():
 	if(raycast_check_for_player_hand()):
-		print("Miscall saved")
+		# This saves miscalls when on a narrow margin at the edge of cards
+		# No idea why this is needed... TODO: Solve this
 		return
 	if(!card_being_dragged):
 		$PlayerHand.hovered = false

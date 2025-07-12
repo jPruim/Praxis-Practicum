@@ -22,6 +22,7 @@ const Z_INDEX = {
 	"deck": -5,
 	"card_animation": 0,
 	"card_in_slot": 1,
+	"hand": 3,
 	"card": 4,
 	"card_back": 5,
 	"card_hovered": 10,
