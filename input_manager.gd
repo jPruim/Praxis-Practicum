@@ -31,21 +31,7 @@ func _input(event: InputEvent) -> void:
 			
 
 func raycast_check_at_cursor():
-	var space_state = get_world_2d().direct_space_state
-	var parameters = PhysicsPointQueryParameters2D.new()
-	parameters.position = get_global_mouse_position()
-	parameters.collide_with_areas = true
-	var result = space_state.intersect_point(parameters)
-	
-	# if over an area
-	if result.size() > 0:
-		var collision_mask = result[0].collider.collision_mask
-		if collision_mask == Globals.CARD_COLLISION_MASK:
-				# Cursor on Card
-			var card_found = result[0].collider.get_parent()
-			if card_found:
-				card_manager.start_drag(card_found)
-		elif collision_mask == Globals.DECK_COLLISION_MASK:
-			# Cursor on Deck
-			pass
+	var card_found = card_manager.raycast_check_for_card()
+	if card_found:
+		card_manager.start_drag(card_found)
 	return null	
