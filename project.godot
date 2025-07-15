@@ -37,7 +37,8 @@ project/assembly_name="Praxis & Practicum"
 
 [gui]
 
-theme/custom_font="res://Assets/font/Grenze/Grenze-Regular.ttf"
+theme/custom="res://Scenes/UI/default-theme.theme"
+theme/custom_font="res://Assets/font/alagard.ttf"
 
 [rendering]
 

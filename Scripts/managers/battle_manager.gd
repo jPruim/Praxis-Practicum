@@ -15,6 +15,7 @@ var empty_ai_slots = []
 var full_player_slots = []
 var current_player_targets = []
 var current_opponent_targets = []
+var pass_button_path = "../PassButton"
 
 const DEFAULT_DELAY = 1
 
@@ -44,6 +45,7 @@ func setup_combat(enemy):
 	
 
 func _on_pass_button_pressed() -> void:
+	get_node(pass_button_path).disabled = true
 	increment_time()
 
 func time_loop():
@@ -81,7 +83,12 @@ func start_turn():
 	$"../CardManager/PlayerHand".update_hand_positions()
 	$"../CardManager/OpponentHand".update_hand_positions()
 	find_empty_slots()
+	update_button_status()
 	find_full_slots()
+
+func update_button_status():
+	if player_cast_time == 0:
+		get_node(pass_button_path).disabled = false
 
 func opponent_turn():
 		# Make the button unclickable and invisible
