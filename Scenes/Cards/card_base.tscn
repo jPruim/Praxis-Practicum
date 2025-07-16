@@ -1,7 +1,7 @@
 [gd_scene load_steps=38 format=3 uid="uid://c2gbemxiigrbl"]
 
-[ext_resource type="Script" path="res://Scripts/card_base.gd" id="1_knr6q"]
-[ext_resource type="Texture2D" uid="uid://dirvipg20u2k5" path="res://Assets/Cards/Card Borders etc/Card Border-3.png" id="2_b5jx4"]
+[ext_resource type="Script" path="res://Scripts/Cards/card_base.gd" id="1_knr6q"]
+[ext_resource type="Texture2D" uid="uid://bqj42lxpdw7km" path="res://Assets/Cards/Card Borders etc/Card-border-colored.png" id="3_c5ytb"]
 [ext_resource type="Texture2D" uid="uid://dc521v33mwvec" path="res://Assets/Spritesheets/Eletric Aura.png" id="3_imowu"]
 [ext_resource type="Texture2D" uid="uid://b86eno3qbpy5v" path="res://Assets/Spritesheets/Fire+Sparks-Sheet.png" id="4_8htuj"]
 [ext_resource type="Texture2D" uid="uid://42543ow2lye3" path="res://Assets/Cards/Card Borders etc/Card Back.png" id="5_578ps"]
@@ -351,7 +351,7 @@ scale = Vector2(1e-05, 1)
 [node name="CardBorder" type="Sprite2D" parent="CardFront"]
 texture_filter = 1
 scale = Vector2(5, 5)
-texture = ExtResource("2_b5jx4")
+texture = ExtResource("3_c5ytb")
 
 [node name="Attack" type="RichTextLabel" parent="CardFront"]
 offset_left = -75.0

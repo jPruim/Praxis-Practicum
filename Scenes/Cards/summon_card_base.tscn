@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cl7ct5otgudvd"]
+
+[ext_resource type="PackedScene" uid="uid://c2gbemxiigrbl" path="res://Scenes/Cards/card_base.tscn" id="1_x62eb"]
+[ext_resource type="Script" path="res://Scripts/Cards/summon_card_base.gd" id="2_10fcu"]
+
+[node name="SummonCardBase" instance=ExtResource("1_x62eb")]
+script = ExtResource("2_10fcu")
