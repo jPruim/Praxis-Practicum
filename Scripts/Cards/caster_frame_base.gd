@@ -1,12 +1,14 @@
-extends Node2D
+class_name CasterFrameBase
+extends CardBase
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$CardFront/Cost.disabled = true
-	$CardFront/Type.disabled = true
-	$CardFront/Attack.disabled = true
-	$CardFront/Details.disabled = true
+	$CardFront/Cost.visible = false
+	$CardFront/Type.visible = false
+	$CardFront/Attack.visible = false
+	$CardFront/Details.visible = false
+	$CardFront/Container.size.y = 250
 	pass # Replace with function body.
 
 

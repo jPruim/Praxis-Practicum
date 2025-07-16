@@ -36,7 +36,7 @@ func set_all(data: CardData):
 
 # Set Display and CardData from a CardData object
 func set_display(data: CardData):
-	$CardFront/Name.text = data.display_name
+	set_display_name(data.display_name)
 	$CardFront/Attack.text = str(data.summon_attack)
 	$CardFront/Health.text = str(data.summon_health)
 	$CardFront/Details.text = data.card_text
@@ -48,9 +48,9 @@ func set_display(data: CardData):
 	
 	# Handle Animations not being added yet ( So I can add them over time)
 	if data.animation != "":
-		$CardFront/Container/AnimatedSprite2D.animation = data.animation
+		set_animation(data.animation)
 	else:
-		$CardFront/Container/AnimatedSprite2D.animation = "FireSparks" # TODO: make an empty spriteframe at some point
+		set_animation()
 	
 # Create Array from Card
 func get_card_info():
@@ -58,6 +58,12 @@ func get_card_info():
 
 func get_card_type():
 	return card_data.card_type
+
+func set_animation(animation: String = "FireSparks"):
+	$CardFront/Container/AnimatedSprite2D.animation = animation # TODO: make an empty spriteframe at some point
+	
+func set_display_name(name: String):
+	$CardFront/Name.text = name
 
 # Flip card to front from back
 func animation_reveal():

@@ -9,6 +9,7 @@ Backgrounds:
 Sprites:
 	https://elthen.itch.io/2d-pixel-art-fox-sprites
 	https://aamatniekss.itch.io/fantasy-knight-free-pixelart-animated-character  # Knight
+	https://sscary.itch.io/the-adventurer-male
 Effects:
 	https://ragnapixel.itch.io/particle-fx
 

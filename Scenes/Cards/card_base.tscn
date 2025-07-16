@@ -1,9 +1,10 @@
-[gd_scene load_steps=38 format=3 uid="uid://c2gbemxiigrbl"]
+[gd_scene load_steps=47 format=3 uid="uid://c2gbemxiigrbl"]
 
 [ext_resource type="Script" path="res://Scripts/Cards/card_base.gd" id="1_knr6q"]
 [ext_resource type="Texture2D" uid="uid://bqj42lxpdw7km" path="res://Assets/Cards/Card Borders etc/Card-border-colored.png" id="3_c5ytb"]
 [ext_resource type="Texture2D" uid="uid://dc521v33mwvec" path="res://Assets/Spritesheets/Eletric Aura.png" id="3_imowu"]
 [ext_resource type="Texture2D" uid="uid://b86eno3qbpy5v" path="res://Assets/Spritesheets/Fire+Sparks-Sheet.png" id="4_8htuj"]
+[ext_resource type="Texture2D" uid="uid://cf6du8wyfyii4" path="res://Assets/Characters/Adventurer/Idle/idle_right_down.png" id="4_cnun8"]
 [ext_resource type="Texture2D" uid="uid://42543ow2lye3" path="res://Assets/Cards/Card Borders etc/Card Back.png" id="5_578ps"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hitk0"]
@@ -15,6 +16,38 @@ shadow_offset = Vector2(5, 7)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qs3p7"]
 size = Vector2(320, 480)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4nrc"]
+atlas = ExtResource("4_cnun8")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8dr0"]
+atlas = ExtResource("4_cnun8")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hog25"]
+atlas = ExtResource("4_cnun8")
+region = Rect2(96, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bsh6o"]
+atlas = ExtResource("4_cnun8")
+region = Rect2(144, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w817y"]
+atlas = ExtResource("4_cnun8")
+region = Rect2(192, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yvbyj"]
+atlas = ExtResource("4_cnun8")
+region = Rect2(240, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bm3h"]
+atlas = ExtResource("4_cnun8")
+region = Rect2(288, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_asit3"]
+atlas = ExtResource("4_cnun8")
+region = Rect2(336, 0, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xqr1s"]
 atlas = ExtResource("3_imowu")
@@ -122,6 +155,35 @@ region = Rect2(192, 384, 96, 96)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_npp4t"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4nrc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q8dr0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hog25")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bsh6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w817y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yvbyj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bm3h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_asit3")
+}],
+"loop": true,
+"name": &"Adventurer",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xqr1s")
@@ -432,10 +494,13 @@ offset_right = 75.0
 offset_bottom = 15.0
 metadata/_edit_use_anchors_ = true
 
+[node name="Sprite2D" type="Sprite2D" parent="CardFront/Container"]
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CardFront/Container"]
 position = Vector2(75, 52)
+scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_npp4t")
-animation = &"Electric"
+animation = &"FireSparks"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

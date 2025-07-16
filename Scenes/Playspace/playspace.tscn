@@ -169,6 +169,7 @@ z_as_relative = false
 position = Vector2(1008, 1071)
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="PlayerSlot"]
+visible = false
 z_as_relative = false
 position = Vector2(19, -83)
 scale = Vector2(5, 5)

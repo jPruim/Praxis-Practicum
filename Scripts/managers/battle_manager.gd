@@ -16,7 +16,9 @@ var full_player_slots = []
 var current_player_targets = []
 var current_opponent_targets = []
 var pass_button_path = "../PassButton"
-
+var caster_frame_base_scene = preload("res://Scenes/Cards/caster_frame_base.tscn")
+var player: CasterFrameBase
+var enemy: CasterFrameBase
 const DEFAULT_DELAY = 1
 
 # Called when the node enters the scene tree for the first time.
@@ -31,7 +33,6 @@ func _ready() -> void:
 	SignalBus.player_targeting_self.connect(_on_player_targeting_self)
 	SignalBus.player_targeting_slot.connect(_on_player_targeting_slot)
 	setup_combat("default")
-	time_loop()
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,8 +42,28 @@ func _process(delta: float) -> void:
 
 func setup_combat(enemy):
 	identify_slots()
-	in_combat = true	
-	
+	in_combat = true
+	setup_player()
+	setup_enemy()
+	time_loop()
+
+func setup_player():
+	player = caster_frame_base_scene.instantiate()
+	player.scale = Globals.CARD_SCALE_PlACED
+	player.set_display_name("Player")
+	player.set_animation("Adventurer")
+	player.position = Globals.PLAYER_POSITION
+	player.animation_reveal()
+	$".".add_child(player)
+
+func setup_enemy():
+	enemy = caster_frame_base_scene.instantiate()
+	enemy.scale = Globals.CARD_SCALE_PlACED
+	enemy.set_display_name("Enemy")
+	enemy.set_animation("Adventurer")
+	enemy.position = Globals.ENEMY_POSITION
+	enemy.animation_reveal()
+	$".".add_child(enemy)
 
 func _on_pass_button_pressed() -> void:
 	get_node(pass_button_path).disabled = true
@@ -98,7 +119,7 @@ func opponent_turn():
 
 	$"../OpponentManager".end_turn()
 
-func play_card(card, caster = "player", cardslot = "", player = "opponent", cast_time_mod = 0, cast_damage_mod = 0):
+func play_card(card, caster = "player", cast_time_mod = 0, cast_damage_mod = 0):
 	pass
 
 func player_turn():

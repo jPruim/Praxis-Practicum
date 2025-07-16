@@ -49,7 +49,7 @@ const PLAYER_CAST_POSITION = PLAYER_POSITION + Vector2(75,0)
 const ENEMY_CAST_POSITION = ENEMY_POSITION + Vector2(75,0)
 const ENEMY_CAST_SCALE = Vector2(0.8, 0.8)
 
-const PLAYER_HAND_Y_POS = 1100
+const PLAYER_HAND_Y_POS = 1150
 const OPPONENT_HAND_Y_POS = -75
 
 # Called when the node enters the scene tree for the first time.
