@@ -15,7 +15,7 @@ var player_hand
 func _ready() -> void:
 	card_manager = $"../CardManager"
 	player_deck = $"../CardManager/PlayerDeck"
-	player_hand = $"../PlayerHand"
+	player_hand = $"../CardManager/PlayerHand"
 	
 
 func _input(event: InputEvent) -> void:

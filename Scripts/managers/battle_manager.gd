@@ -49,6 +49,8 @@ func setup_combat(enemy):
 
 func setup_player():
 	player = caster_frame_base_scene.instantiate()
+	player.set_aloction()
+	player.z_index = Globals.Z_INDEX["caster_frame"]
 	player.scale = Globals.CARD_SCALE_PlACED
 	player.set_display_name("Player")
 	player.set_animation("Adventurer")
@@ -58,6 +60,8 @@ func setup_player():
 
 func setup_enemy():
 	enemy = caster_frame_base_scene.instantiate()
+	enemy.set_aloction()
+	enemy.z_index = Globals.Z_INDEX["caster_frame"]
 	enemy.scale = Globals.CARD_SCALE_PlACED
 	enemy.set_display_name("Enemy")
 	enemy.set_animation("Adventurer")

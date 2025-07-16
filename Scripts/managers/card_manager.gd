@@ -120,9 +120,15 @@ func card_affects(card, hovered: bool):
 			# Play Animation
 		animation_sprite.play()
 	else:
-		if !card.in_slot:
+		if card is CasterFrameBase:
+			card.scale = Globals.CARD_SCALE_PlACED
+			card.z_index = Globals.Z_INDEX["caster_frame"]
+		elif !card.in_slot:
 			card.scale  = Vector2( 1, 1)
-		card.z_index = Globals.Z_INDEX["card"]
+			card.z_index = Globals.Z_INDEX["card"]
+		else:
+			card.scale = Globals.CARD_SCALE_PlACED
+			card.z_index = Globals.Z_INDEX["card_in_slot"]
 		# Pause Animation
 		animation_sprite.pause()
 		

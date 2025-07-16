@@ -22,6 +22,7 @@ const Z_INDEX = {
 	"deck": -5,
 	"card_animation": 0,
 	"card_in_slot": 1,
+	"caster_frame": 2,
 	"hand": 3,
 	"card": 4,
 	"card_back": 5,
@@ -50,7 +51,7 @@ const ENEMY_CAST_POSITION = ENEMY_POSITION + Vector2(75,0)
 const ENEMY_CAST_SCALE = Vector2(0.8, 0.8)
 
 const PLAYER_HAND_Y_POS = 1150
-const OPPONENT_HAND_Y_POS = -75
+const OPPONENT_HAND_Y_POS = -80
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
