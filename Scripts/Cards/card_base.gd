@@ -4,21 +4,25 @@ extends Node2D
 # Properties
 var card_data:CardData = null
 var hand_position: Vector2
-var in_slot = false # Boolean for being in the card_slot
-var ai_card = false
-
+var in_slot: bool  = false # Boolean for being in the card_slot
+var ai_card: bool = false
+var being_cast: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	set_default_data()
 	get_parent().connect_card_signals(self)
 	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-
 	pass
 
+func set_default_data():
+	if(card_data):
+		return
+	card_data = CardData.new()
 
 func _on_area_2d_mouse_entered() -> void:
 	SignalBus.emit_signal("card_hovered", self)
@@ -63,7 +67,15 @@ func set_animation(animation: String = "FireSparks"):
 	$CardFront/Container/AnimatedSprite2D.animation = animation # TODO: make an empty spriteframe at some point
 	
 func set_display_name(name: String):
+	card_data.display_name = name
 	$CardFront/Name.text = name
+
+func set_health(hp: int):
+	card_data.summon_health = hp
+	$CardFront/Health.text = str(hp)
+	
+func adjust_health(hp: int):
+	set_health(card_data.summon_health + hp)
 
 # Flip card to front from back
 func animation_reveal():

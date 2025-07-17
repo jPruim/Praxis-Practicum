@@ -50,6 +50,7 @@ func setup_combat(enemy):
 func setup_player():
 	player = caster_frame_base_scene.instantiate()
 	player.set_aloction()
+	player.set_default_data()
 	player.z_index = Globals.Z_INDEX["caster_frame"]
 	player.scale = Globals.CARD_SCALE_PlACED
 	player.set_display_name("Player")
@@ -61,6 +62,7 @@ func setup_player():
 func setup_enemy():
 	enemy = caster_frame_base_scene.instantiate()
 	enemy.set_aloction()
+	enemy.set_default_data()
 	enemy.z_index = Globals.Z_INDEX["caster_frame"]
 	enemy.scale = Globals.CARD_SCALE_PlACED
 	enemy.set_display_name("Enemy")
@@ -133,26 +135,30 @@ func player_turn():
 
 func _on_opponent_targeting_player(card):
 	create_target(Globals.PLAYER_POSITION, false)
-
+	spell_manager.cast(card, false)
 
 func _on_opponent_targeting_self(card):
 	create_target(Globals.ENEMY_POSITION, false)
-
+	spell_manager.cast(card, false)
 	
 func _on_opponent_targeting_slot(slot, card):
 	create_target(slot.position, false)
+	spell_manager.cast(card, false)
 
 
 func _on_player_targeting_opponent(card):
 	create_target(Globals.ENEMY_POSITION, true)
+	spell_manager.cast(card, true)
 	time_loop()
 
 func _on_player_targeting_self(card):
 	create_target(Globals.PLAYER_POSITION, true)
+	spell_manager.cast(card, true)
 	time_loop()
 	
 func _on_player_targeting_slot(slot, card):
 	create_target(slot.position, true)
+	spell_manager.cast(card, true)
 	time_loop()
 
 func delay(delay = DEFAULT_DELAY):

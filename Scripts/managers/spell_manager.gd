@@ -77,3 +77,9 @@ func _on_player_targeting_slot(slot, card):
 	opponent_spell = card
 	opponent_target_slots.append(slot)
 	
+func cast(card:CardBase, from_player: bool = false):
+	var location
+	if (from_player):
+		location = Globals.PLAYER_CAST_POSITION
+	else:
+		location = Globals.ENEMY_CAST_POSITION

@@ -500,7 +500,7 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(75, 52)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_npp4t")
-animation = &"FireSparks"
+animation = &"Adventurer"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
