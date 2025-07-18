@@ -56,6 +56,8 @@ func setup_player():
 	player.set_display_name("Player")
 	player.set_animation("Adventurer")
 	player.position = Globals.PLAYER_POSITION
+	player.in_slot = true
+	$"../PlayerSlot".cards.append(player)
 	player.animation_reveal()
 	$".".add_child(player)
 
@@ -68,6 +70,8 @@ func setup_enemy():
 	enemy.set_display_name("Enemy")
 	enemy.set_animation("Adventurer")
 	enemy.position = Globals.ENEMY_POSITION
+	enemy.in_slot = true
+	$"../OpponentSlot".cards.append(enemy)
 	enemy.animation_reveal()
 	$".".add_child(enemy)
 
@@ -82,6 +86,7 @@ func time_loop():
 		opponent_manager.make_ai_play()
 	if(player_cast_time == 0):
 		# Break loop if player needs to cast something
+		print("waiting on player")
 		return 
 	else:
 		increment_time()

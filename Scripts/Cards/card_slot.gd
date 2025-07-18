@@ -7,7 +7,7 @@ class_name CardSlot
 const SLOT_SCALE = Vector2(0.9, 0.9)
 
 # Properties
-var cards = []
+var cards: Array[CardBase] = []
 var max_cards = 1
 var player_owned = false # True if the owner is the player
 var is_player = false # True if the card slot is representing the player
