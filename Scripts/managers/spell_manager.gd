@@ -30,16 +30,17 @@ func resolve_spells():
 	var player_spell_ready = false
 	if opponent_spell && battle_manager.opponent_manager.cast_time == 0:
 		opponent_spell_ready = true
-		if opponent_target_slots.size() > 0:
-			for slot in opponent_target_slots:
-				resolve_spell_at(opponent_spell, slot)
-			opponent_target_slots = []
+		
 	if player_spell && player_cast_time == 0:
 		opponent_spell_ready = true
-		if player_target_slots.size() > 0:
-			for slot in player_target_slots:
-				resolve_spell_at(player_spell, slot)
-			player_target_slots = []
+	if opponent_spell_ready:
+		for slot in opponent_target_slots:
+			resolve_spell_at(opponent_spell, slot)
+		opponent_target_slots = []
+	if player_spell_ready:
+		for slot in player_target_slots:
+			resolve_spell_at(player_spell, slot)
+		player_target_slots = []
 
 
 func resolve_spell_at(spell, slot):
@@ -81,5 +82,11 @@ func cast(card:CardBase, from_player: bool = false):
 	var location
 	if (from_player):
 		location = Globals.PLAYER_CAST_POSITION
+		card.being_cast = true
 	else:
 		location = Globals.ENEMY_CAST_POSITION
+		card.being_cast = true
+	card.animation_reveal()
+	card.position = location
+	card.animate_card_to_scale(Globals.CAST_SCALE)
+	print(location)
