@@ -18,6 +18,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kcf2l"]
 shader = ExtResource("5_jl8aw")
+shader_parameter/stars_speed = Vector2(0, 0)
+shader_parameter/stars_density = 0.02
 
 [sub_resource type="Gradient" id="Gradient_1eygi"]
 offsets = PackedFloat32Array(0.45977, 0.994505, 1)
@@ -25,6 +27,7 @@ colors = PackedColorArray(0, 0, 0.196078, 1, 1.53417e-07, 0, 0.170818, 0.196078,
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_s8wr1"]
 gradient = SubResource("Gradient_1eygi")
+width = 2000
 
 [sub_resource type="Gradient" id="Gradient_dttap"]
 
@@ -138,9 +141,9 @@ texture = ExtResource("4_n0cij")
 [node name="Sprite2D" type="Sprite2D" parent="Backdrop"]
 z_index = -100
 material = SubResource("ShaderMaterial_kcf2l")
-position = Vector2(1409, -130)
+position = Vector2(131, 238)
 rotation = 1.5708
-scale = Vector2(7.45313, 4287.35)
+scale = Vector2(1, 2168.1)
 texture = SubResource("GradientTexture1D_s8wr1")
 
 [node name="CardManager" type="Node2D" parent="."]
