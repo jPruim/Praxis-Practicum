@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://blidm0gf4b13l" path="res://Assets/Background/background_layer_2.png" id="3_d5p4b"]
 [ext_resource type="Script" path="res://Scripts/Managers/card_manager.gd" id="3_n5cyu"]
 [ext_resource type="Texture2D" uid="uid://sdapeo05l5jd" path="res://Assets/Background/background_layer_3.png" id="4_n0cij"]
-[ext_resource type="Shader" path="res://Scripts/Shaders/Cloud.gdshader" id="5_jl8aw"]
+[ext_resource type="Shader" path="res://Scripts/Shaders/stars.gdshader" id="5_jl8aw"]
 [ext_resource type="Script" path="res://Scripts/Cards/card_database.gd" id="7_ojqhm"]
 [ext_resource type="PackedScene" uid="uid://vlo6uno0t1dc" path="res://Scenes/Cards/player_hand.tscn" id="8_l370m"]
 [ext_resource type="PackedScene" uid="uid://crv6rsiuh0gi1" path="res://Scenes/Playspace/opponent_manager.tscn" id="8_o8vo8"]
@@ -18,8 +18,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kcf2l"]
 shader = ExtResource("5_jl8aw")
-shader_parameter/stars_speed = Vector2(0, 0)
-shader_parameter/stars_density = 0.02
+shader_parameter/stars_speed = Vector2(0, 0.3)
+shader_parameter/stars_density = 0.0
 
 [sub_resource type="Gradient" id="Gradient_1eygi"]
 offsets = PackedFloat32Array(0.45977, 0.994505, 1)

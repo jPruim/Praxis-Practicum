@@ -1,6 +1,6 @@
 shader_type canvas_item;
-uniform vec2 stars_speed = vec2(0.0,0.0);
-uniform float stars_density: hint_range(0.0, 1.0, 0.001) = 0.002;
+uniform vec2 stars_speed = vec2(0.0, 0.3);
+uniform float stars_density: hint_range(0.0, 1.0, 0.001) = 0.001;
 
 // 2D Random See: 		https://thebookofshaders.com/11/
 float random (vec2 st) {
@@ -30,35 +30,22 @@ float custom_noise (vec2 st) {
             (d - b) * u.x * u.y;
 }
 
-float custom_partition(float value, float chunks){
-	return round(value * chunks)/ chunks;
-}
-
 void vertex() {
 	// Called for every vertex the material is visible on.
 }
 
 // Called on each pixel
 void fragment() {
-	vec2 st = VERTEX;
-	st.x = custom_partition(st.x, 400);
-	st.y = custom_partition(st.y, 400);
+	vec2 st = UV.xy * 500.0;
 	st = (st 
 			+ TIME * stars_speed 
 			)
 			//* TEXTURE_PIXEL_SIZE
 			;
-	st = st * step(random(floor(st)), stars_density);
-	COLOR = texture(TEXTURE,st);
-    // Scale the coordinate system to see
-    // some noise in action
-    vec2 pos = vec2(st);
+	float brightness = step(random(floor(st)), stars_density);
+	
+	COLOR = COLOR + vec4(brightness * 0.8);
 
-    // Use the noise function
-    //float n = custom_noise(pos);
-    //COLOR = vec4(vec3(n), 1.0);
-	
-	
 }
 
 
