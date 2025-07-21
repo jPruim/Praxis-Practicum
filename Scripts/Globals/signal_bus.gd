@@ -27,8 +27,16 @@ signal fight_won(remaining_health)
 signal fight_loss
 signal run_win
 signal run_loss
+signal enter_shop
+signal exit_shop
+signal start_run
 
 # Shop Signals
+signal buy_spell(spell)
+signal sell_spell(spell)
+signal buy_sigil()
+signal sell_sigil
+
 
 # Control Signals
 
