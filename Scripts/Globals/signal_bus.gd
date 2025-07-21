@@ -21,6 +21,13 @@ signal player_hand_hovered
 signal player_hand_hovered_off
 
 
+# Gamestate Signals
+signal fight_start
+signal fight_won(remaining_health)
+signal fight_loss
+signal run_win
+signal run_loss
+
 # Shop Signals
 
 # Control Signals

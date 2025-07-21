@@ -41,8 +41,8 @@ void vertex() {
 // Called on each pixel
 void fragment() {
 	vec2 st = VERTEX;
-	st.x = custom_partition(st.x, 400);
-	st.y = custom_partition(st.y, 400);
+	st.x = custom_partition(st.x, 200);
+	st.y = custom_partition(st.y, 200);
 	st = (st 
 			+ TIME * stars_speed 
 			)
