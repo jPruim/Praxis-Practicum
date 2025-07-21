@@ -109,7 +109,7 @@ func on_hovered_off_card(card):
 	card_affects(card, false)
 	
 # Change card affects TODO: Decide if cards in cardslots need animations (go and add a new mask for animations, and separate from card detection)
-func card_affects(card, hovered: bool):
+func card_affects(card: CardBase, hovered: bool):
 	var animation_sprite = card.get_node("CardFront/Container/AnimatedSprite2D")
 	if hovered:
 		if !card.in_slot:
@@ -123,6 +123,9 @@ func card_affects(card, hovered: bool):
 		if card is CasterFrameBase:
 			card.scale = Globals.CARD_SCALE_PlACED
 			card.z_index = Globals.Z_INDEX["caster_frame"]
+		elif card.being_cast:	
+			card.scale = Globals.CAST_SCALE
+			card.z_index = Globals.Z_INDEX["caster_frame"] + 1
 		elif !card.in_slot:
 			card.scale  = Vector2( 1, 1)
 			card.z_index = Globals.Z_INDEX["card"]
@@ -148,7 +151,9 @@ func get_top_card(results):
 			top_card = check_card
 	return top_card
 		
-func start_drag(card):
+func start_drag(card:CardBase):
+	if(card.being_cast || card is CasterFrameBase):
+		return
 	card_being_dragged = card
 	card_being_dragged.z_index = Globals.Z_INDEX["card_being_dragged"]
 	card_being_dragged.scale = Vector2( 1, 1)
@@ -157,7 +162,7 @@ func start_drag(card):
 func end_drag():
 	card_being_dragged.scale = Vector2( 1.05, 1.05)
 	# Disable collision shape during animations
-	card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
+	# card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
 	
 	var card_type = card_being_dragged.get_card_type()
 	
