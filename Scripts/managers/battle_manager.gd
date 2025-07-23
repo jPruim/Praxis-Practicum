@@ -1,3 +1,4 @@
+class_name BattleManager
 extends Node2D
 
 

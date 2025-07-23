@@ -10,7 +10,7 @@ var cast_time = 0
 var opponent_hand
 
 
-var battle_manager
+var battle_manager: BattleManager
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	timer = $OpponentTimer
@@ -61,7 +61,10 @@ func make_ai_play():
 
 
 
-func summon_target(card):
+func summon_target(card: CardBase):
+	for slot in battle_manager.
+	if($"../SpellManager".check_valid_summon(card, slot):
+		return
 	battle_manager.find_empty_slots()
 	# return if there are no valid targets
 	if(battle_manager.empty_ai_slots.size() == 0 ):
@@ -83,7 +86,6 @@ func spell_target(card):
 		var target = battle_manager.full_player_slots[randi() % battle_manager.full_player_slots.size()]
 		SignalBus.opponent_targeting_slot.emit(target, card) 
 	return
-
 
 
 # Time function
