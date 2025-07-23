@@ -6,8 +6,8 @@ var target_scene
 var opponent_manager
 var in_combat = false
 var player_cast_time = 0
-var spell_manager
-
+var spell_manager: SpellManager
+var is_player_turn: bool = false
 
 # Board State Variables
 var ai_slots = [] # Storage for on board slots
@@ -87,6 +87,7 @@ func time_loop():
 		opponent_manager.make_ai_play()
 	if(player_cast_time == 0):
 		# Break loop if player needs to cast something
+		is_player_turn = true
 		print("waiting on player")
 		return 
 	else:
@@ -142,6 +143,7 @@ func player_turn():
 func _on_opponent_targeting_player(card):
 	create_target(Globals.PLAYER_POSITION, false)
 	spell_manager.cast(card, false)
+	
 
 func _on_opponent_targeting_self(card):
 	create_target(Globals.ENEMY_POSITION, false)
@@ -153,16 +155,21 @@ func _on_opponent_targeting_slot(slot, card):
 
 
 func _on_player_targeting_opponent(card):
+	is_player_turn = false
 	create_target(Globals.ENEMY_POSITION, true)
 	spell_manager.cast(card, true)
 	time_loop()
 
+
 func _on_player_targeting_self(card):
+	is_player_turn = false
 	create_target(Globals.PLAYER_POSITION, true)
 	spell_manager.cast(card, true)
+
 	time_loop()
 	
 func _on_player_targeting_slot(slot, card):
+	is_player_turn = false
 	create_target(slot.position, true)
 	spell_manager.cast(card, true)
 	time_loop()

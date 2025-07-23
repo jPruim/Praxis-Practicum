@@ -62,15 +62,19 @@ func make_ai_play():
 
 
 func summon_target(card: CardBase):
-	for slot in battle_manager.
-	if($"../SpellManager".check_valid_summon(card, slot):
+	var valid_targets: Array[CardSlot] = []
+	for slot in battle_manager.ai_slots:
+		if($"../SpellManager".check_stacking_summon(card, slot)):
+			# Always stack summons when possible
+			valid_targets = [slot]
+			break
+		if($"../SpellManager".check_valid_summon(card, slot)):
+			valid_targets.append(slot)
+	if(valid_targets.size() == 0):
+		# TODO: Make sure that there is never an enemy with more than 3 types of summons
 		return
-	battle_manager.find_empty_slots()
-	# return if there are no valid targets
-	if(battle_manager.empty_ai_slots.size() == 0 ):
-		return
-	# Select Random valid target TODO: Make an actually AI choice
-	var target = battle_manager.empty_ai_slots[randi() % battle_manager.empty_ai_slots.size()]
+		
+	var target = valid_targets[randi() % valid_targets.size()]
 	SignalBus.opponent_targeting_slot.emit(target, card)
 	return
 

@@ -43,8 +43,8 @@ void fragment() {
 	vec2 st = VERTEX;
 	st.x = custom_partition(st.x, 200);
 	st.y = custom_partition(st.y, 200);
-	st = (st 
-			+ TIME * stars_speed 
+	st = (st
+			+ TIME * stars_speed
 			)
 			//* TEXTURE_PIXEL_SIZE
 			;
@@ -57,8 +57,8 @@ void fragment() {
     // Use the noise function
     //float n = custom_noise(pos);
     //COLOR = vec4(vec3(n), 1.0);
-	
-	
+
+
 }
 
 

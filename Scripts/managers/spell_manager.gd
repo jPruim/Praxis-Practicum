@@ -1,3 +1,4 @@
+class_name SpellManager
 extends Node2D
 
 var player_cast_time = 0

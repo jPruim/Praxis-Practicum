@@ -37,13 +37,13 @@ void vertex() {
 // Called on each pixel
 void fragment() {
 	vec2 st = UV.xy * 500.0;
-	st = (st 
-			+ TIME * stars_speed 
+	st = (st
+			+ TIME * stars_speed
 			)
 			//* TEXTURE_PIXEL_SIZE
 			;
 	float brightness = step(random(floor(st)), stars_density);
-	
+
 	COLOR = COLOR + vec4(brightness * 0.8);
 
 }
