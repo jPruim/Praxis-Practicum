@@ -15,7 +15,7 @@ var empty_ai_slots = []
 var full_player_slots = []
 var current_player_targets = []
 var current_opponent_targets = []
-var pass_button_path = "../PassButton"
+var pass_button_path = "Playspace/PassButton"
 var caster_frame_base_scene = preload("res://Scenes/Cards/caster_frame_base.tscn")
 var player: CasterFrameBase
 var enemy: CasterFrameBase
@@ -24,7 +24,7 @@ const DEFAULT_DELAY = 1
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	target_scene = preload("res://Scenes/Graphic Elements/target.tscn")
-	opponent_manager = $"../OpponentManager"
+	opponent_manager = $"OpponentManager"
 	spell_manager = $".".find_child("SpellManager")
 	SignalBus.opponent_targeting_player.connect(_on_opponent_targeting_player)
 	SignalBus.opponent_targeting_self.connect(_on_opponent_targeting_self)
@@ -57,7 +57,7 @@ func setup_player():
 	player.set_animation("Adventurer")
 	player.position = Globals.PLAYER_POSITION
 	player.in_slot = true
-	$"../PlayerSlot".cards.append(player)
+	$"Playspace/PlayerSlot".cards.append(player)
 	player.animation_reveal()
 	$".".add_child(player)
 
@@ -71,7 +71,7 @@ func setup_enemy():
 	enemy.set_animation("Adventurer")
 	enemy.position = Globals.ENEMY_POSITION
 	enemy.in_slot = true
-	$"../OpponentSlot".cards.append(enemy)
+	$"Playspace/OpponentSlot".cards.append(enemy)
 	enemy.animation_reveal()
 	$".".add_child(enemy)
 
@@ -110,10 +110,10 @@ func increment_time():
 	
 # Hold the beginning of the time increment setup
 func start_turn():
-	$"../CardManager/".get_node("PlayerDeck").draw_card()
-	$"../OpponentManager".start_turn()
-	$"../CardManager/PlayerHand".update_hand_positions()
-	$"../CardManager/OpponentHand".update_hand_positions()
+	$"CardManager/".get_node("PlayerDeck").draw_card()
+	$"OpponentManager".start_turn()
+	$"CardManager/PlayerHand".update_hand_positions()
+	$"CardManager/OpponentHand".update_hand_positions()
 	find_empty_slots()
 	update_button_status()
 	find_full_slots()

@@ -16,7 +16,7 @@ func _ready() -> void:
 	timer = $OpponentTimer
 	timer.one_shot = true
 	opponent_hand = $"../CardManager/OpponentHand"
-	battle_manager = $"../BattleManager"
+	battle_manager = $"../"
 	pass # Replace with function body.
 
 
@@ -59,9 +59,13 @@ func make_ai_play():
 	if (cast_time == 0):
 		make_ai_play()
 
+
+
 func summon_target(card):
 	battle_manager.find_empty_slots()
-	
+	# return if there are no valid targets
+	if(battle_manager.empty_ai_slots.size() == 0 ):
+		return
 	# Select Random valid target TODO: Make an actually AI choice
 	var target = battle_manager.empty_ai_slots[randi() % battle_manager.empty_ai_slots.size()]
 	SignalBus.opponent_targeting_slot.emit(target, card)

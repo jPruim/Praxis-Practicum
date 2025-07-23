@@ -168,7 +168,7 @@ func end_drag():
 	
 	
 	# Check if Player can cast
-	if($"../BattleManager".player_cast_time == 0):
+	if($"..".player_cast_time == 0):
 		# Check if final location is a CardSlot
 		var card_slot = raycast_check_for_card_slot()
 		if (card_slot && card_slot.is_player):

@@ -114,37 +114,79 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Playspace" type="Node2D"]
+[node name="BattleManager" type="Node2D"]
+script = ExtResource("9_uwahy")
+
+[node name="BattleTimer" type="Timer" parent="."]
+
+[node name="SpellManager" type="Node2D" parent="."]
+script = ExtResource("10_vwsko")
+
+[node name="Playspace" type="Node2D" parent="."]
 script = ExtResource("1_t02ni")
 
-[node name="Backdrop" type="Node2D" parent="."]
+[node name="Backdrop" type="Node2D" parent="Playspace"]
 z_index = -100
 position = Vector2(781, 302)
 
-[node name="Background" type="Sprite2D" parent="Backdrop"]
+[node name="Background" type="Sprite2D" parent="Playspace/Backdrop"]
 visible = false
 scale = Vector2(10, 10)
 texture = ExtResource("2_mgru5")
 
-[node name="Background-2" type="Sprite2D" parent="Backdrop"]
+[node name="Background-2" type="Sprite2D" parent="Playspace/Backdrop"]
 visible = false
 position = Vector2(0.000244141, 0.00012207)
 scale = Vector2(10, 10)
 texture = ExtResource("3_d5p4b")
 
-[node name="Background-3" type="Sprite2D" parent="Backdrop"]
+[node name="Background-3" type="Sprite2D" parent="Playspace/Backdrop"]
 visible = false
 position = Vector2(0.000244141, 0.00012207)
 scale = Vector2(10, 10)
 texture = ExtResource("4_n0cij")
 
-[node name="Sprite2D" type="Sprite2D" parent="Backdrop"]
+[node name="Sprite2D" type="Sprite2D" parent="Playspace/Backdrop"]
 z_index = -100
 material = SubResource("ShaderMaterial_kcf2l")
 position = Vector2(131, 238)
 rotation = 1.5708
 scale = Vector2(1, 2168.1)
 texture = SubResource("GradientTexture1D_s8wr1")
+
+[node name="Centerpoint" type="Sprite2D" parent="Playspace"]
+visible = false
+z_index = 15
+scale = Vector2(2, 2)
+texture = SubResource("GradientTexture2D_di84m")
+
+[node name="PassButton" type="Button" parent="Playspace"]
+offset_left = 1564.0
+offset_top = 497.0
+offset_right = 1649.0
+offset_bottom = 535.0
+theme = ExtResource("10_da8iy")
+action_mode = 0
+text = "Pass
+"
+
+[node name="PlayerSlot" parent="Playspace" instance=ExtResource("12_r2h81")]
+z_as_relative = false
+position = Vector2(1008, 1071)
+
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="Playspace/PlayerSlot"]
+visible = false
+z_as_relative = false
+position = Vector2(19, -83)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_5q441")
+autoplay = "default"
+frame_progress = 0.333758
+
+[node name="OpponentSlot" parent="Playspace" instance=ExtResource("12_r2h81")]
+z_index = 5
+z_as_relative = false
+position = Vector2(1028, 22)
 
 [node name="CardManager" type="Node2D" parent="."]
 script = ExtResource("3_n5cyu")
@@ -162,50 +204,8 @@ script = ExtResource("7_ojqhm")
 [node name="InputManager" type="Node2D" parent="."]
 script = ExtResource("10_bbo5u")
 
-[node name="Centerpoint" type="Sprite2D" parent="."]
-visible = false
-z_index = 15
-scale = Vector2(2, 2)
-texture = SubResource("GradientTexture2D_di84m")
-
 [node name="OpponentManager" parent="." instance=ExtResource("8_o8vo8")]
 
 [node name="OpponentTimer" type="Timer" parent="OpponentManager"]
 
-[node name="PassButton" type="Button" parent="."]
-offset_left = 1564.0
-offset_top = 497.0
-offset_right = 1649.0
-offset_bottom = 535.0
-theme = ExtResource("10_da8iy")
-action_mode = 0
-text = "Pass
-"
-
-[node name="BattleManager" type="Node2D" parent="."]
-script = ExtResource("9_uwahy")
-
-[node name="BattleTimer" type="Timer" parent="BattleManager"]
-
-[node name="SpellManager" type="Node2D" parent="BattleManager"]
-script = ExtResource("10_vwsko")
-
-[node name="PlayerSlot" parent="." instance=ExtResource("12_r2h81")]
-z_as_relative = false
-position = Vector2(1008, 1071)
-
-[node name="PlayerSprite" type="AnimatedSprite2D" parent="PlayerSlot"]
-visible = false
-z_as_relative = false
-position = Vector2(19, -83)
-scale = Vector2(5, 5)
-sprite_frames = SubResource("SpriteFrames_5q441")
-autoplay = "default"
-frame_progress = 0.333758
-
-[node name="OpponentSlot" parent="." instance=ExtResource("12_r2h81")]
-z_index = 5
-z_as_relative = false
-position = Vector2(1028, 22)
-
-[connection signal="pressed" from="PassButton" to="BattleManager" method="_on_pass_button_pressed"]
+[connection signal="pressed" from="Playspace/PassButton" to="." method="_on_pass_button_pressed"]
