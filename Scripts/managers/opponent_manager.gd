@@ -1,3 +1,4 @@
+class_name OpponentManager
 extends Node2D
 
 
@@ -7,9 +8,8 @@ const THOUGHT_DELAY = 0.7
 # Propterties
 var timer
 var cast_time = 0
-var opponent_hand
-
-
+var spell_manager: SpellManager
+var opponent_hand: PlayerHand
 var battle_manager: BattleManager
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,6 +17,7 @@ func _ready() -> void:
 	timer.one_shot = true
 	opponent_hand = $"../CardManager/OpponentHand"
 	battle_manager = $"../"
+	spell_manager = $"../SpellManager"
 	pass # Replace with function body.
 
 
@@ -56,7 +57,10 @@ func make_ai_play():
 	elif card_info.card_type == "spell":
 		spell_target(choice)
 		pass
+	spell_manager.cast(choice, false)
+	opponent_hand.update_hand_positions()
 	if (cast_time == 0):
+		battle_manager.delay()
 		make_ai_play()
 
 

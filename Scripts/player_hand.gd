@@ -1,3 +1,4 @@
+class_name PlayerHand
 extends Node2D
 
 # Consts

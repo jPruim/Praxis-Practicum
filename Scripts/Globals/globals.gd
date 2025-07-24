@@ -22,13 +22,15 @@ const Z_INDEX = {
 	"deck": -5,
 	"card_animation": 0,
 	"card_in_slot": 1,
-	"caster_frame": 2,
-	"hand": 3,
-	"card": 4,
-	"card_back": 5,
-	"card_hovered": 10,
-	"card_being_dragged": 11,
-	"centerpoint": 15
+	"caster_frame": 5,
+	"card_cast_player":6,
+	"hand": 10,
+	"card": 15,
+	"card_cast_enemy": 16,
+	"card_back": 20,
+	"card_hovered": 25,
+	"card_being_dragged": 30,
+	"centerpoint": 35
 }
 
 # Masks

@@ -1,12 +1,13 @@
 class_name SpellManager
 extends Node2D
 
-var player_cast_time = 0
-var player_spell
-var opponent_spell
-var player_target_slots = []
-var opponent_target_slots = []
-var battle_manager
+var player_cast_time: int = 0
+var player_spell: CardBase
+var opponent_spell:CardBase
+var player_target_slots: Array[CardSlot] = []
+var opponent_target_slots: Array[CardSlot] = []
+var battle_manager: BattleManager
+var opponent_manager: OpponentManager
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -85,8 +86,10 @@ func cast(card:CardBase, from_player: bool = false):
 	var location
 	if (from_player):
 		location = Globals.PLAYER_CAST_POSITION
+		card.z_index = Globals.Z_INDEX.card_cast_player
 	else:
 		location = Globals.ENEMY_CAST_POSITION
-	card.z_index = Globals.Z_INDEX.caster_frame + 1
-	card.position = location
+		card.z_index = Globals.Z_INDEX.card_cast_enemy
+	card.animate_card_to_position(location)
+	card.animation_reveal()
 	
