@@ -124,8 +124,11 @@ func card_affects(card: CardBase, hovered: bool):
 			card.scale = Globals.CARD_SCALE_PlACED
 			card.z_index = Globals.Z_INDEX["caster_frame"]
 		elif card.being_cast:	
+			if card.ai_card:
+				card.z_index = Globals.Z_INDEX["card_cast_enemy"]
+			else:
+				card.z_index = Globals.Z_INDEX["card_cast_player"]
 			card.scale = Globals.CAST_SCALE
-			card.z_index = Globals.Z_INDEX["caster_frame"] + 1
 		elif !card.in_slot:
 			card.scale  = Vector2( 1, 1)
 			card.z_index = Globals.Z_INDEX["card"]
