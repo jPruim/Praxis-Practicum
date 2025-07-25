@@ -6,11 +6,13 @@ extends Node
 signal opponent_targeting_slot(slot, card)
 signal opponent_targeting_player(card)
 signal opponent_targeting_self(card)
+signal opponent_spell_resolution(rarity)
 
 # Player Signals
 signal player_targeting_slot(slot, card)
 signal player_targeting_opponent(card)
 signal player_targeting_self(card)
+signal player_spell_resolution(rarity)
 
 # Keybind signals
 signal left_mouse_button_clicked

@@ -18,6 +18,14 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+	
+# Set to full deep copy of the passed in CardBase
+func copy(card: CardBase):	
+	card_data = card.card_data.duplicate(true)
+	hand_position = card.hand_position
+	in_slot = card.in_slot
+	ai_card = card.ai_card
+	being_cast = card.being_cast
 
 func set_default_data():
 	if(card_data):
@@ -100,6 +108,6 @@ func animate_card_to_scale(scale, speed = Globals.DEFAULT_ASPEED):
 	tween.tween_property($".", "scale", scale, speed)
 
 
-func animate_card_to_slot(position, scale = Globals.CARD_SCALE_PlACED, speed = Globals.DEFAULT_ASPEED):
-	animate_card_to_position(position, speed)
+func animate_card_to_slot(slot: CardSlot, scale = Globals.CARD_SCALE_PlACED, speed = Globals.DEFAULT_ASPEED):
+	animate_card_to_position(slot.position, speed)
 	animate_card_to_scale(scale, speed)

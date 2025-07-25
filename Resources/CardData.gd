@@ -14,6 +14,8 @@ extends Resource
 @export var stackable: bool = false
 @export var ally_target: String = "Single"
 @export var enemy_target: String = "Single"
+@export var current_block: int = 0
+@export var current_health: int = 0
 @export var effects: Array[String] = []
 @export var effect_strength: int = 0
 @export var spell_level : int = 1

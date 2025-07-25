@@ -32,19 +32,37 @@ func resolve_spells():
 	var player_spell_ready = false
 	if opponent_spell && battle_manager.opponent_manager.cast_time == 0:
 		opponent_spell_ready = true
-		if opponent_target_slots.size() > 0:
-			for slot in opponent_target_slots:
-				resolve_spell_at(opponent_spell, slot)
-			opponent_target_slots = []
+		SignalBus.emit_signal("opponent_spell_resolution")
 	if player_spell && player_cast_time == 0:
-		opponent_spell_ready = true
-		if player_target_slots.size() > 0:
-			for slot in player_target_slots:
-				resolve_spell_at(player_spell, slot)
-			player_target_slots = []
+		player_spell_ready = true
+		SignalBus.emit_signal("player_spell_resolution")
+	if opponent_spell_ready && opponent_spell.card_data.card_type == "summon":
+		for slot in opponent_target_slots:
+			resolve_spell_summon_at(opponent_spell, slot)
+	if player_spell_ready && player_spell.card_data.card_type == "summon":
+		for slot in player_target_slots:
+			resolve_spell_summon_at(player_spell, slot)
 
+# Create copy of spell as a summon card in slot
+func resolve_spell_summon_at(spell: CardBase, slot: CardSlot):
+	var summon: SummonCardBase = SummonCardBase.new()
+	summon.copy(spell)
+	summon.card_data.current_health = summon.card_data.summon_health
+	if(slot.cards.size() == 0):
+		summon.animate_card_to_slot(slot)
+	else:
+		slot.cards.append(summon)
+		slot.cards[0].card_data.current_health += summon.card_data.current_health
+		slot.cards[0].card_data.current_health += summon.card_data.summon_attack
+	
 
-func resolve_spell_at(spell:CardBase, slot: CardSlot):
+func resolve_spell_barrier_at(spell:CardBase, slot: CardSlot):
+	var block = spell.card_data.damage
+	if ( slot.cards.size() > 0):
+		slot.cards[0].card_data["current_block"] + block
+	pass
+
+func resolve_spell_dmg_at(spell:CardBase, slot: CardSlot):
 	var dmg = spell.card_data.damage
 	if ( slot.cards.size() > 0):
 		slot.cards[0].card_data["summon_health"] - dmg
