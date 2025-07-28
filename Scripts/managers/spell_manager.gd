@@ -48,12 +48,14 @@ func resolve_spell_summon_at(spell: CardBase, slot: CardSlot):
 	var summon: SummonCardBase = SummonCardBase.new()
 	summon.copy(spell)
 	summon.card_data.current_health = summon.card_data.summon_health
-	if(slot.cards.size() == 0):
+	slot.cards.append(summon)
+	if(slot.cards.size() == 1):
 		summon.animate_card_to_slot(slot)
-	else:
-		slot.cards.append(summon)
-		slot.cards[0].card_data.current_health += summon.card_data.current_health
-		slot.cards[0].card_data.current_health += summon.card_data.summon_attack
+		slot.cards[0].card_data.current_health = 0
+		slot.cards[0].card_data.current_attack = 0
+	slot.cards[0].card_data.current_health += summon.card_data.summon_health
+	slot.cards[0].card_data.current_attack += summon.card_data.summon_attack
+
 	
 
 func resolve_spell_barrier_at(spell:CardBase, slot: CardSlot):
