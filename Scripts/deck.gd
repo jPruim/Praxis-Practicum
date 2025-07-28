@@ -4,6 +4,8 @@ extends Node2D
 
 # Consts
 const CARD_SCENE_PATH = "res://Scenes/Cards/card_base.tscn"
+const SPELL_SCENE_PATH = "res://Scenes/Cards/spell_card_base.tscn"
+const SUMMON_SCENE_PATH = "res://Scenes/Cards/summon_card_base.tscn"
 const CARD_DRAW_ASPEED = 0.2 # animation speed
 const CARD_SPAWN = Vector2(-300,-300)
 
@@ -12,12 +14,16 @@ var hand_limit = 6 # Note this is a var as it might be changed over the course o
 var ai_deck = true # Check if the deck is NOT owned by the player
 var deck = [] # Array of JSON Card Info
 var card_scene
+var spell_scene
+var summon_scene
 var card_database
 var valid_draw = true # Check if a card can be drawn
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	card_scene = preload(CARD_SCENE_PATH)
+	spell_scene = preload(SPELL_SCENE_PATH)
+	summon_scene = preload(SUMMON_SCENE_PATH)
 	$DeckCount.text = str(deck.size())
 	card_database = $'../CardDatabase'
 	# Initialize the deck ai_deck is assigned in the parent _ready() function
@@ -28,6 +34,7 @@ func _ready() -> void:
 
 func initialize(hand_size = 5):
 	card_scene = preload(CARD_SCENE_PATH)
+	
 	card_database = $'../CardDatabase'
 	if ai_deck:
 		initialize_enemy()
@@ -117,7 +124,11 @@ func initialize_player_deck():
 
 # Add Card to Deck, Accepts Array
 func add_card_to_deck(data: CardData):
-	var new_card = card_scene.instantiate()
+	var new_card: CardBase
+	if(data.card_type == "summon"):
+		new_card = summon_scene.instantiate()
+	else:
+		new_card = spell_scene.instantiate()
 	new_card.position = CARD_SPAWN
 	new_card.set_all(data)
 	new_card.set_display(data)

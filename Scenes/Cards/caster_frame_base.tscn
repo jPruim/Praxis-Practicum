@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://d6jgahcvym2n" path="res://Assets/Cards/Card Borders etc/Caster-Border-2.png" id="2_vq5pk"]
 
 [node name="CasterFrameBase" instance=ExtResource("1_pn1jy")]
+position = Vector2(-1, 0)
 script = ExtResource("2_rtf22")
 
 [node name="CardBorder" parent="CardFront" index="0"]
