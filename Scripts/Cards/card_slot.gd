@@ -17,6 +17,7 @@ var is_opponent = false # True if the card slot is representing the opponent
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$".".scale = SLOT_SCALE
+	$".".z_index = Globals.Z_INDEX.caster_frame
 	pass # Replace with function body.
 
 

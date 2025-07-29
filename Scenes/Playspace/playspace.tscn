@@ -110,8 +110,6 @@ script = ExtResource("10_vwsko")
 [node name="Playspace" type="Node2D" parent="."]
 script = ExtResource("1_t02ni")
 
-[node name="Backdrop" parent="Playspace" instance=ExtResource("4_p1rqr")]
-
 [node name="Centerpoint" type="Sprite2D" parent="Playspace"]
 visible = false
 z_index = 15
@@ -145,6 +143,8 @@ frame_progress = 0.333758
 z_index = 5
 z_as_relative = false
 position = Vector2(1028, 22)
+
+[node name="Backdrop" parent="Playspace" instance=ExtResource("4_p1rqr")]
 
 [node name="CardManager" type="Node2D" parent="."]
 script = ExtResource("3_n5cyu")

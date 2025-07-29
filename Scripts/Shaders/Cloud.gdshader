@@ -1,14 +1,16 @@
 shader_type canvas_item;
-uniform vec2 stars_speed = vec2(0.0,0.0);
+uniform vec2 stars_speed = vec2(0.1,0.0);
 uniform float stars_density: hint_range(0.0, 1.0, 0.001) = 0.002;
 
 // 2D Random See: 		https://thebookofshaders.com/11/
 float random (vec2 st) {
     return fract(sin(dot(st.xy,
-                         vec2(23.98,98.233)))
-                 * 43758.5453123)
-				;
+                         vec2(12.9898,78.233)))*
+        43758.5453123)*100.;
 }
+float hash(float p) { p = fract(p * 0.011); p *= p + 7.5; p *= p + p; return fract(p); }
+float hash2d(vec2 p) {vec3 p3 = fract(vec3(p.xyx) * 0.13); p3 += dot(p3, p3.yzx + 3.333); return fract((p3.x + p3.y) * p3.z); }
+
 // 2D Noise based on Morgan McGuire @morgan3d
 // https://www.shadertoy.com/view/4dS3Wd
 float custom_noise (vec2 st) {
@@ -16,10 +18,10 @@ float custom_noise (vec2 st) {
     vec2 f = fract(st);
 
     // Four corners in 2D of a tile
-    float a = random(i);
-    float b = random(i + vec2(1.0, 0.0));
-    float c = random(i + vec2(0.0, 1.0));
-    float d = random(i + vec2(1.0, 1.0));
+    float a = hash2d(i);
+    float b = hash2d(i + vec2(1.0, 0.0));
+    float c = hash2d(i + vec2(0.0, 1.0));
+    float d = hash2d(i + vec2(1.0, 1.0));
 
     // Smoothing
     vec2 u = f*f*(3.0-2.0*f);
@@ -31,7 +33,7 @@ float custom_noise (vec2 st) {
 }
 
 float custom_partition(float value, float chunks){
-	return round(value * chunks)/ chunks;
+	return floor(value * chunks)/chunks;
 }
 
 void vertex() {
@@ -40,25 +42,17 @@ void vertex() {
 
 // Called on each pixel
 void fragment() {
-	vec2 st = VERTEX;
-	st.x = custom_partition(st.x, 200);
-	st.y = custom_partition(st.y, 200);
+	vec2 st = VERTEX.xy;
+	st *= 100.;
+	st.x = custom_partition(st.x, 1920./600.);
+	st.y = custom_partition(st.y, 1080./600.);
 	st = (st
 			+ TIME * stars_speed
 			)
 			//* TEXTURE_PIXEL_SIZE
 			;
-	st = st * step(random(floor(st)), stars_density);
-	COLOR = texture(TEXTURE,st);
-    // Scale the coordinate system to see
-    // some noise in action
-    vec2 pos = vec2(st);
-
-    // Use the noise function
-    //float n = custom_noise(pos);
-    //COLOR = vec4(vec3(n), 1.0);
-
-
+	float brightness = step( custom_noise(st), stars_density);
+	COLOR = COLOR * (1. - brightness) + vec4(255., 255., 255., 160.) * brightness;
 }
 
 
