@@ -1,11 +1,8 @@
-[gd_scene load_steps=32 format=3 uid="uid://dws2mhcfu18v7"]
+[gd_scene load_steps=26 format=3 uid="uid://dws2mhcfu18v7"]
 
 [ext_resource type="Script" path="res://Scripts/playspace.gd" id="1_t02ni"]
-[ext_resource type="Texture2D" uid="uid://dfen2tb0rf3nh" path="res://Assets/Background/background_layer_1.png" id="2_mgru5"]
-[ext_resource type="Texture2D" uid="uid://blidm0gf4b13l" path="res://Assets/Background/background_layer_2.png" id="3_d5p4b"]
 [ext_resource type="Script" path="res://Scripts/Managers/card_manager.gd" id="3_n5cyu"]
-[ext_resource type="Texture2D" uid="uid://sdapeo05l5jd" path="res://Assets/Background/background_layer_3.png" id="4_n0cij"]
-[ext_resource type="Shader" path="res://Scripts/Shaders/stars.gdshader" id="5_jl8aw"]
+[ext_resource type="PackedScene" uid="uid://btfj0fwy4dex8" path="res://Scenes/Graphic Elements/Backdrop.tscn" id="4_p1rqr"]
 [ext_resource type="Script" path="res://Scripts/Cards/card_database.gd" id="7_ojqhm"]
 [ext_resource type="PackedScene" uid="uid://vlo6uno0t1dc" path="res://Scenes/Cards/player_hand.tscn" id="8_l370m"]
 [ext_resource type="PackedScene" uid="uid://crv6rsiuh0gi1" path="res://Scenes/Playspace/opponent_manager.tscn" id="8_o8vo8"]
@@ -15,19 +12,6 @@
 [ext_resource type="Script" path="res://Scripts/Managers/spell_manager.gd" id="10_vwsko"]
 [ext_resource type="PackedScene" uid="uid://brqd7qlj1sonb" path="res://Scenes/Cards/card_slot.tscn" id="12_r2h81"]
 [ext_resource type="Texture2D" uid="uid://ba411usipidba" path="res://Assets/Characters/Knight/_Idle.png" id="13_aq3wy"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kcf2l"]
-shader = ExtResource("5_jl8aw")
-shader_parameter/stars_speed = Vector2(0, 0.3)
-shader_parameter/stars_density = 0.0
-
-[sub_resource type="Gradient" id="Gradient_1eygi"]
-offsets = PackedFloat32Array(0.45977, 0.994505, 1)
-colors = PackedColorArray(0, 0, 0.196078, 1, 1.53417e-07, 0, 0.170818, 0.196078, 1, 0.0784314, 0.196078, 0.392157)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_s8wr1"]
-gradient = SubResource("Gradient_1eygi")
-width = 2000
 
 [sub_resource type="Gradient" id="Gradient_dttap"]
 
@@ -115,6 +99,7 @@ animations = [{
 }]
 
 [node name="BattleManager" type="Node2D"]
+position = Vector2(-1, 0)
 script = ExtResource("9_uwahy")
 
 [node name="BattleTimer" type="Timer" parent="."]
@@ -125,34 +110,7 @@ script = ExtResource("10_vwsko")
 [node name="Playspace" type="Node2D" parent="."]
 script = ExtResource("1_t02ni")
 
-[node name="Backdrop" type="Node2D" parent="Playspace"]
-z_index = -100
-position = Vector2(781, 302)
-
-[node name="Background" type="Sprite2D" parent="Playspace/Backdrop"]
-visible = false
-scale = Vector2(10, 10)
-texture = ExtResource("2_mgru5")
-
-[node name="Background-2" type="Sprite2D" parent="Playspace/Backdrop"]
-visible = false
-position = Vector2(0.000244141, 0.00012207)
-scale = Vector2(10, 10)
-texture = ExtResource("3_d5p4b")
-
-[node name="Background-3" type="Sprite2D" parent="Playspace/Backdrop"]
-visible = false
-position = Vector2(0.000244141, 0.00012207)
-scale = Vector2(10, 10)
-texture = ExtResource("4_n0cij")
-
-[node name="Sprite2D" type="Sprite2D" parent="Playspace/Backdrop"]
-z_index = -100
-material = SubResource("ShaderMaterial_kcf2l")
-position = Vector2(131, 238)
-rotation = 1.5708
-scale = Vector2(1, 2168.1)
-texture = SubResource("GradientTexture1D_s8wr1")
+[node name="Backdrop" parent="Playspace" instance=ExtResource("4_p1rqr")]
 
 [node name="Centerpoint" type="Sprite2D" parent="Playspace"]
 visible = false

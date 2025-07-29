@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://btfj0fwy4dex8"]
+
+[ext_resource type="Texture2D" uid="uid://dfen2tb0rf3nh" path="res://Assets/Background/background_layer_1.png" id="1_j1c87"]
+[ext_resource type="Texture2D" uid="uid://blidm0gf4b13l" path="res://Assets/Background/background_layer_2.png" id="2_kciij"]
+[ext_resource type="Texture2D" uid="uid://sdapeo05l5jd" path="res://Assets/Background/background_layer_3.png" id="3_8xs4f"]
+[ext_resource type="Shader" path="res://Scripts/Shaders/stars.gdshader" id="4_tyqkg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kcf2l"]
+shader = ExtResource("4_tyqkg")
+shader_parameter/stars_speed = Vector2(0, 0.3)
+shader_parameter/stars_density = 0.0
+
+[sub_resource type="Gradient" id="Gradient_1eygi"]
+offsets = PackedFloat32Array(0.0714286, 0.45977, 0.935065, 0.994505, 1)
+colors = PackedColorArray(0, 0, 0.196078, 1, 0, 0, 0.196078, 1, 1.36363e-07, 0, 0.173626, 0.28544, 1.53417e-07, 0, 0.170818, 0.196078, 1, 0.0784314, 0.196078, 0.392157)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_s8wr1"]
+gradient = SubResource("Gradient_1eygi")
+width = 2000
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gl2su"]
+shader = ExtResource("4_tyqkg")
+shader_parameter/stars_speed = Vector2(0, 0.3)
+shader_parameter/stars_density = 0.001
+
+[node name="Backdrop" type="Control"]
+z_index = -100
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1900.0
+offset_bottom = 1080.0
+
+[node name="Background" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(10, 10)
+texture = ExtResource("1_j1c87")
+
+[node name="Background-2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0.000244141, 0.00012207)
+scale = Vector2(10, 10)
+texture = ExtResource("2_kciij")
+
+[node name="Background-3" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0.000244141, 0.00012207)
+scale = Vector2(10, 10)
+texture = ExtResource("3_8xs4f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+z_index = -100
+material = SubResource("ShaderMaterial_kcf2l")
+position = Vector2(131, 238)
+rotation = 1.5708
+scale = Vector2(1, 2168.1)
+texture = SubResource("GradientTexture1D_s8wr1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_gl2su")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.00533391, 0.0168037, 0.159174, 0.988235)

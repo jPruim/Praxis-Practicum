@@ -2,27 +2,58 @@
 
 [ext_resource type="Theme" uid="uid://dpn2t23n7kt45" path="res://Scenes/UI/default-theme.theme" id="1_ykmtr"]
 
-[node name="Menu" type="Node2D"]
-
-[node name="MenuButtons" type="Control" parent="."]
+[node name="Menu" type="Control"]
 layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MenuButtons" type="Control" parent="MarginContainer"]
+layout_mode = 2
 theme = ExtResource("1_ykmtr")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuButtons"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MenuButtons"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 74.0
+offset_bottom = 108.0
+theme_override_constants/separation = 10
 
-[node name="Button" type="Button" parent="MenuButtons/VBoxContainer"]
+[node name="NewGameBtm" type="Button" parent="MarginContainer/MenuButtons/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+text = "New Game"
+
+[node name="PlayBtn" type="Button" parent="MarginContainer/MenuButtons/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("1_ykmtr")
 text = "Play"
 text_overrun_behavior = 3
 
-[node name="Background" type="Node2D" parent="."]
+[node name="SettingsBtn" type="Button" parent="MarginContainer/MenuButtons/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+text = "Settings"
+
+[node name="QuitBtn" type="Button" parent="MarginContainer/MenuButtons/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+text = "Quit"
