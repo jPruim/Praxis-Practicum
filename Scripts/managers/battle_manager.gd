@@ -140,35 +140,40 @@ func player_turn():
 	$"../PassButton".disabled = false
 
 
-func _on_opponent_targeting_player(card):
+func _on_opponent_targeting_player(card: CardBase):
+	card.being_cast = true
 	create_target(Globals.PLAYER_POSITION, false)
 	spell_manager.cast(card, false)
 	
 
-func _on_opponent_targeting_self(card):
+func _on_opponent_targeting_self(card: CardBase):
+	card.being_cast = true
 	create_target(Globals.ENEMY_POSITION, false)
 	spell_manager.cast(card, false)
 	
-func _on_opponent_targeting_slot(slot, card):
+func _on_opponent_targeting_slot(slot: CardSlot, card: CardBase):
+	card.being_cast = true
 	create_target(slot.position, false)
 	spell_manager.cast(card, false)
 
 
-func _on_player_targeting_opponent(card):
+func _on_player_targeting_opponent(card: CardBase):
+	card.being_cast = true
 	is_player_turn = false
 	create_target(Globals.ENEMY_POSITION, true)
 	spell_manager.cast(card, true)
 	time_loop()
 
 
-func _on_player_targeting_self(card):
+func _on_player_targeting_self(card: CardBase):
+	card.being_cast = true
 	is_player_turn = false
 	create_target(Globals.PLAYER_POSITION, true)
 	spell_manager.cast(card, true)
-
 	time_loop()
 	
-func _on_player_targeting_slot(slot, card):
+func _on_player_targeting_slot(slot: CardSlot, card: CardBase):
+	card.being_cast = true
 	is_player_turn = false
 	create_target(slot.position, true)
 	spell_manager.cast(card, true)
