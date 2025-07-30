@@ -10,7 +10,6 @@ script = ExtResource("1_auajs")
 
 [node name="Hourglass1" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(10, 0)
 texture = ExtResource("2_u4xss")
 
 [node name="Hourglass2" type="Sprite2D" parent="."]
@@ -19,5 +18,8 @@ texture = ExtResource("3_cq621")
 
 [node name="Hourglass3" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-10, 0)
+texture = ExtResource("4_seq5q")
+
+[node name="Hourglass4" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = ExtResource("4_seq5q")
