@@ -16,21 +16,34 @@ func set_time( time: int ):
 		$Hourglass3.visible = true
 		$Hourglass2.visible = false
 		$Hourglass1.visible = false
+		$Hourglass0.visible = false
 		current_time = 3
 	elif time == 2:
 		$Hourglass3.visible = false
 		$Hourglass2.visible = true
 		$Hourglass1.visible = false
+		$Hourglass0.visible = false
 		current_time = 2
 	elif time == 1:
 		$Hourglass3.visible = false
 		$Hourglass2.visible = false
 		$Hourglass1.visible = true
+		$Hourglass0.visible = false
 		current_time = 1
 	else:
+		$Hourglass3.visible = false
+		$Hourglass2.visible = false
 		$Hourglass1.visible = false
-		$Hourglass1.visible = false
-		$Hourglass1.visible = false
+		$Hourglass0.visible = true
+		current_time = 0
+	update_display()
+
+func decrement_time():
+	current_time -= 1
+	update_display()
+
+func update_display():
+	$Time.text = str(current_time)
 		
-		
-		
+func get_time() -> int:
+	return current_time

@@ -1,25 +1,35 @@
-[gd_scene load_steps=5 format=3 uid="uid://bcsfohtmxascv"]
+[gd_scene load_steps=6 format=3 uid="uid://bcsfohtmxascv"]
 
 [ext_resource type="Script" path="res://Scripts/UI Elements/game_time.gd" id="1_auajs"]
 [ext_resource type="Texture2D" uid="uid://b07jcps8qed1o" path="res://Assets/GUI/Hourglass-1.png" id="2_u4xss"]
 [ext_resource type="Texture2D" uid="uid://cduxt040ni0lh" path="res://Assets/GUI/Hourglass-2.png" id="3_cq621"]
 [ext_resource type="Texture2D" uid="uid://dcp5xrcl46ok1" path="res://Assets/GUI/Hourglass-3.png" id="4_seq5q"]
+[ext_resource type="Texture2D" uid="uid://bmvj2b03qc7g2" path="res://Assets/GUI/Hourglass-4.png" id="5_vn453"]
 
 [node name="GameTime" type="Node2D"]
 script = ExtResource("1_auajs")
 
-[node name="Hourglass1" type="Sprite2D" parent="."]
+[node name="Hourglass0" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("2_u4xss")
 
-[node name="Hourglass2" type="Sprite2D" parent="."]
+[node name="Hourglass1" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("3_cq621")
 
-[node name="Hourglass3" type="Sprite2D" parent="."]
+[node name="Hourglass2" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("4_seq5q")
 
-[node name="Hourglass4" type="Sprite2D" parent="."]
+[node name="Hourglass3" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("4_seq5q")
+texture = ExtResource("5_vn453")
+
+[node name="Time" type="RichTextLabel" parent="."]
+texture_filter = 1
+offset_left = -13.0
+offset_top = -6.0
+offset_right = 27.0
+offset_bottom = 34.0
+text = "3
+"

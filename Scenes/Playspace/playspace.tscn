@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dws2mhcfu18v7"]
+[gd_scene load_steps=27 format=3 uid="uid://dws2mhcfu18v7"]
 
 [ext_resource type="Script" path="res://Scripts/playspace.gd" id="1_t02ni"]
 [ext_resource type="Script" path="res://Scripts/Managers/card_manager.gd" id="3_n5cyu"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://Scripts/Managers/spell_manager.gd" id="10_vwsko"]
 [ext_resource type="PackedScene" uid="uid://brqd7qlj1sonb" path="res://Scenes/Cards/card_slot.tscn" id="12_r2h81"]
 [ext_resource type="Texture2D" uid="uid://ba411usipidba" path="res://Assets/Characters/Knight/_Idle.png" id="13_aq3wy"]
+[ext_resource type="PackedScene" uid="uid://bcsfohtmxascv" path="res://Scenes/Playspace/game_time.tscn" id="13_mvkgt"]
 
 [sub_resource type="Gradient" id="Gradient_dttap"]
 
@@ -165,5 +166,7 @@ script = ExtResource("10_bbo5u")
 [node name="OpponentManager" parent="." instance=ExtResource("8_o8vo8")]
 
 [node name="OpponentTimer" type="Timer" parent="OpponentManager"]
+
+[node name="GameTime" parent="." instance=ExtResource("13_mvkgt")]
 
 [connection signal="pressed" from="Playspace/PassButton" to="." method="_on_pass_button_pressed"]

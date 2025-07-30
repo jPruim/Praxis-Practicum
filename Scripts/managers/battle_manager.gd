@@ -44,6 +44,7 @@ func _process(delta: float) -> void:
 func setup_combat(enemy):
 	identify_slots()
 	in_combat = true
+	$GameTime.set_time(3)
 	setup_player()
 	setup_enemy()
 	time_loop()
@@ -106,6 +107,10 @@ func increment_time():
 		opponent_manager.cast_time -= 1
 	elif opponent_manager.cast_time < 0:
 		printerr("Opponent cast_time is negative") # TODO: Remove this comment
+		
+	if ($GameTime.get_time() > 0):
+		$GameTime.decrement_time()
+	$GameTime.set_time()
 	delay()
 	spell_manager.resolve_spells()
 
