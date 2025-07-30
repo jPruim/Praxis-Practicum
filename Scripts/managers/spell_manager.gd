@@ -110,6 +110,8 @@ func cast(card:CardBase, from_player: bool = false):
 	else:
 		location = Globals.ENEMY_CAST_POSITION
 		card.z_index = Globals.Z_INDEX.card_cast_enemy
+	card.being_cast = true
+	card.scale = Globals.SCALE.card_cast
 	card.animate_card_to_position(location)
 	card.animation_reveal()
 	

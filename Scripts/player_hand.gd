@@ -10,7 +10,7 @@ const DEFAULT_ASPEED = 0.25
 var player_hand = []
 var center_screen_x: int
 var ai_hand:bool = false
-var offset_value: int = - 150
+var offset_value: int = - 175
 var hovered: bool = false
 
 # Called when the node enters the scene tree for the first time.

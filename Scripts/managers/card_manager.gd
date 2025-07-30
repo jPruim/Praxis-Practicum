@@ -86,7 +86,7 @@ func connect_card_signals(card):
 
 
 # Handle card being hovered
-func on_hovered_card(card):
+func on_hovered_card(card: CardBase):
 	if !is_hovering_card:
 		is_hovering_card = true
 		card_affects(card, true)
@@ -159,11 +159,10 @@ func start_drag(card:CardBase):
 		return
 	card_being_dragged = card
 	card_being_dragged.z_index = Globals.Z_INDEX["card_being_dragged"]
-	card_being_dragged.scale = Vector2( 1, 1)
+	card_being_dragged.scale = Globals.SCALE.card_drag
 	
 	
 func end_drag():
-	card_being_dragged.scale = Vector2( 1.05, 1.05)
 	# Disable collision shape during animations
 	# card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
 	
@@ -179,6 +178,7 @@ func end_drag():
 				# Should never be called
 				opponent_hand.remove_card_from_hand(card_being_dragged) 
 			else:
+				card_being_dragged.scale = Globals.SCALE.cast_scale
 				player_hand.remove_card_from_hand(card_being_dragged)
 				player_hand.update_hand_border(false)
 			SignalBus.emit_signal("player_targeting_self", card_being_dragged)
@@ -189,6 +189,7 @@ func end_drag():
 				# Should never be called
 				opponent_hand.remove_card_from_hand(card_being_dragged) 
 			else:
+				card_being_dragged.scale = Globals.SCALE.cast_scale
 				$PlayerHand.hovered = false
 				player_hand.remove_card_from_hand(card_being_dragged)
 				player_hand.update_hand_border(false)
@@ -198,13 +199,10 @@ func end_drag():
 		elif(card_slot and card_slot.max_cards > card_slot.cards.size()):
 			# Check for room in the CardSlot
 			if  (card_type == "summon" and card_slot.player_owned) or \
-				(card_type == "spell" and !card_slot.player_owned):
+				(card_type == "spell"):
 				#card_being_dragged.in_slot = true
 				#card_being_dragged.position = card_slot.position
-				
-				# Add card to card slot and remove from hand (THIS ASSUMES CARD CAME FROM HAND)
-				card_slot.cards.append(card_being_dragged)
-				card_being_dragged.scale = CARD_SCALE_PlACED
+				card_being_dragged.scale = Globals.SCALE.card_cast
 				if(card_being_dragged.ai_card):
 					# Should never be called
 					$PlayerHand.hovered = false
@@ -215,8 +213,6 @@ func end_drag():
 					player_hand.remove_card_from_hand(card_being_dragged)
 					player_hand.update_hand_border(false)
 				SignalBus.emit_signal("player_targeting_slot", card_slot, card_being_dragged)
-				#card_being_dragged.z_index = Globals.Z_INDEX["card_in_slot"]
-				#card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = false
 				card_being_dragged = null
 				return
 	
@@ -224,6 +220,7 @@ func end_drag():
 		# Should never be called
 		opponent_hand.add_card_to_hand(card_being_dragged)
 	else:
+		card_being_dragged.scale = Globals.SCALE.card_hand
 		$PlayerHand.hovered = false
 		player_hand.add_card_to_hand(card_being_dragged)
 		player_hand.update_hand_border(false)

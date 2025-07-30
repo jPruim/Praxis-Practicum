@@ -10,6 +10,7 @@ func _ready() -> void:
 	$CardFront/Attack.visible = false
 	$CardFront/Details.visible = false
 	$CardFront/Container.size.y = 250
+	$".".z_index = Globals.Z_INDEX.caster_frame
 	pass # Replace with function body.
 
 func set_aloction():
