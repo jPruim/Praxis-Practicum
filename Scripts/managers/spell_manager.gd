@@ -70,7 +70,7 @@ func resolve_spell_dmg_at(spell:CardBase, slot: CardSlot):
 		slot.cards[0].card_data["summon_health"] - dmg
 	pass
 
-func add_player_target(slot):
+func add_player_target(slot: CardSlot):
 	player_target_slots.append(slot)
 	
 func add_opponent_target(slot):
@@ -80,27 +80,27 @@ func add_opponent_target(slot):
 # Signals
 func _on_opponent_targeting_player(card):
 	opponent_spell = card
-	opponent_target_slots.append($"../../OpponentSlot")
+	add_opponent_target($"../../PlayerSlot")
 
-func _on_opponent_targeting_self(card):
+func _on_opponent_targeting_self(card: CardBase):
 	opponent_spell = card
-	opponent_target_slots.append($"../../PlayerSlot")
+	add_opponent_target($"../../OpponentSlot")
 	
-func _on_opponent_targeting_slot(slot, card):
+func _on_opponent_targeting_slot(slot: CardSlot, card: CardBase):
 	opponent_spell = card
-	opponent_target_slots.append(slot)
+	add_opponent_target(slot)
 
-func _on_player_targeting_opponent(card):
-	opponent_spell = card
-	opponent_target_slots.append($"../../OpponentSlot")
+func _on_player_targeting_opponent(card: CardBase):
+	player_spell = card
+	add_player_target($"../../OpponentSlot")
 
-func _on_player_targeting_self(card):
-	opponent_spell = card
-	opponent_target_slots.append($"../../PlayerSlot")
+func _on_player_targeting_self(card: CardBase):
+	player_spell = card
+	add_player_target($"../../PlayerSlot")
 	
-func _on_player_targeting_slot(slot, card):
-	opponent_spell = card
-	opponent_target_slots.append(slot)
+func _on_player_targeting_slot(slot: CardSlot, card: CardBase):
+	player_spell = card
+	add_player_target(slot)
 	
 func cast(card:CardBase, from_player: bool = false):
 	var location
