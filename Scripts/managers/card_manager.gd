@@ -80,7 +80,8 @@ func connect_signals():
 	SignalBus.connect("player_hand_hovered", on_hover_hand)
 	SignalBus.connect("player_hand_hovered_off", on_hover_hand_off)
 	
-func connect_card_signals(card):
+# Called by Cards Individually
+func connect_card_signals(card:CardBase):
 	SignalBus.connect("card_hovered", on_hovered_card)
 	SignalBus.connect("card_hovered_off", on_hovered_off_card)
 
@@ -89,7 +90,7 @@ func connect_card_signals(card):
 func on_hovered_card(card: CardBase):
 	if !is_hovering_card:
 		is_hovering_card = true
-		card_affects(card, true)
+	card_affects(card, true)
 
 # Handle card being hovered
 func on_hovered_off_card(card):
@@ -112,12 +113,9 @@ func on_hovered_off_card(card):
 func card_affects(card: CardBase, hovered: bool):
 	var animation_sprite = card.get_node("CardFront/Container/AnimatedSprite2D")
 	if hovered:
-		if !card.in_slot:
-			card.scale = Vector2(1.05, 1.05)
-			# TODO: Decide if we want card clamping
-			# card.position = card.position.clamp(Vector2(80,120), Vector2(1800-80,1080-120))
-			card.z_index = Globals.Z_INDEX["card_hovered"]
-			# Play Animation
+		card.scale = Vector2(1.05, 1.05)
+		card.z_index = Globals.Z_INDEX["card_hovered"]
+		# Play Animation
 		animation_sprite.play()
 	else:
 		if card is CasterFrameBase:
