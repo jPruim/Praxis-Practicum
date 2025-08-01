@@ -40,6 +40,8 @@ func set_time( time: int ):
 
 func decrement_time():
 	current_time -= 1
+	if current_time < 0:
+		current_time = 0
 	update_display()
 
 func update_display():

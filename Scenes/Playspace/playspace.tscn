@@ -155,7 +155,7 @@ z_index = 3
 position = Vector2(1014, 1151)
 
 [node name="OpponentHand" parent="CardManager" instance=ExtResource("8_l370m")]
-position = Vector2(1146, 29)
+position = Vector2(978, 43)
 
 [node name="CardDatabase" type="Node2D" parent="CardManager"]
 script = ExtResource("7_ojqhm")
@@ -168,5 +168,7 @@ script = ExtResource("10_bbo5u")
 [node name="OpponentTimer" type="Timer" parent="OpponentManager"]
 
 [node name="GameTime" parent="." instance=ExtResource("13_mvkgt")]
+position = Vector2(1629, 455)
+scale = Vector2(5, 5)
 
 [connection signal="pressed" from="Playspace/PassButton" to="." method="_on_pass_button_pressed"]

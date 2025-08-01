@@ -15,7 +15,7 @@ void vertex() {
 // Called on each pixel
 void fragment() {
 	vec2 st = UV.xy;
-	st = floor(st * vec2(1920.,1080.)/5.); 
+	st = floor(st * vec2(1920.,1080.)/5.);
 	st -= TIME * stars_speed;
 	float brightness = step(random(floor(st)), stars_density);
 	COLOR = COLOR * (1. - brightness) + vec4(255., 255., 255., 160.) * brightness;
