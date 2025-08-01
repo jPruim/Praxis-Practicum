@@ -3,7 +3,7 @@ extends Node2D
 
 
 var target_scene
-var opponent_manager
+var opponent_manager: OpponentManager
 var in_combat = false
 var player_cast_time = 0
 var spell_manager: SpellManager
@@ -89,9 +89,10 @@ func time_loop():
 	if(player_cast_time == 0):
 		# Break loop if player needs to cast something
 		is_player_turn = true
-		print("waiting on player")
+		print_status()
 		return 
 	else:
+		print_status()
 		increment_time()
 		clean_up()
 		time_loop()
@@ -110,7 +111,6 @@ func increment_time():
 		
 	if ($GameTime.get_time() > 0):
 		$GameTime.decrement_time()
-	$GameTime.set_time()
 	delay()
 	spell_manager.resolve_spells()
 
@@ -247,3 +247,14 @@ func clean_up():
 func check_game_end():
 	# TODO make this actually check things
 	return false
+
+# For testing purposes
+func print_status():
+	var output: String = "Start Debug"
+	output += "\nPlayerCastTime: " + str(spell_manager.player_cast_time)
+	output += "\nOppCastTime: " + str(opponent_manager.cast_time)
+	if(Globals.DEBUG):
+		if(is_player_turn):
+			output += "\nWaiting on Player"
+	output += "\nEnd Debug"
+	print(output)
