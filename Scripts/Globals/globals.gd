@@ -35,12 +35,14 @@ const Z_INDEX = {
 }
 
 # Masks
-const CARD_COLLISION_MASK = 1
-const CARD_SLOT_COLLISION_MASK = 2
-const DECK_COLLISION_MASK = 4
-const DECK_COLLISION_MASK_OPPONENT = 8
-const CARD_COLLISION_MASK_OPPONENT = 16
-const HAND_COLLISION_MASK_PLAYER = 32
+const MASK = {
+	"card": 1,
+	"cardSlot": 2,
+	"deck_player": 4,
+	"deck_opponent": 8,
+	"card_opponent":16,
+	"player_hand": 32,
+}
 
 # Graphic Constants
 const DECK_POSITION = Vector2(100, 900)

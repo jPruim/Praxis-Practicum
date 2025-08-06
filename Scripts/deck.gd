@@ -134,6 +134,6 @@ func add_card_to_deck(data: CardData):
 	new_card.set_display(data)
 	if(ai_deck):
 		new_card.ai_card = true
-		new_card.get_node("Area2D").collision_mask = Globals.CARD_COLLISION_MASK_OPPONENT
+		new_card.get_node("Area2D").collision_mask = Globals.MASK.card + Globals.MASK.card_opponent
 	$"..".add_child(new_card)
 	deck.append(new_card)

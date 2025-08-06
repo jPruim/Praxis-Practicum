@@ -24,6 +24,8 @@ const DEFAULT_DELAY = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	get_viewport().set_physics_object_picking_sort(true)
+	get_viewport().set_physics_object_picking_first_only(true)	
 	target_scene = preload("res://Scenes/Graphic Elements/target.tscn")
 	opponent_manager = $"OpponentManager"
 	spell_manager = $".".find_child("SpellManager")
@@ -250,7 +252,10 @@ func check_game_end():
 
 # For testing purposes
 func print_status():
+	if Globals.DEBUG == false:
+		return
 	var output: String = "Start Debug"
+	output +="\nGameTime: " + str($GameTime.get_time())
 	output += "\nPlayerCastTime: " + str(spell_manager.player_cast_time)
 	output += "\nOppCastTime: " + str(opponent_manager.cast_time)
 	if(Globals.DEBUG):

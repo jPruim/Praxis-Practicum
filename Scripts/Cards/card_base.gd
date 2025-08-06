@@ -7,7 +7,7 @@ var hand_position: Vector2
 var in_slot: bool  = false # Boolean for being in the card_slot
 var ai_card: bool = false
 var being_cast: bool = false
-
+var being_hovered: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_default_data()
@@ -111,3 +111,35 @@ func animate_card_to_scale(scale, speed = Globals.DEFAULT_ASPEED):
 func animate_card_to_slot(slot: CardSlot, scale = Globals.CARD_SCALE_PlACED, speed = Globals.DEFAULT_ASPEED):
 	animate_card_to_position(slot.position, speed)
 	animate_card_to_scale(scale, speed)
+
+
+
+# Change card affects TODO: Decide if cards in cardslots need animations (go and add a new mask for animations, and separate from card detection)
+func card_affects(hovered: bool):
+	var animation_sprite = get_node("CardFront/Container/AnimatedSprite2D")
+	being_hovered = hovered
+	if being_hovered:
+		$".".scale = Vector2(1.05, 1.05)
+		$".".z_index = Globals.Z_INDEX["card_hovered"]
+		# Play Animation
+		animation_sprite.play()
+		print("hover on")
+	else:
+		if $"." is CasterFrameBase:
+			$".".scale = Globals.CARD_SCALE_PlACED
+			$".".z_index = Globals.Z_INDEX["caster_frame"]
+		elif $".".being_cast:	
+			if $".".ai_card:
+				$".".z_index = Globals.Z_INDEX["card_cast_enemy"]
+			else:
+				$".".z_index = Globals.Z_INDEX["card_cast_player"]
+			$".".scale = Globals.CAST_SCALE
+		elif !$".".in_slot:
+			$".".scale  = Vector2( 1, 1)
+			$".".z_index = Globals.Z_INDEX["card"]
+		else:
+			$".".scale = Globals.CARD_SCALE_PlACED
+			$".".z_index = Globals.Z_INDEX["card_in_slot"]
+		# Pause Animation
+		animation_sprite.pause()
+		print("hover off")

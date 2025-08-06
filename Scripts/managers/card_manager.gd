@@ -33,7 +33,7 @@ func _ready() -> void:
 
 # Card Collision detector
 func raycast_check_for_card():
-	var result = raycast_check_mask(Globals.CARD_COLLISION_MASK)
+	var result = raycast_check_mask(Globals.MASK.card)
 	# if over an area
 	if result.size() > 0:
 		# make sure to highlight return top card only
@@ -42,7 +42,7 @@ func raycast_check_for_card():
 
 # Card Slot Collision Detector
 func raycast_check_for_card_slot():
-	var result = raycast_check_mask(Globals.CARD_SLOT_COLLISION_MASK)
+	var result = raycast_check_mask(Globals.MASK.cardSlot)
 	# if over an area
 	if result.size() > 0:
 		# make sure to highlight return top card only
@@ -59,7 +59,7 @@ func raycast_check_mask( mask: int):
 
 # Player Hand Collision Detector
 func raycast_check_for_player_hand():
-	var result = raycast_check_mask(Globals.HAND_COLLISION_MASK_PLAYER)
+	var result = raycast_check_mask(Globals.MASK.player_hand)
 	# if over an area
 	if result.size() > 0:
 		# make sure to highlight return top card only
@@ -90,51 +90,25 @@ func connect_card_signals(card:CardBase):
 func on_hovered_card(card: CardBase):
 	if !is_hovering_card:
 		is_hovering_card = true
-	card_affects(card, true)
+	card.card_affects( true)
 
 # Handle card being hovered
 func on_hovered_off_card(card):
 	# Check if card is NOT in a card slot
-	if !card.in_slot:
-		if !card_being_dragged:
-			#check if transitioning onto a new card
-			var new_card = raycast_check_for_card()
-			if new_card:
-				on_hovered_card(new_card)
-			else:
-				is_hovering_card = false
+	if !card_being_dragged:
+		#check if transitioning onto a new card
+		var new_card = raycast_check_for_card()
+		if new_card:
+			on_hovered_card(new_card)
+		else:
+			is_hovering_card = false
 	# Make sure cards are in the right spot, only needed if card clamping
 	$PlayerHand.update_hand_positions()
 	$OpponentHand.update_hand_positions()
 	# Turn off card affects
-	card_affects(card, false)
+	card.card_affects(false)
 	
-# Change card affects TODO: Decide if cards in cardslots need animations (go and add a new mask for animations, and separate from card detection)
-func card_affects(card: CardBase, hovered: bool):
-	var animation_sprite = card.get_node("CardFront/Container/AnimatedSprite2D")
-	if hovered:
-		card.scale = Vector2(1.05, 1.05)
-		card.z_index = Globals.Z_INDEX["card_hovered"]
-		# Play Animation
-		animation_sprite.play()
-	else:
-		if card is CasterFrameBase:
-			card.scale = Globals.CARD_SCALE_PlACED
-			card.z_index = Globals.Z_INDEX["caster_frame"]
-		elif card.being_cast:	
-			if card.ai_card:
-				card.z_index = Globals.Z_INDEX["card_cast_enemy"]
-			else:
-				card.z_index = Globals.Z_INDEX["card_cast_player"]
-			card.scale = Globals.CAST_SCALE
-		elif !card.in_slot:
-			card.scale  = Vector2( 1, 1)
-			card.z_index = Globals.Z_INDEX["card"]
-		else:
-			card.scale = Globals.CARD_SCALE_PlACED
-			card.z_index = Globals.Z_INDEX["card_in_slot"]
-		# Pause Animation
-		animation_sprite.pause()
+
 		
 # Returns the top card from a raycast result
 func get_top_card(results):
@@ -187,7 +161,7 @@ func end_drag():
 				# Should never be called
 				opponent_hand.remove_card_from_hand(card_being_dragged) 
 			else:
-				card_being_dragged.scale = Globals.SCALE.cast_scale
+				card_being_dragged.scale = Globals.SCALE["card_cast"]
 				$PlayerHand.hovered = false
 				player_hand.remove_card_from_hand(card_being_dragged)
 				player_hand.update_hand_border(false)
@@ -237,7 +211,7 @@ func initialize_decks():
 	deck = deck_scene.instantiate()
 	deck.name = "OpponentDeck"
 	deck.position = OPPONENT_DECK_POSITION
-	deck.get_node("Area2D").collision_mask = Globals.DECK_COLLISION_MASK_OPPONENT
+	deck.get_node("Area2D").collision_mask = Globals.MASK.deck_opponent
 	deck.ai_deck = true
 	add_child(deck)
 	deck.initialize()
