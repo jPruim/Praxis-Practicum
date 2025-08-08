@@ -8,7 +8,6 @@ var in_combat = false
 var player_cast_time = 0
 var spell_manager: SpellManager
 var is_player_turn: bool = false
-
 # Board State Variables
 var ai_slots = [] # Storage for on board slots
 var player_slots = [] # Storage for on board slots
@@ -21,6 +20,8 @@ var caster_frame_base_scene = preload("res://Scenes/Cards/caster_frame_base.tscn
 var player: CasterFrameBase
 var enemy: CasterFrameBase
 const DEFAULT_DELAY = 1
+var phaseList = ["start_turn","ai_decision", "player_decision","cleanup", "end_step"]
+var phase: String
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -49,6 +50,7 @@ func setup_combat(enemy):
 	$GameTime.set_time(3)
 	setup_player()
 	setup_enemy()
+	phase = "start_turn"
 	time_loop()
 
 func setup_player():
@@ -70,7 +72,7 @@ func setup_enemy():
 	enemy.set_aloction()
 	enemy.set_default_data()
 	enemy.z_index = Globals.Z_INDEX["caster_frame"]
-	enemy.scale = Globals.CARD_SCALE_PlACED
+	enemy.scale = Globals.SCALE.card_placed
 	enemy.set_display_name("Enemy")
 	enemy.set_animation("Adventurer")
 	enemy.position = Globals.ENEMY_POSITION
@@ -83,21 +85,37 @@ func _on_pass_button_pressed() -> void:
 	get_node(pass_button_path).disabled = true
 	increment_time()
 
+# Game Phase Setup
+func next_phase():
+	if(in_combat):
+		phase = phaseList[1 + phaseList.find(phase) % phaseList.size()]
+	print(in_combat)
+
 func time_loop():
-	start_turn()
+	in_combat = true
+	print_status()
 	delay()
-	if(opponent_manager.cast_time == 0):
-		opponent_manager.make_ai_play()
-	if(player_cast_time == 0):
-		# Break loop if player needs to cast something
-		is_player_turn = true
-		print_status()
-		return 
-	else:
-		print_status()
+	if(phase == "start_turn"):
+		start_turn()
+		next_phase()
+	elif(phase == "ai_decision"):
+		if(opponent_manager.cast_time == 0):
+			opponent_manager.make_ai_play()
+			next_phase()
+	elif(phase == "player_decision"):
+		if(player_cast_time == 0):
+			is_player_turn = true
+			# Break loop if player needs to cast something
+			print_status()
+			return 
+	elif(phase == "clean_up"):
 		increment_time()
 		clean_up()
-		time_loop()
+	elif(phase == "end_step"):
+		return
+	time_loop()
+
+
 		
 # Function to hold to setup the end of the time step
 func increment_time():
@@ -166,24 +184,27 @@ func _on_opponent_targeting_slot(slot: CardSlot, card: CardBase):
 
 func _on_player_targeting_opponent(card: CardBase):
 	card.being_cast = true
-	is_player_turn = false
 	create_target(Globals.ENEMY_POSITION, true)
 	spell_manager.cast(card, true)
+	is_player_turn = false
+	next_phase()
 	time_loop()
 
 
 func _on_player_targeting_self(card: CardBase):
 	card.being_cast = true
-	is_player_turn = false
 	create_target(Globals.PLAYER_POSITION, true)
 	spell_manager.cast(card, true)
+	is_player_turn = false
+	next_phase()
 	time_loop()
 	
 func _on_player_targeting_slot(slot: CardSlot, card: CardBase):
 	card.being_cast = true
-	is_player_turn = false
 	create_target(slot.position, true)
 	spell_manager.cast(card, true)
+	is_player_turn = false
+	next_phase()
 	time_loop()
 
 func delay(delay = DEFAULT_DELAY):
@@ -255,11 +276,12 @@ func print_status():
 	if Globals.DEBUG == false:
 		return
 	var output: String = "Start Debug"
+	output+="\nPhase: " + phase
 	output +="\nGameTime: " + str($GameTime.get_time())
 	output += "\nPlayerCastTime: " + str(spell_manager.player_cast_time)
 	output += "\nOppCastTime: " + str(opponent_manager.cast_time)
 	if(Globals.DEBUG):
-		if(is_player_turn):
+		if(phase == "player_decision"):
 			output += "\nWaiting on Player"
 	output += "\nEnd Debug"
 	print(output)

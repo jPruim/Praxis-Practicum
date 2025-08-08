@@ -123,7 +123,6 @@ func card_affects(hovered: bool):
 		$".".z_index = Globals.Z_INDEX["card_hovered"]
 		# Play Animation
 		animation_sprite.play()
-		print("hover on")
 	else:
 		if $"." is CasterFrameBase:
 			$".".scale = Globals.CARD_SCALE_PlACED
@@ -142,4 +141,3 @@ func card_affects(hovered: bool):
 			$".".z_index = Globals.Z_INDEX["card_in_slot"]
 		# Pause Animation
 		animation_sprite.pause()
-		print("hover off")
