@@ -109,11 +109,16 @@ func time_loop():
 			print_status()
 			return 
 	elif(phase == "clean_up"):
-		increment_time()
+		increment_time() # Spell resolution
 		clean_up()
 	elif(phase == "end_step"):
-		return
+		end_step()
+
+
+# Any end step effects
+func end_step():
 	time_loop()
+
 
 
 		
@@ -265,10 +270,14 @@ func clean_up():
 	if(check_game_end()):
 		return
 	else:
-		return
+		time_loop()
 
 func check_game_end():
 	# TODO make this actually check things
+	var player: CasterFrameBase = $Playspace/PlayerSlot.cards[0]
+	var opponent: CasterFrameBase = $Playspace/OpponentSlot.cards[0]
+	if(player.card_data.current_health <= 0):
+		SignalBus.emit_signal("run_loss")
 	return false
 
 # For testing purposes
