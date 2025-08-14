@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmqw3g63oh7ut"]
+[gd_scene load_steps=5 format=3 uid="uid://cmqw3g63oh7ut"]
 
+[ext_resource type="Script" path="res://Scripts/UI Elements/menu.gd" id="1_pbacw"]
 [ext_resource type="Theme" uid="uid://dpn2t23n7kt45" path="res://Scenes/UI/default-theme.theme" id="1_ykmtr"]
 [ext_resource type="Texture2D" uid="uid://cfdvwowvfmxi2" path="res://Assets/GUI/Book-2.png" id="2_i700f"]
 [ext_resource type="Theme" uid="uid://cxef1cilx5oai" path="res://Scenes/UI/menu-button.tres" id="3_kp7d6"]
@@ -11,6 +12,7 @@ anchors_preset = 0
 offset_left = 1.0
 offset_right = 1921.0
 offset_bottom = 1080.0
+script = ExtResource("1_pbacw")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -51,18 +53,18 @@ rotation = 6.1488
 theme = ExtResource("3_kp7d6")
 theme_override_constants/separation = 10
 
+[node name="ResumeBtn" type="Button" parent="MarginContainer/MenuButtons/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("3_kp7d6")
+text = "Resume"
+text_overrun_behavior = 3
+
 [node name="NewGameBtm" type="Button" parent="MarginContainer/MenuButtons/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("3_kp7d6")
 text = "New Game"
-
-[node name="PlayBtn" type="Button" parent="MarginContainer/MenuButtons/VBoxContainer"]
-texture_filter = 1
-layout_mode = 2
-theme = ExtResource("3_kp7d6")
-text = "Play"
-text_overrun_behavior = 3
 
 [node name="SettingsBtn" type="Button" parent="MarginContainer/MenuButtons/VBoxContainer"]
 texture_filter = 1
@@ -73,3 +75,6 @@ text = "Settings"
 texture_filter = 1
 layout_mode = 2
 text = "Quit"
+
+[connection signal="pressed" from="MarginContainer/MenuButtons/VBoxContainer/ResumeBtn" to="." method="_on_resume_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/MenuButtons/VBoxContainer/NewGameBtm" to="." method="_on_new_game_btm_pressed"]
