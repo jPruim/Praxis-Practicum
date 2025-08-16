@@ -14,11 +14,13 @@ func _process(delta: float) -> void:
 
 func _on_new_game_btm_pressed() -> void:
 	SignalBus.emit_signal("run_start")
+	hide_all()
 	pass # Replace with function body.
 
 
 func _on_resume_btn_pressed() -> void:
 	SignalBus.emit_signal("run_resume")
+	hide_all()
 	pass # Replace with function body.
 
 
@@ -43,4 +45,9 @@ func hide_all():
 
 func _on_back_pressed() -> void:
 	display_menu()
+	pass # Replace with function body.
+
+
+func _on_quit_btn_pressed() -> void:
+	get_tree().quit()
 	pass # Replace with function body.

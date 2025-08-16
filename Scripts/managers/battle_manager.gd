@@ -36,7 +36,6 @@ func _ready() -> void:
 	SignalBus.player_targeting_opponent.connect(_on_player_targeting_opponent)
 	SignalBus.player_targeting_self.connect(_on_player_targeting_self)
 	SignalBus.player_targeting_slot.connect(_on_player_targeting_slot)
-	setup_combat("default")
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

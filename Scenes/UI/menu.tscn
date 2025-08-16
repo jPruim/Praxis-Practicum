@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmqw3g63oh7ut"]
+[gd_scene load_steps=6 format=3 uid="uid://cmqw3g63oh7ut"]
 
 [ext_resource type="Script" path="res://Scripts/UI Elements/menu.gd" id="1_pbacw"]
 [ext_resource type="Theme" uid="uid://dpn2t23n7kt45" path="res://Scenes/UI/default-theme.theme" id="1_ykmtr"]
+[ext_resource type="PackedScene" uid="uid://s2i4wqf4t68e" path="res://Scenes/Graphic Elements/Fog.tscn" id="2_5nfdi"]
 [ext_resource type="Texture2D" uid="uid://cfdvwowvfmxi2" path="res://Assets/GUI/Book-2.png" id="2_i700f"]
 [ext_resource type="Theme" uid="uid://cxef1cilx5oai" path="res://Scenes/UI/menu-button.tres" id="3_kp7d6"]
 
@@ -14,14 +15,7 @@ offset_right = 1921.0
 offset_bottom = 1080.0
 script = ExtResource("1_pbacw")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Fog" parent="." instance=ExtResource("2_5nfdi")]
 
 [node name="Book" type="Sprite2D" parent="."]
 position = Vector2(1005, 594)
@@ -128,6 +122,7 @@ text = "Back"
 [connection signal="pressed" from="MainMenu/MenuButtons/VBoxContainer/ResumeBtn" to="." method="_on_resume_btn_pressed"]
 [connection signal="pressed" from="MainMenu/MenuButtons/VBoxContainer/NewGameBtm" to="." method="_on_new_game_btm_pressed"]
 [connection signal="pressed" from="MainMenu/MenuButtons/VBoxContainer/SettingsBtn" to="." method="_on_settings_btn_pressed"]
+[connection signal="pressed" from="MainMenu/MenuButtons/VBoxContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]
 [connection signal="pressed" from="Settings/MenuButtons/VBoxContainer/ResumeBtn" to="." method="_on_resume_btn_pressed"]
 [connection signal="pressed" from="Settings/MenuButtons/VBoxContainer/NewGameBtm" to="." method="_on_new_game_btm_pressed"]
 [connection signal="pressed" from="Settings/MenuButtons/VBoxContainer/SettingsBtn" to="." method="_on_settings_btn_pressed"]

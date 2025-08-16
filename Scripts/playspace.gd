@@ -42,10 +42,10 @@ func initialize_card_slots():
 			x_pos = x_pos_first + (i * (slotSize.x + slotMargin.x))
 			y_pos = y_pos_first + (j * (slotSize.y + slotMargin.y))
 			newSlot.position = Vector2(x_pos,y_pos)
+			newSlot.visible = false
 			$".".add_child(newSlot)
-			
 	$Centerpoint.position = centerPoint
-
+	
 
 func _ready() -> void:
 	$OpponentSlot.is_opponent = true

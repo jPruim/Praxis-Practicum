@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://s2i4wqf4t68e"]
+
+[ext_resource type="Shader" path="res://Scripts/Shaders/Fog.gdshader" id="1_j2w37"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_augxp"]
+frequency = 0.0032
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mrrrx"]
+width = 1920
+height = 1080
+seamless = true
+seamless_blend_skirt = 0.815
+noise = SubResource("FastNoiseLite_augxp")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t3vhh"]
+shader = ExtResource("1_j2w37")
+shader_parameter/strength = 0.25
+shader_parameter/inverse_density = 1.618
+shader_parameter/speed = Vector2(0.01, 0.02)
+shader_parameter/pixels = 480.0
+shader_parameter/number_of_shades = 12.0
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_mrrrx")
+
+[node name="Fog" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = 2
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1920, 1080)
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/ParallaxLayer"]
+material = SubResource("ShaderMaterial_t3vhh")
+offset_left = -2.0
+offset_right = 1918.0
+offset_bottom = 1080.0

@@ -25,6 +25,7 @@ signal player_hand_hovered_off
 
 # Gamestate Signals
 signal fight_start
+signal fight_enter
 signal fight_won(remaining_health)
 signal fight_loss
 signal run_win
