@@ -28,7 +28,7 @@ func _ready() -> void:
 	screen_size = get_viewport_rect().size
 	SignalBus.connect("left_mouse_button_released", on_left_click_release)
 	connect_signals()
-	initialize_decks()
+	#initialize_decks()
 	pass # Replace with function body.
 
 # Card Collision detector

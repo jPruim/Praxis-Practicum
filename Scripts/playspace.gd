@@ -15,7 +15,8 @@ var PlayerHand = preload("res://Scenes/Cards/player_hand.tscn")
 
 func _enter_tree() -> void:
 	# Needs to happen before some of the ready() functions of children
-	initialize_card_slots()
+	#initialize_card_slots()
+	pass
 
 
 

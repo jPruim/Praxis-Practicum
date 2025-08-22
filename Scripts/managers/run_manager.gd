@@ -54,6 +54,9 @@ func _on_fight_won():
 func _on_fight_loss():
 	pass
 
+func setup_fight():
+	SignalBus.emit("")
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
