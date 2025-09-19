@@ -21,15 +21,13 @@ shader_parameter/pixels = 480.0
 shader_parameter/number_of_shades = 12.0
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_mrrrx")
 
-[node name="Fog" type="Node2D"]
+[node name="Fog" type="ParallaxBackground"]
+layer = 5
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-layer = 2
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
 motion_mirroring = Vector2(1920, 1080)
 
-[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/ParallaxLayer"]
+[node name="ColorRect" type="ColorRect" parent="ParallaxLayer"]
 material = SubResource("ShaderMaterial_t3vhh")
 offset_left = -2.0
 offset_right = 1918.0

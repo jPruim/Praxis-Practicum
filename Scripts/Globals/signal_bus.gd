@@ -17,6 +17,7 @@ signal player_spell_resolution(rarity)
 # Keybind signals
 signal left_mouse_button_clicked
 signal left_mouse_button_released
+signal menu_button_pressed
 signal card_hovered
 signal card_hovered_off
 signal player_hand_hovered

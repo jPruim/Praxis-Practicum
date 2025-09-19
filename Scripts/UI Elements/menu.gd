@@ -1,9 +1,10 @@
-extends Control
+extends CanvasLayer
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	hide_all()
+	SignalBus.connect("menu_button_pressed", _on_menu_button_pressed)
+	display_menu()
 	pass # Replace with function body.
 
 
@@ -11,6 +12,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func _on_menu_button_pressed() -> void:
+	display_menu()
 
 func _on_new_game_btm_pressed() -> void:
 	SignalBus.emit_signal("run_start")
@@ -29,19 +32,21 @@ func _on_settings_btn_pressed() -> void:
 	pass # Replace with function body.
 
 func display_settings():
-	$MainMenu.visible = false
-	$Settings.visible = true
-	$Book.visible = true
+	$MenuContainer/MainMenu.visible = false
+	$MenuContainer/Settings.visible = true
+	$MenuContainer/Book.visible = true
+	print("display_settings")
 
 func display_menu():
-	$MainMenu.visible = true
-	$Settings.visible = false
-	$Book.visible = true
+	$MenuContainer/MainMenu.visible = true
+	$MenuContainer/Settings.visible = false
+	$MenuContainer/Book.visible = true
+	print("display_main_menu")
 
 func hide_all():
-	$MainMenu.visible = false
-	$Settings.visible = false
-	$Book.visible = false
+	$MenuContainer/MainMenu.visible = false
+	$MenuContainer/Settings.visible = false
+	$MenuContainer/Book.visible = false
 
 func _on_back_pressed() -> void:
 	display_menu()

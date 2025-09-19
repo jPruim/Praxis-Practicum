@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://djevrlreboepw"]
 
-[ext_resource type="Script" path="res://Resources/CardData.gd" id="1_u0o3j"]
+[ext_resource type="Script" path="res://Resources/Types/CardData.gd" id="1_u0o3j"]
 
 [resource]
 script = ExtResource("1_u0o3j")
@@ -17,6 +17,9 @@ animation = ""
 stackable = true
 ally_target = "Single"
 enemy_target = "Single"
+current_block = 0
+current_health = 0
+current_attack = 0
 effects = Array[String]([])
 effect_strength = 0
 spell_level = 1

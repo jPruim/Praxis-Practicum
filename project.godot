@@ -18,8 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 Globals="*res://Scripts/Globals/globals.gd"
-CardDatabase="*res://Scripts/CardDatabase.gd"
 SignalBus="*res://Scripts/Globals/signal_bus.gd"
+CardDatabase="*res://Scripts/Cards/card_database.gd"
 
 [debug]
 

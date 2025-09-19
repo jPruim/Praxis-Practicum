@@ -1,16 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7mxxeb5gtpft"]
+[gd_scene load_steps=6 format=3 uid="uid://c7mxxeb5gtpft"]
 
 [ext_resource type="Script" path="res://Scripts/Managers/game_manager.gd" id="1_ypglt"]
 [ext_resource type="PackedScene" uid="uid://cmqw3g63oh7ut" path="res://Scenes/UI/menu.tscn" id="2_3q5x6"]
 [ext_resource type="PackedScene" uid="uid://btfj0fwy4dex8" path="res://Scenes/Graphic Elements/Backdrop.tscn" id="2_4suqw"]
 [ext_resource type="Script" path="res://Scripts/Managers/run_manager.gd" id="2_qus16"]
+[ext_resource type="PackedScene" uid="uid://s2i4wqf4t68e" path="res://Scenes/Graphic Elements/Fog.tscn" id="5_e4tbf"]
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_ypglt")
 
 [node name="Backdrop" parent="." instance=ExtResource("2_4suqw")]
 
-[node name="Menu" parent="." instance=ExtResource("2_3q5x6")]
-
 [node name="RunManager" type="Node2D" parent="."]
 script = ExtResource("2_qus16")
+
+[node name="Fog" parent="." instance=ExtResource("5_e4tbf")]
+
+[node name="Menu" parent="." instance=ExtResource("2_3q5x6")]

@@ -2,7 +2,7 @@ class_name RunManager
 extends Node2D
 
 var battleManager: BattleManager
-
+var battleManager_scene = preload("res://Scenes/Playspace/battle_manager.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	connect_signals()
@@ -18,9 +18,7 @@ func connect_signals():
 	SignalBus.connect("shop_exit", _on_shop_exit)
 	SignalBus.connect("fight_loss", _on_fight_loss)
 	SignalBus.connect("fight_won", _on_fight_won)
-	var battleManager_scene = preload("res://Scenes/Playspace/battle_manager.tscn")
-	battleManager = battleManager_scene.instantiate()
-	$".".add_child(battleManager)
+	
 # Resume Last Game
 func resume():
 	# TODO: Add resume Functionality
@@ -55,7 +53,9 @@ func _on_fight_loss():
 	pass
 
 func setup_fight():
-	SignalBus.emit("")
+	battleManager = battleManager_scene.instantiate()
+	$".".add_child(battleManager)
+	SignalBus.emit_signal("fight_start")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

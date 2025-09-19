@@ -1,3 +1,4 @@
+class_name CardManager
 extends Node2D
 
 

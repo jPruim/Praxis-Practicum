@@ -1,29 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmqw3g63oh7ut"]
+[gd_scene load_steps=5 format=3 uid="uid://cmqw3g63oh7ut"]
 
 [ext_resource type="Script" path="res://Scripts/UI Elements/menu.gd" id="1_pbacw"]
 [ext_resource type="Theme" uid="uid://dpn2t23n7kt45" path="res://Scenes/UI/default-theme.theme" id="1_ykmtr"]
-[ext_resource type="PackedScene" uid="uid://s2i4wqf4t68e" path="res://Scenes/Graphic Elements/Fog.tscn" id="2_5nfdi"]
 [ext_resource type="Texture2D" uid="uid://cfdvwowvfmxi2" path="res://Assets/GUI/Book-2.png" id="2_i700f"]
 [ext_resource type="Theme" uid="uid://cxef1cilx5oai" path="res://Scenes/UI/menu-button.tres" id="3_kp7d6"]
 
-[node name="Menu" type="Control"]
+[node name="Menu" type="CanvasLayer"]
+layer = 10
+script = ExtResource("1_pbacw")
+
+[node name="MenuContainer" type="Control" parent="."]
 z_index = 1000
 layout_mode = 3
 anchors_preset = 0
 offset_left = 1.0
 offset_right = 1921.0
 offset_bottom = 1080.0
-script = ExtResource("1_pbacw")
 
-[node name="Fog" parent="." instance=ExtResource("2_5nfdi")]
-
-[node name="Book" type="Sprite2D" parent="."]
+[node name="Book" type="Sprite2D" parent="MenuContainer"]
 position = Vector2(1005, 594)
 scale = Vector2(5, 5)
 texture = ExtResource("2_i700f")
 
-[node name="MainMenu" type="MarginContainer" parent="."]
-visible = false
+[node name="MainMenu" type="MarginContainer" parent="MenuContainer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,12 +32,12 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="MenuButtons" type="Control" parent="MainMenu"]
+[node name="MenuButtons" type="Control" parent="MenuContainer/MainMenu"]
 layout_mode = 2
 theme = ExtResource("1_ykmtr")
 theme_type_variation = &"Book"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MenuButtons"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/MainMenu/MenuButtons"]
 layout_mode = 0
 offset_left = 1021.0
 offset_top = 477.0
@@ -48,30 +47,30 @@ rotation = 6.1488
 theme = ExtResource("3_kp7d6")
 theme_override_constants/separation = 10
 
-[node name="ResumeBtn" type="Button" parent="MainMenu/MenuButtons/VBoxContainer"]
+[node name="ResumeBtn" type="Button" parent="MenuContainer/MainMenu/MenuButtons/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("3_kp7d6")
 text = "Resume"
 text_overrun_behavior = 3
 
-[node name="NewGameBtm" type="Button" parent="MainMenu/MenuButtons/VBoxContainer"]
+[node name="NewGameBtm" type="Button" parent="MenuContainer/MainMenu/MenuButtons/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("3_kp7d6")
 text = "New Game"
 
-[node name="SettingsBtn" type="Button" parent="MainMenu/MenuButtons/VBoxContainer"]
+[node name="SettingsBtn" type="Button" parent="MenuContainer/MainMenu/MenuButtons/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 text = "Settings"
 
-[node name="QuitBtn" type="Button" parent="MainMenu/MenuButtons/VBoxContainer"]
+[node name="QuitBtn" type="Button" parent="MenuContainer/MainMenu/MenuButtons/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 text = "Quit"
 
-[node name="Settings" type="MarginContainer" parent="."]
+[node name="Settings" type="MarginContainer" parent="MenuContainer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -81,12 +80,12 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="MenuButtons" type="Control" parent="Settings"]
+[node name="MenuButtons" type="Control" parent="MenuContainer/Settings"]
 layout_mode = 2
 theme = ExtResource("1_ykmtr")
 theme_type_variation = &"Book"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings/MenuButtons"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/Settings/MenuButtons"]
 layout_mode = 0
 offset_left = 1021.0
 offset_top = 477.0
@@ -96,34 +95,26 @@ rotation = 6.1488
 theme = ExtResource("3_kp7d6")
 theme_override_constants/separation = 10
 
-[node name="ResumeBtn" type="Button" parent="Settings/MenuButtons/VBoxContainer"]
+[node name="Volume" type="Button" parent="MenuContainer/Settings/MenuButtons/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("3_kp7d6")
 text = "Resume"
 text_overrun_behavior = 3
 
-[node name="NewGameBtm" type="Button" parent="Settings/MenuButtons/VBoxContainer"]
-texture_filter = 1
-layout_mode = 2
-theme = ExtResource("3_kp7d6")
-text = "New Game"
-
-[node name="SettingsBtn" type="Button" parent="Settings/MenuButtons/VBoxContainer"]
-texture_filter = 1
-layout_mode = 2
-text = "Settings"
-
-[node name="Back" type="Button" parent="Settings/MenuButtons/VBoxContainer"]
+[node name="Back" type="Button" parent="MenuContainer/Settings/MenuButtons/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 text = "Back"
 
-[connection signal="pressed" from="MainMenu/MenuButtons/VBoxContainer/ResumeBtn" to="." method="_on_resume_btn_pressed"]
-[connection signal="pressed" from="MainMenu/MenuButtons/VBoxContainer/NewGameBtm" to="." method="_on_new_game_btm_pressed"]
-[connection signal="pressed" from="MainMenu/MenuButtons/VBoxContainer/SettingsBtn" to="." method="_on_settings_btn_pressed"]
-[connection signal="pressed" from="MainMenu/MenuButtons/VBoxContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]
-[connection signal="pressed" from="Settings/MenuButtons/VBoxContainer/ResumeBtn" to="." method="_on_resume_btn_pressed"]
-[connection signal="pressed" from="Settings/MenuButtons/VBoxContainer/NewGameBtm" to="." method="_on_new_game_btm_pressed"]
-[connection signal="pressed" from="Settings/MenuButtons/VBoxContainer/SettingsBtn" to="." method="_on_settings_btn_pressed"]
-[connection signal="pressed" from="Settings/MenuButtons/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="MenuContainer/MainMenu/MenuButtons/VBoxContainer/ResumeBtn" to="MenuContainer" method="_on_resume_btn_pressed"]
+[connection signal="pressed" from="MenuContainer/MainMenu/MenuButtons/VBoxContainer/ResumeBtn" to="." method="_on_resume_btn_pressed"]
+[connection signal="pressed" from="MenuContainer/MainMenu/MenuButtons/VBoxContainer/NewGameBtm" to="MenuContainer" method="_on_new_game_btm_pressed"]
+[connection signal="pressed" from="MenuContainer/MainMenu/MenuButtons/VBoxContainer/NewGameBtm" to="." method="_on_new_game_btm_pressed"]
+[connection signal="pressed" from="MenuContainer/MainMenu/MenuButtons/VBoxContainer/SettingsBtn" to="MenuContainer" method="_on_settings_btn_pressed"]
+[connection signal="pressed" from="MenuContainer/MainMenu/MenuButtons/VBoxContainer/SettingsBtn" to="." method="_on_settings_btn_pressed"]
+[connection signal="pressed" from="MenuContainer/MainMenu/MenuButtons/VBoxContainer/QuitBtn" to="MenuContainer" method="_on_quit_btn_pressed"]
+[connection signal="pressed" from="MenuContainer/MainMenu/MenuButtons/VBoxContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]
+[connection signal="pressed" from="MenuContainer/Settings/MenuButtons/VBoxContainer/Volume" to="MenuContainer" method="_on_resume_btn_pressed"]
+[connection signal="pressed" from="MenuContainer/Settings/MenuButtons/VBoxContainer/Back" to="MenuContainer" method="_on_back_pressed"]
+[connection signal="pressed" from="MenuContainer/Settings/MenuButtons/VBoxContainer/Back" to="." method="_on_back_pressed"]

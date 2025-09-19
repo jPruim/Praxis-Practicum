@@ -25,7 +25,7 @@ func _ready() -> void:
 	spell_scene = preload(SPELL_SCENE_PATH)
 	summon_scene = preload(SUMMON_SCENE_PATH)
 	$DeckCount.text = str(deck.size())
-	card_database = $'../CardDatabase'
+	card_database = CardDatabase
 	# Initialize the deck ai_deck is assigned in the parent _ready() function
 	#initialize()
 	pass # Replace with function body.
@@ -35,7 +35,7 @@ func _ready() -> void:
 func initialize(hand_size = 5):
 	card_scene = preload(CARD_SCENE_PATH)
 	
-	card_database = $'../CardDatabase'
+	card_database = CardDatabase
 	if ai_deck:
 		initialize_enemy()
 	else:

@@ -26,3 +26,9 @@ Z-Index:
 	5 Card Back #default to showing card back
 	10 Card Hovered
 	15	Centerpoint
+
+Canvas Layers:
+	0 default
+	5 UI Elements
+	9 Fog
+	10 Menu
