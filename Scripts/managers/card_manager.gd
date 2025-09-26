@@ -29,7 +29,6 @@ func _ready() -> void:
 	screen_size = get_viewport_rect().size
 	SignalBus.connect("left_mouse_button_released", on_left_click_release)
 	connect_signals()
-	#initialize_decks()
 	pass # Replace with function body.
 
 # Card Collision detector
@@ -202,20 +201,20 @@ func end_drag():
 	card_being_dragged = null
 	
 	
-func initialize_decks():
+func initialize_decks(run_data: RunData):
 	var deck = deck_scene.instantiate()
 	deck.position = DECK_POSITION
 	deck.ai_deck = false
 	deck.name = "PlayerDeck"
 	add_child(deck)
-	deck.initialize()
+	deck.initialize(run_data)
 	deck = deck_scene.instantiate()
 	deck.name = "OpponentDeck"
 	deck.position = OPPONENT_DECK_POSITION
 	deck.get_node("Area2D").collision_mask = Globals.MASK.deck_opponent
 	deck.ai_deck = true
 	add_child(deck)
-	deck.initialize()
+	deck.initialize(run_data)
 
 func on_hover_hand():
 	$PlayerHand.hovered = true

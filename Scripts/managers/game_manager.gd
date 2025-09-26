@@ -6,7 +6,7 @@ var save_file: String = "user://savefile.tres"
 var achievement_file: String
 var default_save_file: String = "res://Resources/GameData/default_game.tres"
 var battle_manager: BattleManager
-var battle_manager_scene = "res://Scenes/Playspace/battle_manager.tscn"
+var battle_manager_scene = preload("res://Scenes/Playspace/battle_manager.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -30,9 +30,9 @@ func run_resume():
 
 func run_start(resuming: bool = false):
 	if( !resuming ):
-		run_data = load_default_game_data()
+		load_default_game_data()
 	else:
-		run_data = load_game_data()
+		load_game_data()
 	first_assignment()
 
 func load_game_data():
@@ -74,5 +74,5 @@ func next_phase():
 func first_assignment():
 	run_data.assignment = 1
 	battle_manager = battle_manager_scene.instantiate()
-	battle_manager.setup_combat(run_data)
 	$".".add_child(battle_manager)
+	battle_manager.setup_combat(run_data)

@@ -32,18 +32,20 @@ func _ready() -> void:
 
 
 
-func initialize(hand_size = 5):
+func initialize(run_data: RunData, handsize: int = 5):
 	card_scene = preload(CARD_SCENE_PATH)
 	
 	card_database = CardDatabase
 	if ai_deck:
-		initialize_enemy()
+		initialize_enemy(run_data)
 	else:
-		initialize_player(hand_size)
+		initialize_player(run_data, handsize)
 		#$"../PlayerHand"
 
 # Setup function for AI
-func initialize_enemy( type: int = 0, hand_size = 5):
+func initialize_enemy( run_data: RunData, hand_size = 5):
+	# get enemy type, adjusting for the 1-indexed assignment variable
+	var type = run_data.assignment_list[run_data.assignment -1]
 	initialize_enemy_deck(type)
 	initialize_player_hand(hand_size)
 	pass
@@ -54,7 +56,7 @@ func initialize_enemy_deck(type: int = 0):
 
 	
 # Setup function for the player
-func initialize_player(hand_size = 5):
+func initialize_player(run_data, hand_size: int = 5):
 	initialize_player_deck()
 	initialize_player_hand(hand_size)
 	

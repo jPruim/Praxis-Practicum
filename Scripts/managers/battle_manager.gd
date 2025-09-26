@@ -49,6 +49,7 @@ func setup_combat(run_data: RunData):
 	$GameTime.set_time(3)
 	setup_player(run_data)
 	setup_enemy(run_data)
+	$CardManager.initialize_decks(run_data)
 	phase = "start_turn"
 	time_loop()
 
@@ -88,7 +89,6 @@ func _on_pass_button_pressed() -> void:
 func next_phase():
 	if(in_combat):
 		phase = phase_list[1 + phase_list.find(phase) % phase_list.size()]
-	print(in_combat)
 
 func time_loop():
 	in_combat = true

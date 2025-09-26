@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://broinid76d1g1"
-path="res://.godot/imported/Grenze-ExtraBold.ttf-ad01a84187cde84ed4968e11c32e31d9.fontdata"
+path="res://.godot/imported/Grenze-ExtraBold.ttf-4e7c4eeeba3a75793ba5980978570f61.fontdata"
 
 [deps]
 
-source_file="res://Assets/Font/Grenze/Grenze-ExtraBold.ttf"
-dest_files=["res://.godot/imported/Grenze-ExtraBold.ttf-ad01a84187cde84ed4968e11c32e31d9.fontdata"]
+source_file="res://Assets/font/Grenze/Grenze-ExtraBold.ttf"
+dest_files=["res://.godot/imported/Grenze-ExtraBold.ttf-4e7c4eeeba3a75793ba5980978570f61.fontdata"]
 
 [params]
 
