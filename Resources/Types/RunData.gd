@@ -8,3 +8,5 @@ extends Resource
 @export var current_health: int = 100
 @export var relics: Array[Relic] = []
 @export var deck: Array[CardData] = []
+@export var assignment: int = 0
+@export var phase: String = ""

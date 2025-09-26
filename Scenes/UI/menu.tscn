@@ -107,14 +107,14 @@ texture_filter = 1
 layout_mode = 2
 text = "Back"
 
-[connection signal="pressed" from="MenuContainer/MainMenu/MenuButtons/VBoxContainer/ResumeBtn" to="MenuContainer" method="_on_resume_btn_pressed"]
 [connection signal="pressed" from="MenuContainer/MainMenu/MenuButtons/VBoxContainer/ResumeBtn" to="." method="_on_resume_btn_pressed"]
-[connection signal="pressed" from="MenuContainer/MainMenu/MenuButtons/VBoxContainer/NewGameBtm" to="MenuContainer" method="_on_new_game_btm_pressed"]
+[connection signal="pressed" from="MenuContainer/MainMenu/MenuButtons/VBoxContainer/ResumeBtn" to="MenuContainer" method="_on_resume_btn_pressed"]
 [connection signal="pressed" from="MenuContainer/MainMenu/MenuButtons/VBoxContainer/NewGameBtm" to="." method="_on_new_game_btm_pressed"]
-[connection signal="pressed" from="MenuContainer/MainMenu/MenuButtons/VBoxContainer/SettingsBtn" to="MenuContainer" method="_on_settings_btn_pressed"]
+[connection signal="pressed" from="MenuContainer/MainMenu/MenuButtons/VBoxContainer/NewGameBtm" to="MenuContainer" method="_on_new_game_btm_pressed"]
 [connection signal="pressed" from="MenuContainer/MainMenu/MenuButtons/VBoxContainer/SettingsBtn" to="." method="_on_settings_btn_pressed"]
-[connection signal="pressed" from="MenuContainer/MainMenu/MenuButtons/VBoxContainer/QuitBtn" to="MenuContainer" method="_on_quit_btn_pressed"]
+[connection signal="pressed" from="MenuContainer/MainMenu/MenuButtons/VBoxContainer/SettingsBtn" to="MenuContainer" method="_on_settings_btn_pressed"]
 [connection signal="pressed" from="MenuContainer/MainMenu/MenuButtons/VBoxContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]
+[connection signal="pressed" from="MenuContainer/MainMenu/MenuButtons/VBoxContainer/QuitBtn" to="MenuContainer" method="_on_quit_btn_pressed"]
 [connection signal="pressed" from="MenuContainer/Settings/MenuButtons/VBoxContainer/Volume" to="MenuContainer" method="_on_resume_btn_pressed"]
-[connection signal="pressed" from="MenuContainer/Settings/MenuButtons/VBoxContainer/Back" to="MenuContainer" method="_on_back_pressed"]
 [connection signal="pressed" from="MenuContainer/Settings/MenuButtons/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="MenuContainer/Settings/MenuButtons/VBoxContainer/Back" to="MenuContainer" method="_on_back_pressed"]

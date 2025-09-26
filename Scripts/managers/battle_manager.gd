@@ -20,7 +20,7 @@ var caster_frame_base_scene = preload("res://Scenes/Cards/caster_frame_base.tscn
 var player: CasterFrameBase
 var enemy: CasterFrameBase
 const DEFAULT_DELAY = 1
-var phaseList = ["start_turn","ai_decision", "player_decision","cleanup", "end_step"]
+var phase_list = ["start_turn","ai_decision", "player_decision","cleanup", "end_step"]
 var phase: String
 
 # Called when the node enters the scene tree for the first time.
@@ -43,16 +43,16 @@ func _process(delta: float) -> void:
 	pass
 
 
-func setup_combat(enemy):
+func setup_combat(run_data: RunData):
 	identify_slots()
 	in_combat = true
 	$GameTime.set_time(3)
-	setup_player()
-	setup_enemy()
+	setup_player(run_data)
+	setup_enemy(run_data)
 	phase = "start_turn"
 	time_loop()
 
-func setup_player():
+func setup_player(run_data: RunData):
 	player = caster_frame_base_scene.instantiate()
 	player.set_aloction()
 	player.set_default_data()
@@ -66,7 +66,7 @@ func setup_player():
 	player.animation_reveal()
 	$".".add_child(player)
 
-func setup_enemy():
+func setup_enemy(run_data: RunData):
 	enemy = caster_frame_base_scene.instantiate()
 	enemy.set_aloction()
 	enemy.set_default_data()
@@ -87,7 +87,7 @@ func _on_pass_button_pressed() -> void:
 # Game Phase Setup
 func next_phase():
 	if(in_combat):
-		phase = phaseList[1 + phaseList.find(phase) % phaseList.size()]
+		phase = phase_list[1 + phase_list.find(phase) % phase_list.size()]
 	print(in_combat)
 
 func time_loop():

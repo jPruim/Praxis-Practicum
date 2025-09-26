@@ -3,16 +3,16 @@ extends Node
 # Will through warnings if unused_signal warning is allowed in project settings
 
 # AI Signals
-signal opponent_targeting_slot(slot, card)
-signal opponent_targeting_player(card)
-signal opponent_targeting_self(card)
-signal opponent_spell_resolution(rarity)
+signal opponent_targeting_slot(slot: CardSlot, card: CardBase)
+signal opponent_targeting_player(card: CardBase)
+signal opponent_targeting_self(card: CardBase)
+signal opponent_spell_resolution(rarity: String)
 
 # Player Signals
-signal player_targeting_slot(slot, card)
-signal player_targeting_opponent(card)
-signal player_targeting_self(card)
-signal player_spell_resolution(rarity)
+signal player_targeting_slot(slot: CardSlot, card: CardBase)
+signal player_targeting_opponent(card: CardBase)
+signal player_targeting_self(card: CardBase)
+signal player_spell_resolution(rarity: String)
 
 # Keybind signals
 signal left_mouse_button_clicked
