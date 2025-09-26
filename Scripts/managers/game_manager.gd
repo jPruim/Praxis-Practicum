@@ -37,13 +37,15 @@ func run_start(resuming: bool = false):
 
 func load_game_data():
 	if ResourceLoader.exists(save_file):
-		return load(save_file)
+		run_data =  load(save_file)
+		print(run_data)
+		get_tree().quit()
 	else:
 		run_data = load_default_game_data()
-		save_game_data()
+		save_game()
 	return null
 
-func save_game_data():
+func save_game():
 	ResourceSaver.save(run_data, save_file)
 
 func load_default_game_data():
@@ -51,7 +53,7 @@ func load_default_game_data():
 		run_data = load(default_save_file)
 		return
 	printerr("Loading null game data")
-	return
+	get_tree().quit()
 
 func end_run(victory: bool):
 	if(victory):
@@ -70,6 +72,7 @@ func next_phase():
 		run_data.phase = "shoppping"
 	elif run_data.phase == "shopping":
 		run_data.phase = "assignment"
+	save_game()
 
 func first_assignment():
 	run_data.assignment = 1

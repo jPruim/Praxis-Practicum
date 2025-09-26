@@ -15,7 +15,7 @@ var PlayerHand = preload("res://Scenes/Cards/player_hand.tscn")
 
 func _enter_tree() -> void:
 	# Needs to happen before some of the ready() functions of children
-	#initialize_card_slots()
+	initialize_card_slots()
 	pass
 
 
@@ -43,9 +43,10 @@ func initialize_card_slots():
 			x_pos = x_pos_first + (i * (slotSize.x + slotMargin.x))
 			y_pos = y_pos_first + (j * (slotSize.y + slotMargin.y))
 			newSlot.position = Vector2(x_pos,y_pos)
-			newSlot.visible = false
+			newSlot.visible = true
 			$".".add_child(newSlot)
 	$Centerpoint.position = centerPoint
+	print("Card Slots initialized")
 	
 
 func _ready() -> void:

@@ -151,12 +151,10 @@ position = Vector2(1028, 22)
 script = ExtResource("8_igyel")
 
 [node name="PlayerHand" parent="CardManager" instance=ExtResource("9_c2gkm")]
-visible = false
 z_index = 3
 position = Vector2(1014, 1151)
 
 [node name="OpponentHand" parent="CardManager" instance=ExtResource("9_c2gkm")]
-visible = false
 position = Vector2(978, 43)
 
 [node name="CardDatabase" type="Node2D" parent="CardManager"]
