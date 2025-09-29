@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://blpagcyuax2ni"
-path="res://.godot/imported/Grenze-BlackItalic.ttf-3ab706a06019a651a6b262074eb331c3.fontdata"
+path="res://.godot/imported/Grenze-BlackItalic.ttf-7f87773ef4b2ea74926243afd45db728.fontdata"
 
 [deps]
 
-source_file="res://Assets/font/Grenze/Grenze-BlackItalic.ttf"
-dest_files=["res://.godot/imported/Grenze-BlackItalic.ttf-3ab706a06019a651a6b262074eb331c3.fontdata"]
+source_file="res://Assets/Font/Grenze/Grenze-BlackItalic.ttf"
+dest_files=["res://.godot/imported/Grenze-BlackItalic.ttf-7f87773ef4b2ea74926243afd45db728.fontdata"]
 
 [params]
 

@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://dkbyqck3j3tha"
-path="res://.godot/imported/Grenze-ExtraLight.ttf-271c0c21850cc44dcfaaf3998ddb25b8.fontdata"
+path="res://.godot/imported/Grenze-ExtraLight.ttf-b7cacc98676cb1db3f7c610b38162e3d.fontdata"
 
 [deps]
 
-source_file="res://Assets/font/Grenze/Grenze-ExtraLight.ttf"
-dest_files=["res://.godot/imported/Grenze-ExtraLight.ttf-271c0c21850cc44dcfaaf3998ddb25b8.fontdata"]
+source_file="res://Assets/Font/Grenze/Grenze-ExtraLight.ttf"
+dest_files=["res://.godot/imported/Grenze-ExtraLight.ttf-b7cacc98676cb1db3f7c610b38162e3d.fontdata"]
 
 [params]
 
