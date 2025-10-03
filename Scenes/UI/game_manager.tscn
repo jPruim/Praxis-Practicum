@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c7mxxeb5gtpft"]
+[gd_scene load_steps=13 format=3 uid="uid://c7mxxeb5gtpft"]
 
 [ext_resource type="Script" path="res://Scripts/Managers/game_manager.gd" id="1_ypglt"]
 [ext_resource type="PackedScene" uid="uid://cmqw3g63oh7ut" path="res://Scenes/UI/menu.tscn" id="2_3q5x6"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://04xcl8nsvh7u" path="res://Assets/Spritesheets/Book-icon.png" id="7_t5ui1"]
 [ext_resource type="Texture2D" uid="uid://sc7ohlrr45qn" path="res://Assets/Spritesheets/crown-coin.png" id="8_m1631"]
 [ext_resource type="Texture2D" uid="uid://dep335bxf8gas" path="res://Assets/Spritesheets/Fire-icon.png" id="9_tyfb3"]
+[ext_resource type="Theme" uid="uid://dpn2t23n7kt45" path="res://Scenes/UI/default-theme.theme" id="10_mhp3w"]
+[ext_resource type="Texture2D" uid="uid://bj8afq7v5wd2n" path="res://Assets/Spritesheets/Settings-icon.png" id="11_38tdi"]
 
 [sub_resource type="Theme" id="Theme_euek4"]
 
@@ -104,3 +106,19 @@ horizontal_alignment = 2
 [node name="Sprite2D" type="Sprite2D" parent="UI/HeaderBar/NinePatchRect/HBoxContainer/AscensionDisplay"]
 position = Vector2(72, 11)
 texture = ExtResource("9_tyfb3")
+
+[node name="Menubutton" type="Button" parent="UI/HeaderBar/NinePatchRect/HBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(24, 20)
+layout_mode = 2
+theme = ExtResource("10_mhp3w")
+
+[node name="SettingsIcon" type="TextureRect" parent="UI/HeaderBar/NinePatchRect/HBoxContainer/Menubutton"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 22.0
+offset_bottom = 22.0
+texture = ExtResource("11_38tdi")
+
+[connection signal="pressed" from="UI/HeaderBar/NinePatchRect/HBoxContainer/Menubutton" to="." method="_on_menubutton_pressed"]

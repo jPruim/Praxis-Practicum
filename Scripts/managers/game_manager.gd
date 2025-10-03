@@ -27,14 +27,18 @@ func connect_signals() -> void:
 	SignalBus.connect("run_won", end_run)
 
 func run_resume():
-	run_start(false) # TODO: make a resume function that doesn't bug
+	run_start(true) # TODO: make a resume function that doesn't bug
 
 func run_start(resuming: bool = false):
 	if( !resuming ):
-		load_default_game_data()
+		if(run_data):
+			$Menu.hide()
+		else:
+			load_default_game_data()
+			first_assignment()
 	else:
 		load_game_data()
-	first_assignment()
+		first_assignment()
 
 func load_game_data():
 	if ResourceLoader.exists(save_file):
@@ -76,6 +80,7 @@ func next_phase():
 	save_game()
 
 func first_assignment():
+	show_game_ui()
 	run_data.assignment = 1
 	battle_manager = battle_manager_scene.instantiate()
 	$".".add_child(battle_manager)
@@ -107,3 +112,8 @@ func update_ascension(difference: int):
 	else:
 		print("Assignment decrermented")
 	$UI/HeaderBar/NinePatchRect/HBoxContainer/AssignmentDisplay/Assignment.text = str(run_data.ascension)
+
+func _on_menubutton_pressed() -> void:
+	print("menu button pressed")
+	$Menu.display_menu()
+	pass # Replace with function body.
