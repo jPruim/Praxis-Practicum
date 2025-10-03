@@ -1,19 +1,106 @@
-[gd_scene load_steps=6 format=3 uid="uid://c7mxxeb5gtpft"]
+[gd_scene load_steps=11 format=3 uid="uid://c7mxxeb5gtpft"]
 
 [ext_resource type="Script" path="res://Scripts/Managers/game_manager.gd" id="1_ypglt"]
 [ext_resource type="PackedScene" uid="uid://cmqw3g63oh7ut" path="res://Scenes/UI/menu.tscn" id="2_3q5x6"]
 [ext_resource type="PackedScene" uid="uid://btfj0fwy4dex8" path="res://Scenes/Graphic Elements/Backdrop.tscn" id="2_4suqw"]
 [ext_resource type="Script" path="res://Scripts/Managers/run_manager.gd" id="2_qus16"]
 [ext_resource type="PackedScene" uid="uid://s2i4wqf4t68e" path="res://Scenes/Graphic Elements/Fog.tscn" id="5_e4tbf"]
+[ext_resource type="Texture2D" uid="uid://bo56tuwrojsaf" path="res://Assets/GUI/praxis-ui-ninepatch.png" id="6_n6is1"]
+[ext_resource type="Texture2D" uid="uid://04xcl8nsvh7u" path="res://Assets/Spritesheets/Book-icon.png" id="7_t5ui1"]
+[ext_resource type="Texture2D" uid="uid://sc7ohlrr45qn" path="res://Assets/Spritesheets/crown-coin.png" id="8_m1631"]
+[ext_resource type="Texture2D" uid="uid://dep335bxf8gas" path="res://Assets/Spritesheets/Fire-icon.png" id="9_tyfb3"]
+
+[sub_resource type="Theme" id="Theme_euek4"]
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_ypglt")
 
 [node name="Backdrop" parent="." instance=ExtResource("2_4suqw")]
+position = Vector2(-46, -26)
+scale = Vector2(0.4, 0.4)
 
 [node name="RunManager" type="Node2D" parent="."]
+position = Vector2(0, 3)
 script = ExtResource("2_qus16")
 
 [node name="Fog" parent="." instance=ExtResource("5_e4tbf")]
+scale = Vector2(0.2, 0.2)
+transform = Transform2D(0.2, 0, 0, 0.2, 0, 0)
+follow_viewport_enabled = true
 
 [node name="Menu" parent="." instance=ExtResource("2_3q5x6")]
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="HeaderBar" type="HBoxContainer" parent="UI"]
+modulate = Color(1, 1, 1, 0.72549)
+texture_filter = 1
+clip_contents = true
+offset_right = 640.0
+offset_bottom = 24.0
+theme = SubResource("Theme_euek4")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/HeaderBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("6_n6is1")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HeaderBar/NinePatchRect"]
+clip_contents = true
+layout_mode = 2
+offset_right = 640.0
+offset_bottom = 24.0
+
+[node name="AssignmentDisplay" type="MarginContainer" parent="UI/HeaderBar/NinePatchRect/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="Assignment" type="Label" parent="UI/HeaderBar/NinePatchRect/HBoxContainer/AssignmentDisplay"]
+clip_contents = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "1
+"
+horizontal_alignment = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/HeaderBar/NinePatchRect/HBoxContainer/AssignmentDisplay"]
+position = Vector2(73, 10)
+texture = ExtResource("7_t5ui1")
+
+[node name="MoneyDisplay" type="MarginContainer" parent="UI/HeaderBar/NinePatchRect/HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Money" type="Label" parent="UI/HeaderBar/NinePatchRect/HBoxContainer/MoneyDisplay"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "100"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/HeaderBar/NinePatchRect/HBoxContainer/MoneyDisplay"]
+position = Vector2(81, -1)
+texture = ExtResource("8_m1631")
+offset = Vector2(-10, 12)
+
+[node name="AscensionDisplay" type="MarginContainer" parent="UI/HeaderBar/NinePatchRect/HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="Ascension" type="Label" parent="UI/HeaderBar/NinePatchRect/HBoxContainer/AscensionDisplay"]
+layout_mode = 2
+text = "0
+"
+horizontal_alignment = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/HeaderBar/NinePatchRect/HBoxContainer/AscensionDisplay"]
+position = Vector2(72, 11)
+texture = ExtResource("9_tyfb3")

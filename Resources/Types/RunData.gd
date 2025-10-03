@@ -11,3 +11,4 @@ extends Resource
 @export var assignment: int = 0 # Not zero indexed, 0 is pregame
 @export var phase: String = ""
 @export var assignment_list: Array[int] = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ]
+@export var ascension : int = 0

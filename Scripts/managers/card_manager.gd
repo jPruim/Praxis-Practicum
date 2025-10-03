@@ -11,8 +11,8 @@ var opponent_hand
 var deck_scene
 
 # Consts
-const DECK_POSITION = Vector2(100, 900)
-const OPPONENT_DECK_POSITION = Vector2(1800, 150)
+const DECK_POSITION = Vector2(100, 900)/4
+const OPPONENT_DECK_POSITION = Vector2(1800, 150)/4
 const CARD_SCALE_PlACED = Vector2( 0.7, 0.7)
 
 # Called when the node enters the scene tree for the first time.

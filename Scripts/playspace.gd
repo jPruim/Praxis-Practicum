@@ -9,7 +9,7 @@ var PlayerHand = preload("res://Scenes/Cards/player_hand.tscn")
 @export var boardDimensions = Vector2(3, 2)
 @export var centerPoint : Vector2
 @export var slotMargin = Vector2( 20, 20)
-@export var slotSize = 0.9 * Vector2( 32 * 5, 48 * 5 )
+@export var slotSize = 0.9 * Vector2( 8 * 5, 6 * 5 )
 # Called when the node enters the scene tree for the first time.
 
 

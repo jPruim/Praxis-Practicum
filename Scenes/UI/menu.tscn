@@ -13,13 +13,14 @@ script = ExtResource("1_pbacw")
 z_index = 1000
 layout_mode = 3
 anchors_preset = 0
-offset_left = 1.0
-offset_right = 1921.0
-offset_bottom = 1080.0
+offset_right = 640.0
+offset_bottom = 360.0
 
 [node name="Book" type="Sprite2D" parent="MenuContainer"]
-position = Vector2(1005, 594)
-scale = Vector2(5, 5)
+physics_interpolation_mode = 1
+texture_filter = 1
+position = Vector2(320, 180)
+scale = Vector2(2, 2)
 texture = ExtResource("2_i700f")
 
 [node name="MainMenu" type="MarginContainer" parent="MenuContainer"]
@@ -27,6 +28,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -39,11 +42,10 @@ theme_type_variation = &"Book"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/MainMenu/MenuButtons"]
 layout_mode = 0
-offset_left = 1021.0
-offset_top = 477.0
-offset_right = 1162.0
-offset_bottom = 802.0
-rotation = 6.1488
+offset_left = 315.0
+offset_top = 100.0
+offset_right = 397.0
+offset_bottom = 425.0
 theme = ExtResource("3_kp7d6")
 theme_override_constants/separation = 10
 
@@ -87,11 +89,10 @@ theme_type_variation = &"Book"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/Settings/MenuButtons"]
 layout_mode = 0
-offset_left = 1021.0
-offset_top = 477.0
-offset_right = 1162.0
-offset_bottom = 802.0
-rotation = 6.1488
+offset_left = 315.0
+offset_top = 101.0
+offset_right = 395.0
+offset_bottom = 426.0
 theme = ExtResource("3_kp7d6")
 theme_override_constants/separation = 10
 

@@ -28,8 +28,8 @@ texture = ExtResource("5_vn453")
 [node name="Time" type="RichTextLabel" parent="."]
 texture_filter = 1
 offset_left = -13.0
-offset_top = -6.0
-offset_right = 27.0
-offset_bottom = 34.0
+offset_top = -7.0
+offset_right = 28.0
+offset_bottom = 9.0
 text = "3
 "

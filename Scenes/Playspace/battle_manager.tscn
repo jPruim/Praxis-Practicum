@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dws2mhcfu18v7"]
+[gd_scene load_steps=26 format=3 uid="uid://dws2mhcfu18v7"]
 
 [ext_resource type="Script" path="res://Scripts/Managers/battle_manager.gd" id="1_q4kp8"]
 [ext_resource type="Script" path="res://Scripts/Managers/spell_manager.gd" id="2_fijju"]
@@ -6,7 +6,6 @@
 [ext_resource type="Theme" uid="uid://dpn2t23n7kt45" path="res://Scenes/UI/default-theme.theme" id="4_p0ay2"]
 [ext_resource type="PackedScene" uid="uid://brqd7qlj1sonb" path="res://Scenes/Cards/card_slot.tscn" id="5_jwt0r"]
 [ext_resource type="Texture2D" uid="uid://ba411usipidba" path="res://Assets/Characters/Knight/_Idle.png" id="6_h1mt6"]
-[ext_resource type="PackedScene" uid="uid://btfj0fwy4dex8" path="res://Scenes/Graphic Elements/Backdrop.tscn" id="7_pjyrn"]
 [ext_resource type="Script" path="res://Scripts/Managers/card_manager.gd" id="8_igyel"]
 [ext_resource type="PackedScene" uid="uid://vlo6uno0t1dc" path="res://Scenes/Cards/player_hand.tscn" id="9_c2gkm"]
 [ext_resource type="Script" path="res://Scripts/Cards/card_database.gd" id="10_axl6h"]
@@ -118,18 +117,19 @@ scale = Vector2(2, 2)
 texture = SubResource("GradientTexture2D_di84m")
 
 [node name="PassButton" type="Button" parent="Playspace"]
-offset_left = 1564.0
-offset_top = 497.0
-offset_right = 1649.0
-offset_bottom = 535.0
+offset_left = 494.0
+offset_top = 217.0
+offset_right = 579.0
+offset_bottom = 255.0
 theme = ExtResource("4_p0ay2")
+theme_override_font_sizes/font_size = 16
 action_mode = 0
 text = "Pass
 "
 
 [node name="PlayerSlot" parent="Playspace" instance=ExtResource("5_jwt0r")]
 z_as_relative = false
-position = Vector2(1008, 1071)
+position = Vector2(320, 337)
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="Playspace/PlayerSlot"]
 visible = false
@@ -143,9 +143,7 @@ frame_progress = 0.333758
 [node name="OpponentSlot" parent="Playspace" instance=ExtResource("5_jwt0r")]
 z_index = 5
 z_as_relative = false
-position = Vector2(1028, 22)
-
-[node name="Backdrop" parent="Playspace" instance=ExtResource("7_pjyrn")]
+position = Vector2(320, 26)
 
 [node name="CardManager" type="Node2D" parent="."]
 script = ExtResource("8_igyel")
@@ -171,7 +169,8 @@ script = ExtResource("11_3dc1d")
 [node name="OpponentTimer" type="Timer" parent="OpponentManager"]
 
 [node name="GameTime" parent="." instance=ExtResource("13_nv2l5")]
-position = Vector2(1629, 455)
+visible = false
+position = Vector2(557, 169)
 scale = Vector2(5, 5)
 
 [connection signal="pressed" from="Playspace/PassButton" to="." method="_on_pass_button_pressed"]
