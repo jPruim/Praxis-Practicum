@@ -107,18 +107,20 @@ horizontal_alignment = 2
 position = Vector2(72, 11)
 texture = ExtResource("9_tyfb3")
 
-[node name="Menubutton" type="Button" parent="UI/HeaderBar/NinePatchRect/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/HeaderBar/NinePatchRect/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Menubutton" type="Button" parent="UI/HeaderBar/NinePatchRect/HBoxContainer/VBoxContainer"]
 clip_contents = true
-custom_minimum_size = Vector2(24, 20)
+custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 theme = ExtResource("10_mhp3w")
+icon = ExtResource("11_38tdi")
+icon_alignment = 1
 
-[node name="SettingsIcon" type="TextureRect" parent="UI/HeaderBar/NinePatchRect/HBoxContainer/Menubutton"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 22.0
-offset_bottom = 22.0
-texture = ExtResource("11_38tdi")
+[node name="MarginContainer" type="MarginContainer" parent="UI/HeaderBar/NinePatchRect/HBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
 
-[connection signal="pressed" from="UI/HeaderBar/NinePatchRect/HBoxContainer/Menubutton" to="." method="_on_menubutton_pressed"]
+[connection signal="pressed" from="UI/HeaderBar/NinePatchRect/HBoxContainer/VBoxContainer/Menubutton" to="." method="_on_menubutton_pressed"]

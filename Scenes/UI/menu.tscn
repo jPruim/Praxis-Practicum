@@ -15,6 +15,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 640.0
 offset_bottom = 360.0
+mouse_filter = 2
 
 [node name="Book" type="Sprite2D" parent="MenuContainer"]
 physics_interpolation_mode = 1
@@ -34,9 +35,11 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="MenuButtons" type="Control" parent="MenuContainer/MainMenu"]
 layout_mode = 2
+mouse_filter = 2
 theme = ExtResource("1_ykmtr")
 theme_type_variation = &"Book"
 
@@ -45,7 +48,7 @@ layout_mode = 0
 offset_left = 315.0
 offset_top = 100.0
 offset_right = 397.0
-offset_bottom = 425.0
+offset_bottom = 229.0
 theme = ExtResource("3_kp7d6")
 theme_override_constants/separation = 10
 
@@ -84,6 +87,7 @@ size_flags_vertical = 3
 
 [node name="MenuButtons" type="Control" parent="MenuContainer/Settings"]
 layout_mode = 2
+mouse_filter = 2
 theme = ExtResource("1_ykmtr")
 theme_type_variation = &"Book"
 
@@ -92,7 +96,7 @@ layout_mode = 0
 offset_left = 315.0
 offset_top = 101.0
 offset_right = 395.0
-offset_bottom = 426.0
+offset_bottom = 227.0
 theme = ExtResource("3_kp7d6")
 theme_override_constants/separation = 10
 
