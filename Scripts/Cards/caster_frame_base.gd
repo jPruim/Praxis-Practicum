@@ -15,8 +15,8 @@ func _ready() -> void:
 
 func set_aloction():
 	if( !alocation_set ):
-		$CardFront/Container/AnimatedSprite2D.position.y += 50
-		$CardFront/Container/Sprite2D.position.y += 50	
+		$CardFront/Container/AnimatedSprite2D.position.y += 30
+		$CardFront/Container/Sprite2D.position.y += 30	
 	alocation_set = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

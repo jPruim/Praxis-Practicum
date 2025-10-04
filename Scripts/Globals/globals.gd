@@ -49,8 +49,8 @@ const DECK_POSITION = Vector2(25, 260)
 const OPPONENT_DECK_POSITION = Vector2(450, 40)
 const CARD_SCALE_PlACED = Vector2( 1, 1)
 const DEFAULT_ASPEED = 0.25
-const PLAYER_POSITION = Vector2((VIEWPORT_SIZE/ 2).x, 210)
-const ENEMY_POSITION = Vector2((VIEWPORT_SIZE/ 2).x, 30)
+const PLAYER_POSITION = Vector2((VIEWPORT_SIZE/ 2).x, 305)
+const ENEMY_POSITION = Vector2((VIEWPORT_SIZE/ 2).x, 50)
 const PLAYER_CAST_POSITION = PLAYER_POSITION + Vector2(20,0)
 const ENEMY_CAST_POSITION = ENEMY_POSITION + Vector2(20,0)
 const CAST_SCALE = Vector2(0.5, 0.5)
@@ -66,7 +66,7 @@ const SCALE = {
 
 
 
-const PLAYER_HAND_Y_POS = 330
+const PLAYER_HAND_Y_POS = 400
 const OPPONENT_HAND_Y_POS = -20
 
 # Called when the node enters the scene tree for the first time.

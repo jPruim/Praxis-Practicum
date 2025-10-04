@@ -27,16 +27,15 @@ func run_resume():
 	run_start(true) # TODO: make a resume function that doesn't bug
 
 func run_start(resuming: bool = false):
+	$Menu.hide_all()
+	$Fog/Fog.visible = false
 	if( !resuming ):
-		if(run_data):
-			$Menu.hide_all()
-		else:
-			run_data = $DataManager.load_default_game_data()
-			first_assignment()
+		run_data = DataManager.load_default_game_data()
+		first_assignment()
 	else:
 		if(run_data):
 			return
-		run_data = $DataManager.load_game_data()
+		run_data = DataManager.load_game_data()
 		first_assignment()
 
 
@@ -58,7 +57,7 @@ func next_phase():
 		run_data.phase = "shoppping"
 	elif run_data.phase == "shopping":
 		run_data.phase = "assignment"
-	$DataManager.save_game(run_data)
+	DataManager.save_game(run_data)
 
 func first_assignment():
 	show_game_ui()
@@ -98,4 +97,5 @@ func update_ascension(difference: int):
 func _on_menubutton_pressed() -> void:
 	print("menu button pressed")
 	$Menu.display_menu()
+	$Fog/Fog.visible = true
 	pass # Replace with function body.

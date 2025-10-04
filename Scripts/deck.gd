@@ -12,7 +12,9 @@ const CARD_SPAWN = Vector2(-300,-300)
 # Properties
 var hand_limit = 6 # Note this is a var as it might be changed over the course of game
 var ai_deck = true # Check if the deck is NOT owned by the player
-var deck = [] # Array of JSON Card Info
+var run_deck : Array[CardData] = []
+var deck: Array[CardBase] = []
+var discard_pile: Array[CardBase] = []
 var card_scene
 var spell_scene
 var summon_scene
@@ -25,9 +27,8 @@ func _ready() -> void:
 	spell_scene = preload(SPELL_SCENE_PATH)
 	summon_scene = preload(SUMMON_SCENE_PATH)
 	$DeckCount.text = str(deck.size())
-	card_database = CardDatabase
 	# Initialize the deck ai_deck is assigned in the parent _ready() function
-	#initialize()
+	# initialize()
 	pass # Replace with function body.
 
 
@@ -50,13 +51,23 @@ func initialize_enemy( run_data: RunData, hand_size = 5):
 	initialize_player_hand(hand_size)
 	pass
 
-# TODO: Make this different from player deck
-func initialize_enemy_deck(type: int = 0):
-	initialize_player_deck()
+
+func initialize_enemy_deck(type: int = 1):
+	# TODO: handle different enemies
+	var enemy_data: RunData = DataManager.load_enemy_game_data(type)
+	var enemy_deck = enemy_data['deck']
+	# initialize deck
+	for i in range (0,2):
+		for data in enemy_deck:
+			add_card_to_deck(data)
+			pass
+	deck.shuffle()
+	$DeckCount.text = str(deck.size())
 
 	
 # Setup function for the player
 func initialize_player(run_data, hand_size: int = 5):
+	run_deck = run_data.deck
 	initialize_player_deck()
 	initialize_player_hand(hand_size)
 	
@@ -65,6 +76,8 @@ func initialize_player_hand(hand_size = 5):
 	for i in range(hand_size):
 		draw_card()
 	#$"../../PlayerHand".update_hand_positions()
+	
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -83,6 +96,11 @@ func draw_card():
 	var card_drawn = deck.pop_front()
 	if(!card_drawn):
 		# Deck is empty
+		if(discard_pile.size() > 0):
+			reshuffle_deck()
+		else:
+			# Deck is empty
+			SignalBus.emit_signal("fight_loss")
 		return
 	$DeckCount.text = str(deck.size())
 
@@ -117,7 +135,7 @@ func reveal_deck():
 func initialize_player_deck():	
 	#initialize deck
 	for i in range (0,2):
-		for data in card_database.cards:
+		for data in run_deck:
 			#card_database
 			add_card_to_deck(data)
 			pass
@@ -139,3 +157,9 @@ func add_card_to_deck(data: CardData):
 		new_card.get_node("Area2D").collision_mask = Globals.MASK.card + Globals.MASK.card_opponent
 	$"..".add_child(new_card)
 	deck.append(new_card)
+
+func reshuffle_deck():
+	deck = discard_pile
+	deck.shuffle()
+	discard_pile = []
+	SignalBus.emit_signal("shuffle_deck")

@@ -12,10 +12,12 @@
 script = ExtResource("3_1f5od")
 seed = 0
 event = 1
-gold = 0
+gold = 50
 max_health = 100
 current_health = 100
 relics = Array[ExtResource("2_k6grd")]([])
 deck = Array[ExtResource("1_6ygvw")]([ExtResource("2_8pc0v"), ExtResource("2_8pc0v"), ExtResource("2_8pc0v"), ExtResource("2_8pc0v"), ExtResource("3_ry4w2"), ExtResource("3_ry4w2"), ExtResource("3_ry4w2"), ExtResource("4_usnh2"), ExtResource("4_usnh2"), ExtResource("4_usnh2"), ExtResource("4_usnh2"), ExtResource("3_ry4w2"), ExtResource("5_inxbn"), ExtResource("5_inxbn"), ExtResource("5_inxbn")])
 assignment = 0
 phase = ""
+assignment_list = Array[int]([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
+ascension = 0

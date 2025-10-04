@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="RunData" load_steps=8 format=3 uid="uid://drk6afxtrn5ya"]
+
+[ext_resource type="Script" path="res://Resources/Types/CardData.gd" id="1_mygd8"]
+[ext_resource type="Resource" uid="uid://dytmkgkrr7hyo" path="res://Resources/Cards/Firebolt.tres" id="2_im3wi"]
+[ext_resource type="Resource" uid="uid://b8t8hb5j7rqf5" path="res://Resources/Cards/FireFox.tres" id="3_jrbbo"]
+[ext_resource type="Resource" uid="uid://clpt4ig2ny678" path="res://Resources/Cards/Icebolt.tres" id="4_utvqb"]
+[ext_resource type="Resource" uid="uid://djevrlreboepw" path="res://Resources/Cards/ArcaneBarrier.tres" id="5_qa616"]
+[ext_resource type="Script" path="res://Resources/Types/Relic.gd" id="6_wxqvw"]
+[ext_resource type="Script" path="res://Resources/Types/RunData.gd" id="7_luodr"]
+
+[resource]
+script = ExtResource("7_luodr")
+seed = 0
+event = 1
+gold = 0
+max_health = 100
+current_health = 100
+relics = Array[ExtResource("6_wxqvw")]([])
+deck = Array[ExtResource("1_mygd8")]([ExtResource("2_im3wi"), ExtResource("2_im3wi"), ExtResource("2_im3wi"), ExtResource("2_im3wi"), ExtResource("3_jrbbo"), ExtResource("3_jrbbo"), ExtResource("3_jrbbo"), ExtResource("4_utvqb"), ExtResource("4_utvqb"), ExtResource("4_utvqb"), ExtResource("4_utvqb"), ExtResource("3_jrbbo"), ExtResource("5_qa616"), ExtResource("5_qa616"), ExtResource("5_qa616")])
+assignment = 0
+phase = ""
+assignment_list = Array[int]([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
+ascension = 0

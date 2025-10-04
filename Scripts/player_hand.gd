@@ -3,19 +3,19 @@ extends Node2D
 
 # Consts
 const CARD_SCENE_PATH = "res://Scenes/Cards/card_base.tscn"
-const CARD_WIDTH = 50
+const CARD_WIDTH = 68
 const DEFAULT_ASPEED = 0.25
 
 # Properties
 var player_hand = []
 var center_screen_x: int
 var ai_hand:bool = false
-var offset_value: int = -60
+var offset_value: int = -85
 var hovered: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	center_screen_x = floor(get_viewport().size.x / 2)
+	center_screen_x = floor(Globals.VIEWPORT_SIZE.x / 2)
 	$".".z_index = Globals.Z_INDEX.hand
 	
 # Add card to player hand
@@ -50,13 +50,14 @@ func update_hand_positions( speed = DEFAULT_ASPEED):
 		var card = player_hand[i]
 		card.hand_position = new_position
 		card.animate_card_to_position(new_position, speed)
+		print(new_position)
 	pass
 
 # Calculate the offset (for x) in the hand	
 func calculate_card_position(i):
 	# Apprently, this needs to also be defined here for the function 
 	# to work on initial loading (otherwise center_screen_x is 0)
-	center_screen_x = floor(get_viewport().size.x / 2) 
+	center_screen_x = floor(Globals.VIEWPORT_SIZE.x / 2) 
 	var total_width = (player_hand.size() - 1) * CARD_WIDTH
 	var x_offset
 	

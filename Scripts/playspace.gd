@@ -25,7 +25,7 @@ func initialize_card_slots():
 	var x_pos
 	var y_pos
 	# Calculate the initial position of the top left most cardSlot
-	centerPoint = get_viewport_rect().size / 2
+	centerPoint = Globals.VIEWPORT_SIZE / 2
 	# Shift the board up to skew for more player space
 	centerPoint += Vector2(0, -30) 
 	var x_pos_first = centerPoint.x - (0.5 * ((boardDimensions.x -1) * slotSize.x))

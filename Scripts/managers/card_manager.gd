@@ -6,27 +6,27 @@ extends Node2D
 var card_being_dragged = null # Card object being grabbed (NOT a bool)
 var screen_size: Vector2
 var is_hovering_card :bool = false
-var player_hand
-var opponent_hand
+var player_hand: PlayerHand
+var opponent_hand: PlayerHand
 var deck_scene
 
 # Consts
 const DECK_POSITION = Vector2(100, 900)/4
 const OPPONENT_DECK_POSITION = Vector2(1800, 150)/4
-const CARD_SCALE_PlACED = Vector2( 0.7, 0.7)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	deck_scene = preload("res://Scenes/Cards/deck.tscn")
 	player_hand = $"PlayerHand"
 	player_hand.ai_hand = false
-	player_hand.position = Vector2(get_viewport_rect().size.x / 2, Globals.PLAYER_HAND_Y_POS)
+	player_hand.position = Vector2(Globals.VIEWPORT_SIZE.x / 2, Globals.PLAYER_HAND_Y_POS)
 	opponent_hand = $OpponentHand
 	opponent_hand.get_node("MarginContainer").visible = false
 	opponent_hand.get_node("Area2D/CollisionShape2D").disabled = true
-	opponent_hand.position = Vector2(get_viewport_rect().size.x / 2, Globals.OPPONENT_HAND_Y_POS)
+	opponent_hand.position = Vector2(Globals.VIEWPORT_SIZE.x / 2, Globals.OPPONENT_HAND_Y_POS)
 	opponent_hand.ai_hand = true
-	screen_size = get_viewport_rect().size
+	screen_size = Globals.VIEWPORT_SIZE
 	SignalBus.connect("left_mouse_button_released", on_left_click_release)
 	connect_signals()
 	pass # Replace with function body.
@@ -79,6 +79,7 @@ func _process(delta: float) -> void:
 func connect_signals():
 	SignalBus.connect("player_hand_hovered", on_hover_hand)
 	SignalBus.connect("player_hand_hovered_off", on_hover_hand_off)
+	SignalBus.connect("shuffle_deck", on_shuffle_deck)
 	
 # Called by Cards Individually
 func connect_card_signals(card:CardBase):
@@ -150,7 +151,7 @@ func end_drag():
 				# Should never be called
 				opponent_hand.remove_card_from_hand(card_being_dragged) 
 			else:
-				card_being_dragged.scale = Globals.SCALE.cast_scale
+				card_being_dragged.scale = Globals.SCALE.card_cast
 				player_hand.remove_card_from_hand(card_being_dragged)
 				player_hand.update_hand_border(false)
 			SignalBus.emit_signal("player_targeting_self", card_being_dragged)
@@ -248,3 +249,8 @@ func on_left_click_release():
 		end_drag()
 		
 		
+
+# Animate cards for a "shuffle effect"
+func on_shuffle_deck():
+	for card : CardBase in $PlayerDeck.deck:
+		card.animate_card_to_position($PlayerDeck.position)

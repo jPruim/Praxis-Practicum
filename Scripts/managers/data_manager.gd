@@ -1,4 +1,3 @@
-class_name DataManager
 extends Node2D
 
 var save_file: String = "user://savefile.tres"
@@ -27,10 +26,21 @@ func save_game(run_data: RunData):
 	file.store_line(JSON.stringify(run_data_JSONIFY(run_data)))
 
 func load_default_game_data():
-	if ResourceLoader.exists(default_save_file):
-		return load(default_save_file)
+	return load_saved_static_resource(default_save_file)
+
+func load_saved_static_resource(path: String):
+	if ResourceLoader.exists(path):
+		return load(path)
 	printerr("Loading null game data")
 	get_tree().quit()
+
+func load_enemy_game_data(enemy: int = 1):
+	var path
+	if (enemy == 1):
+		path = "res://Resources/GameData/first-fight.tres"
+	else:
+		path = "res://Resources/GameData/default-enemy.tres"
+	return load_saved_static_resource(path)
 
 func run_data_JSONIFY(run_data: RunData):
 	var run_json = {}
