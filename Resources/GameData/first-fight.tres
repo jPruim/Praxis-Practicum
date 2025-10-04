@@ -10,6 +10,7 @@
 
 [resource]
 script = ExtResource("7_b82e1")
+name = "Vincent"
 seed = 0
 event = 1
 gold = 0

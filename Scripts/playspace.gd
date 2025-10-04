@@ -46,7 +46,6 @@ func initialize_card_slots():
 			newSlot.visible = true
 			$".".add_child(newSlot)
 	$Centerpoint.position = centerPoint
-	print("Card Slots initialized")
 	
 
 func _ready() -> void:

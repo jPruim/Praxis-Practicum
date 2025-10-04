@@ -1,6 +1,7 @@
 class_name RunData
 extends Resource
 
+@export var name: String = "Veritas"
 @export var seed: int = 0
 @export var event: int = 1
 @export var gold: int = 0

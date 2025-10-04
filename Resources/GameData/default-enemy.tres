@@ -10,6 +10,7 @@
 
 [resource]
 script = ExtResource("7_luodr")
+name = "Viceroy"
 seed = 0
 event = 1
 gold = 0

@@ -36,19 +36,27 @@ func _ready() -> void:
 	SignalBus.player_targeting_opponent.connect(_on_player_targeting_opponent)
 	SignalBus.player_targeting_self.connect(_on_player_targeting_self)
 	SignalBus.player_targeting_slot.connect(_on_player_targeting_slot)
+	SignalBus.player_turn.connect(_player_turn_changed)
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
+func set_player_turn(state: bool):
+	SignalBus.emit_signal("player_turn", state)
+
+func _player_turn_changed(state: bool):
+	is_player_turn = state
 
 func setup_combat(run_data: RunData):
 	identify_slots()
 	in_combat = true
 	$GameTime.set_time(3)
 	setup_player(run_data)
-	setup_enemy(run_data)
+	var enemy = run_data.assignment_list[run_data.assignment - 1]
+	var enemy_data = DataManager.load_enemy_game_data(enemy)
+	setup_enemy(enemy_data)
 	$CardManager.initialize_decks(run_data)
 	phase = "start_turn"
 	time_loop()
@@ -59,23 +67,25 @@ func setup_player(run_data: RunData):
 	player.set_default_data()
 	player.z_index = Globals.Z_INDEX["caster_frame"]
 	player.scale = Globals.CARD_SCALE_PlACED
-	player.set_display_name("Player")
+	player.set_display_name(run_data.name)
 	player.set_animation("Adventurer")
+	player.set_health(run_data.current_health)
 	player.position = Globals.PLAYER_POSITION
 	player.in_slot = true
 	$"Playspace/PlayerSlot".cards.append(player)
 	player.animation_reveal()
 	$".".add_child(player)
 
-func setup_enemy(run_data: RunData):
+func setup_enemy(enemy_data: RunData):
 	enemy = caster_frame_base_scene.instantiate()
 	enemy.set_aloction()
 	enemy.set_default_data()
 	enemy.z_index = Globals.Z_INDEX["caster_frame"]
 	enemy.scale = Globals.SCALE.card_placed
-	enemy.set_display_name("Enemy")
+	enemy.set_display_name(enemy_data.name)
 	enemy.set_animation("Adventurer")
 	enemy.position = Globals.ENEMY_POSITION
+	enemy.set_health(enemy_data.current_health)
 	enemy.in_slot = true
 	$"Playspace/OpponentSlot".cards.append(enemy)
 	enemy.animation_reveal()
@@ -103,7 +113,7 @@ func time_loop():
 			next_phase()
 	elif(phase == "player_decision"):
 		if(player_cast_time == 0):
-			is_player_turn = true
+			set_player_turn(true)
 			# Break loop if player needs to cast something
 			print_status()
 			return 
@@ -112,6 +122,7 @@ func time_loop():
 		clean_up()
 	elif(phase == "end_step"):
 		end_step()
+	time_loop()
 
 
 # Any end step effects
@@ -132,9 +143,6 @@ func increment_time():
 		opponent_manager.cast_time -= 1
 	elif opponent_manager.cast_time < 0:
 		printerr("Opponent cast_time is negative") # TODO: Remove this comment
-		
-	if ($GameTime.get_time() > 0):
-		$GameTime.decrement_time()
 	delay()
 	spell_manager.resolve_spells()
 
@@ -285,7 +293,6 @@ func print_status():
 		return
 	var output: String = "Start Debug"
 	output+="\nPhase: " + phase
-	output +="\nGameTime: " + str($GameTime.get_time())
 	output += "\nPlayerCastTime: " + str(spell_manager.player_cast_time)
 	output += "\nOppCastTime: " + str(opponent_manager.cast_time)
 	if(Globals.DEBUG):

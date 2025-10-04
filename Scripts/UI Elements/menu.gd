@@ -37,7 +37,6 @@ func display_settings():
 	$MenuContainer/Book.visible = true
 	$MenuContainer/MainMenu/MenuButtons.mouse_filter = 2 # IGNORE
 	$MenuContainer/Settings/MenuButtons.mouse_filter = 0 # STOP
-	print("display_settings")
 
 func display_menu():
 	$MenuContainer/MainMenu.visible = true
@@ -45,7 +44,6 @@ func display_menu():
 	$MenuContainer/Book.visible = true
 	$MenuContainer/MainMenu/MenuButtons.mouse_filter = 0 # STOP
 	$MenuContainer/Settings/MenuButtons.mouse_filter = 2 # IGNORE
-	print("display_main_menu")
 
 func hide_all():
 	$MenuContainer/MainMenu.visible = false

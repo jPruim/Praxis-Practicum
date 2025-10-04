@@ -61,7 +61,6 @@ func next_phase():
 
 func first_assignment():
 	show_game_ui()
-	# $DataManager.print_run_data(run_data)
 	run_data.assignment = 1
 	battle_manager = battle_manager_scene.instantiate()
 	$".".add_child(battle_manager)
@@ -95,7 +94,6 @@ func update_ascension(difference: int):
 	$UI/HeaderBar/NinePatchRect/HBoxContainer/AssignmentDisplay/Assignment.text = str(run_data.ascension)
 
 func _on_menubutton_pressed() -> void:
-	print("menu button pressed")
 	$Menu.display_menu()
 	$Fog/Fog.visible = true
 	pass # Replace with function body.

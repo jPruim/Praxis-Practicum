@@ -140,8 +140,6 @@ func end_drag():
 	# card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
 	
 	var card_type = card_being_dragged.get_card_type()
-	
-	
 	# Check if Player can cast
 	if($"..".is_player_turn):
 		# Check if final location is a CardSlot

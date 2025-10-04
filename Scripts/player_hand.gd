@@ -17,7 +17,15 @@ var hovered: bool = false
 func _ready() -> void:
 	center_screen_x = floor(Globals.VIEWPORT_SIZE.x / 2)
 	$".".z_index = Globals.Z_INDEX.hand
-	
+	SignalBus.player_turn.connect(_player_turn)
+
+
+func _player_turn(state: bool):
+	if state:
+		$MarginContainer/PanelContainer.visible = true
+	else:
+		$MarginContainer/PanelContainer.visible = false
+
 # Add card to player hand
 func add_card_to_hand(card, speed = DEFAULT_ASPEED):
 	card.z_index = Globals.Z_INDEX["card_being_dragged"]

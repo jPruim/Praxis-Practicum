@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://vlo6uno0t1dc"]
+[gd_scene load_steps=5 format=3 uid="uid://vlo6uno0t1dc"]
 
 [ext_resource type="Script" path="res://Scripts/player_hand.gd" id="1_xup57"]
 [ext_resource type="Texture2D" uid="uid://dos886xw0be4f" path="res://Assets/Spritesheets/praxis-ui-ninepatch-light.png" id="2_j3nvc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g5w1n"]
 size = Vector2(440, 109)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_od7te"]
+bg_color = Color(1, 1, 1, 0)
+shadow_color = Color(0.819608, 0.898039, 0.968627, 0.415686)
+shadow_size = 3
 
 [node name="PlayerHand" type="Node2D"]
 position = Vector2(0, 112)
@@ -29,6 +34,11 @@ offset_top = -55.0
 offset_right = 220.0
 offset_bottom = 55.0
 grow_horizontal = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_od7te")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer"]
 texture_filter = 1
