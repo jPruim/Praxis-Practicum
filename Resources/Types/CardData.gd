@@ -21,3 +21,4 @@ extends Resource
 @export var effect_strength: int = 0
 @export var spell_level : int = 1
 @export var spell_rarity : String = "Common"
+@export var tags: Array[String] = []

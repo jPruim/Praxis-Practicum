@@ -2,9 +2,6 @@ class_name GameManager
 extends Node2D
 
 var run_data: RunData
-var save_file: String = "user://savefile.tres"
-var achievement_file: String
-var default_save_file: String = "res://Resources/GameData/default_game.tres"
 var battle_manager: BattleManager
 var battle_manager_scene = preload("res://Scenes/Playspace/battle_manager.tscn")
 
@@ -32,33 +29,17 @@ func run_resume():
 func run_start(resuming: bool = false):
 	if( !resuming ):
 		if(run_data):
-			$Menu.hide()
+			$Menu.hide_all()
 		else:
-			load_default_game_data()
+			run_data = $DataManager.load_default_game_data()
 			first_assignment()
 	else:
-		load_game_data()
+		if(run_data):
+			return
+		run_data = $DataManager.load_game_data()
 		first_assignment()
 
-func load_game_data():
-	if ResourceLoader.exists(save_file):
-		run_data =  load(save_file)
-		print(run_data)
-		get_tree().quit()
-	else:
-		run_data = load_default_game_data()
-		save_game()
-	return null
 
-func save_game():
-	ResourceSaver.save(run_data, save_file)
-
-func load_default_game_data():
-	if ResourceLoader.exists(default_save_file):
-		run_data = load(default_save_file)
-		return
-	printerr("Loading null game data")
-	get_tree().quit()
 
 func end_run(victory: bool):
 	if(victory):
@@ -77,10 +58,11 @@ func next_phase():
 		run_data.phase = "shoppping"
 	elif run_data.phase == "shopping":
 		run_data.phase = "assignment"
-	save_game()
+	$DataManager.save_game(run_data)
 
 func first_assignment():
 	show_game_ui()
+	# $DataManager.print_run_data(run_data)
 	run_data.assignment = 1
 	battle_manager = battle_manager_scene.instantiate()
 	$".".add_child(battle_manager)

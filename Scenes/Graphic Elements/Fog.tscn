@@ -35,3 +35,4 @@ material = SubResource("ShaderMaterial_t3vhh")
 offset_left = -2.0
 offset_right = 1918.0
 offset_bottom = 1080.0
+mouse_filter = 2

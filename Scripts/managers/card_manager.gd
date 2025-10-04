@@ -22,7 +22,7 @@ func _ready() -> void:
 	player_hand.ai_hand = false
 	player_hand.position = Vector2(get_viewport_rect().size.x / 2, Globals.PLAYER_HAND_Y_POS)
 	opponent_hand = $OpponentHand
-	opponent_hand.get_node("Sprite2D").visible = false
+	opponent_hand.get_node("MarginContainer").visible = false
 	opponent_hand.get_node("Area2D/CollisionShape2D").disabled = true
 	opponent_hand.position = Vector2(get_viewport_rect().size.x / 2, Globals.OPPONENT_HAND_Y_POS)
 	opponent_hand.ai_hand = true

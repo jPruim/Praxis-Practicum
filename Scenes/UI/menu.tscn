@@ -104,7 +104,7 @@ theme_override_constants/separation = 10
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("3_kp7d6")
-text = "Resume"
+text = "Mute"
 text_overrun_behavior = 3
 
 [node name="Back" type="Button" parent="MenuContainer/Settings/MenuButtons/VBoxContainer"]
