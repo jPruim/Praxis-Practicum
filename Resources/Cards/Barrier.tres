@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://djevrlreboepw"]
 
-[ext_resource type="Script" path="res://Resources/Types/CardData.gd" id="1_u0o3j"]
+[ext_resource type="Script" path="res://Resources/Types/CardData.gd" id="1_ie0ae"]
 
 [resource]
-script = ExtResource("1_u0o3j")
-display_name = "Arcane Barrier"
+script = ExtResource("1_ie0ae")
+display_name = "Barrier"
 card_type = "spell"
 cast_time = 1
 summon_attack = 0

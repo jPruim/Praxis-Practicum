@@ -10,7 +10,7 @@ const DEFAULT_ASPEED = 0.25
 var player_hand = []
 var center_screen_x: int
 var ai_hand:bool = false
-var offset_value: int = -85
+var offset_value: int = -90
 var hovered: bool = false
 
 # Called when the node enters the scene tree for the first time.
@@ -50,7 +50,6 @@ func update_hand_positions( speed = DEFAULT_ASPEED):
 		var card = player_hand[i]
 		card.hand_position = new_position
 		card.animate_card_to_position(new_position, speed)
-		print(new_position)
 	pass
 
 # Calculate the offset (for x) in the hand	

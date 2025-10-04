@@ -12,8 +12,8 @@
 bg_color = Color(0.6, 0.6, 0.6, 0)
 border_color = Color(0.8, 0.8, 0.8, 0)
 shadow_color = Color(0, 0, 0, 1)
-shadow_size = 4
-shadow_offset = Vector2(2, 3)
+shadow_size = 2
+shadow_offset = Vector2(1, 2)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qs3p7"]
 size = Vector2(59.0476, 91.4286)

@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://Resources/Types/RunData.gd" id="3_1f5od"]
 [ext_resource type="Resource" uid="uid://b8t8hb5j7rqf5" path="res://Resources/Cards/FireFox.tres" id="3_ry4w2"]
 [ext_resource type="Resource" uid="uid://clpt4ig2ny678" path="res://Resources/Cards/Icebolt.tres" id="4_usnh2"]
-[ext_resource type="Resource" uid="uid://djevrlreboepw" path="res://Resources/Cards/ArcaneBarrier.tres" id="5_inxbn"]
+[ext_resource type="Resource" uid="uid://djevrlreboepw" path="res://Resources/Cards/Barrier.tres" id="5_inxbn"]
 
 [resource]
 script = ExtResource("3_1f5od")

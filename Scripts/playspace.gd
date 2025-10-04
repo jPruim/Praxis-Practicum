@@ -8,8 +8,8 @@ var PlayerHand = preload("res://Scenes/Cards/player_hand.tscn")
 # Dimensions of the Card Slots ( Horizontal, Vertical)
 @export var boardDimensions = Vector2(3, 2)
 @export var centerPoint : Vector2
-@export var slotMargin = Vector2( 20, 20)
-@export var slotSize = 0.9 * Vector2( 8 * 5, 6 * 5 )
+@export var slotMargin = Vector2( 10, 2)
+@export var slotSize = Vector2( 32, 48 )
 # Called when the node enters the scene tree for the first time.
 
 
@@ -27,7 +27,7 @@ func initialize_card_slots():
 	# Calculate the initial position of the top left most cardSlot
 	centerPoint = Globals.VIEWPORT_SIZE / 2
 	# Shift the board up to skew for more player space
-	centerPoint += Vector2(0, -30) 
+	centerPoint += Vector2(0, +4) 
 	var x_pos_first = centerPoint.x - (0.5 * ((boardDimensions.x -1) * slotSize.x))
 	var y_pos_first = centerPoint.y - (0.5 * ((boardDimensions.y -1) * slotSize.y))
 	# Handle Margins

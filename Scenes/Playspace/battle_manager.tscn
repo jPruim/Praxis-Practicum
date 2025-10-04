@@ -117,10 +117,10 @@ scale = Vector2(2, 2)
 texture = SubResource("GradientTexture2D_di84m")
 
 [node name="PassButton" type="Button" parent="Playspace"]
-offset_left = 494.0
-offset_top = 217.0
+offset_left = 519.0
+offset_top = 209.0
 offset_right = 579.0
-offset_bottom = 255.0
+offset_bottom = 239.0
 theme = ExtResource("4_p0ay2")
 theme_override_font_sizes/font_size = 16
 action_mode = 0
