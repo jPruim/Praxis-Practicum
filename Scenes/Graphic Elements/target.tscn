@@ -86,14 +86,12 @@ scale = Vector2(5, 5)
 modulate = Color(1, 1, 1, 0.627451)
 texture_filter = 1
 position = Vector2(-2.98023e-08, 2.98023e-08)
-scale = Vector2(2, 2)
 texture = ExtResource("1_644jy")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.627451)
 texture_filter = 1
 position = Vector2(-2.98023e-08, 2.98023e-08)
-scale = Vector2(2, 2)
 texture = SubResource("CompressedTexture2D_2hvfs")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

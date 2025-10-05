@@ -200,7 +200,7 @@ func _on_player_targeting_opponent(card: CardBase):
 	spell_manager.cast(card, true)
 	is_player_turn = false
 	next_phase()
-	time_loop()
+	#time_loop()
 
 
 func _on_player_targeting_self(card: CardBase):
@@ -209,7 +209,7 @@ func _on_player_targeting_self(card: CardBase):
 	spell_manager.cast(card, true)
 	is_player_turn = false
 	next_phase()
-	time_loop()
+	#time_loop()
 	
 func _on_player_targeting_slot(slot: CardSlot, card: CardBase):
 	card.being_cast = true
@@ -217,12 +217,13 @@ func _on_player_targeting_slot(slot: CardSlot, card: CardBase):
 	spell_manager.cast(card, true)
 	is_player_turn = false
 	next_phase()
-	time_loop()
+	#time_loop()
 
 func delay(delay = DEFAULT_DELAY):
-	$BattleTimer.wait_time = delay
-	$BattleTimer.start()
-	await $BattleTimer.timeout
+	#$BattleTimer.wait_time = delay
+	#$BattleTimer.start()
+	#await $BattleTimer.timeout
+	await get_tree().create_timer(DEFAULT_DELAY).timeout
 	return
 
 # Theoretically only needs to be called once, 

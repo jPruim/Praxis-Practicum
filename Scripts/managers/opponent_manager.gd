@@ -37,7 +37,7 @@ func end_turn():
 
 func make_ai_play():
 	# Basic AI
-	
+	decision_delay()
 	# Do nothing if hand is empty
 	if (opponent_hand.player_hand.size() == 0):
 		return
