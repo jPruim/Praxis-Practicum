@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://5f8c2idfudc1"]
+
+[ext_resource type="Script" path="res://Scripts/world.gd" id="1_tofjt"]
+[ext_resource type="PackedScene" uid="uid://c7mxxeb5gtpft" path="res://Scenes/UI/game_manager.tscn" id="2_q2fwe"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_tofjt")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(320, 180)
+
+[node name="GameManager" parent="Camera2D" instance=ExtResource("2_q2fwe")]

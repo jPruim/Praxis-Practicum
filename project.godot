@@ -11,9 +11,10 @@ config_version=5
 [application]
 
 config/name="Praxis & Practicum"
+config/version="0.01"
 run/main_scene="res://Scenes/UI/game_manager.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://Assets/Spritesheets/crown-coin.png"
 
 [autoload]
 
@@ -35,6 +36,7 @@ window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/stretch/scale_mode="integer"
 window/vsync/vsync_mode=0
+window/main_scene=""
 
 [dotnet]
 
