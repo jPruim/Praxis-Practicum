@@ -57,7 +57,7 @@ func set_display(data: CardData):
 	$CardFront/DirectDamage.text = str(data.direct_damage)
 	$CardFront/DamageType.text = data.damage_type
 	$CardFront/DirectBlock.text = str(data.direct_block)
-	
+	$TagList.set_taglist(data.tags)
 	# Handle Animations not being added yet ( So I can add them over time)
 	if data.animation != "":
 		set_animation(data.animation)
@@ -123,7 +123,9 @@ func card_affects(hovered: bool):
 		$".".z_index = Globals.Z_INDEX["card_hovered"]
 		# Play Animation
 		animation_sprite.play()
+		$TagList.visible = true
 	else:
+		$TagList.visible = false
 		if $"." is CasterFrameBase:
 			$".".scale = Globals.CARD_SCALE_PlACED
 			$".".z_index = Globals.Z_INDEX["caster_frame"]

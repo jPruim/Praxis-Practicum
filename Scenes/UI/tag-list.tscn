@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://col41cp0e8dys"]
+
+[ext_resource type="Script" path="res://Scripts/UI Elements/taglist.gd" id="1_4nlv8"]
+
+[node name="TagList" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+size_flags_vertical = 3
+script = ExtResource("1_4nlv8")

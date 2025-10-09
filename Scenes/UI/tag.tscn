@@ -1,0 +1,81 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjfghiqrojl6k"]
+
+[ext_resource type="Script" path="res://Scripts/UI Elements/tag.gd" id="1_ri1oy"]
+[ext_resource type="Theme" uid="uid://dlyxw6e1bkfhe" path="res://Scenes/UI/Tag.theme" id="1_sgug1"]
+[ext_resource type="Texture2D" uid="uid://df3fajumbo3rk" path="res://Assets/Spritesheets/tag-nine-patch.png" id="2_7mdyh"]
+
+[node name="Tag" type="MarginContainer"]
+offset_right = 126.0
+offset_bottom = 52.0
+theme = ExtResource("1_sgug1")
+script = ExtResource("1_ri1oy")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("1_sgug1")
+
+[node name="MarginHeader" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_sgug1")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/MarginHeader"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("1_sgug1")
+texture = ExtResource("2_7mdyh")
+region_rect = Rect2(0, 0, 16, 5)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginHeader"]
+layout_mode = 2
+theme = ExtResource("1_sgug1")
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+
+[node name="Header" type="Label" parent="VBoxContainer/MarginHeader/MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("1_sgug1")
+text = "Defaultg
+"
+horizontal_alignment = 1
+
+[node name="MarginBody" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_sgug1")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/MarginBody"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("1_sgug1")
+texture = ExtResource("2_7mdyh")
+region_rect = Rect2(0, 0, 16, 5)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginBody"]
+layout_mode = 2
+theme = ExtResource("1_sgug1")
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+
+[node name="Label" type="RichTextLabel" parent="VBoxContainer/MarginBody/MarginContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme = ExtResource("1_sgug1")
+theme_override_constants/line_separation = -4
+theme_override_font_sizes/normal_font_size = 16
+text = "Extra text is just being put in here at this moment in time
+
+"

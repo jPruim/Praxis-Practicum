@@ -24,3 +24,4 @@ effects = Array[String]([])
 effect_strength = 0
 spell_level = 1
 spell_rarity = "Common"
+tags = Array[String](["summon"])
