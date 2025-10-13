@@ -15,9 +15,9 @@ func _process(delta: float) -> void:
 	pass
 
 
-func set_taglist(array: Array[String]):
-	var tag: Tag
-	for label in array:
+func set_taglist(tag_array: Array[String]):
+	for label in tag_array:
+		var tag: Tag
 		tag = tag_scene.instantiate()
 		tag.set_tag_data(label)
 		$".".add_child(tag)

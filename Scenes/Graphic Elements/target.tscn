@@ -79,7 +79,7 @@ _data = {
 }
 
 [node name="Target" type="Node2D"]
-z_index = 25
+z_index = 7
 scale = Vector2(5, 5)
 
 [node name="EnemySprite" type="Sprite2D" parent="."]

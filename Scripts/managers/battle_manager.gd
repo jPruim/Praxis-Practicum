@@ -253,7 +253,6 @@ func find_full_slots():
 func create_target(location, player_owned = false):
 	var current_target = target_scene.instantiate()
 	current_target.position = location
-	$".".add_child(current_target)
 	if (player_owned):
 		current_target.get_node("EnemySprite").visible = false
 		current_target.get_node("PlayerSprite").visible = true
@@ -262,6 +261,7 @@ func create_target(location, player_owned = false):
 		current_target.get_node("EnemySprite").visible = true
 		current_target.get_node("PlayerSprite").visible = false
 		current_opponent_targets.append(current_target)
+	$".".add_child(current_target)
 	return
 
 func clear_target(player_owned):

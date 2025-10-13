@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmqw3g63oh7ut"]
+[gd_scene load_steps=7 format=3 uid="uid://cmqw3g63oh7ut"]
 
 [ext_resource type="Script" path="res://Scripts/UI Elements/menu.gd" id="1_pbacw"]
 [ext_resource type="Theme" uid="uid://dpn2t23n7kt45" path="res://Scenes/UI/default-theme.theme" id="1_ykmtr"]
-[ext_resource type="Texture2D" uid="uid://cfdvwowvfmxi2" path="res://Assets/GUI/Book-2.png" id="2_i700f"]
+[ext_resource type="Texture2D" uid="uid://dwxfl1wk5n4su" path="res://Assets/Spritesheets/book-3.png" id="2_vkt5i"]
 [ext_resource type="Theme" uid="uid://cxef1cilx5oai" path="res://Scenes/UI/menu-button.tres" id="3_kp7d6"]
+[ext_resource type="Texture2D" uid="uid://c3ryhb2fa2um3" path="res://Assets/Spritesheets/book-3-normal.png" id="3_xt1fa"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_yersk"]
+diffuse_texture = ExtResource("2_vkt5i")
+normal_texture = ExtResource("3_xt1fa")
 
 [node name="Menu" type="CanvasLayer"]
 layer = 10
@@ -22,7 +27,7 @@ physics_interpolation_mode = 1
 texture_filter = 1
 position = Vector2(320, 180)
 scale = Vector2(2, 2)
-texture = ExtResource("2_i700f")
+texture = SubResource("CanvasTexture_yersk")
 
 [node name="MainMenu" type="MarginContainer" parent="MenuContainer"]
 layout_mode = 1
@@ -45,10 +50,10 @@ theme_type_variation = &"Book"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/MainMenu/MenuButtons"]
 layout_mode = 0
-offset_left = 315.0
-offset_top = 100.0
-offset_right = 397.0
-offset_bottom = 229.0
+offset_left = 339.0
+offset_top = 101.0
+offset_right = 421.0
+offset_bottom = 230.0
 theme = ExtResource("3_kp7d6")
 theme_override_constants/separation = 10
 
@@ -93,10 +98,10 @@ theme_type_variation = &"Book"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/Settings/MenuButtons"]
 layout_mode = 0
-offset_left = 315.0
-offset_top = 101.0
-offset_right = 395.0
-offset_bottom = 227.0
+offset_left = 339.0
+offset_top = 102.0
+offset_right = 419.0
+offset_bottom = 228.0
 theme = ExtResource("3_kp7d6")
 theme_override_constants/separation = 10
 
@@ -111,6 +116,15 @@ text_overrun_behavior = 3
 texture_filter = 1
 layout_mode = 2
 text = "Back"
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+color = Color(0.937255, 0.854902, 0.615686, 0.184314)
+energy = 0.36
+range_layer_min = 9
+range_layer_max = 10
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+height = 1.0
 
 [connection signal="pressed" from="MenuContainer/MainMenu/MenuButtons/VBoxContainer/ResumeBtn" to="." method="_on_resume_btn_pressed"]
 [connection signal="pressed" from="MenuContainer/MainMenu/MenuButtons/VBoxContainer/ResumeBtn" to="MenuContainer" method="_on_resume_btn_pressed"]

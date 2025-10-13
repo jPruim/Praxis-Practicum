@@ -25,6 +25,7 @@ const Z_INDEX = {
 	"card_in_slot": 1,
 	"caster_frame": 5,
 	"card_cast_player":6,
+	"target":7,
 	"hand": 10,
 	"card": 15,
 	"card_cast_enemy": 16,

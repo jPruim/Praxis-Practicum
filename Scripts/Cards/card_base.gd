@@ -8,7 +8,7 @@ var in_slot: bool  = false # Boolean for being in the card_slot
 var ai_card: bool = false
 var being_cast: bool = false
 var being_hovered: bool = false
-var default_tag_location = Vector2(-176, -100)
+var default_tag_location = Vector2(-176, 0)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_default_data()
@@ -128,10 +128,10 @@ func card_affects(hovered: bool):
 		# If card is in play or being cast or owned by the player
 		if(in_slot || being_cast || !ai_card):
 			$TagList.visible = true
-			$TagList.global_position.x = clamp($TagList.global_position.x, 0 + $TagList.size.x, 
-				Globals.VIEWPORT_SIZE.x -  $TagList.size.x)
-			$TagList.global_position.y = clamp($TagList.global_position.y, 0 + $TagList.size.y, 
-				Globals.VIEWPORT_SIZE.y -  $TagList.size.y)
+			$TagList.global_position.x = clamp($TagList.global_position.x, 0 + $TagList.size.x/2, 
+				Globals.VIEWPORT_SIZE.x -  $TagList.size.x/2)
+			$TagList.global_position.y = clamp($TagList.global_position.y, 0 + $TagList.size.y/2, 
+				Globals.VIEWPORT_SIZE.y -  $TagList.size.y/2)
 		
 	else:
 		$TagList.visible = false

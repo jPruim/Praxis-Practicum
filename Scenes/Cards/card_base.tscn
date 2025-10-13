@@ -8,7 +8,7 @@
 [ext_resource type="Theme" uid="uid://be4cr2ag7jwqr" path="res://Scenes/UI/Card.theme" id="4_suoux"]
 [ext_resource type="Texture2D" uid="uid://42543ow2lye3" path="res://Assets/Cards/Card Borders etc/Card Back.png" id="5_578ps"]
 [ext_resource type="Texture2D" uid="uid://bnwo0vw32jl2i" path="res://Assets/Spritesheets/FireFox.png" id="7_7s10g"]
-[ext_resource type="Script" path="res://Scripts/UI Elements/taglist.gd" id="9_oaa4u"]
+[ext_resource type="PackedScene" uid="uid://col41cp0e8dys" path="res://Scenes/UI/tag-list.tscn" id="9_73vww"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hitk0"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -556,15 +556,8 @@ libraries = {
 "": SubResource("AnimationLibrary_bn0ox")
 }
 
-[node name="TagList" type="Control" parent="."]
+[node name="TagList" parent="." instance=ExtResource("9_73vww")]
 visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_left = -176.0
-offset_top = -100.0
-offset_right = -176.0
-offset_bottom = -100.0
-script = ExtResource("9_oaa4u")
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
