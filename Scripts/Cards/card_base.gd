@@ -8,7 +8,7 @@ var in_slot: bool  = false # Boolean for being in the card_slot
 var ai_card: bool = false
 var being_cast: bool = false
 var being_hovered: bool = false
-var default_tag_location = Vector2(-176, 0)
+var default_tag_location = Vector2(-176, -80)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_default_data()
@@ -17,7 +17,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 	
 # Set to full deep copy of the passed in CardBase
@@ -75,6 +75,7 @@ func get_card_type():
 func set_animation(animation: String = "FireSparks"):
 	$CardFront/Container/AnimatedSprite2D.animation = animation # TODO: make an empty spriteframe at some point
 	
+@warning_ignore("shadowed_variable_base_class")
 func set_display_name(name: String):
 	card_data.display_name = name
 	$CardFront/Name.text = name
@@ -99,16 +100,19 @@ func animation_conceal():
 		$AnimationPlayer.play_backwards("card_flip")
 	
 # Animate card to position
+@warning_ignore("shadowed_variable_base_class")
 func animate_card_to_position(position, speed = Globals.DEFAULT_ASPEED):
 	var tween = get_tree().create_tween()
 	tween.tween_property($".", "position", position, speed)
 	
 # Animate card to Scale
+@warning_ignore("shadowed_variable_base_class")
 func animate_card_to_scale(scale, speed = Globals.DEFAULT_ASPEED):
 	var tween = get_tree().create_tween()
 	tween.tween_property($".", "scale", scale, speed)
 
 
+@warning_ignore("shadowed_variable_base_class")
 func animate_card_to_slot(slot: CardSlot, scale = Globals.CARD_SCALE_PlACED, speed = Globals.DEFAULT_ASPEED):
 	animate_card_to_position(slot.position, speed)
 	animate_card_to_scale(scale, speed)
@@ -120,7 +124,7 @@ func card_affects(hovered: bool):
 	var animation_sprite = get_node("CardFront/Container/AnimatedSprite2D")
 	being_hovered = hovered
 	if being_hovered:
-		$".".scale = Vector2(1.05, 1.05)
+		$".".scale = Vector2(1.0, 1.0)
 		$".".z_index = Globals.Z_INDEX["card_hovered"]
 		# Play Animation
 		animation_sprite.play()
@@ -128,10 +132,11 @@ func card_affects(hovered: bool):
 		# If card is in play or being cast or owned by the player
 		if(in_slot || being_cast || !ai_card):
 			$TagList.visible = true
-			$TagList.global_position.x = clamp($TagList.global_position.x, 0 + $TagList.size.x/2, 
-				Globals.VIEWPORT_SIZE.x -  $TagList.size.x/2)
+			$TagList.position = default_tag_location
+			$TagList.global_position.x = clamp($TagList.global_position.x, 0, 
+				Globals.VIEWPORT_SIZE.x - $TagList.size.x/2)
 			$TagList.global_position.y = clamp($TagList.global_position.y, 0 + $TagList.size.y/2, 
-				Globals.VIEWPORT_SIZE.y -  $TagList.size.y/2)
+				Globals.VIEWPORT_SIZE.y -  $TagList.size.y)
 		
 	else:
 		$TagList.visible = false

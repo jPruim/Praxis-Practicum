@@ -3,7 +3,7 @@ extends Node2D
 
 
 # Properties
-var card_being_dragged = null # Card object being grabbed (NOT a bool)
+var card_being_dragged: CardBase = null # Card object being grabbed (NOT a bool)
 var screen_size: Vector2
 var is_hovering_card :bool = false
 var player_hand: PlayerHand
@@ -67,7 +67,7 @@ func raycast_check_for_player_hand():
 	return null	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	
 	#set dragged card to mouse position
 	if card_being_dragged:
@@ -82,7 +82,7 @@ func connect_signals():
 	SignalBus.connect("shuffle_deck", on_shuffle_deck)
 	
 # Called by Cards Individually
-func connect_card_signals(card:CardBase):
+func connect_card_signals(_card:CardBase):
 	SignalBus.connect("card_hovered", on_hovered_card)
 	SignalBus.connect("card_hovered_off", on_hovered_off_card)
 
@@ -133,6 +133,7 @@ func start_drag(card:CardBase):
 	card_being_dragged = card
 	card_being_dragged.z_index = Globals.Z_INDEX["card_being_dragged"]
 	card_being_dragged.scale = Globals.SCALE.card_drag
+	card_being_dragged.find_child("TagList").visible = false
 	
 	
 func end_drag():
@@ -232,7 +233,6 @@ func on_hover_hand_off():
 
 func animate_hand_border(speed = Globals.DEFAULT_ASPEED):
 	var tween = get_tree().create_tween()
-	var position
 	if($PlayerHand.hovered):
 		$PlayerHand.position = Globals.PLAYER_HAND_Y_POS + $PlayerHand.offset_value
 	else: 

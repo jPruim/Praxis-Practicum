@@ -31,6 +31,7 @@ const Z_INDEX = {
 	"card_cast_enemy": 16,
 	"card_back": 20,
 	"card_hovered": 25,
+	"tag": 26,
 	"card_being_dragged": 30,
 	"centerpoint": 35
 }
@@ -76,5 +77,6 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+@warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
 	pass

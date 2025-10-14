@@ -16,6 +16,8 @@ var tag_data = {
 var displaying: String = ""
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$".".z_index = Globals.Z_INDEX.tag
+	#set_tag_data("Default")
 	pass # Replace with function body.
 
 

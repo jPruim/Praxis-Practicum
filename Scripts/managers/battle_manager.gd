@@ -20,8 +20,9 @@ var caster_frame_base_scene = preload("res://Scenes/Cards/caster_frame_base.tscn
 var player: CasterFrameBase
 var enemy: CasterFrameBase
 const DEFAULT_DELAY = 1
-var phase_list = ["start_turn","ai_decision", "player_decision","cleanup", "end_step"]
+var phase_list = ["start_turn","ai_decision", "player_decision","clean_up", "end_step"]
 var phase: String
+var iterations: int = 12 # TODO remove this
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -40,6 +41,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+@warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
 	pass
 
@@ -54,8 +56,8 @@ func setup_combat(run_data: RunData):
 	in_combat = true
 	$GameTime.set_time(3)
 	setup_player(run_data)
-	var enemy = run_data.assignment_list[run_data.assignment - 1]
-	var enemy_data = DataManager.load_enemy_game_data(enemy)
+	var enemy_type = run_data.assignment_list[run_data.assignment - 1]
+	var enemy_data = DataManager.load_enemy_game_data(enemy_type)
 	setup_enemy(enemy_data)
 	$CardManager.initialize_decks(run_data)
 	phase = "start_turn"
@@ -98,9 +100,13 @@ func _on_pass_button_pressed() -> void:
 # Game Phase Setup
 func next_phase():
 	if(in_combat):
-		phase = phase_list[1 + phase_list.find(phase) % phase_list.size()]
+		phase = phase_list[(1 + phase_list.find(phase)) % phase_list.size()]
 
 func time_loop():
+	if (iterations <= 0):
+		return
+	else:
+		iterations-=1
 	in_combat = true
 	print_status()
 	delay()
@@ -110,16 +116,18 @@ func time_loop():
 	elif(phase == "ai_decision"):
 		if(opponent_manager.cast_time == 0):
 			opponent_manager.make_ai_play()
-			next_phase()
+		next_phase()
 	elif(phase == "player_decision"):
 		if(player_cast_time == 0):
 			set_player_turn(true)
 			# Break loop if player needs to cast something
 			print_status()
 			return 
+		next_phase()
 	elif(phase == "clean_up"):
 		increment_time() # Spell resolution
 		clean_up()
+		next_phase()
 	elif(phase == "end_step"):
 		end_step()
 	time_loop()
@@ -169,6 +177,7 @@ func opponent_turn():
 
 	$"../OpponentManager".end_turn()
 
+@warning_ignore("unused_parameter")
 func play_card(card, caster = "player", cast_time_mod = 0, cast_damage_mod = 0):
 	pass
 
@@ -195,40 +204,43 @@ func _on_opponent_targeting_slot(slot: CardSlot, card: CardBase):
 
 
 func _on_player_targeting_opponent(card: CardBase):
+	print("Player Cast at opponent")
 	card.being_cast = true
 	create_target(Globals.ENEMY_POSITION, true)
 	spell_manager.cast(card, true)
 	is_player_turn = false
 	next_phase()
-	#time_loop()
+	time_loop()
 
 
 func _on_player_targeting_self(card: CardBase):
+	print("Player Cast at self")
 	card.being_cast = true
 	create_target(Globals.PLAYER_POSITION, true)
 	spell_manager.cast(card, true)
 	is_player_turn = false
 	next_phase()
-	#time_loop()
+	time_loop()
 	
 func _on_player_targeting_slot(slot: CardSlot, card: CardBase):
+	print("Player Cast at slot")
 	card.being_cast = true
 	create_target(slot.position, true)
 	spell_manager.cast(card, true)
 	is_player_turn = false
 	next_phase()
-	#time_loop()
+	time_loop()
 
-func delay(delay = DEFAULT_DELAY):
+@warning_ignore("unused_parameter")
+func delay(amount = DEFAULT_DELAY):
 	#$BattleTimer.wait_time = delay
 	#$BattleTimer.start()
 	#await $BattleTimer.timeout
-	await get_tree().create_timer(DEFAULT_DELAY).timeout
+	await get_tree().create_timer(amount).timeout
 	return
 
 # Theoretically only needs to be called once, 
 func identify_slots():
-	var card_slot = preload("res://Scenes/Cards/card_slot.tscn")
 	for i in $"..".get_children():
 		if i is CardSlot:
 			if !i.player_owned:
@@ -282,22 +294,25 @@ func clean_up():
 
 func check_game_end():
 	# TODO make this actually check things
-	var player: CasterFrameBase = $Playspace/PlayerSlot.cards[0]
-	var opponent: CasterFrameBase = $Playspace/OpponentSlot.cards[0]
-	if(player.card_data.current_health <= 0):
-		SignalBus.emit_signal("run_loss")
+	var player_frame: CasterFrameBase = $Playspace/PlayerSlot.cards[0]
+	var opponent_frame: CasterFrameBase = $Playspace/OpponentSlot.cards[0]
+	if(player_frame.card_data.current_health <= 0):
+		SignalBus.emit_signal("fight_loss")
+		return true
+	elif(opponent_frame.card_data.current_health <= 0):
+		SignalBus.emit_signal("fight_won")
 	return false
 
 # For testing purposes
 func print_status():
 	if Globals.DEBUG == false:
 		return
-	var output: String = "Start Debug"
+	var output = ""
 	output+="\nPhase: " + phase
-	output += "\nPlayerCastTime: " + str(spell_manager.player_cast_time)
-	output += "\nOppCastTime: " + str(opponent_manager.cast_time)
+	output += "\n\tPlayerCastTime: " + str(spell_manager.player_cast_time)
+	output += "\n\tOppCastTime: " + str(opponent_manager.cast_time)
 	if(Globals.DEBUG):
 		if(phase == "player_decision"):
-			output += "\nWaiting on Player"
-	output += "\nEnd Debug"
+			output += "\n\tWaiting on Player"
+	output += "\n\tEnd Debug"
 	print(output)

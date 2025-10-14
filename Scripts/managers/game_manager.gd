@@ -7,7 +7,6 @@ var battle_manager_scene = preload("res://Scenes/Playspace/battle_manager.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print(find_children("*"))
 	connect_signals()
 	hide_game_ui()
 	$Menu.display_menu()
@@ -17,6 +16,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+@warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
 	pass
 	
@@ -27,12 +27,15 @@ func connect_signals() -> void:
 	SignalBus.connect("run_won", end_run)
 
 func run_resume():
-	run_start(true) # TODO: make a resume function that doesn't bug
+	run_start(true) 
 
 func run_start(resuming: bool = false):
 	$Menu.hide_all()
 	$Fog/Fog.visible = false
 	if( !resuming ):
+		# Remove previous game from active scene
+		if(battle_manager):
+			battle_manager.queue_free()
 		run_data = DataManager.load_default_game_data()
 		first_assignment()
 	else:
