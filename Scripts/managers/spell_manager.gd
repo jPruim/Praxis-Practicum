@@ -8,10 +8,11 @@ var player_target_slots: Array[CardSlot] = []
 var opponent_target_slots: Array[CardSlot] = []
 var battle_manager: BattleManager
 var opponent_manager: OpponentManager
-
+var card_manager: CardManager
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	battle_manager = $".."
+	card_manager = $"../CardManager"
 	SignalBus.opponent_targeting_player.connect(_on_opponent_targeting_player)
 	SignalBus.opponent_targeting_self.connect(_on_opponent_targeting_self)
 	SignalBus.opponent_targeting_slot.connect(_on_opponent_targeting_slot)
@@ -48,6 +49,7 @@ func resolve_spell_summon_at(spell: CardBase, slot: CardSlot):
 	var summon: SummonCardBase = SummonCardBase.new()
 	summon.copy(spell)
 	summon.card_data.current_health = summon.card_data.summon_health
+	card_manager.add_child(summon)
 	slot.cards.append(summon)
 	if(slot.cards.size() == 1):
 		summon.animate_card_to_slot(slot)

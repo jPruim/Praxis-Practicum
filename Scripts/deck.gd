@@ -135,7 +135,7 @@ func reveal_deck():
 # Initialize deck
 func initialize_player_deck():	
 	#initialize deck
-	for i in range (0,2):
+	for i in range (0,1):
 		for data in run_deck:
 			#card_database
 			add_card_to_deck(data)

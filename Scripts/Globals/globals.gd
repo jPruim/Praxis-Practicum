@@ -3,6 +3,12 @@ extends Node
 # Global Constants
 const VIEWPORT_SIZE = Vector2(640,360)
 const DEBUG = true
+const DEBUG_TYPE = {
+	"summon": true,
+	"spell": false,
+	"shop": false,
+	"victory": false,
+}
 
 # Card Info order
 enum CARD_INFO { DISPLAY_NAME, CARD_TYPE, CAST_TIME, SUMMON_ATTACK, SUMMON_HEALTH, DIRECT_DAMAGE, DAMAGE_TYPE, DIRECT_BLOCK, CARD_TEXT, ANIMATION, STACKABLE, ALLY_TARGET, ENEMY_TARGET, EFFECTS, EFFECT_STRENGTH}

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="RunData" load_steps=6 format=3 uid="uid://cgw5mjks7x88d"]
+
+[ext_resource type="Script" path="res://Resources/Types/CardData.gd" id="1_adix4"]
+[ext_resource type="Resource" uid="uid://b8t8hb5j7rqf5" path="res://Resources/Cards/FireFox.tres" id="2_powo1"]
+[ext_resource type="Resource" uid="uid://8vam1kq7wb83" path="res://Resources/Cards/Bee.tres" id="3_qc51x"]
+[ext_resource type="Script" path="res://Resources/Types/Relic.gd" id="4_3s3ls"]
+[ext_resource type="Script" path="res://Resources/Types/RunData.gd" id="5_ylbrk"]
+
+[resource]
+script = ExtResource("5_ylbrk")
+name = "Veritas"
+seed = 0
+event = 1
+gold = 50
+max_health = 100
+current_health = 100
+relics = Array[ExtResource("4_3s3ls")]([])
+deck = Array[ExtResource("1_adix4")]([ExtResource("2_powo1"), ExtResource("2_powo1"), ExtResource("2_powo1"), ExtResource("2_powo1"), ExtResource("3_qc51x"), ExtResource("3_qc51x"), ExtResource("3_qc51x"), ExtResource("3_qc51x"), ExtResource("3_qc51x")])
+assignment = 0
+phase = ""
+assignment_list = Array[int]([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
+ascension = 0

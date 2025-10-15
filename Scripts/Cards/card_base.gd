@@ -102,6 +102,8 @@ func animation_conceal():
 # Animate card to position
 @warning_ignore("shadowed_variable_base_class")
 func animate_card_to_position(position, speed = Globals.DEFAULT_ASPEED):
+	var tree = get_tree();
+	var i = 0;
 	var tween = get_tree().create_tween()
 	tween.tween_property($".", "position", position, speed)
 	

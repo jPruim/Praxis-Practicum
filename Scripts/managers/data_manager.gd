@@ -3,6 +3,7 @@ extends Node2D
 var save_file: String = "user://savefile.tres"
 var achievement_file: String
 var default_save_file: String = "res://Resources/GameData/default_game.tres"
+var debug_summon_file: String = "res://Resources/GameData/summon_test.tres"
 const RunDataPS = preload("res://Resources/Types/RunData.gd") # PackedScene
 const CardDataPS = preload("res://Resources/Types/CardData.gd") # PackedScene
 # Called when the node enters the scene tree for the first time.
@@ -26,6 +27,9 @@ func save_game(run_data: RunData):
 	file.store_line(JSON.stringify(run_data_JSONIFY(run_data)))
 
 func load_default_game_data():
+	if(Globals.DEBUG):
+		if(Globals.DEBUG_TYPE.summon):
+			return load_saved_static_resource(debug_summon_file)
 	return load_saved_static_resource(default_save_file)
 
 func load_saved_static_resource(path: String):
