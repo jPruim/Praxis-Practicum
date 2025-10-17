@@ -31,10 +31,10 @@ const Z_INDEX = {
 	"card_in_slot": 1,
 	"caster_frame": 5,
 	"card_cast_player":6,
-	"target":7,
 	"hand": 10,
 	"card": 15,
 	"card_cast_enemy": 16,
+	"target":17,
 	"card_back": 20,
 	"card_hovered": 25,
 	"tag": 26,
@@ -50,6 +50,11 @@ const MASK = {
 	"deck_opponent": 8,
 	"card_opponent":16,
 	"player_hand": 32,
+}
+
+const LIGHT_MASK = {
+	"world": 1,
+	"card_art": 2,
 }
 
 # Graphic Constants

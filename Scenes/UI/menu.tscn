@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://Scripts/UI Elements/menu.gd" id="1_pbacw"]
 [ext_resource type="Theme" uid="uid://dpn2t23n7kt45" path="res://Scenes/UI/default-theme.theme" id="1_ykmtr"]
 [ext_resource type="Texture2D" uid="uid://dwxfl1wk5n4su" path="res://Assets/Spritesheets/book-3.png" id="2_vkt5i"]
+[ext_resource type="Texture2D" uid="uid://5xoq1uugxjum" path="res://Assets/Spritesheets/book-3-normal-2.png" id="3_b5i0v"]
 [ext_resource type="Theme" uid="uid://cxef1cilx5oai" path="res://Scenes/UI/menu-button.tres" id="3_kp7d6"]
-[ext_resource type="Texture2D" uid="uid://c3ryhb2fa2um3" path="res://Assets/Spritesheets/book-3-normal.png" id="3_xt1fa"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_yersk"]
 diffuse_texture = ExtResource("2_vkt5i")
-normal_texture = ExtResource("3_xt1fa")
+normal_texture = ExtResource("3_b5i0v")
 
 [node name="Menu" type="CanvasLayer"]
 layer = 10

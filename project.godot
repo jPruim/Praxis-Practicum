@@ -51,6 +51,7 @@ theme/default_font_antialiasing=0
 [layer_names]
 
 2d_render/layer_1="World"
+2d_render/layer_2="Cards"
 2d_render/layer_5="UI Elements"
 2d_render/layer_9="Fog"
 2d_render/layer_10="Menu"

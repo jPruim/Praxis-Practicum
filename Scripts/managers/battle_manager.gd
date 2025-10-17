@@ -121,7 +121,6 @@ func time_loop():
 		if(player_cast_time == 0):
 			set_player_turn(true)
 			# Break loop if player needs to cast something
-			print_status()
 			return 
 		next_phase()
 	elif(phase == "clean_up"):
@@ -130,12 +129,13 @@ func time_loop():
 		next_phase()
 	elif(phase == "end_step"):
 		end_step()
+		next_phase()
 	time_loop()
 
 
 # Any end step effects
 func end_step():
-	time_loop()
+	pass
 
 
 
@@ -274,6 +274,7 @@ func create_target(location, player_owned = false):
 		current_target.get_node("PlayerSprite").visible = false
 		current_opponent_targets.append(current_target)
 	$".".add_child(current_target)
+	
 	return
 
 func clear_target(player_owned):
