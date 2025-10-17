@@ -85,14 +85,15 @@ scale = Vector2(5, 5)
 
 [node name="EnemySprite" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.627451)
-z_index = 17
+z_index = 7
+z_as_relative = false
 texture_filter = 1
 position = Vector2(-2.98023e-08, 2.98023e-08)
 texture = ExtResource("1_644jy")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.627451)
-z_index = 17
+z_index = 7
 z_as_relative = false
 texture_filter = 1
 position = Vector2(-2.98023e-08, 2.98023e-08)
