@@ -1,0 +1,40 @@
+[gd_scene load_steps=11 format=3 uid="uid://b3w502gv2muiu"]
+
+[ext_resource type="Script" path="res://Scripts/UI Elements/sigil.gd" id="1_ut6oq"]
+[ext_resource type="Texture2D" uid="uid://dq5mwe04wu53y" path="res://Assets/Spritesheets/CardArt/Seal-basel.png" id="1_vyeca"]
+[ext_resource type="Texture2D" uid="uid://chi12f4cyla0u" path="res://Assets/Spritesheets/CardArt/Seal-base-normal.png" id="2_l704k"]
+[ext_resource type="Texture2D" uid="uid://dtbuynwbwfp7e" path="res://Assets/Spritesheets/TagArt/Gem-normal.png" id="4_ru2lv"]
+[ext_resource type="Texture2D" uid="uid://dufsyu40882k0" path="res://Assets/Spritesheets/TagArt/Gem-red.png" id="4_t0o6l"]
+[ext_resource type="Texture2D" uid="uid://sc7ohlrr45qn" path="res://Assets/Spritesheets/crown-coin.png" id="6_qpa07"]
+[ext_resource type="Texture2D" uid="uid://d1fkndt256wji" path="res://Assets/Spritesheets/TagArt/crown-coin-normal.png" id="7_l7ia8"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_20jqi"]
+diffuse_texture = ExtResource("1_vyeca")
+normal_texture = ExtResource("2_l704k")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_wapl1"]
+diffuse_texture = ExtResource("4_t0o6l")
+normal_texture = ExtResource("4_ru2lv")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_uhv2l"]
+diffuse_texture = ExtResource("6_qpa07")
+normal_texture = ExtResource("7_l7ia8")
+
+[node name="Sigil" type="Node2D"]
+script = ExtResource("1_ut6oq")
+
+[node name="Sigilbase" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("CanvasTexture_20jqi")
+
+[node name="BlueGem" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("CanvasTexture_wapl1")
+
+[node name="RedGem" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("CanvasTexture_wapl1")
+
+[node name="Coin" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("CanvasTexture_uhv2l")
