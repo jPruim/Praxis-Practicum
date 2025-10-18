@@ -25,4 +25,10 @@ func _process(delta: float) -> void:
 	pass
 
 func set_animation_position():
-	$CardFront/Container/AnimatedSprite2D.position.y = 100
+	$CardFront/Container/AnimatedSprite2D.position.y = 85
+	
+func get_card() -> CardBase:
+	if(cards.size() > 0):
+		return cards[0]
+	else:
+		return null

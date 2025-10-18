@@ -6,6 +6,7 @@ var default_save_file: String = "res://Resources/GameData/default_game.tres"
 var debug_summon_file: String = "res://Resources/GameData/summon_test.tres"
 const RunDataPS = preload("res://Resources/Types/RunData.gd") # PackedScene
 const CardDataPS = preload("res://Resources/Types/CardData.gd") # PackedScene
+const RelicDataPS = preload("res://Resources/Types/RelicData.gd") # PackedScene
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -48,7 +49,7 @@ func load_enemy_game_data(enemy: int = 1):
 
 func run_data_JSONIFY(run_data: RunData):
 	var run_json = {}
-	run_json['seed'] = run_data.seed
+	run_json['run_seed'] = run_data.run_seed
 	run_json['event'] = run_data.event
 	run_json['gold'] = run_data.gold
 	run_json['max_health'] = run_data.max_health
@@ -65,12 +66,13 @@ func run_data_JSONIFY(run_data: RunData):
 	
 func run_data_deJSONIFY(run_json):
 	var run_data: RunData = RunDataPS.new()
-	run_data['seed'] = run_json.seed
+	run_data['run_seed'] = run_json.run_seed
 	run_data['event'] = run_json.event
 	run_data['gold'] = run_json.gold
 	run_data['max_health'] = run_json.max_health
 	run_data['current_health'] = run_json.current_health
-	run_data['relics'] = run_json.relics
+	for x in run_json.relic:
+		run_data['relics'].append(relic_data_deJSONIFY(x))
 	run_data['deck'] = []
 	for x in run_json.deck:
 		run_data['deck'].append(card_data_deJSONIFY(x))
@@ -128,3 +130,12 @@ func card_data_deJSONIFY(card_json):
 	card_data['spell_level'] = card_json['spell_level']
 	card_data['tags'] = card_json['tags']
 	return card_data
+
+func relic_data_deJSONIFY(relic_json):
+	var relic_data: RelicData = RelicDataPS.new()
+	relic_data['name'] = relic_json['name']
+	relic_data['cost'] = relic_json['cost']
+	relic_data['rarity'] = relic_json['rarity']
+	relic_data['description'] = relic_json['description']
+	relic_data['image'] = relic_json['image']
+	return relic_data

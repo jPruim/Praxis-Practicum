@@ -22,17 +22,16 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+@warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
 	pass
 
 # Any automatic "start of turn" affects (e.g. draw a card)
 func start_turn():
-	print("AI turn Start")
 	$"../CardManager".get_node("OpponentDeck").draw_card()
 
 # For furture end turn effects (currently there aren't any)
 func end_turn():
-	print("AI turn End")
 	pass
 
 func make_ai_play():

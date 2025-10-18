@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dws2mhcfu18v7"]
+[gd_scene load_steps=27 format=3 uid="uid://dws2mhcfu18v7"]
 
 [ext_resource type="Script" path="res://Scripts/Managers/battle_manager.gd" id="1_q4kp8"]
 [ext_resource type="Script" path="res://Scripts/Managers/spell_manager.gd" id="2_fijju"]
@@ -99,26 +99,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Gradient" id="Gradient_s2b4b"]
-offsets = PackedFloat32Array(0, 0.72238, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0.946176, 0.946176, 0.946176, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_is8as"]
-gradient = SubResource("Gradient_s2b4b")
-fill = 1
-fill_from = Vector2(0.508547, 0.504274)
-fill_to = Vector2(0.893162, 0.162393)
-
-[sub_resource type="Gradient" id="Gradient_cp2la"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ab8nc"]
-gradient = SubResource("Gradient_cp2la")
-width = 1920
-height = 1920
-fill_from = Vector2(0, 1)
-
 [node name="BattleManager" type="Node2D"]
 position = Vector2(-1, 0)
 script = ExtResource("1_q4kp8")
@@ -191,41 +171,5 @@ script = ExtResource("11_3dc1d")
 visible = false
 position = Vector2(557, 169)
 scale = Vector2(5, 5)
-
-[node name="Lighting" type="Node2D" parent="."]
-
-[node name="PlayerLight" type="PointLight2D" parent="Lighting"]
-light_mask = 3
-position = Vector2(324, 416)
-scale = Vector2(7.05469, 7.03906)
-color = Color(1, 0.988235, 0.917647, 0.647059)
-texture = SubResource("GradientTexture2D_is8as")
-
-[node name="EnemyLight" type="PointLight2D" parent="Lighting"]
-position = Vector2(321, 49)
-scale = Vector2(4.03125, 4.03906)
-color = Color(1, 0.988235, 0.917647, 0.796078)
-range_item_cull_mask = 3
-texture = SubResource("GradientTexture2D_is8as")
-
-[node name="Ambient" type="PointLight2D" parent="Lighting"]
-position = Vector2(329, 501)
-scale = Vector2(1.66979, 1.21615)
-color = Color(1, 1, 1, 0.521569)
-blend_mode = 1
-range_layer_max = 2
-range_item_cull_mask = 769
-texture = SubResource("GradientTexture2D_ab8nc")
-height = 100.0
-
-[node name="CardAmbient" type="PointLight2D" parent="Lighting"]
-position = Vector2(329, 501)
-scale = Vector2(1.66979, 1.21615)
-color = Color(1, 1, 1, 0.403922)
-blend_mode = 1
-range_layer_max = 2
-range_item_cull_mask = 2
-texture = SubResource("GradientTexture2D_ab8nc")
-height = 400.0
 
 [connection signal="pressed" from="Playspace/PassButton" to="." method="_on_pass_button_pressed"]

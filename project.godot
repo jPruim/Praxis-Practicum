@@ -14,7 +14,7 @@ config/name="Praxis & Practicum"
 config/version="0.01"
 run/main_scene="res://Scenes/UI/game_manager.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://Assets/Spritesheets/crown-coin.png"
+config/icon="res://Assets/Spritesheets/TagArt/crown-coin-normal.png"
 
 [autoload]
 

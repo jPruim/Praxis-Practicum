@@ -25,6 +25,40 @@ func connect_signals() -> void:
 	SignalBus.connect("run_resume", run_resume)
 	SignalBus.connect("run_loss",	end_run)
 	SignalBus.connect("run_won", end_run)
+	SignalBus.connect("fight_enter", initialize_fight)
+	SignalBus.connect("shop_enter", initialize_shop)
+	SignalBus.connect("shop_exit", end_shop)
+	SignalBus.connect("fight_loss", fight_loss)
+	SignalBus.connect("fight_won", fight_won)
+
+
+func initialize_fight():
+	show_game_ui()
+	battle_manager = battle_manager_scene.instantiate()
+	$".".add_child(battle_manager)
+	battle_manager.setup_combat(run_data)
+	pass
+
+func initialize_shop():
+	pass
+
+func fight_loss():
+	print("Fight Loss")
+	fight_cleanup()
+	end_run(false)
+	pass
+
+func fight_won():
+	print("Fight Won", run_data)
+	run_data.gold += run_data.max_health - run_data.current_health
+	fight_cleanup()
+	next_phase()
+	
+func fight_cleanup():
+	battle_manager.queue_free()
+
+func end_shop():
+	next_phase()
 
 func run_resume():
 	run_start(true) 
@@ -34,7 +68,7 @@ func run_start(resuming: bool = false):
 	$Fog/Fog.visible = false
 	if( !resuming ):
 		# Remove previous game from active scene
-		if(battle_manager):
+		if(!(!(battle_manager))):
 			battle_manager.queue_free()
 		run_data = DataManager.load_default_game_data()
 		first_assignment()
@@ -56,22 +90,25 @@ func end_run(victory: bool):
 func next_phase():
 	if run_data.phase == "assignment":
 		run_data.phase = "post_fight_dialogue"
+		# TODO: Add dialogue
+		next_phase()
 	elif run_data.phase == "post_fight_dialogue":
 		if (run_data.assignment == 12):
 			run_data.phase = "victory"
 			SignalBus.emit_signal("run_win")
 		run_data.phase = "shoppping"
+		SignalBus.emit_signal("shop_enter")
 	elif run_data.phase == "shopping":
 		run_data.phase = "assignment"
+		run_data.assignment += 1
+		SignalBus.emit_signal("fight_enter")
 	DataManager.save_game(run_data)
 
 func first_assignment():
-	show_game_ui()
+	run_data.phase = "assignment"
 	run_data.assignment = 1
-	battle_manager = battle_manager_scene.instantiate()
-	$".".add_child(battle_manager)
-	battle_manager.setup_combat(run_data)
-
+	SignalBus.emit_signal("fight_enter")
+	
 func hide_game_ui():
 	$UI.visible = false
 

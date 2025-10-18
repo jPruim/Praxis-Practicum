@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c7mxxeb5gtpft"]
+[gd_scene load_steps=20 format=3 uid="uid://c7mxxeb5gtpft"]
 
 [ext_resource type="Script" path="res://Scripts/Managers/game_manager.gd" id="1_ypglt"]
 [ext_resource type="PackedScene" uid="uid://cmqw3g63oh7ut" path="res://Scenes/UI/menu.tscn" id="2_3q5x6"]
@@ -11,8 +11,39 @@
 [ext_resource type="Texture2D" uid="uid://dep335bxf8gas" path="res://Assets/Spritesheets/Fire-icon.png" id="9_tyfb3"]
 [ext_resource type="Theme" uid="uid://dpn2t23n7kt45" path="res://Scenes/UI/default-theme.theme" id="10_mhp3w"]
 [ext_resource type="Texture2D" uid="uid://bj8afq7v5wd2n" path="res://Assets/Spritesheets/Settings-icon.png" id="11_38tdi"]
+[ext_resource type="Script" path="res://Scripts/Managers/lighting_manager.gd" id="12_t4hrx"]
 
 [sub_resource type="Theme" id="Theme_euek4"]
+
+[sub_resource type="Gradient" id="Gradient_s2b4b"]
+offsets = PackedFloat32Array(0, 0.72238, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.946176, 0.946176, 0.946176, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wf70c"]
+gradient = SubResource("Gradient_s2b4b")
+fill = 1
+fill_from = Vector2(0.508547, 0.504274)
+fill_to = Vector2(0.893162, 0.162393)
+
+[sub_resource type="Gradient" id="Gradient_cp2la"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2cmpm"]
+gradient = SubResource("Gradient_cp2la")
+width = 1920
+height = 1920
+fill_from = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_5s0rb"]
+offsets = PackedFloat32Array(0, 0.993994)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lxxkv"]
+gradient = SubResource("Gradient_5s0rb")
+fill = 1
+fill_from = Vector2(0.525641, 0.5)
+fill_to = Vector2(0.854701, 0.17094)
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_ypglt")
@@ -122,5 +153,45 @@ icon_alignment = 1
 [node name="MarginContainer" type="MarginContainer" parent="UI/HeaderBar/NinePatchRect/HBoxContainer"]
 custom_minimum_size = Vector2(5, 0)
 layout_mode = 2
+
+[node name="LightingManager" type="Node2D" parent="."]
+script = ExtResource("12_t4hrx")
+
+[node name="PlayerLight" type="PointLight2D" parent="LightingManager"]
+light_mask = 3
+position = Vector2(324, 416)
+scale = Vector2(7.05469, 7.03906)
+color = Color(1, 0.988235, 0.917647, 0.647059)
+texture = SubResource("GradientTexture2D_wf70c")
+
+[node name="EnemyLight" type="PointLight2D" parent="LightingManager"]
+position = Vector2(321, 49)
+scale = Vector2(4.03125, 4.03906)
+color = Color(1, 0.988235, 0.917647, 0.796078)
+range_item_cull_mask = 3
+texture = SubResource("GradientTexture2D_wf70c")
+
+[node name="Ambient" type="PointLight2D" parent="LightingManager"]
+position = Vector2(329, 501)
+scale = Vector2(1.66979, 1.21615)
+color = Color(1, 1, 1, 0.521569)
+blend_mode = 1
+range_layer_max = 2
+range_item_cull_mask = 769
+texture = SubResource("GradientTexture2D_2cmpm")
+height = 100.0
+
+[node name="CardAmbient" type="PointLight2D" parent="LightingManager"]
+position = Vector2(329, 501)
+scale = Vector2(1.66979, 1.21615)
+color = Color(1, 1, 1, 0.403922)
+blend_mode = 1
+range_layer_max = 2
+range_item_cull_mask = 2
+texture = SubResource("GradientTexture2D_2cmpm")
+height = 400.0
+
+[node name="ShopLight" type="PointLight2D" parent="LightingManager"]
+texture = SubResource("GradientTexture2D_lxxkv")
 
 [connection signal="pressed" from="UI/HeaderBar/NinePatchRect/HBoxContainer/VBoxContainer/Menubutton" to="." method="_on_menubutton_pressed"]

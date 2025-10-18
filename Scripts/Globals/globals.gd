@@ -4,7 +4,7 @@ extends Node
 const VIEWPORT_SIZE = Vector2(640,360)
 const DEBUG = true
 const DEBUG_TYPE = {
-	"summon": true,
+	"summon": false,
 	"spell": false,
 	"shop": false,
 	"victory": false,
@@ -58,8 +58,8 @@ const LIGHT_MASK = {
 }
 
 # Graphic Constants
-const DECK_POSITION = Vector2(200, 290)
-const OPPONENT_DECK_POSITION = Vector2(200, 70)
+const DECK_POSITION = Vector2(50, 290)
+const OPPONENT_DECK_POSITION = Vector2(50, 50)
 const CARD_SCALE_PlACED = Vector2( 1, 1)
 const DEFAULT_ASPEED = 0.25
 const PLAYER_POSITION = Vector2((VIEWPORT_SIZE/ 2).x, 290)

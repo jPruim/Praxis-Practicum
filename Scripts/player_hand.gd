@@ -15,6 +15,7 @@ var hovered: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	@warning_ignore("narrowing_conversion")
 	center_screen_x = floor(Globals.VIEWPORT_SIZE.x / 2)
 	$".".z_index = Globals.Z_INDEX.hand
 	SignalBus.player_turn.connect(_player_turn)
@@ -64,24 +65,27 @@ func update_hand_positions( speed = DEFAULT_ASPEED):
 func calculate_card_position(i):
 	# Apprently, this needs to also be defined here for the function 
 	# to work on initial loading (otherwise center_screen_x is 0)
+	@warning_ignore("narrowing_conversion")
 	center_screen_x = floor(Globals.VIEWPORT_SIZE.x / 2) 
 	var total_width = (player_hand.size() - 1) * CARD_WIDTH
 	var x_offset
 	
 	# Reverse the directions of enemy hands
 	if (!ai_hand):
+		@warning_ignore("integer_division")
 		x_offset = center_screen_x + i * CARD_WIDTH - total_width / 2
 	else:
+		@warning_ignore("integer_division")
 		x_offset = center_screen_x - i * CARD_WIDTH + total_width / 2
 	return x_offset
 
 
 
-func update_hand_border(hovered: bool = false):
+func update_hand_border(status_hover: bool = false):
 	var tween = get_tree().create_tween()
 	var new_position = $".".position
 	new_position.y = Globals.PLAYER_HAND_Y_POS
-	if hovered:
+	if status_hover:
 		new_position.y += offset_value
 	tween.tween_property($".", "position", new_position, Globals.DEFAULT_ASPEED)
 
@@ -93,5 +97,6 @@ func _on_area_2d_mouse_exited() -> void:
 	SignalBus.emit_signal("player_hand_hovered_off")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+@warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
 	pass

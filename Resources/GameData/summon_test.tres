@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Resources/Types/CardData.gd" id="1_adix4"]
 [ext_resource type="Resource" uid="uid://b8t8hb5j7rqf5" path="res://Resources/Cards/FireFox.tres" id="2_powo1"]
 [ext_resource type="Resource" uid="uid://8vam1kq7wb83" path="res://Resources/Cards/Bee.tres" id="3_qc51x"]
-[ext_resource type="Script" path="res://Resources/Types/Relic.gd" id="4_3s3ls"]
+[ext_resource type="Script" path="res://Resources/Types/RelicData.gd" id="4_3s3ls"]
 [ext_resource type="Script" path="res://Resources/Types/RunData.gd" id="5_ylbrk"]
 
 [resource]

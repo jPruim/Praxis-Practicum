@@ -66,7 +66,7 @@ func set_display(data: CardData):
 		set_animation()
 	
 # Create Array from Card
-func get_card_info():
+func get_card_info() -> CardData:
 	return card_data
 
 func get_card_type():

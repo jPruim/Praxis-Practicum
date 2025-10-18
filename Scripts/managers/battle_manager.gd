@@ -52,6 +52,7 @@ func _player_turn_changed(state: bool):
 	is_player_turn = state
 
 func setup_combat(run_data: RunData):
+	#DataManager.print_run_data(run_data)
 	identify_slots()
 	in_combat = true
 	$GameTime.set_time(3)
@@ -103,11 +104,10 @@ func next_phase():
 		phase = phase_list[(1 + phase_list.find(phase)) % phase_list.size()]
 
 func time_loop():
-	if (iterations <= 0):
+	if (iterations <= 0 || in_combat == false):
 		return
 	else:
 		iterations-=1
-	in_combat = true
 	print_status()
 	delay()
 	if(phase == "start_turn"):
@@ -287,22 +287,19 @@ func clear_target(player_owned):
 	return
 
 func clean_up():
-	# TODO make this actually check things
-	if(check_game_end()):
-		return
-	else:
-		time_loop()
+	check_game_end()
+		
 
 func check_game_end():
-	# TODO make this actually check things
 	var player_frame: CasterFrameBase = $Playspace/PlayerSlot.cards[0]
 	var opponent_frame: CasterFrameBase = $Playspace/OpponentSlot.cards[0]
-	if(player_frame.card_data.current_health <= 0):
+	if(player_frame.get_card_info().current_health <= 0):
 		SignalBus.emit_signal("fight_loss")
-		return true
-	elif(opponent_frame.card_data.current_health <= 0):
+		in_combat = false
+	elif(opponent_frame.get_card_info().current_health <= 0):
 		SignalBus.emit_signal("fight_won")
-	return false
+		in_combat = false
+	
 
 # For testing purposes
 func print_status():
