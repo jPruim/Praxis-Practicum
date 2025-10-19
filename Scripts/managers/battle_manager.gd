@@ -286,7 +286,19 @@ func clean_up():
 		clear_target(true)
 	if opponent_manager.cast_time == 0:
 		clear_target(false)
-
+	for slot: CardSlot in ai_slots:
+		if slot.cards.size() > 0 && slot.cards[0].get_health() <=0:
+			slot.cards[0].queue_free()
+			slot.cards = []
+		slot.update_graphic()
+	for slot: CardSlot in player_slots:
+		if slot.cards.size() > 0 && slot.cards[0].get_health() <= 0:
+			slot.cards[0].queue_free()
+			slot.cards = []
+		slot.update_graphic()
+	$Playspace/PlayerSlot.update_graphic()
+	$Playspace/OpponentSlot.update_graphic()
+	
 func check_game_end():
 	if(player.get_card_info().summon_health <= 0):
 		print("Player Health: ", player.get_card_info().summon_health)

@@ -123,9 +123,29 @@ func animate_card_to_slot(slot: CardSlot, scale = Globals.CARD_SCALE_PlACED, spe
 	animate_card_to_scale(scale, speed)
 	var i = 0;
 	
-	
+func has_tag(name: String):
+	for tag in card_data.tags:
+		if tag == name:
+			return true
+	return false	
 
+func has_effect(name: String):
+	for effect in card_data.effects:
+		if effect == name:
+			return true
+	return false	
 
+func add_tag(name: String):
+	card_data.tags.append(name)
+
+func remove_tag(name: String):
+	card_data.tags.erase(name)
+
+func add_effect(name: String):
+	card_data.effects.append(name)
+
+func remove_effect(name: String):
+	card_data.effects.erase(name)
 
 # Change card affects TODO: Decide if cards in cardslots need animations (go and add a new mask for animations, and separate from card detection)
 func card_affects(hovered: bool = false):

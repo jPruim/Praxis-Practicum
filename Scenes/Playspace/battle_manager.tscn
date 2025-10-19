@@ -26,9 +26,6 @@ script = ExtResource("1_q4kp8")
 
 [node name="BattleTimer" type="Timer" parent="."]
 
-[node name="SpellManager" type="Node2D" parent="."]
-script = ExtResource("2_fijju")
-
 [node name="Playspace" type="Node2D" parent="."]
 script = ExtResource("3_x32qe")
 
@@ -88,5 +85,8 @@ script = ExtResource("11_3dc1d")
 [node name="OpponentManager" parent="." instance=ExtResource("12_is4qh")]
 
 [node name="OpponentTimer" type="Timer" parent="OpponentManager"]
+
+[node name="SpellManager" type="Node2D" parent="."]
+script = ExtResource("2_fijju")
 
 [connection signal="pressed" from="Playspace/PassButton" to="." method="_on_pass_button_pressed"]

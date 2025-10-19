@@ -168,7 +168,7 @@ func reshuffle_deck():
 
 func add_card_to_discard_pile(card: CardBase):
 	# Check if this is the correct deck
-	if card.ai_card == ai_deck:
+	if card && card.ai_card == ai_deck:
 		card.animation_conceal()
 		card.scale = Globals.SCALE.card_discard
 		card.discarded = true
@@ -177,4 +177,4 @@ func add_card_to_discard_pile(card: CardBase):
 		else:
 			card.animate_card_to_position(Globals.POSITION.player_discard_pile)
 		discard_pile.append(card)
-	card.card_affects(false)
+		card.card_affects(false)

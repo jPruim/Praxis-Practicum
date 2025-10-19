@@ -11,11 +11,11 @@
 [resource]
 script = ExtResource("7_luodr")
 name = "Viceroy"
-seed = 0
+run_seed = 0
 event = 1
 gold = 0
-max_health = 100
-current_health = 100
+max_health = 40
+current_health = 40
 relics = Array[ExtResource("6_wxqvw")]([])
 deck = Array[ExtResource("1_mygd8")]([ExtResource("2_im3wi"), ExtResource("2_im3wi"), ExtResource("2_im3wi"), ExtResource("2_im3wi"), ExtResource("3_jrbbo"), ExtResource("3_jrbbo"), ExtResource("3_jrbbo"), ExtResource("4_utvqb"), ExtResource("4_utvqb"), ExtResource("4_utvqb"), ExtResource("4_utvqb"), ExtResource("3_jrbbo"), ExtResource("5_qa616"), ExtResource("5_qa616"), ExtResource("5_qa616")])
 assignment = 0

@@ -12,11 +12,11 @@
 [resource]
 script = ExtResource("3_1f5od")
 name = "Veritas"
-seed = 0
+run_seed = 0
 event = 1
 gold = 50
-max_health = 100
-current_health = 100
+max_health = 40
+current_health = 40
 relics = Array[ExtResource("2_k6grd")]([])
 deck = Array[ExtResource("1_6ygvw")]([ExtResource("2_8pc0v"), ExtResource("2_8pc0v"), ExtResource("2_8pc0v"), ExtResource("2_8pc0v"), ExtResource("3_ry4w2"), ExtResource("3_ry4w2"), ExtResource("3_ry4w2"), ExtResource("4_usnh2"), ExtResource("4_usnh2"), ExtResource("4_usnh2"), ExtResource("4_usnh2"), ExtResource("3_ry4w2"), ExtResource("5_inxbn"), ExtResource("5_inxbn"), ExtResource("5_inxbn"), ExtResource("6_7o0h7"), ExtResource("6_7o0h7")])
 assignment = 0
