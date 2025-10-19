@@ -45,7 +45,9 @@ signal sell_sigil
 
 # Control Signals
 signal shuffle_deck
+signal on_shuffle_deck
 signal player_turn(state: bool)
+signal discard_card(card: CardBase)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

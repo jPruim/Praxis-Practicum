@@ -26,12 +26,11 @@ func _ready() -> void:
 	card_scene = preload(CARD_SCENE_PATH)
 	spell_scene = preload(SPELL_SCENE_PATH)
 	summon_scene = preload(SUMMON_SCENE_PATH)
+	SignalBus.connect("discard_card", add_card_to_discard_pile)
 	$DeckCount.text = str(deck.size())
 	# Initialize the deck ai_deck is assigned in the parent _ready() function
 	# initialize()
 	pass # Replace with function body.
-
-
 
 func initialize(run_data: RunData, handsize: int = 5):
 	card_scene = preload(CARD_SCENE_PATH)
@@ -160,5 +159,20 @@ func add_card_to_deck(data: CardData):
 func reshuffle_deck():
 	deck = discard_pile
 	deck.shuffle()
+	# reset card tracking
+	for card in deck:
+		card.discarded = false
+		card.in_slot = false
 	discard_pile = []
-	SignalBus.emit_signal("shuffle_deck")
+	SignalBus.emit_signal("on_shuffle_deck")
+
+func add_card_to_discard_pile(card: CardBase):
+	# Check if this is the correct deck
+	if card.ai_card == ai_deck:
+		card.animation_conceal()
+		card.scale = Globals.SCALE.card_discard
+		if(ai_deck):
+			card.animate_card_to_position(Globals.POSITION.opponent_discard_pile)
+		else:
+			card.animate_card_to_position(Globals.POSITION.player_discard_pile)
+		discard_pile.append(card)

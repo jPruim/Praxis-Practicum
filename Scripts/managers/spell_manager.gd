@@ -9,6 +9,8 @@ var opponent_target_slots: Array[CardSlot] = []
 var battle_manager: BattleManager
 var opponent_manager: OpponentManager
 var card_manager: CardManager
+var summon_base = preload("res://Scenes/Cards/summon_card_base.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	battle_manager = $".."
@@ -46,18 +48,15 @@ func resolve_spells():
 
 # Create copy of spell as a summon card in slot
 func resolve_spell_summon_at(spell: CardBase, slot: CardSlot):
-	var summon: SummonCardBase = SummonCardBase.new()
+	var summon: SummonCardBase = summon_base.instantiate()
 	summon.copy(spell)
+	SignalBus.emit_signal("discard_card", spell)
 	card_manager.add_child(summon)
 	slot.cards = [summon]
 	summon.animate_card_to_slot(slot)
-	slot.cards[0].card_data.current_health = 0
-	slot.cards[0].card_data.current_attack = 0
-	slot.cards[0].card_data.current_health += summon.card_data.summon_health
-	slot.cards[0].card_data.current_attack += summon.card_data.summon_attack
-	print("CardSlot Summon: ", slot, slot.cards.size())
-
-	
+	slot.cards[0].card_data.current_health = summon.card_data.summon_health
+	slot.cards[0].card_data.current_attack = summon.card_data.summon_attack
+	slot.update_graphic()
 
 func resolve_spell_barrier_at(spell:CardBase, slot: CardSlot):
 	var block = spell.card_data.damage
@@ -73,9 +72,11 @@ func resolve_spell_dmg_at(spell:CardBase, slot: CardSlot):
 
 func add_player_target(slot: CardSlot):
 	player_target_slots.append(slot)
+	pass
 	
 func add_opponent_target(slot):
 	opponent_target_slots.append(slot)
+	pass
 
 
 # Signals

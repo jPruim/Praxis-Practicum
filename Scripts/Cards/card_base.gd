@@ -9,7 +9,7 @@ var ai_card: bool = false
 var being_cast: bool = false
 var being_hovered: bool = false
 var default_tag_location = Vector2(-176, -80)
-
+var discarded: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_default_data()
@@ -23,12 +23,14 @@ func _process(_delta: float) -> void:
 	
 # Set to full deep copy of the passed in CardBase
 func copy(card: CardBase):	
-	card_data = card.card_data.duplicate(true)
+	set_all(card.card_data)
 	hand_position = card.hand_position
 	in_slot = card.in_slot
 	ai_card = card.ai_card
+	discarded = card.discarded
 	being_cast = card.being_cast
-
+	set_display(card_data)
+	
 func set_default_data():
 	if(card_data):
 		return
