@@ -239,11 +239,7 @@ func _on_player_targeting_slot(slot: CardSlot, card: CardBase):
 
 @warning_ignore("unused_parameter")
 func time_loop_delay(amount = DEFAULT_DELAY):
-	if Globals.DEBUG:
-		print("Before timeout: ", iterations)
 	await get_tree().create_timer(amount).timeout
-	if Globals.DEBUG:
-		print("After timeout: ", iterations)
 	time_loop()
 	return
 

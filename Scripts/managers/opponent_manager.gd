@@ -28,7 +28,6 @@ func _process(delta: float) -> void:
 
 # Any automatic "start of turn" affects (e.g. draw a card)
 func start_turn():
-	print("AI Draw Card Attempt")
 	$"../CardManager/OpponentDeck".draw_card()
 	$"../CardManager/OpponentHand".update_hand_positions()
 

@@ -43,9 +43,9 @@ func remove_card_from_hand(card: CardBase):
 		player_hand.erase(card)
 		update_hand_positions()
 	else:
-		printerr("Removing card not in hand: ", card.ai_card,   DataManager.card_data_JSONIFY(card.card_data))
-		for x in player_hand:
-			print("\n\t", DataManager.card_data_JSONIFY(x.card_data))
+		# TODO: Figure out why this is ever being run
+		return
+		
 	pass
 
 # update_hand_position
