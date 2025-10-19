@@ -55,6 +55,8 @@ func _ready() -> void:
 	$PlayerSlot.is_player = true
 	$PlayerSlot.player_owned = false
 	$PlayerSlot.position = Globals.PLAYER_POSITION
+	$PlayerCastTime.position = Globals.PLAYER_CAST_POSITION
+	$OpponentCastTime.position = Globals.ENEMY_CAST_POSITION
 	pass # Replace with function body.
 
 func _input(event: InputEvent) -> void:

@@ -34,7 +34,6 @@ func menu_lighting():
 	
 func _pass_lighting(state: bool):
 	$PassLight.visible = state
-	print("PlayerLight")
 
 func battle_lighting():
 	$PlayerLight.visible = true

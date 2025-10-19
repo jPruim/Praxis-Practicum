@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dws2mhcfu18v7"]
+[gd_scene load_steps=15 format=3 uid="uid://dws2mhcfu18v7"]
 
 [ext_resource type="Script" path="res://Scripts/Managers/battle_manager.gd" id="1_q4kp8"]
 [ext_resource type="Script" path="res://Scripts/Managers/spell_manager.gd" id="2_fijju"]
@@ -6,13 +6,12 @@
 [ext_resource type="Theme" uid="uid://dpn2t23n7kt45" path="res://Scenes/UI/default-theme.theme" id="4_p0ay2"]
 [ext_resource type="Script" path="res://Scripts/UI Elements/pass_button.gd" id="5_hc2at"]
 [ext_resource type="PackedScene" uid="uid://brqd7qlj1sonb" path="res://Scenes/Cards/card_slot.tscn" id="5_jwt0r"]
-[ext_resource type="Texture2D" uid="uid://ba411usipidba" path="res://Assets/Characters/Knight/_Idle.png" id="6_h1mt6"]
 [ext_resource type="Script" path="res://Scripts/Managers/card_manager.gd" id="8_igyel"]
+[ext_resource type="PackedScene" uid="uid://bcsfohtmxascv" path="res://Scenes/Playspace/cast_time.tscn" id="8_vjwtq"]
 [ext_resource type="PackedScene" uid="uid://vlo6uno0t1dc" path="res://Scenes/Cards/player_hand.tscn" id="9_c2gkm"]
 [ext_resource type="Script" path="res://Scripts/Cards/card_database.gd" id="10_axl6h"]
 [ext_resource type="Script" path="res://input_manager.gd" id="11_3dc1d"]
 [ext_resource type="PackedScene" uid="uid://crv6rsiuh0gi1" path="res://Scenes/Playspace/opponent_manager.tscn" id="12_is4qh"]
-[ext_resource type="PackedScene" uid="uid://bcsfohtmxascv" path="res://Scenes/Playspace/game_time.tscn" id="13_nv2l5"]
 
 [sub_resource type="Gradient" id="Gradient_dttap"]
 
@@ -20,84 +19,6 @@
 gradient = SubResource("Gradient_dttap")
 width = 4
 height = 4
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_64vpn"]
-atlas = ExtResource("6_h1mt6")
-region = Rect2(0, 0, 120, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b6ace"]
-atlas = ExtResource("6_h1mt6")
-region = Rect2(120, 0, 120, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tabat"]
-atlas = ExtResource("6_h1mt6")
-region = Rect2(240, 0, 120, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_l5ux6"]
-atlas = ExtResource("6_h1mt6")
-region = Rect2(360, 0, 120, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_087gk"]
-atlas = ExtResource("6_h1mt6")
-region = Rect2(480, 0, 120, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vwj3r"]
-atlas = ExtResource("6_h1mt6")
-region = Rect2(600, 0, 120, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qw6jv"]
-atlas = ExtResource("6_h1mt6")
-region = Rect2(720, 0, 120, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_24poh"]
-atlas = ExtResource("6_h1mt6")
-region = Rect2(840, 0, 120, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_r4drr"]
-atlas = ExtResource("6_h1mt6")
-region = Rect2(960, 0, 120, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2m20e"]
-atlas = ExtResource("6_h1mt6")
-region = Rect2(1080, 0, 120, 80)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_5q441"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_64vpn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b6ace")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tabat")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_l5ux6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_087gk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vwj3r")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qw6jv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_24poh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_r4drr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2m20e")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [node name="BattleManager" type="Node2D"]
 position = Vector2(-1, 0)
@@ -138,18 +59,14 @@ script = ExtResource("5_hc2at")
 z_as_relative = false
 position = Vector2(320, 337)
 
-[node name="PlayerSprite" type="AnimatedSprite2D" parent="Playspace/PlayerSlot"]
-visible = false
-z_as_relative = false
-position = Vector2(19, -83)
-scale = Vector2(5, 5)
-sprite_frames = SubResource("SpriteFrames_5q441")
-autoplay = "default"
-frame_progress = 0.333758
-
 [node name="OpponentSlot" parent="Playspace" instance=ExtResource("5_jwt0r")]
 z_index = 5
 z_as_relative = false
+position = Vector2(320, 26)
+
+[node name="PlayerCastTime" parent="Playspace" instance=ExtResource("8_vjwtq")]
+
+[node name="OpponentCastTime" parent="Playspace" instance=ExtResource("8_vjwtq")]
 position = Vector2(320, 26)
 
 [node name="CardManager" type="Node2D" parent="."]
@@ -171,10 +88,5 @@ script = ExtResource("11_3dc1d")
 [node name="OpponentManager" parent="." instance=ExtResource("12_is4qh")]
 
 [node name="OpponentTimer" type="Timer" parent="OpponentManager"]
-
-[node name="GameTime" parent="." instance=ExtResource("13_nv2l5")]
-visible = false
-position = Vector2(557, 169)
-scale = Vector2(5, 5)
 
 [connection signal="pressed" from="Playspace/PassButton" to="." method="_on_pass_button_pressed"]

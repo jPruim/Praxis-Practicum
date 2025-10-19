@@ -33,6 +33,7 @@ const Z_INDEX = {
 	"card_cast_player":6,
 	"card_cast_enemy": 6,
 	"target":7,
+	"cast_time": 9,
 	"hand": 10,
 	"card": 15,
 	"card_back": 20,

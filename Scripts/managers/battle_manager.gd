@@ -18,8 +18,8 @@ var current_opponent_targets = []
 var caster_frame_base_scene = preload("res://Scenes/Cards/caster_frame_base.tscn")
 var player: CasterFrameBase
 var enemy: CasterFrameBase
-const DEFAULT_DELAY = 1
-var phase_list = ["start_turn","ai_decision", "player_decision","clean_up", "end_step"]
+const DEFAULT_DELAY = 0.5
+var phase_list = ["start_turn","ai_decision", "player_decision","spell_cast", "clean_up", "end_step"]
 var phase: String
 var iterations: int = 50 # TODO remove this, infinite loop catcher
 
@@ -49,7 +49,6 @@ func set_player_turn(state: bool):
 
 func _player_turn_changed(state: bool):
 	is_player_turn = state
-	print("Player Turn: ", is_player_turn)
 
 func setup_combat(run_data: RunData):
 	#DataManager.print_run_data(run_data)
@@ -122,13 +121,17 @@ func time_loop():
 			# Break loop if player needs to cast something
 			return 
 		next_phase()
-	elif(phase == "clean_up"):
+	elif(phase == "spell_cast"):
 		increment_time() # Spell resolution
+		next_phase()
+	elif(phase == "clean_up"):
 		clean_up()
 		next_phase()
 	elif(phase == "end_step"):
 		end_step()
 		next_phase()
+	# Always keep cast times up to date
+	update_cast_times()
 	time_loop_delay()
 
 
@@ -150,6 +153,7 @@ func increment_time():
 		opponent_manager.cast_time -= 1
 	elif opponent_manager.cast_time < 0:
 		printerr("Opponent cast_time is negative") # TODO: Remove this comment
+	update_cast_times()
 	spell_manager.resolve_spells()
 
 	
@@ -192,9 +196,10 @@ func _on_player_targeting_opponent(card: CardBase):
 	card.being_cast = true
 	create_target(Globals.ENEMY_POSITION, true)
 	spell_manager.cast(card, true)
+	$Playspace/PlayerCastTime.set_time(player_cast_time)
 	is_player_turn = false
 	next_phase()
-	time_loop()
+	time_loop_delay(2)
 
 
 func _on_player_targeting_self(card: CardBase):
@@ -203,9 +208,10 @@ func _on_player_targeting_self(card: CardBase):
 	card.being_cast = true
 	create_target(Globals.PLAYER_POSITION, true)
 	spell_manager.cast(card, true)
+	$Playspace/PlayerCastTime.set_time(player_cast_time)
 	is_player_turn = false
 	next_phase()
-	time_loop()
+	time_loop_delay(2)
 	
 func _on_player_targeting_slot(slot: CardSlot, card: CardBase):
 	print("Player Cast at slot")
@@ -213,9 +219,10 @@ func _on_player_targeting_slot(slot: CardSlot, card: CardBase):
 	card.being_cast = true
 	create_target(slot.position, true)
 	spell_manager.cast(card, true)
+	$Playspace/PlayerCastTime.set_time(player_cast_time)
 	is_player_turn = false
 	next_phase()
-	time_loop()
+	time_loop_delay(2)
 
 @warning_ignore("unused_parameter")
 func time_loop_delay(amount = DEFAULT_DELAY):
@@ -295,3 +302,7 @@ func print_status():
 		if(phase == "player_decision"):
 			output += "\n\tWaiting on Player"
 	print(output)
+
+func update_cast_times():
+	$Playspace/PlayerCastTime.set_time(player_cast_time)
+	$Playspace/OpponentCastTime.set_time($OpponentManager.cast_time)
