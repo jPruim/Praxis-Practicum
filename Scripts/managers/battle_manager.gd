@@ -67,7 +67,7 @@ func setup_player(run_data: RunData):
 	player.set_aloction()
 	player.set_default_data()
 	player.z_index = Globals.Z_INDEX["caster_frame"]
-	player.scale = Globals.CARD_SCALE_PlACED
+	player.scale = Globals.SCALE.caster
 	player.set_display_name(run_data.name)
 	player.set_animation("Adventurer")
 	player.set_health(run_data.current_health)
@@ -82,7 +82,7 @@ func setup_enemy(enemy_data: RunData):
 	enemy.set_aloction()
 	enemy.set_default_data()
 	enemy.z_index = Globals.Z_INDEX["caster_frame"]
-	enemy.scale = Globals.SCALE.card_placed
+	enemy.scale = Globals.SCALE.caster
 	enemy.set_display_name(enemy_data.name)
 	enemy.set_animation("Adventurer")
 	enemy.position = Globals.ENEMY_POSITION
@@ -270,14 +270,20 @@ func clear_target(player_owned):
 	if player_owned:
 		for x in current_player_targets:
 			x.free()
+		current_player_targets = []
 	else:
 		for y in current_opponent_targets:
 			y.free()
+		current_opponent_targets = []
 	return
 
 func clean_up():
 	check_game_end()
-		
+	# Clean up targets
+	if player_cast_time == 0:
+		clear_target(true)
+	elif opponent_manager.cast_time == 0:
+		clear_target(false)
 
 func check_game_end():
 	if(player.get_card_info().summon_health <= 0):

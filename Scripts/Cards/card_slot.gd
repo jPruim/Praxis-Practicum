@@ -36,9 +36,10 @@ func get_card() -> CardBase:
 func update_graphic():
 	if(cards.size() == 0):
 		return
+	cards[0].position = $".".position
 	cards[0].scale = Globals.CARD_SCALE_PlACED
 	cards[0].z_index = Globals.Z_INDEX.card_in_slot
+	cards[0].in_slot = true
 	cards[0].visible = true
 	cards[0].animation_reveal()
-	cards[0].in_slot = true
-	cards[0].animate_card_to_slot($".")
+	cards[0].card_affects(false)

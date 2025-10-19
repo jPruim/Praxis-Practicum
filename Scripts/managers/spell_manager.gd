@@ -42,9 +42,13 @@ func resolve_spells():
 	if opponent_spell_ready && opponent_spell.card_data.card_type == "summon":
 		for slot in opponent_target_slots:
 			resolve_spell_summon_at(opponent_spell, slot)
+		opponent_spell = null
+		opponent_target_slots = []
 	if player_spell_ready && player_spell.card_data.card_type == "summon":
 		for slot in player_target_slots:
 			resolve_spell_summon_at(player_spell, slot)
+		player_spell = null
+		player_target_slots = []
 
 # Create copy of spell as a summon card in slot
 func resolve_spell_summon_at(spell: CardBase, slot: CardSlot):

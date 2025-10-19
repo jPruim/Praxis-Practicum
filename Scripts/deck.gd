@@ -171,8 +171,10 @@ func add_card_to_discard_pile(card: CardBase):
 	if card.ai_card == ai_deck:
 		card.animation_conceal()
 		card.scale = Globals.SCALE.card_discard
+		card.discarded = true
 		if(ai_deck):
 			card.animate_card_to_position(Globals.POSITION.opponent_discard_pile)
 		else:
 			card.animate_card_to_position(Globals.POSITION.player_discard_pile)
 		discard_pile.append(card)
+	card.card_affects(false)

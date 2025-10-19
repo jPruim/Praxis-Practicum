@@ -124,7 +124,7 @@ func get_top_card(results):
 	return top_card
 		
 func start_drag(card:CardBase):
-	if(card.being_cast || card is CasterFrameBase):
+	if(card.being_cast || card is CasterFrameBase || card.in_slot):
 		return
 	card_being_dragged = card
 	card_being_dragged.z_index = Globals.Z_INDEX["card_being_dragged"]

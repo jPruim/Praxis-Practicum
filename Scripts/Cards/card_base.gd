@@ -128,10 +128,10 @@ func animate_card_to_slot(slot: CardSlot, scale = Globals.CARD_SCALE_PlACED, spe
 
 
 # Change card affects TODO: Decide if cards in cardslots need animations (go and add a new mask for animations, and separate from card detection)
-func card_affects(hovered: bool):
+func card_affects(hovered: bool = false):
 	var animation_sprite = get_node("CardFront/Container/AnimatedSprite2D")
 	being_hovered = hovered
-	if being_hovered:
+	if being_hovered && !discarded:
 		$".".scale = Vector2(1.0, 1.0)
 		$".".z_index = Globals.Z_INDEX["card_hovered"]
 		# Play Animation
@@ -158,11 +158,14 @@ func card_affects(hovered: bool):
 			else:
 				$".".z_index = Globals.Z_INDEX["card_cast_player"]
 			$".".scale = Globals.CAST_SCALE
-		elif !$".".in_slot:
-			$".".scale  = Vector2( 1, 1)
-			$".".z_index = Globals.Z_INDEX["card"]
-		else:
-			$".".scale = Globals.CARD_SCALE_PlACED
+		elif $".".in_slot:
+			$".".scale  = Globals.SCALE.card_placed
 			$".".z_index = Globals.Z_INDEX["card_in_slot"]
+		elif $".".discarded:
+			$".".scale  = Globals.SCALE.card_discard
+			$".".z_index = Globals.Z_INDEX["deck"]
+		else:
+			$".".scale = Globals.SCALE.card_hand
+			$".".z_index = Globals.Z_INDEX["card"]
 		# Pause Animation
 		animation_sprite.pause()

@@ -71,8 +71,8 @@ const ENEMY_CAST_POSITION = ENEMY_POSITION + Vector2(20,0)
 const CAST_SCALE = Vector2(0.5, 0.5)
 
 const POSITION = {
-	"player_discard_pile": Vector2(320,290),
-	"opponent_discard_pile": Vector2(320,50),
+	"player_discard_pile": Vector2(500,290),
+	"opponent_discard_pile": Vector2(500,50),
 }
 
 const SCALE = {
@@ -83,6 +83,7 @@ const SCALE = {
 	"card_hand": Vector2(1,1),
 	"card_drag": Vector2(1,1),
 	"card_discard": Vector2(1,1),
+	"caster": Vector2(1,1),
 }
 
 
