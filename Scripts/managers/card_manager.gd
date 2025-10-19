@@ -10,10 +10,6 @@ var player_hand: PlayerHand
 var opponent_hand: PlayerHand
 var deck_scene
 
-# Consts
-const DECK_POSITION = Vector2(100, 900)/4
-const OPPONENT_DECK_POSITION = Vector2(1800, 150)/4
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -148,10 +144,9 @@ func end_drag():
 		if (card_slot && card_slot.is_player):
 			if(card_being_dragged.ai_card):
 				# Should never be called
-				opponent_hand.remove_card_from_hand(card_being_dragged) 
+				pass
 			else:
 				card_being_dragged.scale = Globals.SCALE.card_cast
-				player_hand.remove_card_from_hand(card_being_dragged)
 				player_hand.update_hand_border(false)
 			SignalBus.emit_signal("player_targeting_self", card_being_dragged)
 			card_being_dragged = null
@@ -159,11 +154,10 @@ func end_drag():
 		elif (card_slot && card_slot.is_opponent):
 			if(card_being_dragged.ai_card):
 				# Should never be called
-				opponent_hand.remove_card_from_hand(card_being_dragged) 
+				pass
 			else:
 				card_being_dragged.scale = Globals.SCALE["card_cast"]
 				$PlayerHand.hovered = false
-				player_hand.remove_card_from_hand(card_being_dragged)
 				player_hand.update_hand_border(false)
 			SignalBus.emit_signal("player_targeting_opponent", card_being_dragged)
 			card_being_dragged = null
@@ -178,11 +172,9 @@ func end_drag():
 				if(card_being_dragged.ai_card):
 					# Should never be called
 					$PlayerHand.hovered = false
-					opponent_hand.remove_card_from_hand(card_being_dragged)
 					player_hand.update_hand_border(false) 
 				else:
 					$PlayerHand.hovered = false
-					player_hand.remove_card_from_hand(card_being_dragged)
 					player_hand.update_hand_border(false)
 				SignalBus.emit_signal("player_targeting_slot", card_slot, card_being_dragged)
 				card_being_dragged = null
@@ -203,14 +195,14 @@ func end_drag():
 	
 func initialize_decks(run_data: RunData):
 	var deck = deck_scene.instantiate()
-	deck.position = DECK_POSITION
+	deck.position = Globals.DECK_POSITION
 	deck.ai_deck = false
 	deck.name = "PlayerDeck"
 	add_child(deck)
 	deck.initialize(run_data)
 	deck = deck_scene.instantiate()
 	deck.name = "OpponentDeck"
-	deck.position = OPPONENT_DECK_POSITION
+	deck.position = Globals.OPPONENT_DECK_POSITION
 	deck.get_node("Area2D").collision_mask = Globals.MASK.deck_opponent
 	deck.ai_deck = true
 	add_child(deck)

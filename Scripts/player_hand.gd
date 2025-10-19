@@ -38,10 +38,14 @@ func add_card_to_hand(card, speed = DEFAULT_ASPEED):
 	pass
 
 # Remove Card from player_hand
-func remove_card_from_hand(card):
+func remove_card_from_hand(card: CardBase):
 	if card in player_hand:
 		player_hand.erase(card)
 		update_hand_positions()
+	else:
+		printerr("Removing card not in hand: ", card.ai_card,   DataManager.card_data_JSONIFY(card.card_data))
+		for x in player_hand:
+			print("\n\t", DataManager.card_data_JSONIFY(x.card_data))
 	pass
 
 # update_hand_position

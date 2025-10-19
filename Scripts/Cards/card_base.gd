@@ -9,6 +9,7 @@ var ai_card: bool = false
 var being_cast: bool = false
 var being_hovered: bool = false
 var default_tag_location = Vector2(-176, -80)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_default_data()
@@ -102,8 +103,6 @@ func animation_conceal():
 # Animate card to position
 @warning_ignore("shadowed_variable_base_class")
 func animate_card_to_position(position, speed = Globals.DEFAULT_ASPEED):
-	var tree = get_tree();
-	var i = 0;
 	var tween = get_tree().create_tween()
 	tween.tween_property($".", "position", position, speed)
 	
@@ -116,8 +115,13 @@ func animate_card_to_scale(scale, speed = Globals.DEFAULT_ASPEED):
 
 @warning_ignore("shadowed_variable_base_class")
 func animate_card_to_slot(slot: CardSlot, scale = Globals.CARD_SCALE_PlACED, speed = Globals.DEFAULT_ASPEED):
+	in_slot = true
+	being_cast = false
 	animate_card_to_position(slot.position, speed)
 	animate_card_to_scale(scale, speed)
+	var i = 0;
+	
+	
 
 
 

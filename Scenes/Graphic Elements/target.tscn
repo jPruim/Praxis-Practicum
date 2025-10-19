@@ -1,8 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://gx36j0hxpfg2"]
 
-[ext_resource type="Texture2D" uid="uid://b4ydulmicvmmk" path="res://Assets/GUI/target.png" id="1_644jy"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2hvfs"]
+[ext_resource type="Texture2D" uid="uid://cpcq88smhsd65" path="res://Assets/GUI/target-blue.png" id="1_3r7r1"]
+[ext_resource type="Script" path="res://Scripts/UI Elements/target.gd" id="1_dg3vb"]
 
 [sub_resource type="Animation" id="Animation_ye1ji"]
 resource_name = "Idle"
@@ -10,8 +9,8 @@ length = 2.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("EnemySprite:rotation")
+tracks/0/enabled = false
+tracks/0/path = NodePath("Sprite:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -20,52 +19,16 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.0, 0.349066, 0.0]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerSprite:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0.0, -0.349066, 0.0]
-}
 
 [sub_resource type="Animation" id="Animation_i3nl2"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("EnemySprite:rotation")
+tracks/0/path = NodePath("Sprite:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerSprite:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("CompressedTexture2D_2hvfs")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PlayerSprite:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -79,25 +42,18 @@ _data = {
 }
 
 [node name="Target" type="Node2D"]
-z_index = 17
+z_index = 7
 z_as_relative = false
-scale = Vector2(5, 5)
+scale = Vector2(3, 3)
+script = ExtResource("1_dg3vb")
 
-[node name="EnemySprite" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.627451)
 z_index = 7
 z_as_relative = false
 texture_filter = 1
 position = Vector2(-2.98023e-08, 2.98023e-08)
-texture = ExtResource("1_644jy")
-
-[node name="PlayerSprite" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.627451)
-z_index = 7
-z_as_relative = false
-texture_filter = 1
-position = Vector2(-2.98023e-08, 2.98023e-08)
-texture = SubResource("CompressedTexture2D_2hvfs")
+texture = ExtResource("1_3r7r1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

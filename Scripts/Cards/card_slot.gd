@@ -32,3 +32,9 @@ func get_card() -> CardBase:
 		return cards[0]
 	else:
 		return null
+
+func update_graphic():
+	if(cards.size() == 0):
+		return
+	cards[0].visible = true
+	cards[0].animate_card_to_slot($".")

@@ -44,7 +44,7 @@ func initialize(run_data: RunData, handsize: int = 5):
 		#$"../PlayerHand"
 
 # Setup function for AI
-func initialize_enemy( run_data: RunData, hand_size = 5):
+func initialize_enemy( run_data: RunData, hand_size = 6):
 	# get enemy type, adjusting for the 1-indexed assignment variable
 	var type = run_data.assignment_list[run_data.assignment -1]
 	initialize_enemy_deck(type)
@@ -55,12 +55,11 @@ func initialize_enemy( run_data: RunData, hand_size = 5):
 func initialize_enemy_deck(type: int = 1):
 	# TODO: handle different enemies
 	var enemy_data: RunData = DataManager.load_enemy_game_data(type)
-	var enemy_deck = enemy_data['deck']
+	run_deck = enemy_data['deck']
 	# initialize deck
-	for i in range (0,2):
-		for data in enemy_deck:
-			add_card_to_deck(data)
-			pass
+	for data in run_deck:
+		add_card_to_deck(data)
+		pass
 	deck.shuffle()
 	$DeckCount.text = str(deck.size())
 
@@ -72,7 +71,7 @@ func initialize_player(run_data, hand_size: int = 5):
 	initialize_player_hand(hand_size)
 	
 # Setup function for the player's hand
-func initialize_player_hand(hand_size = 5):
+func initialize_player_hand(hand_size = 6):
 	for i in range(hand_size):
 		draw_card()
 	#$"../../PlayerHand".update_hand_positions()
@@ -113,6 +112,7 @@ func draw_card():
 	# Add Card to hand
 	if (ai_deck):
 		$"../OpponentHand".add_card_to_hand(card_drawn, CARD_DRAW_ASPEED)
+		print("AI Draw")
 	else:
 		$"../PlayerHand".add_card_to_hand(card_drawn, CARD_DRAW_ASPEED)
 		# Reveal Card
@@ -135,11 +135,10 @@ func reveal_deck():
 # Initialize deck
 func initialize_player_deck():	
 	#initialize deck
-	for i in range (0,1):
-		for data in run_deck:
-			#card_database
-			add_card_to_deck(data)
-			pass
+	for data in run_deck:
+		#card_database
+		add_card_to_deck(data)
+		pass
 	deck.shuffle()
 	$DeckCount.text = str(deck.size())
 

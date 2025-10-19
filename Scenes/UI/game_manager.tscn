@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c7mxxeb5gtpft"]
+[gd_scene load_steps=22 format=3 uid="uid://c7mxxeb5gtpft"]
 
 [ext_resource type="Script" path="res://Scripts/Managers/game_manager.gd" id="1_ypglt"]
 [ext_resource type="PackedScene" uid="uid://cmqw3g63oh7ut" path="res://Scenes/UI/menu.tscn" id="2_3q5x6"]
@@ -44,6 +44,17 @@ gradient = SubResource("Gradient_5s0rb")
 fill = 1
 fill_from = Vector2(0.525641, 0.5)
 fill_to = Vector2(0.854701, 0.17094)
+
+[sub_resource type="Gradient" id="Gradient_vkbwa"]
+offsets = PackedFloat32Array(0.015015, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_an8k0"]
+gradient = SubResource("Gradient_vkbwa")
+width = 120
+fill = 1
+fill_from = Vector2(0.5, 0.487179)
+fill_to = Vector2(0.880342, 0.162393)
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_ypglt")
@@ -193,5 +204,10 @@ height = 400.0
 
 [node name="ShopLight" type="PointLight2D" parent="LightingManager"]
 texture = SubResource("GradientTexture2D_lxxkv")
+
+[node name="PassLight" type="PointLight2D" parent="LightingManager"]
+visible = false
+color = Color(0.858824, 1, 1, 0.643137)
+texture = SubResource("GradientTexture2D_an8k0")
 
 [connection signal="pressed" from="UI/HeaderBar/NinePatchRect/HBoxContainer/VBoxContainer/Menubutton" to="." method="_on_menubutton_pressed"]

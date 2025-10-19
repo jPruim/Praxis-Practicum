@@ -28,7 +28,9 @@ func _process(delta: float) -> void:
 
 # Any automatic "start of turn" affects (e.g. draw a card)
 func start_turn():
-	$"../CardManager".get_node("OpponentDeck").draw_card()
+	$"../CardManager/OpponentDeck".draw_card()
+	$"../CardManager/OpponentHand".update_hand_positions()
+
 
 # For furture end turn effects (currently there aren't any)
 func end_turn():

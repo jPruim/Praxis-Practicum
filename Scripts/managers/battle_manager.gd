@@ -22,7 +22,7 @@ var enemy: CasterFrameBase
 const DEFAULT_DELAY = 1
 var phase_list = ["start_turn","ai_decision", "player_decision","clean_up", "end_step"]
 var phase: String
-var iterations: int = 12 # TODO remove this
+var iterations: int = 50 # TODO remove this, infinite loop catcher
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -50,12 +50,12 @@ func set_player_turn(state: bool):
 
 func _player_turn_changed(state: bool):
 	is_player_turn = state
+	print("Player Turn: ", is_player_turn)
 
 func setup_combat(run_data: RunData):
 	#DataManager.print_run_data(run_data)
 	identify_slots()
 	in_combat = true
-	$GameTime.set_time(3)
 	setup_player(run_data)
 	var enemy_type = run_data.assignment_list[run_data.assignment - 1]
 	var enemy_data = DataManager.load_enemy_game_data(enemy_type)
@@ -96,7 +96,9 @@ func setup_enemy(enemy_data: RunData):
 
 func _on_pass_button_pressed() -> void:
 	get_node(pass_button_path).disabled = true
-	increment_time()
+	set_player_turn(false)
+	next_phase()
+	time_loop()
 
 # Game Phase Setup
 func next_phase():
@@ -109,7 +111,6 @@ func time_loop():
 	else:
 		iterations-=1
 	print_status()
-	delay()
 	if(phase == "start_turn"):
 		start_turn()
 		next_phase()
@@ -130,7 +131,7 @@ func time_loop():
 	elif(phase == "end_step"):
 		end_step()
 		next_phase()
-	time_loop()
+	time_loop_delay()
 
 
 # Any end step effects
@@ -151,16 +152,18 @@ func increment_time():
 		opponent_manager.cast_time -= 1
 	elif opponent_manager.cast_time < 0:
 		printerr("Opponent cast_time is negative") # TODO: Remove this comment
-	delay()
 	spell_manager.resolve_spells()
 
 	
 # Hold the beginning of the time increment setup
 func start_turn():
+	# Handle Player Start turn
 	$"CardManager/".get_node("PlayerDeck").draw_card()
-	$"OpponentManager".start_turn()
 	$"CardManager/PlayerHand".update_hand_positions()
-	$"CardManager/OpponentHand".update_hand_positions()
+	
+	# Handle AI Start turn
+	$"OpponentManager".start_turn()
+	
 	find_empty_slots()
 	update_button_status()
 	find_full_slots()
@@ -205,6 +208,7 @@ func _on_opponent_targeting_slot(slot: CardSlot, card: CardBase):
 
 func _on_player_targeting_opponent(card: CardBase):
 	print("Player Cast at opponent")
+	SignalBus.emit_signal("player_turn", false)
 	card.being_cast = true
 	create_target(Globals.ENEMY_POSITION, true)
 	spell_manager.cast(card, true)
@@ -215,6 +219,7 @@ func _on_player_targeting_opponent(card: CardBase):
 
 func _on_player_targeting_self(card: CardBase):
 	print("Player Cast at self")
+	SignalBus.emit_signal("player_turn", false)
 	card.being_cast = true
 	create_target(Globals.PLAYER_POSITION, true)
 	spell_manager.cast(card, true)
@@ -224,6 +229,7 @@ func _on_player_targeting_self(card: CardBase):
 	
 func _on_player_targeting_slot(slot: CardSlot, card: CardBase):
 	print("Player Cast at slot")
+	SignalBus.emit_signal("player_turn", false)
 	card.being_cast = true
 	create_target(slot.position, true)
 	spell_manager.cast(card, true)
@@ -232,11 +238,13 @@ func _on_player_targeting_slot(slot: CardSlot, card: CardBase):
 	time_loop()
 
 @warning_ignore("unused_parameter")
-func delay(amount = DEFAULT_DELAY):
-	#$BattleTimer.wait_time = delay
-	#$BattleTimer.start()
-	#await $BattleTimer.timeout
+func time_loop_delay(amount = DEFAULT_DELAY):
+	if Globals.DEBUG:
+		print("Before timeout: ", iterations)
 	await get_tree().create_timer(amount).timeout
+	if Globals.DEBUG:
+		print("After timeout: ", iterations)
+	time_loop()
 	return
 
 # Theoretically only needs to be called once, 
@@ -263,15 +271,13 @@ func find_full_slots():
 
 # Create a target at a location, allows for multiple targets per "player"
 func create_target(location, player_owned = false):
-	var current_target = target_scene.instantiate()
+	var current_target: Target = target_scene.instantiate()
 	current_target.position = location
 	if (player_owned):
-		current_target.get_node("EnemySprite").visible = false
-		current_target.get_node("PlayerSprite").visible = true
+		current_target.display_player_target()
 		current_player_targets.append(current_target)
 	else:
-		current_target.get_node("EnemySprite").visible = true
-		current_target.get_node("PlayerSprite").visible = false
+		current_target.display_enemy_target()
 		current_opponent_targets.append(current_target)
 	$".".add_child(current_target)
 	
@@ -291,12 +297,11 @@ func clean_up():
 		
 
 func check_game_end():
-	var player_frame: CasterFrameBase = $Playspace/PlayerSlot.cards[0]
-	var opponent_frame: CasterFrameBase = $Playspace/OpponentSlot.cards[0]
-	if(player_frame.get_card_info().current_health <= 0):
+	if(player.get_card_info().summon_health <= 0):
+		print("Player Health: ", player.get_card_info().summon_health)
 		SignalBus.emit_signal("fight_loss")
 		in_combat = false
-	elif(opponent_frame.get_card_info().current_health <= 0):
+	elif(enemy.get_card_info().summon_health <= 0):
 		SignalBus.emit_signal("fight_won")
 		in_combat = false
 	
@@ -309,6 +314,7 @@ func print_status():
 	output+="\nPhase: " + phase
 	output += "\n\tPlayerCastTime: " + str(spell_manager.player_cast_time)
 	output += "\n\tOppCastTime: " + str(opponent_manager.cast_time)
+	output += "\n\tHealth: " + str(player.get_card_info().summon_health)
 	if(Globals.DEBUG):
 		if(phase == "player_decision"):
 			output += "\n\tWaiting on Player"

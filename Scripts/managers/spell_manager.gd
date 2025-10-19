@@ -48,15 +48,14 @@ func resolve_spells():
 func resolve_spell_summon_at(spell: CardBase, slot: CardSlot):
 	var summon: SummonCardBase = SummonCardBase.new()
 	summon.copy(spell)
-	summon.card_data.current_health = summon.card_data.summon_health
 	card_manager.add_child(summon)
-	slot.cards.append(summon)
-	if(slot.cards.size() == 1):
-		summon.animate_card_to_slot(slot)
-		slot.cards[0].card_data.current_health = 0
-		slot.cards[0].card_data.current_attack = 0
+	slot.cards = [summon]
+	summon.animate_card_to_slot(slot)
+	slot.cards[0].card_data.current_health = 0
+	slot.cards[0].card_data.current_attack = 0
 	slot.cards[0].card_data.current_health += summon.card_data.summon_health
 	slot.cards[0].card_data.current_attack += summon.card_data.summon_attack
+	print("CardSlot Summon: ", slot, slot.cards.size())
 
 	
 
@@ -109,9 +108,11 @@ func cast(card:CardBase, from_player: bool = false):
 	if (from_player):
 		location = Globals.PLAYER_CAST_POSITION
 		card.z_index = Globals.Z_INDEX.card_cast_player
+		$"../CardManager/PlayerHand".remove_card_from_hand(card)
 	else:
 		location = Globals.ENEMY_CAST_POSITION
 		card.z_index = Globals.Z_INDEX.card_cast_enemy
+		$"../CardManager/OpponentHand".remove_card_from_hand(card)
 	card.being_cast = true
 	card.scale = Globals.SCALE.card_cast
 	card.animate_card_to_position(location)

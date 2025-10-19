@@ -1,20 +1,20 @@
-extends Button
+class_name Target
+extends Node2D
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	SignalBus.player_turn.connect(_on_player_turn)
-	$".".disabled = true
-	$".".position = Globals.PASS_BUTTON_POSITION
 	pass # Replace with function body.
 
-
-func _on_player_turn(state: bool):
-	if state:
-		$".".disabled = false
-	else:
-		$".".disabled = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+func display_player_target():
+	$Sprite.texture = load("res://Assets/GUI/target-blue.png")
+	
+func display_enemy_target():
+	$Sprite.texture = load("res://Assets/GUI/target.png")
+
+	
