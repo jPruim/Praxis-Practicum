@@ -11,10 +11,10 @@
 [resource]
 script = ExtResource("7_b82e1")
 name = "Vincent"
-seed = 0
+run_seed = 0
 event = 1
 gold = 0
-max_health = 100
+max_health = 40
 current_health = 100
 relics = Array[ExtResource("6_3mnyd")]([])
 deck = Array[ExtResource("1_in8e0")]([ExtResource("2_vr42a"), ExtResource("2_vr42a"), ExtResource("2_vr42a"), ExtResource("2_vr42a"), ExtResource("3_wuavd"), ExtResource("3_wuavd"), ExtResource("3_wuavd"), ExtResource("4_108em"), ExtResource("4_108em"), ExtResource("4_108em"), ExtResource("4_108em"), ExtResource("3_wuavd"), ExtResource("5_4kahi"), ExtResource("5_4kahi"), ExtResource("5_4kahi")])

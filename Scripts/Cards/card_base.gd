@@ -89,7 +89,9 @@ func set_health(hp: int):
 	
 func adjust_health(hp: int):
 	set_health(card_data.summon_health + hp)
-
+	
+func get_health() -> int:
+	return card_data.current_health
 # Flip card to front from back
 func animation_reveal():
 	# Check if card back is visible

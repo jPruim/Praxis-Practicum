@@ -155,6 +155,7 @@ func increment_time():
 		printerr("Opponent cast_time is negative") # TODO: Remove this comment
 	update_cast_times()
 	spell_manager.resolve_spells()
+	summon_attacks()
 
 	
 # Hold the beginning of the time increment setup
@@ -168,6 +169,22 @@ func start_turn():
 	
 	find_empty_slots()
 	find_full_slots()
+
+
+func summon_attacks():
+	var dmg = 0
+	for i: CardSlot in ai_slots:
+		if i.cards.size() > 0:
+			dmg += i.cards[0].card_data.current_attack
+	$Playspace/PlayerSlot.cards[0].adjust_health(-1 * dmg)
+	dmg = 0
+	for i: CardSlot in player_slots:
+		if i.cards.size() > 0:
+			dmg += i.cards[0].card_data.current_attack
+	$Playspace/OpponentSlot.cards[0].adjust_health(-1 * dmg)
+
+
+
 
 @warning_ignore("unused_parameter")
 func play_card(card, caster = "player", cast_time_mod = 0, cast_damage_mod = 0):
