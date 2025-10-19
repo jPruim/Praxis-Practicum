@@ -90,7 +90,7 @@ func draw_card():
 	if (ai_deck):
 		if ($"../OpponentHand".player_hand.size() > hand_limit - 1):
 			return
-	if ($"../PlayerHand".player_hand.size() > hand_limit - 1):
+	elif ($"../PlayerHand".player_hand.size() > hand_limit - 1):
 		return
 	# "Draw the card"
 	var card_drawn = deck.pop_front()
