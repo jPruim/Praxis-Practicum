@@ -15,7 +15,6 @@ var empty_ai_slots = []
 var full_player_slots = []
 var current_player_targets = []
 var current_opponent_targets = []
-var pass_button_path = "Playspace/PassButton"
 var caster_frame_base_scene = preload("res://Scenes/Cards/caster_frame_base.tscn")
 var player: CasterFrameBase
 var enemy: CasterFrameBase
@@ -95,7 +94,6 @@ func setup_enemy(enemy_data: RunData):
 	$".".add_child(enemy)
 
 func _on_pass_button_pressed() -> void:
-	get_node(pass_button_path).disabled = true
 	set_player_turn(false)
 	next_phase()
 	time_loop()
@@ -165,29 +163,11 @@ func start_turn():
 	$"OpponentManager".start_turn()
 	
 	find_empty_slots()
-	update_button_status()
 	find_full_slots()
-
-func update_button_status():
-	if player_cast_time == 0:
-		get_node(pass_button_path).disabled = false
-
-func opponent_turn():
-		# Make the button unclickable and invisible
-	$"../PassButton".disabled = true
-	$"../PassButton".visible = false
-	# Initialize Opponent Turn
-
-	$"../OpponentManager".end_turn()
 
 @warning_ignore("unused_parameter")
 func play_card(card, caster = "player", cast_time_mod = 0, cast_damage_mod = 0):
 	pass
-
-func player_turn():
-	$"../PassButton".visible = true
-	$"../PassButton".disabled = false
-
 
 func _on_opponent_targeting_player(card: CardBase):
 	card.being_cast = true
@@ -314,5 +294,4 @@ func print_status():
 	if(Globals.DEBUG):
 		if(phase == "player_decision"):
 			output += "\n\tWaiting on Player"
-	output += "\n\tEnd Debug"
 	print(output)

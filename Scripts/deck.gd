@@ -112,7 +112,6 @@ func draw_card():
 	# Add Card to hand
 	if (ai_deck):
 		$"../OpponentHand".add_card_to_hand(card_drawn, CARD_DRAW_ASPEED)
-		print("AI Draw")
 	else:
 		$"../PlayerHand".add_card_to_hand(card_drawn, CARD_DRAW_ASPEED)
 		# Reveal Card
