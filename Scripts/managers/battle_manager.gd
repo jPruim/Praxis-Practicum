@@ -174,24 +174,28 @@ func play_card(card, caster = "player", cast_time_mod = 0, cast_damage_mod = 0):
 	pass
 
 func _on_opponent_targeting_player(card: CardBase):
+	print("AI casting at Player")
 	card.being_cast = true
 	create_target(Globals.PLAYER_POSITION, false)
 	spell_manager.cast(card, false)
 	
 
 func _on_opponent_targeting_self(card: CardBase):
+	print("AI casting at self")
 	card.being_cast = true
 	create_target(Globals.ENEMY_POSITION, false)
 	spell_manager.cast(card, false)
 	
 func _on_opponent_targeting_slot(slot: CardSlot, card: CardBase):
+	print("AI casting at slot")
+	if(!slot):
+		printerr("AI Casting at empty slot")
 	card.being_cast = true
 	create_target(slot.position, false)
 	spell_manager.cast(card, false)
 
 
 func _on_player_targeting_opponent(card: CardBase):
-	print("Player Cast at opponent")
 	SignalBus.emit_signal("player_turn", false)
 	card.being_cast = true
 	create_target(Globals.ENEMY_POSITION, true)
@@ -203,7 +207,6 @@ func _on_player_targeting_opponent(card: CardBase):
 
 
 func _on_player_targeting_self(card: CardBase):
-	print("Player Cast at self")
 	SignalBus.emit_signal("player_turn", false)
 	card.being_cast = true
 	create_target(Globals.PLAYER_POSITION, true)
@@ -214,7 +217,6 @@ func _on_player_targeting_self(card: CardBase):
 	time_loop_delay(2)
 	
 func _on_player_targeting_slot(slot: CardSlot, card: CardBase):
-	print("Player Cast at slot")
 	SignalBus.emit_signal("player_turn", false)
 	card.being_cast = true
 	create_target(slot.position, true)
@@ -232,11 +234,11 @@ func time_loop_delay(amount = DEFAULT_DELAY):
 
 # Theoretically only needs to be called once, 
 func identify_slots():
-	for i in $"..".get_children():
+	for i in $"Playspace".get_children():
 		if i is CardSlot:
-			if !i.player_owned:
+			if !i.player_owned && !i.is_opponent:
 				ai_slots.append(i)
-			elif i.player_owned:
+			elif i.player_owned && !i.is_player:
 				player_slots.append(i)
 	return
 
@@ -282,7 +284,7 @@ func clean_up():
 	# Clean up targets
 	if player_cast_time == 0:
 		clear_target(true)
-	elif opponent_manager.cast_time == 0:
+	if opponent_manager.cast_time == 0:
 		clear_target(false)
 
 func check_game_end():

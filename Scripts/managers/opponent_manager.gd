@@ -69,12 +69,11 @@ func make_ai_play():
 func summon_target(card: CardBase):
 	var valid_targets: Array[CardSlot] = []
 	for slot in battle_manager.ai_slots:
-		if($"../SpellManager".check_stacking_summon(card, slot)):
-			# Always stack summons when possible
-			valid_targets = [slot]
-			break
-		if($"../SpellManager".check_valid_summon(card, slot)):
-			valid_targets.append(slot)
+		#if($"../SpellManager".check_stacking_summon(card, slot)):
+			## Always stack summons when possible
+			#valid_targets = [slot]
+			#break
+		valid_targets.append(slot)
 	if(valid_targets.size() == 0):
 		# TODO: Make sure that there is never an enemy with more than 3 types of summons
 		return
