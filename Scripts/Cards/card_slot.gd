@@ -34,6 +34,11 @@ func get_card() -> CardBase:
 		return null
 
 func update_graphic():
+	if(player_owned && $"CardSlotImage"):
+		$"CardSlotImage".texture = load("res://Assets/Cards/Card Borders etc/card-outline-blue.png")
+	elif(player_owned == false && $"CardSlotImage"):
+		$"CardSlotImage".texture = load("res://Assets/Cards/Card Borders etc/card-outline-grey.png")
+
 	if(cards.size() == 0):
 		return
 	cards[0].position = $".".position

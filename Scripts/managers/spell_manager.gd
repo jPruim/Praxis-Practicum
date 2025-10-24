@@ -171,7 +171,7 @@ func cast(card:CardBase, from_player: bool = false):
 		location = Globals.PLAYER_CAST_POSITION
 		card.z_index = Globals.Z_INDEX.card_cast_player
 		$"../CardManager/PlayerHand".remove_card_from_hand(card)
-		$"..".player_cast_time = card.card_data.cast_time
+		player_cast_time = card.card_data.cast_time
 	else:
 		location = Globals.ENEMY_CAST_POSITION
 		card.z_index = Globals.Z_INDEX.card_cast_enemy

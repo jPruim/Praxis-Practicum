@@ -15,7 +15,7 @@ var PlayerHand = preload("res://Scenes/Cards/player_hand.tscn")
 
 func _enter_tree() -> void:
 	# Needs to happen before some of the ready() functions of children
-	initialize_card_slots()
+
 	pass
 
 
@@ -44,11 +44,13 @@ func initialize_card_slots():
 			y_pos = y_pos_first + (j * (slotSize.y + slotMargin.y))
 			newSlot.position = Vector2(x_pos,y_pos)
 			newSlot.visible = true
+			newSlot.update_graphic()
 			$".".add_child(newSlot)
 	$Centerpoint.position = centerPoint
 	
 
 func _ready() -> void:
+	initialize_card_slots()
 	$OpponentSlot.is_opponent = true
 	$OpponentSlot.player_owned = false
 	$OpponentSlot.position = Globals.ENEMY_POSITION

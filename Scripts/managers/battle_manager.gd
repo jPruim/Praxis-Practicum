@@ -5,7 +5,6 @@ extends Node2D
 var target_scene
 var opponent_manager: OpponentManager
 var in_combat = false
-var player_cast_time = 0
 var spell_manager: SpellManager
 var is_player_turn: bool = false
 # Board State Variables
@@ -21,7 +20,7 @@ var enemy: CasterFrameBase
 const DEFAULT_DELAY = 0.5
 var phase_list = ["start_turn","ai_decision", "player_decision","spell_cast", "clean_up", "end_step"]
 var phase: String
-var iterations: int = 50 # TODO remove this, infinite loop catcher
+var iterations: int = 5000 # TODO remove this, infinite loop catcher
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -116,7 +115,7 @@ func time_loop():
 			opponent_manager.make_ai_play()
 		next_phase()
 	elif(phase == "player_decision"):
-		if(player_cast_time == 0):
+		if(spell_manager.player_cast_time == 0):
 			set_player_turn(true)
 			# Break loop if player needs to cast something
 			return 
@@ -144,10 +143,10 @@ func end_step():
 		
 # Function to hold to setup the end of the time step
 func increment_time():
-	if(player_cast_time > 0):
-		player_cast_time -= 1
-	elif player_cast_time < 0:
-		player_cast_time = 0
+	if(spell_manager.player_cast_time > 0):
+		spell_manager.player_cast_time -= 1
+	elif spell_manager.player_cast_time < 0:
+		spell_manager.player_cast_time = 0
 		printerr("Player cast_time is negative") # TODO: Remove this comment
 	if(opponent_manager.cast_time > 0):
 		opponent_manager.cast_time -= 1
@@ -217,7 +216,7 @@ func _on_player_targeting_opponent(card: CardBase):
 	card.being_cast = true
 	create_target(Globals.ENEMY_POSITION, true)
 	spell_manager.cast(card, true)
-	$Playspace/PlayerCastTime.set_time(player_cast_time)
+	$Playspace/PlayerCastTime.set_time(spell_manager.player_cast_time)
 	is_player_turn = false
 	next_phase()
 	time_loop_delay(2)
@@ -228,7 +227,7 @@ func _on_player_targeting_self(card: CardBase):
 	card.being_cast = true
 	create_target(Globals.PLAYER_POSITION, true)
 	spell_manager.cast(card, true)
-	$Playspace/PlayerCastTime.set_time(player_cast_time)
+	$Playspace/PlayerCastTime.set_time(spell_manager.player_cast_time)
 	is_player_turn = false
 	next_phase()
 	time_loop_delay(2)
@@ -238,7 +237,7 @@ func _on_player_targeting_slot(slot: CardSlot, card: CardBase):
 	card.being_cast = true
 	create_target(slot.position, true)
 	spell_manager.cast(card, true)
-	$Playspace/PlayerCastTime.set_time(player_cast_time)
+	$Playspace/PlayerCastTime.set_time(spell_manager.player_cast_time)
 	is_player_turn = false
 	next_phase()
 	time_loop_delay(2)
@@ -299,20 +298,22 @@ func clear_target(player_owned):
 func clean_up():
 	check_game_end()
 	# Clean up targets
-	if player_cast_time == 0:
+	if spell_manager.player_cast_time == 0:
 		clear_target(true)
 	if opponent_manager.cast_time == 0:
 		clear_target(false)
 	for slot: CardSlot in ai_slots:
+		slot.update_graphic()
 		if slot.cards.size() > 0 && slot.cards[0].get_health() <=0:
 			slot.cards[0].queue_free()
 			slot.cards = []
-		slot.update_graphic()
+		
 	for slot: CardSlot in player_slots:
+		slot.update_graphic()
 		if slot.cards.size() > 0 && slot.cards[0].get_health() <= 0:
 			slot.cards[0].queue_free()
 			slot.cards = []
-		slot.update_graphic()
+		
 	$Playspace/PlayerSlot.update_graphic()
 	$Playspace/OpponentSlot.update_graphic()
 	
@@ -341,5 +342,5 @@ func print_status():
 	print(output)
 
 func update_cast_times():
-	$Playspace/PlayerCastTime.set_time(player_cast_time)
+	$Playspace/PlayerCastTime.set_time(spell_manager.player_cast_time)
 	$Playspace/OpponentCastTime.set_time($OpponentManager.cast_time)

@@ -149,6 +149,8 @@ func end_drag():
 				card_being_dragged.scale = Globals.SCALE.card_cast
 				player_hand.update_hand_border(false)
 			SignalBus.emit_signal("player_targeting_self", card_being_dragged)
+			$PlayerHand.hovered = false
+			player_hand.update_hand_border(false)
 			card_being_dragged = null
 			return
 		elif (card_slot && card_slot.is_opponent):
@@ -162,7 +164,7 @@ func end_drag():
 			SignalBus.emit_signal("player_targeting_opponent", card_being_dragged)
 			card_being_dragged = null
 			return
-		elif(card_slot and card_slot.max_cards > card_slot.cards.size()):
+		elif(card_slot):
 			# Check for room in the CardSlot
 			if  (card_type == "summon" and card_slot.player_owned) or \
 				(card_type == "spell"):

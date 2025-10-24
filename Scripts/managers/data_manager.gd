@@ -80,7 +80,7 @@ func run_data_deJSONIFY(run_json):
 	run_data['phase'] = run_json.phase
 	run_data['assignment_list'] = run_json.assignment_list
 	run_data['ascension'] = run_json.ascension
-	return run_json
+	return run_data
 
 func print_run_data(run_data: RunData):
 	print(JSON.stringify(run_data_JSONIFY(run_data)))

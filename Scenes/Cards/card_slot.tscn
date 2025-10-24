@@ -1,7 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://brqd7qlj1sonb"]
 
 [ext_resource type="Script" path="res://Scripts/Cards/card_slot.gd" id="1_8kf81"]
-[ext_resource type="Texture2D" uid="uid://cr5yo5vebnlgh" path="res://Assets/Cards/Card Borders etc/Card Outline.png" id="2_q2dei"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_aymkr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kkorq"]
 size = Vector2(32, 50)
@@ -12,7 +13,7 @@ script = ExtResource("1_8kf81")
 
 [node name="CardSlotImage" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_q2dei")
+texture = SubResource("CanvasTexture_aymkr")
 
 [node name="Area2D" type="Area2D" parent="."]
 texture_filter = 1

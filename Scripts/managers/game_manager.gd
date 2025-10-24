@@ -4,7 +4,8 @@ extends Node2D
 var run_data: RunData
 var battle_manager: BattleManager
 var battle_manager_scene = preload("res://Scenes/Playspace/battle_manager.tscn")
-
+var shop_manager: ShopManager
+var shop_manager_scene = preload("res://Scenes/Playspace/shop-manager.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	connect_signals()
@@ -40,6 +41,8 @@ func initialize_fight():
 	pass
 
 func initialize_shop():
+	shop_manager = shop_manager_scene.instantiate()
+	$".".add_child(shop_manager)
 	pass
 
 func fight_loss():

@@ -1,10 +1,9 @@
-[gd_resource type="Resource" script_class="RunData" load_steps=8 format=3 uid="uid://cohec54rmpeq"]
+[gd_resource type="Resource" script_class="RunData" load_steps=7 format=3 uid="uid://cohec54rmpeq"]
 
 [ext_resource type="Script" path="res://Resources/Types/CardData.gd" id="1_in8e0"]
 [ext_resource type="Resource" uid="uid://dytmkgkrr7hyo" path="res://Resources/Cards/Firebolt.tres" id="2_vr42a"]
 [ext_resource type="Resource" uid="uid://b8t8hb5j7rqf5" path="res://Resources/Cards/FireFox.tres" id="3_wuavd"]
 [ext_resource type="Resource" uid="uid://clpt4ig2ny678" path="res://Resources/Cards/Icebolt.tres" id="4_108em"]
-[ext_resource type="Resource" uid="uid://djevrlreboepw" path="res://Resources/Cards/Barrier.tres" id="5_4kahi"]
 [ext_resource type="Script" path="res://Resources/Types/RelicData.gd" id="6_3mnyd"]
 [ext_resource type="Script" path="res://Resources/Types/RunData.gd" id="7_b82e1"]
 
@@ -15,9 +14,9 @@ run_seed = 0
 event = 1
 gold = 0
 max_health = 40
-current_health = 100
+current_health = 40
 relics = Array[ExtResource("6_3mnyd")]([])
-deck = Array[ExtResource("1_in8e0")]([ExtResource("2_vr42a"), ExtResource("2_vr42a"), ExtResource("2_vr42a"), ExtResource("2_vr42a"), ExtResource("3_wuavd"), ExtResource("3_wuavd"), ExtResource("3_wuavd"), ExtResource("4_108em"), ExtResource("4_108em"), ExtResource("4_108em"), ExtResource("4_108em"), ExtResource("3_wuavd"), ExtResource("5_4kahi"), ExtResource("5_4kahi"), ExtResource("5_4kahi")])
+deck = Array[ExtResource("1_in8e0")]([ExtResource("2_vr42a"), ExtResource("2_vr42a"), ExtResource("2_vr42a"), ExtResource("2_vr42a"), ExtResource("3_wuavd"), ExtResource("3_wuavd"), ExtResource("3_wuavd"), ExtResource("4_108em"), ExtResource("4_108em"), ExtResource("4_108em"), ExtResource("4_108em"), ExtResource("3_wuavd")])
 assignment = 0
 phase = ""
 assignment_list = Array[int]([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
