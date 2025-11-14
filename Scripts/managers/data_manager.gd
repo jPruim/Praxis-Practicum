@@ -71,9 +71,8 @@ func run_data_deJSONIFY(run_json):
 	run_data['gold'] = run_json.gold
 	run_data['max_health'] = run_json.max_health
 	run_data['current_health'] = run_json.current_health
-	for x in run_json.relic:
+	for x in run_json.relics:
 		run_data['relics'].append(relic_data_deJSONIFY(x))
-	run_data['deck'] = []
 	for x in run_json.deck:
 		run_data['deck'].append(card_data_deJSONIFY(x))
 	run_data['assignment'] = run_json.assignment
@@ -139,3 +138,18 @@ func relic_data_deJSONIFY(relic_json):
 	relic_data['description'] = relic_json['description']
 	relic_data['image'] = relic_json['image']
 	return relic_data
+
+
+func effect_data_deJSONIFY(effect_json):
+	var effect_data: RelicData = RelicDataPS.new()
+	effect_data['name'] = effect_json['name']
+	effect_data['cost'] = effect_json['cost']
+	effect_data['rarity'] = effect_json['rarity']
+	effect_data['description'] = effect_json['description']
+	effect_data['image'] = effect_json['image']
+	return effect_data
+
+# From the Wiki, doesnt work atm, IDK if it will be fixed
+#func decode_data(string, allow_objects = false):
+	#return JSON.to_native(JSON.parse_string(string), allow_objects)
+	#JSON.to_na
