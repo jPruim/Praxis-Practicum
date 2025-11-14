@@ -20,7 +20,7 @@ func initial_lighting():
 	$PlayerLight.visible = false
 	$EnemyLight.visible = false
 	$Ambient.visible = true
-	$CardAmbient.visible = false
+	$CardAmbient.visible = true
 	$ShopLight.visible = false
 	$BoardLight.visible = false
 	
@@ -40,6 +40,8 @@ func _pass_lighting(state: bool):
 func battle_lighting():
 	$PlayerLight.visible = true
 	$EnemyLight.visible = true
+	$CardAmbient.visible = true
+	$BoardLight.visible = true
 
 	
 func shop_lighting():
