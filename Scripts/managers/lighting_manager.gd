@@ -5,6 +5,7 @@ extends Node2D
 func _ready() -> void:
 	connect_signals()
 	$PassLight.position = Globals.PASS_BUTTON_POSITION + Vector2(30,15)
+	$BoardLight.position = Globals.VIEWPORT_SIZE/2
 	initial_lighting()
 	pass # Replace with function body.
 
@@ -21,7 +22,8 @@ func initial_lighting():
 	$Ambient.visible = true
 	$CardAmbient.visible = false
 	$ShopLight.visible = false
-
+	$BoardLight.visible = false
+	
 func connect_signals():
 	SignalBus.connect("menu_button_pressed", menu_lighting)
 	SignalBus.connect("fight_enter", battle_lighting)
@@ -50,3 +52,4 @@ func reset_lights():
 	$CardAmbient.visible = true
 	$ShopLight.visible = false
 	$PassLight.visible = false
+	$BoardLight.visible = false

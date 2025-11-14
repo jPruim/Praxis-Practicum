@@ -77,7 +77,8 @@ func run_data_deJSONIFY(run_json):
 		run_data['deck'].append(card_data_deJSONIFY(x))
 	run_data['assignment'] = run_json.assignment
 	run_data['phase'] = run_json.phase
-	run_data['assignment_list'] = run_json.assignment_list
+	for x in run_json["assignment_list"]:
+		run_data['assignment_list'].append(x)
 	run_data['ascension'] = run_json.ascension
 	return run_data
 
@@ -124,10 +125,12 @@ func card_data_deJSONIFY(card_json):
 	card_data['current_block'] = card_json['current_block']
 	card_data['current_health'] = card_json['current_health']
 	card_data['current_attack'] = card_json['current_attack']
-	card_data['effects'] = card_json['effects']
+	for x in card_json['effects']:
+		card_data['effects'].append(x)
 	card_data['effect_strength'] = card_json['effect_strength']
 	card_data['spell_level'] = card_json['spell_level']
-	card_data['tags'] = card_json['tags']
+	for x in card_json['tags']:
+		card_data['tags'].append(x)
 	return card_data
 
 func relic_data_deJSONIFY(relic_json):

@@ -174,12 +174,14 @@ position = Vector2(324, 416)
 scale = Vector2(7.05469, 7.03906)
 color = Color(1, 0.988235, 0.917647, 0.647059)
 texture = SubResource("GradientTexture2D_wf70c")
+height = 5.0
 
 [node name="EnemyLight" type="PointLight2D" parent="LightingManager"]
 position = Vector2(321, 49)
 scale = Vector2(4.03125, 4.03906)
 color = Color(1, 0.988235, 0.917647, 0.647059)
 texture = SubResource("GradientTexture2D_wf70c")
+height = 5.0
 
 [node name="Ambient" type="PointLight2D" parent="LightingManager"]
 position = Vector2(329, 501)
@@ -195,18 +197,28 @@ height = 100.0
 position = Vector2(329, 501)
 scale = Vector2(1.66979, 1.21615)
 color = Color(1, 1, 1, 0.403922)
+energy = 13.56
 blend_mode = 1
 range_layer_max = 2
 range_item_cull_mask = 2
 texture = SubResource("GradientTexture2D_2cmpm")
-height = 400.0
+height = 100.0
 
 [node name="ShopLight" type="PointLight2D" parent="LightingManager"]
 texture = SubResource("GradientTexture2D_lxxkv")
+height = 100.0
 
 [node name="PassLight" type="PointLight2D" parent="LightingManager"]
 visible = false
 color = Color(0.858824, 1, 1, 0.643137)
 texture = SubResource("GradientTexture2D_an8k0")
+height = 5.0
+
+[node name="BoardLight" type="PointLight2D" parent="LightingManager"]
+position = Vector2(1615.03, 246.914)
+scale = Vector2(16.251, 16.314)
+color = Color(1, 0.988235, 0.917647, 0.647059)
+texture = SubResource("GradientTexture2D_wf70c")
+height = 5.0
 
 [connection signal="pressed" from="UI/HeaderBar/NinePatchRect/HBoxContainer/VBoxContainer/Menubutton" to="." method="_on_menubutton_pressed"]
