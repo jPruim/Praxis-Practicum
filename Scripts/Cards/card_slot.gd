@@ -48,3 +48,9 @@ func update_graphic():
 	cards[0].visible = true
 	cards[0].animation_reveal()
 	cards[0].card_affects(false)
+
+func animate_dmg(A_SPEED = Globals.DEFAULT_ASPEED):
+	var tween = get_tree().create_tween()
+	tween.tween_property($".", "modulate", Color.RED, A_SPEED)
+	tween.tween_property($".", "modulate", Color.WHITE, A_SPEED)
+	#tween.tween_callback($".".queue_free)
