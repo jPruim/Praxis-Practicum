@@ -48,6 +48,7 @@ project/assembly_name="Praxis & Practicum"
 theme/custom="res://Scenes/UI/default-theme.theme"
 theme/custom_font="res://Assets/font/alagard.ttf"
 theme/default_font_antialiasing=0
+theme/default_font_subpixel_positioning=0
 
 [layer_names]
 

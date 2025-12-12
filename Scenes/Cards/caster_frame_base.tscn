@@ -12,7 +12,9 @@ script = ExtResource("2_rtf22")
 texture = ExtResource("2_vq5pk")
 
 [node name="Sprite2D" parent="CardFront/Container" index="0"]
+light_mask = 2
 scale = Vector2(2, 2)
 
 [node name="AnimatedSprite2D" parent="CardFront/Container" index="1"]
+light_mask = 1
 scale = Vector2(2, 2)
