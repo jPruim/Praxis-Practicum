@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://vlo6uno0t1dc"]
 
-[ext_resource type="Script" path="res://Scripts/player_hand.gd" id="1_xup57"]
+[ext_resource type="Script" path="res://Scripts/Managers/player_hand.gd" id="1_xup57"]
 [ext_resource type="Texture2D" uid="uid://dos886xw0be4f" path="res://Assets/Spritesheets/praxis-ui-ninepatch-light.png" id="2_j3nvc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g5w1n"]

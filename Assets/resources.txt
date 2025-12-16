@@ -1,7 +1,7 @@
 Guides:
 	https://www.youtube.com/watch?v=WjT5sLMD7Kw&ab_channel=AdventuresinGodot
 	https://www.youtube.com/watch?v=2jMcuKdRh2w&ab_channel=Barry%27sDevelopmentHell
-
+	https://github.com/stevepixelface/dialog-system/
 Backgrounds:
 	https://brullov.itch.io/oak-woods
 	https://www.enworld.org/media/artwork-fantasy-art-castle-landscape-wallpaper-preview-jpg.69973/ # TODO: unliscened, placeholder only (though it is heavily edited)

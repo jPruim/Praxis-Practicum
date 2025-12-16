@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dvfwf0hvp8bep"]
 
 [ext_resource type="Texture2D" uid="uid://42543ow2lye3" path="res://Assets/Cards/Card Borders etc/Card Back.png" id="1_h2grd"]
-[ext_resource type="Script" path="res://Scripts/deck.gd" id="1_thb5r"]
+[ext_resource type="Script" path="res://Scripts/Cards/deck.gd" id="1_thb5r"]
 [ext_resource type="FontFile" uid="uid://bhgvkig86iomx" path="res://Assets/Font/alagard.ttf" id="3_u6l1l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_163l4"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Managers/battle_manager.gd" id="1_q4kp8"]
 [ext_resource type="Script" path="res://Scripts/Managers/spell_manager.gd" id="2_fijju"]
-[ext_resource type="Script" path="res://Scripts/playspace.gd" id="3_x32qe"]
+[ext_resource type="Script" path="res://Scripts/UI Elements/playspace.gd" id="3_x32qe"]
 [ext_resource type="Theme" uid="uid://dpn2t23n7kt45" path="res://Scenes/UI/default-theme.theme" id="4_p0ay2"]
 [ext_resource type="Script" path="res://Scripts/UI Elements/pass_button.gd" id="5_hc2at"]
 [ext_resource type="PackedScene" uid="uid://brqd7qlj1sonb" path="res://Scenes/Cards/card_slot.tscn" id="5_jwt0r"]
