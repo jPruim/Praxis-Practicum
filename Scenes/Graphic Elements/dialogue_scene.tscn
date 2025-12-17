@@ -1,12 +1,56 @@
-[gd_scene load_steps=2 format=3 uid="uid://1eqwy3y5qyt4"]
+[gd_scene load_steps=3 format=3 uid="uid://1eqwy3y5qyt4"]
 
 [ext_resource type="Script" path="res://Scripts/UI Elements/dialogue_scene.gd" id="1_aviac"]
+[ext_resource type="Texture2D" uid="uid://bo56tuwrojsaf" path="res://Assets/GUI/praxis-ui-ninepatch.png" id="2_qmqfd"]
 
 [node name="DialogueScene" type="CanvasLayer"]
+layer = 4
 script = ExtResource("1_aviac")
 
-[node name="Background" type="Node2D" parent="."]
+[node name="Background" type="NinePatchRect" parent="."]
+modulate = Color(1, 1, 1, 0.705882)
+texture_filter = 1
+offset_left = 91.0
+offset_top = 213.0
+offset_right = 497.0
+offset_bottom = 304.0
+texture = ExtResource("2_qmqfd")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
 
-[node name="TextLabel" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 15.0
+[node name="Text" type="Label" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SpeakerLabel" type="NinePatchRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.705882)
+offset_left = 97.0
+offset_top = 195.0
+offset_right = 217.0
+offset_bottom = 213.0
+texture = ExtResource("2_qmqfd")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Speaker" type="Label" parent="SpeakerLabel"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Vincent
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true

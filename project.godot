@@ -54,11 +54,13 @@ theme/default_font_subpixel_positioning=0
 
 2d_render/layer_1="World"
 2d_render/layer_2="Cards"
+2d_render/layer_4="Dialogue"
 2d_render/layer_5="UI Elements"
 2d_render/layer_9="Fog"
 2d_render/layer_10="Menu"
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

@@ -3,14 +3,26 @@ extends Node2D
 var save_file: String = "user://savefile.tres"
 var achievement_file: String
 var default_save_file: String = "res://Resources/GameData/default_game.tres"
+var dialogue_file: String = "res://Resources/JSON/dialogue.json"
 var debug_summon_file: String = "res://Resources/GameData/summon_test.tres"
+var dialogue_json: JSON
+
 const RunDataPS = preload("res://Resources/Types/RunData.gd") # PackedScene
 const CardDataPS = preload("res://Resources/Types/CardData.gd") # PackedScene
 const RelicDataPS = preload("res://Resources/Types/RelicData.gd") # PackedScene
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
+
+func load_dialogue_data():
+	if FileAccess.file_exists(dialogue_file):
+		var file = FileAccess.open(dialogue_file, FileAccess.READ)
+		var data = JSON.parse_string(file.get_as_text())
+		dialogue_json = data
+		return dialogue_json
 
 func load_game_data():
 	var run_data: RunData

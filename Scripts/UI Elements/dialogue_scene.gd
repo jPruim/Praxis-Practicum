@@ -6,7 +6,7 @@ extends CanvasLayer
 var scene_text = {}
 var selected_text = []
 var in_progress = false
-
+var dialogue_json: JSON
 
 @onready var background = $Background
 @onready var text_label = $TextLabel
@@ -14,13 +14,10 @@ var in_progress = false
 func _ready():
 	background.visible = false
 	scene_text = load_scene_text()
-	SignalBus.connect("display_dialog", self, "on_display_dialog")
+	#SignalBus.connect("display_dialog", self, "on_display_dialog")
 
 func load_scene_text():
-	var file = File.new()
-	if file.file_exists(scene_text_file):
-		file.open(scene_text_file, File.READ)
-		return parse_json(file.get_as_text())
+	dialogue_json = DataManager.load_dialogue_data()
 #
 func show_text():
 	text_label.text = selected_text.pop_front()
