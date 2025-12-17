@@ -49,6 +49,9 @@ signal on_shuffle_deck
 signal player_turn(state: bool)
 signal discard_card(card: CardBase)
 
+# UI Signals
+signal display_dialogue(text_key)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
