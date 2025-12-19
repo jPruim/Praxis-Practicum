@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/UI Elements/tag.gd" id="1_ri1oy"]
 [ext_resource type="Theme" uid="uid://dlyxw6e1bkfhe" path="res://Scenes/UI/Tag.theme" id="1_sgug1"]
-[ext_resource type="Texture2D" uid="uid://df3fajumbo3rk" path="res://Assets/Spritesheets/tag-nine-patch.png" id="2_7mdyh"]
+[ext_resource type="Texture2D" uid="uid://df3fajumbo3rk" path="res://Assets/Spritesheets/GUIArt/tag-nine-patch.png" id="2_7mdyh"]
 
 [node name="Tag" type="MarginContainer"]
 offset_right = 126.0

@@ -64,3 +64,4 @@ theme/default_font_subpixel_positioning=0
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/layer_4="Dialogue"
