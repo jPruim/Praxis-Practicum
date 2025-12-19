@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://dq3p2abw5na2t"
-path="res://.godot/imported/Ithaca-LVB75.ttf-17e8116bea79fac34846bc01df72c8a6.fontdata"
+path="res://.godot/imported/Ithaca-LVB75.ttf-ac9455bf2de9a75b88617802e55d23d9.fontdata"
 
 [deps]
 
-source_file="res://Assets/Font/Ithaca-LVB75.ttf"
-dest_files=["res://.godot/imported/Ithaca-LVB75.ttf-17e8116bea79fac34846bc01df72c8a6.fontdata"]
+source_file="res://Assets/font/Ithaca-LVB75.ttf"
+dest_files=["res://.godot/imported/Ithaca-LVB75.ttf-ac9455bf2de9a75b88617802e55d23d9.fontdata"]
 
 [params]
 

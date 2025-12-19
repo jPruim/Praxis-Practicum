@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://drsjpas2khbat"
-path="res://.godot/imported/Grenze-Italic.ttf-43e5a5672ac168e087445ce8ebeb233f.fontdata"
+path="res://.godot/imported/Grenze-Italic.ttf-c03fa853cbd3f1b31635f05ce227d61d.fontdata"
 
 [deps]
 
-source_file="res://Assets/Font/Grenze/Grenze-Italic.ttf"
-dest_files=["res://.godot/imported/Grenze-Italic.ttf-43e5a5672ac168e087445ce8ebeb233f.fontdata"]
+source_file="res://Assets/font/Grenze/Grenze-Italic.ttf"
+dest_files=["res://.godot/imported/Grenze-Italic.ttf-c03fa853cbd3f1b31635f05ce227d61d.fontdata"]
 
 [params]
 

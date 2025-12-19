@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://da1u718rq7cpt"
-path="res://.godot/imported/Grenze-ThinItalic.ttf-ec8c8008cd034f60e973007fa9c2a1b6.fontdata"
+path="res://.godot/imported/Grenze-ThinItalic.ttf-63dbaf51b4849d84dc17a4410e90d889.fontdata"
 
 [deps]
 
-source_file="res://Assets/Font/Grenze/Grenze-ThinItalic.ttf"
-dest_files=["res://.godot/imported/Grenze-ThinItalic.ttf-ec8c8008cd034f60e973007fa9c2a1b6.fontdata"]
+source_file="res://Assets/font/Grenze/Grenze-ThinItalic.ttf"
+dest_files=["res://.godot/imported/Grenze-ThinItalic.ttf-63dbaf51b4849d84dc17a4410e90d889.fontdata"]
 
 [params]
 

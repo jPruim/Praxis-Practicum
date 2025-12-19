@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://botbnbtw2hsgp"
-path="res://.godot/imported/pompy-mini.otf-5f9ff7d995a99d6c8d09baca36564d66.fontdata"
+path="res://.godot/imported/pompy-mini.otf-e42691ff234c7cfb0f4e415aab99957a.fontdata"
 
 [deps]
 
-source_file="res://Assets/Font/pompy/pompy-mini.otf"
-dest_files=["res://.godot/imported/pompy-mini.otf-5f9ff7d995a99d6c8d09baca36564d66.fontdata"]
+source_file="res://Assets/font/pompy/pompy-mini.otf"
+dest_files=["res://.godot/imported/pompy-mini.otf-e42691ff234c7cfb0f4e415aab99957a.fontdata"]
 
 [params]
 

@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://mxp7ihqhgw5f"
-path="res://.godot/imported/Grenze-MediumItalic.ttf-3f61b099492d6de167231e008b9140c4.fontdata"
+path="res://.godot/imported/Grenze-MediumItalic.ttf-f38ca51939fb9b7d186f9641be14876a.fontdata"
 
 [deps]
 
-source_file="res://Assets/Font/Grenze/Grenze-MediumItalic.ttf"
-dest_files=["res://.godot/imported/Grenze-MediumItalic.ttf-3f61b099492d6de167231e008b9140c4.fontdata"]
+source_file="res://Assets/font/Grenze/Grenze-MediumItalic.ttf"
+dest_files=["res://.godot/imported/Grenze-MediumItalic.ttf-f38ca51939fb9b7d186f9641be14876a.fontdata"]
 
 [params]
 

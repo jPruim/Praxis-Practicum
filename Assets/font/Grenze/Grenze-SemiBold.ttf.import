@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://g2oh0hxr5unh"
-path="res://.godot/imported/Grenze-SemiBold.ttf-e5facbb608d05ba8ef69051761ef9164.fontdata"
+path="res://.godot/imported/Grenze-SemiBold.ttf-6e2352943e35704445c6d129116da561.fontdata"
 
 [deps]
 
-source_file="res://Assets/Font/Grenze/Grenze-SemiBold.ttf"
-dest_files=["res://.godot/imported/Grenze-SemiBold.ttf-e5facbb608d05ba8ef69051761ef9164.fontdata"]
+source_file="res://Assets/font/Grenze/Grenze-SemiBold.ttf"
+dest_files=["res://.godot/imported/Grenze-SemiBold.ttf-6e2352943e35704445c6d129116da561.fontdata"]
 
 [params]
 
