@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://1eqwy3y5qyt4"]
+[gd_scene load_steps=4 format=3 uid="uid://1eqwy3y5qyt4"]
 
 [ext_resource type="Script" path="res://Scripts/UI Elements/dialogue_scene.gd" id="1_aviac"]
 [ext_resource type="Texture2D" uid="uid://bo56tuwrojsaf" path="res://Assets/GUI/praxis-ui-ninepatch.png" id="2_qmqfd"]
+
+[sub_resource type="Theme" id="Theme_xkcnl"]
 
 [node name="DialogueScene" type="CanvasLayer"]
 process_mode = 3
@@ -13,14 +15,12 @@ modulate = Color(1, 1, 1, 0.705882)
 self_modulate = Color(1, 1, 1, 0.705882)
 texture_filter = 1
 anchors_preset = -1
-anchor_left = 0.459
-anchor_top = 0.844
-anchor_right = 0.459
-anchor_bottom = 0.844
-offset_left = -202.76
-offset_top = -90.84
-offset_right = 203.24
-offset_bottom = 0.159973
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+grow_horizontal = 2
+grow_vertical = 0
 texture = ExtResource("2_qmqfd")
 region_rect = Rect2(0, 0, 32, 32)
 patch_margin_left = 4
@@ -29,12 +29,16 @@ patch_margin_right = 4
 patch_margin_bottom = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="Background"]
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
+anchor_left = 0.01
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 1.937
+offset_left = -6.4
+offset_bottom = -7.496
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
@@ -70,6 +74,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_xkcnl")
 text = "Vincent
 "
 horizontal_alignment = 1
