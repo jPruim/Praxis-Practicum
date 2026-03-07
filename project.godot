@@ -23,6 +23,7 @@ SignalBus="*res://Scripts/Globals/signal_bus.gd"
 CardDatabase="*res://Scripts/Cards/card_database.gd"
 DataManager="*res://Scripts/Managers/data_manager.gd"
 RelicManager="*res://Scripts/Managers/relic_manager.gd"
+TextReplacer="*res://Scripts/Managers/text_replacer.gd"
 
 [debug]
 
