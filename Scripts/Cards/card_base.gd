@@ -52,15 +52,22 @@ func set_all(data: CardData):
 
 # Set Display and CardData from a CardData object
 func set_display(data: CardData):
+	# TOODO: Make this dynamic (link to battle/run manager)
+	var player_name = ""
+	var enemy_name = ""
+	var dmg: int = int(data.direct_damage)
+	var block: int = int(data.direct_block)
 	set_display_name(data.display_name)
 	$CardFront/Attack.text = str(data.summon_attack)
 	$CardFront/Health.text = str(data.summon_health)
-	$CardFront/Details.text = data.card_text
+	$CardFront/Details.text = data.card_text.format(
+		TextReplacer.get_replacements(player_name, enemy_name, dmg, block)
+		)
 	$CardFront/Cost.text = str(data.cast_time)
 	$CardFront/Type.text = data.card_type
-	$CardFront/DirectDamage.text = str(data.direct_damage)
+	$CardFront/DirectDamage.text = str(dmg)
 	$CardFront/DamageType.text = data.damage_type
-	$CardFront/DirectBlock.text = str(data.direct_block)
+	$CardFront/DirectBlock.text = str(block)
 	$TagList.set_taglist(data.tags)
 	# Handle Animations not being added yet ( So I can add them over time)
 	if data.animation != "":
