@@ -161,8 +161,9 @@ func card_affects(hovered: bool = false):
 	var animation_sprite = get_node("CardFront/Container/AnimatedSprite2D")
 	being_hovered = hovered
 	if being_hovered && !discarded:
-		$".".scale = Vector2(1.0, 1.0)
+		$".".scale = Globals.SCALE.card_hovered
 		$".".z_index = Globals.Z_INDEX["card_hovered"]
+		$CardShader/shine.visible = true
 		# Play Animation
 		animation_sprite.play()
 		
@@ -176,6 +177,7 @@ func card_affects(hovered: bool = false):
 				Globals.VIEWPORT_SIZE.y -  $TagList.size.y)
 		
 	else:
+		$CardShader/shine.visible = false
 		$TagList.visible = false
 		$TagList.position = default_tag_location
 		if $"." is CasterFrameBase:

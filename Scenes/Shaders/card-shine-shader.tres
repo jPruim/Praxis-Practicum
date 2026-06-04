@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://kqdmiln7genm"]
+
+[ext_resource type="Shader" path="res://Scripts/Shaders/metallic-shine.gdshader" id="1_a03ui"]
+
+[resource]
+shader = ExtResource("1_a03ui")
+shader_parameter/Line_Smoothness = 0.034
+shader_parameter/Line_Width = 0.057
+shader_parameter/Brightness = 3.0
+shader_parameter/Rotation_deg = 32.023
+shader_parameter/Distortion = 1.345
+shader_parameter/Speed = 0.3
+shader_parameter/Position = 0.0
+shader_parameter/Position_Min = 0.25
+shader_parameter/Position_Max = 0.5
+shader_parameter/Alpha = 0.491
