@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfpxljfu2wbg"]
+
+[ext_resource type="Script" path="res://Scripts/UI Elements/multicard_display.gd" id="1_676te"]
+
+[node name="MulticardDisplay" type="Control"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+script = ExtResource("1_676te")
