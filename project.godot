@@ -42,6 +42,7 @@ window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/stretch/scale_mode="integer"
 window/vsync/vsync_mode=0
+mouse_cursor/custom_image="uid://c72byvglymygs"
 window/main_scene=""
 
 [dotnet]
