@@ -2,14 +2,22 @@ class_name CardBase
 extends Node2D
 
 # Properties
+## data in the CardData type, can be null
 var card_data:CardData = null
+## The position of the hand
 var hand_position: Vector2
-var in_slot: bool  = false # Boolean for being in the card_slot
+## True if in card_slot
+var in_slot: bool  = false 
+## True if not player card
 var ai_card: bool = false
 var being_cast: bool = false
 var being_hovered: bool = false
+
+## Vector2 of relative tag location
 var default_tag_location = Vector2(-176, -80)
 var discarded: bool = false
+## false for cards not in hand ideally, check consistency
+var draggable: bool = true
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_default_data()
@@ -130,31 +138,36 @@ func animate_card_to_slot(slot: CardSlot, scale = Globals.CARD_SCALE_PlACED, spe
 	being_cast = false
 	animate_card_to_position(slot.position, speed)
 	animate_card_to_scale(scale, speed)
-	var i = 0;
 	
-func has_tag(name: String):
+func has_tag(val: String):
 	for tag in card_data.tags:
-		if tag == name:
+		if tag == val:
 			return true
 	return false	
 
-func has_effect(name: String):
+func has_effect(val: String):
 	for effect in card_data.effects:
-		if effect == name:
+		if effect == val:
 			return true
 	return false	
 
-func add_tag(name: String):
-	card_data.tags.append(name)
+func add_tag(val: String):
+	card_data.tags.append(val)
 
-func remove_tag(name: String):
-	card_data.tags.erase(name)
+func remove_tag(val: String):
+	card_data.tags.erase(val)
 
-func add_effect(name: String):
-	card_data.effects.append(name)
+func add_effect(val: String):
+	card_data.effects.append(val)
 
-func remove_effect(name: String):
-	card_data.effects.erase(name)
+func remove_effect(val: String):
+	card_data.effects.erase(val)
+
+func set_draggability(val: bool):
+	draggable = val
+	return
+	
+
 
 # Change card affects TODO: Decide if cards in cardslots need animations (go and add a new mask for animations, and separate from card detection)
 func card_affects(hovered: bool = false):
