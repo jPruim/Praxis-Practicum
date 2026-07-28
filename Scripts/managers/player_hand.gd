@@ -7,7 +7,7 @@ const CARD_WIDTH = 68
 const DEFAULT_ASPEED = 0.25
 
 # Properties
-var player_hand = []
+var player_hand : Array[CardBase]= []
 var center_screen_x: int
 var ai_hand:bool = false
 var offset_value: int = -90
@@ -28,7 +28,7 @@ func _player_turn(state: bool):
 		$MarginContainer/PanelContainer.visible = false
 
 # Add card to player hand
-func add_card_to_hand(card, speed = DEFAULT_ASPEED):
+func add_card_to_hand(card: CardBase, speed = DEFAULT_ASPEED):
 	card.z_index = Globals.Z_INDEX["card_being_dragged"]
 	if card not in player_hand:
 		player_hand.insert(0,card)
