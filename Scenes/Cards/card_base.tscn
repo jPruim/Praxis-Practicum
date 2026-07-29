@@ -1,6 +1,6 @@
-[gd_scene load_steps=56 format=3 uid="uid://c2gbemxiigrbl"]
+[gd_scene format=3 uid="uid://c2gbemxiigrbl"]
 
-[ext_resource type="Script" path="res://Scripts/Cards/card_base.gd" id="1_knr6q"]
+[ext_resource type="Script" uid="uid://y3xdnbjlxbvf" path="res://Scripts/Cards/card_base.gd" id="1_knr6q"]
 [ext_resource type="Texture2D" uid="uid://dc521v33mwvec" path="res://Assets/Spritesheets/Placeholder/Eletric Aura.png" id="3_imowu"]
 [ext_resource type="Texture2D" uid="uid://dirvipg20u2k5" path="res://Assets/Cards/Card Borders etc/Card Border-3.png" id="3_kgjff"]
 [ext_resource type="Material" uid="uid://kqdmiln7genm" path="res://Scenes/Shaders/card-shine-shader.tres" id="3_llf3c"]
@@ -198,7 +198,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_asit3")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Adventurer",
 "speed": 5.0
 }, {
@@ -206,7 +206,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1173s")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Bee",
 "speed": 5.0
 }, {
@@ -232,7 +232,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_87w2n")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Electric",
 "speed": 5.0
 }, {
@@ -240,7 +240,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_74odu")
 }],
-"loop": true,
+"loop": 1,
 "name": &"FireFox",
 "speed": 5.0
 }, {
@@ -302,7 +302,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_350bf")
 }],
-"loop": true,
+"loop": 1,
 "name": &"FireSparks",
 "speed": 5.0
 }]
@@ -411,47 +411,48 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bn0ox"]
 _data = {
-"RESET": SubResource("Animation_eufge"),
-"card_flip": SubResource("Animation_f2wq7")
+&"RESET": SubResource("Animation_eufge"),
+&"card_flip": SubResource("Animation_f2wq7")
 }
 
-[node name="CardBase" type="Node2D"]
+[node name="CardBase" type="Node2D" unique_id=33348425]
 script = ExtResource("1_knr6q")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=2101995800]
+anchors_preset = -1
 offset_left = -32.0
-offset_top = -47.0
-offset_right = -1.0
-scale = Vector2(2, 2)
+offset_top = -48.0
+offset_right = 32.0
+offset_bottom = 48.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_hitk0")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=737697224]
 z_index = 1
 scale = Vector2(0.5, 0.5)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1909551875]
 position = Vector2(1.00001, 1.90735e-06)
 scale = Vector2(2.05, 2.05)
 shape = SubResource("RectangleShape2D_qs3p7")
 
-[node name="CardBack" type="Node2D" parent="."]
+[node name="CardBack" type="Node2D" parent="." unique_id=725509777]
 z_index = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="CardBack"]
+[node name="Sprite2D" type="Sprite2D" parent="CardBack" unique_id=1829128751]
 texture_filter = 1
 scale = Vector2(2, 2)
 texture = ExtResource("5_578ps")
 
-[node name="CardFront" type="Node2D" parent="."]
+[node name="CardFront" type="Node2D" parent="." unique_id=867386372]
 z_index = 1
 scale = Vector2(1e-05, 1)
 
-[node name="CardBorder" type="Sprite2D" parent="CardFront"]
+[node name="CardBorder" type="Sprite2D" parent="CardFront" unique_id=1155641287]
 texture_filter = 1
 scale = Vector2(2, 2)
 texture = SubResource("CanvasTexture_5ml6j")
 
-[node name="Attack" type="RichTextLabel" parent="CardFront"]
+[node name="Attack" type="RichTextLabel" parent="CardFront" unique_id=22527764]
 texture_filter = 1
 offset_left = -30.0
 offset_top = 36.0
@@ -463,7 +464,7 @@ theme_override_font_sizes/normal_font_size = 16
 text = "0"
 scroll_active = false
 
-[node name="Health" type="RichTextLabel" parent="CardFront"]
+[node name="Health" type="RichTextLabel" parent="CardFront" unique_id=183615634]
 texture_filter = 1
 offset_left = 15.0
 offset_top = 36.0
@@ -478,7 +479,7 @@ scroll_active = false
 selection_enabled = true
 text_direction = 2
 
-[node name="Cost" type="RichTextLabel" parent="CardFront"]
+[node name="Cost" type="RichTextLabel" parent="CardFront" unique_id=982006698]
 texture_filter = 1
 offset_left = -28.0
 offset_top = -51.0
@@ -490,7 +491,7 @@ theme_override_font_sizes/normal_font_size = 16
 text = "1"
 scroll_active = false
 
-[node name="Details" type="RichTextLabel" parent="CardFront"]
+[node name="Details" type="RichTextLabel" parent="CardFront" unique_id=236264916]
 texture_filter = 1
 offset_left = -29.0
 offset_top = 8.0
@@ -503,7 +504,7 @@ theme_override_font_sizes/normal_font_size = 16
 text = "Deal 4 FIRE damage."
 scroll_active = false
 
-[node name="Name" type="RichTextLabel" parent="CardFront"]
+[node name="Name" type="RichTextLabel" parent="CardFront" unique_id=1139322241]
 texture_filter = 1
 offset_left = -20.0
 offset_top = -51.0
@@ -515,7 +516,7 @@ theme_override_font_sizes/normal_font_size = 16
 text = "Firebolt"
 autowrap_mode = 0
 
-[node name="Type" type="RichTextLabel" parent="CardFront"]
+[node name="Type" type="RichTextLabel" parent="CardFront" unique_id=1957245497]
 visible = false
 texture_filter = 1
 offset_left = -50.0
@@ -526,7 +527,7 @@ mouse_filter = 1
 theme = ExtResource("4_suoux")
 theme_override_font_sizes/normal_font_size = 16
 
-[node name="DirectDamage" type="RichTextLabel" parent="CardFront"]
+[node name="DirectDamage" type="RichTextLabel" parent="CardFront" unique_id=821282708]
 visible = false
 texture_filter = 1
 offset_right = 40.0
@@ -535,7 +536,7 @@ mouse_filter = 1
 theme = ExtResource("4_suoux")
 theme_override_font_sizes/normal_font_size = 16
 
-[node name="DamageType" type="RichTextLabel" parent="CardFront"]
+[node name="DamageType" type="RichTextLabel" parent="CardFront" unique_id=468188342]
 visible = false
 texture_filter = 1
 offset_right = 40.0
@@ -544,7 +545,7 @@ mouse_filter = 1
 theme = ExtResource("4_suoux")
 theme_override_font_sizes/normal_font_size = 16
 
-[node name="DirectBlock" type="RichTextLabel" parent="CardFront"]
+[node name="DirectBlock" type="RichTextLabel" parent="CardFront" unique_id=1374147397]
 visible = false
 texture_filter = 1
 offset_right = 40.0
@@ -553,7 +554,7 @@ mouse_filter = 1
 theme = ExtResource("4_suoux")
 theme_override_font_sizes/normal_font_size = 16
 
-[node name="Container" type="MarginContainer" parent="CardFront"]
+[node name="Container" type="MarginContainer" parent="CardFront" unique_id=1676591190]
 clip_contents = true
 offset_left = -31.0
 offset_top = -40.0
@@ -561,28 +562,26 @@ offset_right = 33.0
 offset_bottom = 8.0
 metadata/_edit_use_anchors_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="CardFront/Container"]
+[node name="Sprite2D" type="Sprite2D" parent="CardFront/Container" unique_id=1146866744]
 position = Vector2(30, 32)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CardFront/Container"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CardFront/Container" unique_id=1257409844]
 light_mask = 2
 texture_filter = 1
 position = Vector2(30, 26)
 sprite_frames = SubResource("SpriteFrames_npp4t")
 animation = &"FireFox"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_bn0ox")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=950942158]
+libraries/ = SubResource("AnimationLibrary_bn0ox")
 
-[node name="TagList" parent="." instance=ExtResource("9_73vww")]
+[node name="TagList" parent="." unique_id=2102440188 instance=ExtResource("9_73vww")]
 visible = false
 
-[node name="CardShader" type="Node2D" parent="."]
+[node name="CardShader" type="Node2D" parent="." unique_id=358797871]
 z_index = 2
 
-[node name="shine" type="PanelContainer" parent="CardShader"]
+[node name="shine" type="PanelContainer" parent="CardShader" unique_id=85889621]
 visible = false
 material = ExtResource("3_llf3c")
 offset_left = -32.0
