@@ -121,8 +121,15 @@ func animation_conceal():
 	
 # Animate card to position
 @warning_ignore("shadowed_variable_base_class")
-func animate_card_to_position(position, speed = Globals.DEFAULT_ASPEED):
+func animate_card_to_position(position, speed = Globals.DEFAULT_ASPEED, use_mid_point: bool = false):
 	var tween = get_tree().create_tween()
+	# Add a small variable midpoint to the animation, so that multiple cards
+	# animated slightly differently to show multiple cards
+	# Limit the extra mid point to enough distance traveled
+	if ($".".position.distance_to(position) > 20 && use_mid_point):
+		var intermediate_position: Vector2 = ($".".position + position)/2
+		intermediate_position -= Vector2(randi() % 40 -20, randi() % 40 -20)
+		tween.tween_property($".", "position", intermediate_position, speed)
 	tween.tween_property($".", "position", position, speed)
 	
 # Animate card to Scale
