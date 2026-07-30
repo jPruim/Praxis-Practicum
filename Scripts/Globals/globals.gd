@@ -40,7 +40,8 @@ const Z_INDEX = {
 	"card_hovered": 25,
 	"tag": 26,
 	"card_being_dragged": 30,
-	"centerpoint": 35
+	"centerpoint": 35,
+	"multicard_display": 50,
 }
 
 # Masks

@@ -1,9 +1,32 @@
 [gd_scene format=3 uid="uid://dhjcfa5arvy83"]
 
+[ext_resource type="Script" uid="uid://cjcubxhd4olbs" path="res://Scripts/Cards/card_display.gd" id="1_02p8p"]
 [ext_resource type="Script" uid="uid://y3xdnbjlxbvf" path="res://Scripts/Cards/card_base.gd" id="1_06m28"]
 
-[node name="CardDisplay" type="MarginContainer" unique_id=313961248]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bgn2i"]
 
-[node name="CardBase" type="Node2D" parent="." unique_id=44702344]
+[node name="CardDisplay" type="MarginContainer" unique_id=313961248]
+texture_filter = 1
+material = SubResource("ShaderMaterial_bgn2i")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -180.0
+offset_right = -320.0
+offset_bottom = -180.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+script = ExtResource("1_02p8p")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1398540380]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="CardBase" type="Node2D" parent="PanelContainer" unique_id=44702344]
 script = ExtResource("1_06m28")
 metadata/_custom_type_script = "uid://y3xdnbjlxbvf"

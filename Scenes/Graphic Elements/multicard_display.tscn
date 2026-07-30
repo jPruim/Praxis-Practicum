@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bfpxljfu2wbg"]
 
 [ext_resource type="Script" uid="uid://cv7s30xkq4gda" path="res://Scripts/UI Elements/multicard_display.gd" id="1_676te"]
+[ext_resource type="Texture2D" uid="uid://ctqmx33vtxkki" path="res://Assets/Spritesheets/GUIArt/close-v1.png" id="2_0rqpe"]
 [ext_resource type="Shader" uid="uid://cpfvvexfp7k7e" path="res://Scripts/Shaders/Cloud.gdshader" id="2_as5gm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qk2o7"]
@@ -9,6 +10,8 @@ shader_parameter/stars_speed = Vector2(0.1, 0)
 shader_parameter/stars_density = 0.002
 
 [node name="MulticardDisplay" type="Control" unique_id=10507465]
+z_index = 50
+z_as_relative = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,12 +32,25 @@ grow_vertical = 2
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
+[node name="CloseMargin" type="MarginContainer" parent="VBoxContainer" unique_id=788291030]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="VBoxContainer/CloseMargin" unique_id=424580574]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+icon = ExtResource("2_0rqpe")
+icon_alignment = 2
+
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer" unique_id=1598863583]
 texture_filter = 1
 material = SubResource("ShaderMaterial_qk2o7")
 layout_mode = 2
 size_flags_vertical = 3
+columns = 3
 
 [node name="BottomMargin" type="MarginContainer" parent="VBoxContainer" unique_id=198365219]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
+
+[connection signal="pressed" from="VBoxContainer/CloseMargin/CloseButton" to="." method="_on_close_button_pressed"]

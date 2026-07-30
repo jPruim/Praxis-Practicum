@@ -51,6 +51,7 @@ signal discard_card(card: CardBase)
 
 # UI Signals
 signal display_dialogue(text_key)
+signal scale_change_card(new_value: int)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
