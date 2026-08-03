@@ -21,7 +21,7 @@ var draggable: bool = true
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_default_data()
-	get_parent().connect_card_signals(self)
+	#get_parent().connect_card_signals(self)
 	pass
 
 
@@ -31,6 +31,9 @@ func _process(_delta: float) -> void:
 	
 # Set to full deep copy of the passed in CardBase
 func copy(card: CardBase):	
+	if !card || !card.card_data:
+		print("Copy called on empty CardBase")
+		return
 	set_all(card.card_data)
 	hand_position = card.hand_position
 	in_slot = card.in_slot
@@ -96,6 +99,7 @@ func set_animation(animation: String = "FireSparks"):
 @warning_ignore("shadowed_variable_base_class")
 func set_display_name(name: String):
 	card_data.display_name = name
+	print($".".get_children())
 	$CardFront/Name.text = name
 
 func set_health(hp: int):

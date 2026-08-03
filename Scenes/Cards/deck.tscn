@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dvfwf0hvp8bep"]
+[gd_scene format=3 uid="uid://dvfwf0hvp8bep"]
 
 [ext_resource type="Texture2D" uid="uid://42543ow2lye3" path="res://Assets/Cards/Card Borders etc/Card Back.png" id="1_h2grd"]
-[ext_resource type="Script" path="res://Scripts/Cards/deck.gd" id="1_thb5r"]
+[ext_resource type="Script" uid="uid://dl0cgse1fqu87" path="res://Scripts/Cards/deck.gd" id="1_thb5r"]
 [ext_resource type="FontFile" uid="uid://bhgvkig86iomx" path="res://Assets/Font/alagard.ttf" id="3_u6l1l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_163l4"]
@@ -11,22 +11,22 @@ size = Vector2(32, 48)
 default_font = ExtResource("3_u6l1l")
 default_font_size = 16
 
-[node name="Deck" type="Node2D"]
+[node name="Deck" type="Node2D" unique_id=507584330]
 z_index = -5
 script = ExtResource("1_thb5r")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=1396269838]
 collision_layer = 4
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2090551714]
 shape = SubResource("RectangleShape2D_163l4")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=744987939]
 texture_filter = 1
 texture = ExtResource("1_h2grd")
 
-[node name="DeckCount" type="RichTextLabel" parent="."]
+[node name="DeckCount" type="RichTextLabel" parent="." unique_id=1765599357]
 modulate = Color(0.282353, 0.282353, 0.282353, 1)
 texture_filter = 1
 offset_left = -14.0

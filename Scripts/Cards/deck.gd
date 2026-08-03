@@ -1,3 +1,4 @@
+class_name Deck
 extends Node2D
 
 
@@ -12,9 +13,9 @@ const CARD_SPAWN = Vector2(-300,-300)
 # Properties
 var hand_limit = 6 # Note this is a var as it might be changed over the course of game
 var ai_deck = true # Check if the deck is NOT owned by the player
-var run_deck : Array[CardData] = []
-var deck: Array[CardBase] = []
-var discard_pile: Array[CardBase] = []
+var run_deck : Array[CardData] = [] # CardData, the "permanent" deck that stays between assignments
+var deck: Array[CardBase] = [] # The current draw pile of cardbases
+var discard_pile: Array[CardBase] = [] # the current discard pile of cardbases
 var card_scene
 var spell_scene
 var summon_scene
@@ -55,6 +56,7 @@ func initialize_enemy_deck(type: int = 1):
 	# TODO: handle different enemies
 	var enemy_data: RunData = DataManager.load_enemy_game_data(type)
 	run_deck = enemy_data['deck']
+	$"Area2D".collision_layer = Globals.MASK.deck_opponent
 	# initialize deck
 	for data in run_deck:
 		add_card_to_deck(data)

@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://bfpxljfu2wbg"]
 
-[ext_resource type="Script" uid="uid://cv7s30xkq4gda" path="res://Scripts/UI Elements/multicard_display.gd" id="1_676te"]
-[ext_resource type="Texture2D" uid="uid://ctqmx33vtxkki" path="res://Assets/Spritesheets/GUIArt/close-v1.png" id="2_0rqpe"]
-[ext_resource type="Shader" uid="uid://cpfvvexfp7k7e" path="res://Scripts/Shaders/Cloud.gdshader" id="2_as5gm"]
+[ext_resource type="Script" uid="uid://cv7s30xkq4gda" path="res://Scripts/UI Elements/multicard_display.gd" id="1_n15m6"]
+[ext_resource type="Texture2D" uid="uid://ctqmx33vtxkki" path="res://Assets/Spritesheets/GUIArt/close-v1.png" id="2_1m5nm"]
+[ext_resource type="Shader" uid="uid://cpfvvexfp7k7e" path="res://Scripts/Shaders/Cloud.gdshader" id="3_0xyjx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qk2o7"]
-shader = ExtResource("2_as5gm")
+shader = ExtResource("3_0xyjx")
 shader_parameter/stars_speed = Vector2(0.1, 0)
 shader_parameter/stars_density = 0.002
 
@@ -18,7 +18,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_676te")
+script = ExtResource("1_n15m6")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1900338108]
 layout_mode = 1
@@ -39,7 +39,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
-icon = ExtResource("2_0rqpe")
+icon = ExtResource("2_1m5nm")
 icon_alignment = 2
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer" unique_id=1598863583]

@@ -3,7 +3,7 @@ extends Node2D
 #load
 const cardBase = preload("res://Scenes/Cards/card_base.tscn")
 const cardSlot = preload("res://Scenes/Cards/card_slot.tscn")
-var PlayerHand = preload("res://Scenes/Cards/player_hand.tscn")
+const playerHand = preload("res://Scenes/Cards/player_hand.tscn")
 
 # Dimensions of the Card Slots ( Horizontal, Vertical)
 @export var boardDimensions = Vector2(3, 2)

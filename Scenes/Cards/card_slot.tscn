@@ -1,25 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://brqd7qlj1sonb"]
+[gd_scene format=3 uid="uid://brqd7qlj1sonb"]
 
-[ext_resource type="Script" path="res://Scripts/Cards/card_slot.gd" id="1_8kf81"]
+[ext_resource type="Script" uid="uid://d3x23lnnc4cev" path="res://Scripts/Cards/card_slot.gd" id="1_8kf81"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_aymkr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kkorq"]
 size = Vector2(32, 50)
 
-[node name="CardSlot" type="Node2D"]
+[node name="CardSlot" type="Node2D" unique_id=1428842272]
 texture_filter = 1
 script = ExtResource("1_8kf81")
 
-[node name="CardSlotImage" type="Sprite2D" parent="."]
+[node name="CardSlotImage" type="Sprite2D" parent="." unique_id=926242400]
 texture_filter = 1
 texture = SubResource("CanvasTexture_aymkr")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=1285892586]
 texture_filter = 1
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=250701081]
 texture_filter = 1
 shape = SubResource("RectangleShape2D_kkorq")

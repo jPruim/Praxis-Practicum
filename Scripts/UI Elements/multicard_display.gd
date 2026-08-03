@@ -1,5 +1,9 @@
 extends Control
+class_name MulticardDisplay
 
+const CARD_DISPLAY_SCENE = "res://Scenes/Cards/card_display.tscn"
+
+var card_display_scene 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -36,10 +40,9 @@ static func ordering(a: CardBase, b: CardBase):
 # function that adds 1 card to the display
 func add_card_display(card: CardBase):
 	var card_display: CardDisplay
-	var card_display_scene = "res://Scenes/Cards/card_display.tscn"
-	card_display = card_display_scene.instatiate()
-	card_display.set_card(card)
+	card_display = preload(CARD_DISPLAY_SCENE).instantiate()
 	$VBoxContainer/GridContainer.add_child(card_display)
+	card_display.set_card(card)
 	return
 
 # Close the display

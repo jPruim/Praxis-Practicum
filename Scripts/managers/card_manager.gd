@@ -10,6 +10,7 @@ var player_hand: PlayerHand
 var opponent_hand: PlayerHand
 var deck_scene
 
+const MULTICARD_DISPLAY_SCENE = "res://Scenes/Cards/multicard_display.tscn"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -45,6 +46,15 @@ func raycast_check_for_card_slot():
 		return result[0].collider.get_parent()
 	return null	
 	
+# Player deck Collision Detector
+func raycast_check_for_deck():
+	var result = raycast_check_mask(Globals.MASK.deck_player)
+	# if over an area
+	if result.size() > 0:
+		# make sure to highlight return top card only
+		return result[0].collider.get_parent()
+	return null		
+
 func raycast_check_mask( mask: int):
 	var space_state = get_world_2d().direct_space_state
 	var parameters = PhysicsPointQueryParameters2D.new()
@@ -76,6 +86,8 @@ func connect_signals():
 	SignalBus.connect("player_hand_hovered", on_hover_hand)
 	SignalBus.connect("player_hand_hovered_off", on_hover_hand_off)
 	SignalBus.connect("shuffle_deck", on_shuffle_deck)
+	connect_card_signals(null)
+	
 	
 # Called by Cards Individually
 func connect_card_signals(_card:CardBase):
@@ -241,6 +253,12 @@ func on_left_click_release():
 		end_drag()
 		
 		
+		
+# Display a set of cards in a scrollable screen
+func new_multicard_display(deck: Array[CardBase]):
+	var multicard_display: MulticardDisplay
+	multicard_display =	preload("res://Scenes/Cards/multicard_display.tscn").instantiate()
+	multicard_display.new_card_mdisplay(deck)
 
 # Animate cards for a "shuffle effect"
 func on_shuffle_deck():

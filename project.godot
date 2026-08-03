@@ -31,6 +31,7 @@ TextReplacer="*res://Scripts/Managers/text_replacer.gd"
 
 [debug]
 
+gdscript/warnings/unused_parameter=0
 gdscript/warnings/unused_signal=0
 
 [display]
@@ -64,6 +65,12 @@ theme/custom_font="res://Assets/font/alagard.ttf"
 2d_render/layer_5="UI Elements"
 2d_render/layer_9="Fog"
 2d_render/layer_10="Menu"
+2d_physics/layer_1="Card"
+2d_physics/layer_2="CardSlot"
+2d_physics/layer_3="Deck_player"
+2d_physics/layer_4="Deck_opponent"
+2d_physics/layer_5="Card_opponent"
+2d_physics/layer_6="Player_hand"
 
 [rendering]
 

@@ -1,16 +1,16 @@
-[gd_scene load_steps=15 format=3 uid="uid://dws2mhcfu18v7"]
+[gd_scene format=3 uid="uid://dws2mhcfu18v7"]
 
-[ext_resource type="Script" path="res://Scripts/Managers/battle_manager.gd" id="1_q4kp8"]
-[ext_resource type="Script" path="res://Scripts/Managers/spell_manager.gd" id="2_fijju"]
-[ext_resource type="Script" path="res://Scripts/UI Elements/playspace.gd" id="3_x32qe"]
+[ext_resource type="Script" uid="uid://buajowc8l6xms" path="res://Scripts/Managers/battle_manager.gd" id="1_q4kp8"]
+[ext_resource type="Script" uid="uid://c0jnjgiqdp6pl" path="res://Scripts/Managers/spell_manager.gd" id="2_fijju"]
+[ext_resource type="Script" uid="uid://hpfjqbr2w7e8" path="res://Scripts/UI Elements/playspace.gd" id="3_x32qe"]
 [ext_resource type="Theme" uid="uid://dpn2t23n7kt45" path="res://Scenes/UI/default-theme.theme" id="4_p0ay2"]
-[ext_resource type="Script" path="res://Scripts/UI Elements/pass_button.gd" id="5_hc2at"]
+[ext_resource type="Script" uid="uid://ca12ogamlsvic" path="res://Scripts/UI Elements/pass_button.gd" id="5_hc2at"]
 [ext_resource type="PackedScene" uid="uid://brqd7qlj1sonb" path="res://Scenes/Cards/card_slot.tscn" id="5_jwt0r"]
-[ext_resource type="Script" path="res://Scripts/Managers/card_manager.gd" id="8_igyel"]
+[ext_resource type="Script" uid="uid://bojjhktfy0ml7" path="res://Scripts/Managers/card_manager.gd" id="8_igyel"]
 [ext_resource type="PackedScene" uid="uid://bcsfohtmxascv" path="res://Scenes/Playspace/cast_time.tscn" id="8_vjwtq"]
 [ext_resource type="PackedScene" uid="uid://vlo6uno0t1dc" path="res://Scenes/Cards/player_hand.tscn" id="9_c2gkm"]
-[ext_resource type="Script" path="res://Scripts/Cards/card_database.gd" id="10_axl6h"]
-[ext_resource type="Script" path="res://input_manager.gd" id="11_3dc1d"]
+[ext_resource type="Script" uid="uid://ccc03lltxqyc7" path="res://Scripts/Cards/card_database.gd" id="10_axl6h"]
+[ext_resource type="Script" uid="uid://bcnwmry2x85k2" path="res://input_manager.gd" id="11_3dc1d"]
 [ext_resource type="PackedScene" uid="uid://crv6rsiuh0gi1" path="res://Scenes/Playspace/opponent_manager.tscn" id="12_is4qh"]
 
 [sub_resource type="Gradient" id="Gradient_dttap"]
@@ -20,22 +20,22 @@ gradient = SubResource("Gradient_dttap")
 width = 4
 height = 4
 
-[node name="BattleManager" type="Node2D"]
+[node name="BattleManager" type="Node2D" unique_id=1704496626]
 position = Vector2(-1, 0)
 script = ExtResource("1_q4kp8")
 
-[node name="BattleTimer" type="Timer" parent="."]
+[node name="BattleTimer" type="Timer" parent="." unique_id=410800308]
 
-[node name="Playspace" type="Node2D" parent="."]
+[node name="Playspace" type="Node2D" parent="." unique_id=2096600904]
 script = ExtResource("3_x32qe")
 
-[node name="Centerpoint" type="Sprite2D" parent="Playspace"]
+[node name="Centerpoint" type="Sprite2D" parent="Playspace" unique_id=38569238]
 visible = false
 z_index = 15
 scale = Vector2(2, 2)
 texture = SubResource("GradientTexture2D_di84m")
 
-[node name="PassButton" type="Button" parent="Playspace"]
+[node name="PassButton" type="Button" parent="Playspace" unique_id=2006365337]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -52,41 +52,41 @@ text = "Pass
 "
 script = ExtResource("5_hc2at")
 
-[node name="PlayerSlot" parent="Playspace" instance=ExtResource("5_jwt0r")]
+[node name="PlayerSlot" parent="Playspace" unique_id=1403471790 instance=ExtResource("5_jwt0r")]
 z_as_relative = false
 position = Vector2(320, 337)
 
-[node name="OpponentSlot" parent="Playspace" instance=ExtResource("5_jwt0r")]
+[node name="OpponentSlot" parent="Playspace" unique_id=965093045 instance=ExtResource("5_jwt0r")]
 z_index = 5
 z_as_relative = false
 position = Vector2(320, 26)
 
-[node name="PlayerCastTime" parent="Playspace" instance=ExtResource("8_vjwtq")]
+[node name="PlayerCastTime" parent="Playspace" unique_id=279008065 instance=ExtResource("8_vjwtq")]
 
-[node name="OpponentCastTime" parent="Playspace" instance=ExtResource("8_vjwtq")]
+[node name="OpponentCastTime" parent="Playspace" unique_id=94314171 instance=ExtResource("8_vjwtq")]
 position = Vector2(320, 26)
 
-[node name="CardManager" type="Node2D" parent="."]
+[node name="CardManager" type="Node2D" parent="." unique_id=731625920]
 script = ExtResource("8_igyel")
 
-[node name="PlayerHand" parent="CardManager" instance=ExtResource("9_c2gkm")]
+[node name="PlayerHand" parent="CardManager" unique_id=1936172669 instance=ExtResource("9_c2gkm")]
 z_index = 3
 position = Vector2(1014, 1151)
 
-[node name="OpponentHand" parent="CardManager" instance=ExtResource("9_c2gkm")]
+[node name="OpponentHand" parent="CardManager" unique_id=563282807 instance=ExtResource("9_c2gkm")]
 position = Vector2(978, 43)
 
-[node name="CardDatabase" type="Node2D" parent="CardManager"]
+[node name="CardDatabase" type="Node2D" parent="CardManager" unique_id=282669495]
 script = ExtResource("10_axl6h")
 
-[node name="InputManager" type="Node2D" parent="."]
+[node name="InputManager" type="Node2D" parent="." unique_id=636276718]
 script = ExtResource("11_3dc1d")
 
-[node name="OpponentManager" parent="." instance=ExtResource("12_is4qh")]
+[node name="OpponentManager" parent="." unique_id=1938465986 instance=ExtResource("12_is4qh")]
 
-[node name="OpponentTimer" type="Timer" parent="OpponentManager"]
+[node name="OpponentTimer" type="Timer" parent="OpponentManager" unique_id=699520626]
 
-[node name="SpellManager" type="Node2D" parent="."]
+[node name="SpellManager" type="Node2D" parent="." unique_id=1572191716]
 script = ExtResource("2_fijju")
 
 [connection signal="pressed" from="Playspace/PassButton" to="." method="_on_pass_button_pressed"]

@@ -17,8 +17,8 @@ func get_barrier_bonus() -> int:
 	
 func get_barrier_mult() -> float:
 	var mult = 1
-	
-	return 1
+
+	return mult
 	
 func get_spell_power_bonus() -> int:
 	return 0

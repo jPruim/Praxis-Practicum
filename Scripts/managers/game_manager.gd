@@ -25,7 +25,7 @@ func connect_signals() -> void:
 	SignalBus.connect("run_start", run_start)
 	SignalBus.connect("run_resume", run_resume)
 	SignalBus.connect("run_loss",	end_run)
-	SignalBus.connect("run_won", end_run)
+	SignalBus.connect("run_win", end_run)
 	SignalBus.connect("fight_enter", initialize_fight)
 	SignalBus.connect("shop_enter", initialize_shop)
 	SignalBus.connect("shop_exit", end_shop)
