@@ -38,10 +38,10 @@ const Z_INDEX = {
 	"card": 15,
 	"card_back": 20,
 	"card_hovered": 25,
-	"tag": 26,
 	"card_being_dragged": 30,
 	"centerpoint": 35,
 	"multicard_display": 50,
+	"tag": 60,
 }
 
 # Masks
@@ -101,3 +101,8 @@ func _ready() -> void:
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
 	pass
+	
+const CANVAS_LAYERS = {
+	"world": 0,
+	"base_hud": 10,
+}

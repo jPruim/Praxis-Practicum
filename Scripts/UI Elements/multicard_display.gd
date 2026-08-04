@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer	
 class_name MulticardDisplay
 
 const CARD_DISPLAY_SCENE = "res://Scenes/Cards/card_display.tscn"
@@ -41,8 +41,10 @@ static func ordering(a: CardBase, b: CardBase):
 func add_card_display(card: CardBase):
 	var card_display: CardDisplay
 	card_display = preload(CARD_DISPLAY_SCENE).instantiate()
-	$VBoxContainer/GridContainer.add_child(card_display)
 	card_display.set_card(card)
+	$PanelContainer/VBoxContainer/GridContainer.add_child(card_display)
+	$PanelContainer/VBoxContainer/GridContainer.queue_sort()
+	
 	return
 
 # Close the display

@@ -1,9 +1,28 @@
 [gd_scene format=3 uid="uid://dhjcfa5arvy83"]
 
 [ext_resource type="Script" uid="uid://cjcubxhd4olbs" path="res://Scripts/Cards/card_display.gd" id="1_02p8p"]
-[ext_resource type="Script" uid="uid://y3xdnbjlxbvf" path="res://Scripts/Cards/card_base.gd" id="1_06m28"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bgn2i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n15m6"]
+bg_color = Color(0.14277607, 0.10116502, 0.12081801, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.054000556, 0.03022572, 0.04812341, 1)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_color = Color(1, 1, 1, 0.9647059)
+shadow_size = 1
+shadow_offset = Vector2(1, 1)
 
 [node name="CardDisplay" type="MarginContainer" unique_id=313961248]
 texture_filter = 1
@@ -26,7 +45,4 @@ script = ExtResource("1_02p8p")
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-
-[node name="CardBase" type="Node2D" parent="PanelContainer" unique_id=44702344]
-script = ExtResource("1_06m28")
-metadata/_custom_type_script = "uid://y3xdnbjlxbvf"
+theme_override_styles/panel = SubResource("StyleBoxFlat_n15m6")

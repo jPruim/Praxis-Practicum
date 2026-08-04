@@ -259,6 +259,7 @@ func new_multicard_display(deck: Array[CardBase]):
 	var multicard_display: MulticardDisplay
 	multicard_display =	preload("res://Scenes/Cards/multicard_display.tscn").instantiate()
 	multicard_display.new_card_mdisplay(deck)
+	$".".add_child(multicard_display)
 
 # Animate cards for a "shuffle effect"
 func on_shuffle_deck():

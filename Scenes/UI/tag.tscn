@@ -1,25 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://bjfghiqrojl6k"]
+[gd_scene format=3 uid="uid://bjfghiqrojl6k"]
 
-[ext_resource type="Script" path="res://Scripts/UI Elements/tag.gd" id="1_ri1oy"]
+[ext_resource type="Script" uid="uid://bkrrwawd2onfm" path="res://Scripts/UI Elements/tag.gd" id="1_ri1oy"]
 [ext_resource type="Theme" uid="uid://dlyxw6e1bkfhe" path="res://Scenes/UI/Tag.theme" id="1_sgug1"]
 [ext_resource type="Texture2D" uid="uid://df3fajumbo3rk" path="res://Assets/Spritesheets/GUIArt/tag-nine-patch.png" id="2_7mdyh"]
 
-[node name="Tag" type="MarginContainer"]
+[node name="Tag" type="MarginContainer" unique_id=930059641]
+z_index = 60
+z_as_relative = false
 offset_right = 126.0
 offset_bottom = 52.0
 size_flags_vertical = 0
 theme = ExtResource("1_sgug1")
 script = ExtResource("1_ri1oy")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=204989184]
+z_index = 60
+z_as_relative = false
 layout_mode = 2
 theme = ExtResource("1_sgug1")
 
-[node name="MarginHeader" type="MarginContainer" parent="VBoxContainer"]
+[node name="MarginHeader" type="MarginContainer" parent="VBoxContainer" unique_id=116206252]
 layout_mode = 2
 theme = ExtResource("1_sgug1")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/MarginHeader"]
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/MarginHeader" unique_id=781384012]
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("1_sgug1")
@@ -30,7 +34,7 @@ patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginHeader"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginHeader" unique_id=29969410]
 layout_mode = 2
 theme = ExtResource("1_sgug1")
 theme_override_constants/margin_left = 2
@@ -38,7 +42,7 @@ theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 1
 theme_override_constants/margin_bottom = 1
 
-[node name="Header" type="Label" parent="VBoxContainer/MarginHeader/MarginContainer"]
+[node name="Header" type="Label" parent="VBoxContainer/MarginHeader/MarginContainer" unique_id=582326597]
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("1_sgug1")
@@ -46,12 +50,12 @@ text = "Defaultg
 "
 horizontal_alignment = 1
 
-[node name="MarginBody" type="MarginContainer" parent="VBoxContainer"]
+[node name="MarginBody" type="MarginContainer" parent="VBoxContainer" unique_id=1261059991]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("1_sgug1")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/MarginBody"]
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/MarginBody" unique_id=727755029]
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("1_sgug1")
@@ -62,7 +66,7 @@ patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginBody"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginBody" unique_id=500605865]
 layout_mode = 2
 theme = ExtResource("1_sgug1")
 theme_override_constants/margin_left = 4
@@ -70,7 +74,7 @@ theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 1
 theme_override_constants/margin_bottom = 1
 
-[node name="Label" type="RichTextLabel" parent="VBoxContainer/MarginBody/MarginContainer"]
+[node name="Label" type="RichTextLabel" parent="VBoxContainer/MarginBody/MarginContainer" unique_id=334410670]
 texture_filter = 1
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2

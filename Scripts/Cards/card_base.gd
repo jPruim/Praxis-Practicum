@@ -13,6 +13,9 @@ var ai_card: bool = false
 var being_cast: bool = false
 var being_hovered: bool = false
 
+## True if in a Card display
+var displayed: bool = false
+
 ## Vector2 of relative tag location
 var default_tag_location = Vector2(-176, -80)
 var discarded: bool = false
@@ -63,7 +66,7 @@ func set_all(data: CardData):
 
 # Set Display and CardData from a CardData object
 func set_display(data: CardData):
-	# TOODO: Make this dynamic (link to battle/run manager)
+	# TODO: Make this dynamic (link to battle/run manager)
 	var player_name = ""
 	var enemy_name = ""
 	var dmg: int = int(data.direct_damage)
@@ -99,7 +102,6 @@ func set_animation(animation: String = "FireSparks"):
 @warning_ignore("shadowed_variable_base_class")
 func set_display_name(name: String):
 	card_data.display_name = name
-	print($".".get_children())
 	$CardFront/Name.text = name
 
 func set_health(hp: int):
@@ -191,8 +193,8 @@ func card_affects(hovered: bool = false):
 		# Play Animation
 		animation_sprite.play()
 		
-		# If card is in play or being cast or owned by the player
-		if(in_slot || being_cast || !ai_card):
+		# If card is in play or being cast or owned by the player or displayed
+		if(in_slot || being_cast || !ai_card || displayed):
 			$TagList.visible = true
 			$TagList.position = default_tag_location
 			$TagList.global_position.x = clamp($TagList.global_position.x, 0, 
@@ -204,7 +206,9 @@ func card_affects(hovered: bool = false):
 		$CardShader/shine.visible = false
 		$TagList.visible = false
 		$TagList.position = default_tag_location
-		if $"." is CasterFrameBase:
+		if $".".displayed:
+			$".".z_index = Globals.Z_INDEX["multicard_display"]
+		elif $"." is CasterFrameBase:
 			$".".scale = Globals.CARD_SCALE_PlACED
 			$".".z_index = Globals.Z_INDEX["caster_frame"]
 		elif $".".being_cast:	

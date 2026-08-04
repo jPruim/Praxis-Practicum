@@ -9,48 +9,45 @@ shader = ExtResource("3_0xyjx")
 shader_parameter/stars_speed = Vector2(0.1, 0)
 shader_parameter/stars_density = 0.002
 
-[node name="MulticardDisplay" type="Control" unique_id=10507465]
-z_index = 50
-z_as_relative = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MulticardDisplay" type="CanvasLayer" unique_id=907081504]
+layer = 10
 script = ExtResource("1_n15m6")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1900338108]
-layout_mode = 1
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=543159724]
+clip_contents = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HeaderMargin" type="MarginContainer" parent="VBoxContainer" unique_id=1737336512]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1900338108]
+layout_mode = 2
+
+[node name="HeaderMargin" type="MarginContainer" parent="PanelContainer/VBoxContainer" unique_id=1737336512]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
-[node name="CloseMargin" type="MarginContainer" parent="VBoxContainer" unique_id=788291030]
+[node name="CloseMargin" type="MarginContainer" parent="PanelContainer/VBoxContainer" unique_id=788291030]
 layout_mode = 2
 
-[node name="CloseButton" type="Button" parent="VBoxContainer/CloseMargin" unique_id=424580574]
+[node name="CloseButton" type="Button" parent="PanelContainer/VBoxContainer/CloseMargin" unique_id=424580574]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 icon = ExtResource("2_1m5nm")
 icon_alignment = 2
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer" unique_id=1598863583]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer" unique_id=1598863583]
 texture_filter = 1
 material = SubResource("ShaderMaterial_qk2o7")
 layout_mode = 2
 size_flags_vertical = 3
+accessibility_region = true
 columns = 3
 
-[node name="BottomMargin" type="MarginContainer" parent="VBoxContainer" unique_id=198365219]
+[node name="BottomMargin" type="MarginContainer" parent="PanelContainer/VBoxContainer" unique_id=198365219]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
-[connection signal="pressed" from="VBoxContainer/CloseMargin/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/CloseMargin/CloseButton" to="." method="_on_close_button_pressed"]

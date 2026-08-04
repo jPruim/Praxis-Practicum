@@ -15,7 +15,6 @@ var battle_manager: BattleManager
 
 func _ready() -> void:
 	card_manager = $"../CardManager"
-	player_deck = $"../CardManager/PlayerDeck"
 	player_hand = $"../CardManager/PlayerHand"
 	battle_manager = $"../"
 
@@ -34,6 +33,7 @@ func _input(event: InputEvent) -> void:
 func raycast_check_at_cursor():
 	var card_found: CardBase = card_manager.raycast_check_for_card()
 	var deck_found: Deck = card_manager.raycast_check_for_deck()
+	player_deck = $"../CardManager/PlayerDeck"
 	if card_found:
 		card_manager.start_drag(card_found)
 	elif deck_found:
