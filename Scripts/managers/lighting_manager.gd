@@ -38,6 +38,7 @@ func _pass_lighting(state: bool):
 	$PassLight.visible = state
 
 func battle_lighting():
+	reset_lights()
 	$PlayerLight.visible = true
 	$EnemyLight.visible = true
 	$CardAmbient.visible = true
