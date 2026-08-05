@@ -18,7 +18,11 @@ config/name="Praxis & Practicum"
 config/version="0.01"
 run/main_scene="res://Scenes/UI/game_manager.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/use_filter=false
+boot_splash/image="uid://b3rshe2ep1ln7"
 config/icon="res://Assets/Spritesheets/TagArt/crown-coin-normal.png"
+boot_splash/minimum_display_time=250
 
 [autoload]
 

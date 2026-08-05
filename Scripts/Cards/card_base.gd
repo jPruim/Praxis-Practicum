@@ -27,7 +27,6 @@ func _ready() -> void:
 	#get_parent().connect_card_signals(self)
 	pass
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
@@ -113,13 +112,13 @@ func adjust_health(hp: int):
 	
 func get_health() -> int:
 	return card_data.current_health
-# Flip card to front from back
+## Flip card to front from back
 func animation_reveal():
 	# Check if card back is visible
 	if $CardFront.z_index < $CardBack.z_index:
 		$AnimationPlayer.play("card_flip")
 
-# Flip card to back	
+## Flip card to back	
 func animation_conceal():
 	# Check if Card front is visible
 	if $CardFront.z_index > $CardBack.z_index:

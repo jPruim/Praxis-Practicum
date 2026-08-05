@@ -20,12 +20,12 @@ func change_size(scale_factor: int = 2):
 	var custom_margins = 15
 	$PanelContainer.custom_minimum_size = scale_factor*Vector2(32,48)+ custom_margins*Vector2(1,1)
 
-func set_card(card:CardBase):
+func set_card(acard:CardBase):
 	if(!is_instance_valid($PanelContainer/CardBase)):
 		var new_card: CardBase = preload(CARD_SCENE_PATH).instantiate()
 		$PanelContainer.add_child(new_card)
 	# import card data
-	$PanelContainer/CardBase.copy(card)
+	$PanelContainer/CardBase.copy(acard)
 	# remove "hand" traits
 	$PanelContainer/CardBase.draggable = false
 	$PanelContainer/CardBase.ai_card = true

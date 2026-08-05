@@ -1,27 +1,14 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://dytmkgkrr7hyo"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://dytmkgkrr7hyo"]
 
-[ext_resource type="Script" path="res://Resources/Types/CardData.gd" id="1_5b5am"]
+[ext_resource type="Script" uid="uid://clpqupdicsrex" path="res://Resources/Types/CardData.gd" id="1_5b5am"]
 
 [resource]
 script = ExtResource("1_5b5am")
 display_name = "Firebolt"
 card_type = "spell"
 cast_time = 1
-summon_attack = 0
-summon_health = 0
 direct_damage = 4
 damage_type = "FIRE"
-direct_block = 0
 card_text = "Deal {dmg} {fire} damage"
-animation = ""
-stackable = false
-ally_target = "Single"
-enemy_target = "Single"
-current_block = 0
-current_health = 0
-current_attack = 0
-effects = Array[String]([])
-effect_strength = 0
-spell_level = 1
-spell_rarity = "Common"
+effects = Array[String]([""])
 tags = Array[String](["Fire"])

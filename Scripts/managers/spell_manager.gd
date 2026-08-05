@@ -104,7 +104,7 @@ func resolve_spell_barrier_at(spell:CardBase, slot: CardSlot):
 	block += RelicManager.get_barrier_bonus()
 	block = floor(block * RelicManager.get_barrier_mult())
 	if ( slot.cards.size() > 0):
-		slot.cards[0].card_data["current_block"] + block
+		slot.cards[0].card_data["current_block"] += block
 		slot.update_graphic()
 	pass
 
@@ -123,7 +123,7 @@ func resolve_spell_dmg_at(spell:CardBase, slot: CardSlot):
 	dmg = floor(dmg * RelicManager.get_spell_power_mult())
 	if spell.has_tag("fire") && slot.cards[0].has_effect("ice"):
 		dmg = dmg * RelicManager.get_melt_mult()
-	elif spell.has_tag("ice") && slot.cards[0].has_effect("fire"):\
+	elif spell.has_tag("ice") && slot.cards[0].has_effect("fire"):
 		dmg = dmg * RelicManager.get_melt_mult()
 	if ( slot.cards.size() < 1):
 		return

@@ -1,17 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwtrie2pvj8y5"]
+[gd_scene format=3 uid="uid://dwtrie2pvj8y5"]
 
 [ext_resource type="PackedScene" uid="uid://c2gbemxiigrbl" path="res://Scenes/Cards/card_base.tscn" id="1_vad3n"]
-[ext_resource type="Script" path="res://Scripts/Cards/spell_card_base.gd" id="2_sk3ls"]
+[ext_resource type="Script" uid="uid://bi73hvcefafax" path="res://Scripts/Cards/spell_card_base.gd" id="2_sk3ls"]
 [ext_resource type="Texture2D" uid="uid://dirvipg20u2k5" path="res://Assets/Cards/Card Borders etc/Card Border-3.png" id="3_dtf5l"]
 
-[node name="SpellCardBase" instance=ExtResource("1_vad3n")]
+[node name="SpellCardBase" unique_id=1937977291 instance=ExtResource("1_vad3n")]
 script = ExtResource("2_sk3ls")
 
-[node name="CardBorder" parent="CardFront" index="0"]
+[node name="CardBorder" parent="CardFront" parent_id_path=PackedInt32Array(867386372) index="0" unique_id=1155641287]
 texture = ExtResource("3_dtf5l")
 
-[node name="Attack" parent="CardFront" index="1"]
+[node name="Attack" parent="CardFront" parent_id_path=PackedInt32Array(867386372) index="1" unique_id=22527764]
 visible = false
 
-[node name="Health" parent="CardFront" index="2"]
+[node name="Health" parent="CardFront" parent_id_path=PackedInt32Array(867386372) index="2" unique_id=183615634]
 visible = false
