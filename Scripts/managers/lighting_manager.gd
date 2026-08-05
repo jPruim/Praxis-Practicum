@@ -45,6 +45,7 @@ func battle_lighting():
 
 	
 func shop_lighting():
+	reset_lights()
 	$ShopLight.visible = true
 
 func reset_lights():
