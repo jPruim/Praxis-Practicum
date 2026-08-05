@@ -4,26 +4,6 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bgn2i"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n15m6"]
-bg_color = Color(0.14277607, 0.10116502, 0.12081801, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.054000556, 0.03022572, 0.04812341, 1)
-border_blend = true
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-expand_margin_left = 2.0
-expand_margin_top = 2.0
-expand_margin_right = 2.0
-expand_margin_bottom = 2.0
-shadow_color = Color(1, 1, 1, 0.9647059)
-shadow_size = 1
-shadow_offset = Vector2(1, 1)
-
 [node name="CardDisplay" type="MarginContainer" unique_id=313961248]
 texture_filter = 1
 material = SubResource("ShaderMaterial_bgn2i")
@@ -45,4 +25,4 @@ script = ExtResource("1_02p8p")
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_n15m6")
+mouse_filter = 1

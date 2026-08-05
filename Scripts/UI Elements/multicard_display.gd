@@ -42,8 +42,9 @@ func add_card_display(card: CardBase):
 	var card_display: CardDisplay
 	card_display = preload(CARD_DISPLAY_SCENE).instantiate()
 	card_display.set_card(card)
-	$PanelContainer/VBoxContainer/GridContainer.add_child(card_display)
-	$PanelContainer/VBoxContainer/GridContainer.queue_sort()
+	var grid_container = $"MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/GridContainer"
+	grid_container.add_child(card_display)
+	grid_container.queue_sort()
 	
 	return
 

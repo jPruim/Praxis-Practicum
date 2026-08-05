@@ -6,10 +6,6 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1m5nm"]
 bg_color = Color(0.6, 0.6, 0.6, 0.23529412)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
 border_color = Color(0.8, 0.8, 1, 1)
 corner_detail = 15
 
@@ -22,45 +18,53 @@ shader_parameter/stars_density = 0.002
 layer = 10
 script = ExtResource("1_n15m6")
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=543159724]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1064385360]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=543159724]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 offset_transform_visual_only = false
 theme_override_styles/panel = SubResource("StyleBoxFlat_1m5nm")
+metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1900338108]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer" unique_id=1900338108]
 layout_mode = 2
-metadata/_edit_group_ = true
 
-[node name="HeaderMargin" type="MarginContainer" parent="PanelContainer/VBoxContainer" unique_id=1737336512]
+[node name="HeaderMargin" type="MarginContainer" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=1737336512]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
-[node name="CloseMargin" type="MarginContainer" parent="PanelContainer/VBoxContainer" unique_id=788291030]
+[node name="CloseMargin" type="MarginContainer" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=788291030]
 layout_mode = 2
 
-[node name="CloseButton" type="Button" parent="PanelContainer/VBoxContainer/CloseMargin" unique_id=424580574]
+[node name="CloseButton" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer/CloseMargin" unique_id=424580574]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 icon = ExtResource("2_1m5nm")
 icon_alignment = 2
 
-[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer" unique_id=1598863583]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=736282398]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/PanelContainer/VBoxContainer/ScrollContainer" unique_id=1598863583]
 texture_filter = 1
 material = SubResource("ShaderMaterial_qk2o7")
 layout_mode = 2
+size_flags_horizontal = 6
 size_flags_vertical = 3
 accessibility_region = true
-columns = 3
+columns = 4
 
-[node name="BottomMargin" type="MarginContainer" parent="PanelContainer/VBoxContainer" unique_id=198365219]
+[node name="BottomMargin" type="MarginContainer" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=198365219]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/CloseMargin/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="MarginContainer/PanelContainer/VBoxContainer/CloseMargin/CloseButton" to="." method="_on_close_button_pressed"]

@@ -17,7 +17,7 @@ func _process(delta: float) -> void:
 	pass
 	
 func change_size(scale_factor: int = 2):
-	var custom_margins = 15
+	var custom_margins = 32
 	$PanelContainer.custom_minimum_size = scale_factor*Vector2(32,48)+ custom_margins*Vector2(1,1)
 
 func set_card(acard:CardBase):
@@ -30,11 +30,16 @@ func set_card(acard:CardBase):
 	$PanelContainer/CardBase.draggable = false
 	$PanelContainer/CardBase.ai_card = true
 	$PanelContainer/CardBase.hand_position = Vector2(0,0)
-	$PanelContainer/CardBase.in_slot = true
+	$PanelContainer/CardBase.in_slot = false
+	$PanelContainer/CardBase.animation_reveal()
+	$PanelContainer/CardBase.scale = Globals.SCALE.card_hand
 	recenter_card()
+	
 
 
 ## put card to center of panel container
 func recenter_card():
-	$PanelContainer/CardBase.global_position = $PanelContainer.global_position
+	change_size()
+	$PanelContainer/CardBase.position = $PanelContainer.position + $PanelContainer.custom_minimum_size/2
+	print("position", $PanelContainer/CardBase.position, $PanelContainer.position, $PanelContainer.custom_minimum_size/2)
 	
