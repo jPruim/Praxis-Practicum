@@ -8,6 +8,7 @@
 size = Vector2(32, 50)
 
 [node name="CardSlot" type="Node2D" unique_id=1428842272]
+z_index = -1
 texture_filter = 1
 script = ExtResource("1_8kf81")
 

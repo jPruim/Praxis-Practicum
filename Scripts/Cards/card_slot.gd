@@ -10,7 +10,8 @@ var max_cards = 1
 var player_owned = false # True if the owner is the player
 var is_player = false # True if the card slot is representing the player
 var is_opponent = false # True if the card slot is representing the opponent
-
+## The location in the board. Player summons attack y -=1....		
+var board_location: Vector2 = Vector2( -1, -1)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

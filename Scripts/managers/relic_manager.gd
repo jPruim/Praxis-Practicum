@@ -16,7 +16,7 @@ func get_barrier_bonus() -> int:
 	return bonus
 	
 func get_barrier_mult() -> float:
-	var mult = 1
+	var mult = 1.0
 
 	return mult
 	
@@ -25,7 +25,7 @@ func get_spell_power_bonus() -> int:
 	
 # No plan to add atm
 func get_spell_power_mult() -> float:
-	return 1
+	return 1.0
 	
 func get_summon_bonus_health() -> int:
 	return 0
@@ -34,4 +34,4 @@ func get_summon_bonus_attack() -> int:
 	return 0
 
 func get_melt_mult() -> float:
-	return 2
+	return 2.0

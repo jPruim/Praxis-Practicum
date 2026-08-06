@@ -21,7 +21,7 @@ func _enter_tree() -> void:
 
 
 func initialize_card_slots():
-	var newSlot = cardSlot.instantiate() 
+	var newSlot: CardSlot
 	var x_pos
 	var y_pos
 	# Calculate the initial position of the top left most cardSlot
@@ -44,6 +44,7 @@ func initialize_card_slots():
 			y_pos = y_pos_first + (j * (slotSize.y + slotMargin.y))
 			newSlot.position = Vector2(x_pos,y_pos)
 			newSlot.visible = true
+			newSlot.board_location = Vector2(i,j)
 			newSlot.update_graphic()
 			$".".add_child(newSlot)
 	$Centerpoint.position = centerPoint
