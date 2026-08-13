@@ -22,3 +22,15 @@ extends Resource
 @export var spell_level : int = 1
 @export var spell_rarity : String = "Common"
 @export var tags: Array[String] = []
+
+func print_debug():
+	var output: String = "["
+	output += display_name 
+	output += ": "
+	output += card_type
+	output += str(summon_health)
+	output += "]"
+	if Globals.DEBUG:
+		print(output)
+	return(output)
+	

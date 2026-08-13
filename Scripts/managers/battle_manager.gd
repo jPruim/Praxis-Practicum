@@ -72,8 +72,10 @@ func setup_player(run_data: RunData):
 	player.set_health(run_data.current_health)
 	player.position = Globals.PLAYER_POSITION
 	player.in_slot = true
+	$"Playspace/PlayerSlot".cards.clear()
 	$"Playspace/PlayerSlot".cards.append(player)
 	player.animation_reveal()
+	$"Playspace/PlayerSlot".update_graphic()
 	$".".add_child(player)
 
 func setup_enemy(enemy_data: RunData):
@@ -87,8 +89,10 @@ func setup_enemy(enemy_data: RunData):
 	enemy.position = Globals.ENEMY_POSITION
 	enemy.set_health(enemy_data.current_health)
 	enemy.in_slot = true
+	$"Playspace/OpponentSlot".cards.clear()
 	$"Playspace/OpponentSlot".cards.append(enemy)
 	enemy.animation_reveal()
+	$"Playspace/OpponentSlot".update_graphic()
 	$".".add_child(enemy)
 
 func _on_pass_button_pressed() -> void:
@@ -124,6 +128,8 @@ func time_loop():
 		increment_time() # Spell resolution
 		next_phase()
 	elif(phase == "clean_up"):
+		if Globals.DEBUG:
+			$Playspace.print_slots()
 		clean_up()
 		next_phase()
 	elif(phase == "end_step"):
@@ -170,17 +176,20 @@ func start_turn():
 	find_full_slots()
 
 
+## Trigger Summon Attacks
+## Prioritize "opposing" summon then the "enemy"
 func summon_attacks():
-	var dmg = 0
+	var dmg: int = 0
 	for i: CardSlot in ai_slots:
+		dmg = 0
 		if i.cards.size() > 0:
 			dmg += i.cards[0].card_data.current_attack
 	$Playspace/PlayerSlot.cards[0].adjust_health(-1 * dmg)
-	dmg = 0
 	for i: CardSlot in player_slots:
+		dmg = 0
 		if i.cards.size() > 0:
 			dmg += i.cards[0].card_data.current_attack
-	$Playspace/OpponentSlot.cards[0].adjust_health(-1 * dmg)
+		$Playspace/OpponentSlot.cards[0].adjust_health(-1 * dmg)
 
 
 
@@ -318,11 +327,11 @@ func clean_up():
 	$Playspace/OpponentSlot.update_graphic()
 	
 func check_game_end():
-	if(player.get_card_info().summon_health <= 0):
-		print("Player Health: ", player.get_card_info().summon_health)
+	if(player.get_health() <= 0):
+		print("Player Health: ", player.get_health())
 		SignalBus.emit_signal("fight_loss")
 		in_combat = false
-	elif(enemy.get_card_info().summon_health <= 0):
+	elif(enemy.get_health() <= 0):
 		SignalBus.emit_signal("fight_won")
 		in_combat = false
 	
@@ -332,10 +341,11 @@ func print_status():
 	if Globals.DEBUG == false:
 		return
 	var output = ""
-	output+="\nPhase: " + phase
-	output += "\n\tPlayerCastTime: " + str(spell_manager.player_cast_time)
-	output += "\n\tOppCastTime: " + str(opponent_manager.cast_time)
-	output += "\n\tHealth: " + str(player.get_card_info().summon_health)
+	output+="Phase: " + phase
+	#output += "\n\tPlayerCastTime: " + str(spell_manager.player_cast_time)
+	#output += "\n\tOppCastTime: " + str(opponent_manager.cast_time)
+	#output += "\n\tHealth: " + str(player.get_card_info().summon_health)
+
 	if(Globals.DEBUG):
 		if(phase == "player_decision"):
 			output += "\n\tWaiting on Player"

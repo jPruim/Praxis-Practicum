@@ -19,7 +19,6 @@ func _enter_tree() -> void:
 	pass
 
 
-
 func initialize_card_slots():
 	var newSlot: CardSlot
 	var x_pos
@@ -44,7 +43,7 @@ func initialize_card_slots():
 			y_pos = y_pos_first + (j * (slotSize.y + slotMargin.y))
 			newSlot.position = Vector2(x_pos,y_pos)
 			newSlot.visible = true
-			newSlot.board_location = Vector2(i,j)
+			newSlot.board_location = Vector2(i,j+1) # Make row  0 be the opponent 
 			newSlot.update_graphic()
 			$".".add_child(newSlot)
 	$Centerpoint.position = centerPoint
@@ -68,3 +67,30 @@ func _input(event: InputEvent) -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+func print_slots():
+	## : Array[Array[string]]
+	var output = [[]]
+	
+	# set output array shape
+	output[0].append("")
+	for y in boardDimensions.y:
+		output.append([])
+		for x in boardDimensions.x:
+			output[y+1].append("")
+	output.append([""])
+	# find slots
+	var slots: Array[CardSlot]
+	for x in get_children():
+		if x is CardSlot:
+			slots.append(x)
+	for slot in slots:
+		if(slot.is_player):
+			output[boardDimensions.y + 1][0] = slot.get_debug_output()
+		elif(slot.is_opponent):
+			output[0][0] = slot.get_debug_output()
+		else: # Slot is a card Slot
+			output[slot.board_location.y][slot.board_location.x] = slot.get_debug_output()
+	print("Current board: \n")
+	for row in output:
+		print("\t" + str(row))

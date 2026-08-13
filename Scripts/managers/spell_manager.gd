@@ -135,7 +135,6 @@ func resolve_spell_dmg_at(spell:CardBase, slot: CardSlot):
 		dmg = dmg * RelicManager.get_melt_mult()
 		
 	# turn dmg into int (no partial dmg)
-	
 	var int_dmg: int = floor(dmg)
 	slot.cards[0].adjust_health(-1 * int_dmg)
 	

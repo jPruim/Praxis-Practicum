@@ -11,6 +11,7 @@ func _ready() -> void:
 	$CardFront/Details.visible = false
 	$CardFront/Container.size.y = 250
 	$".".z_index = Globals.Z_INDEX.caster_frame
+	card_data.card_type = "Caster"
 	pass # Replace with function body.
 
 func set_aloction():

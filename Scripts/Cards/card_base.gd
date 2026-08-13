@@ -103,15 +103,31 @@ func set_display_name(name: String):
 	card_data.display_name = name
 	$CardFront/Name.text = name
 
+
+## Sets summon and current health to an amount. Expects int
 func set_health(hp: int):
 	card_data.summon_health = hp
+	card_data.current_health = hp
 	$CardFront/Health.text = str(hp)
-	
+
+
+## Adjusts current current Health by amount. Expects an int
 func adjust_health(hp: int):
-	set_health(card_data.summon_health + hp)
+	card_data.current_health += hp
 	
+## Full heal
+func reset_health():
+	card_data.current_health = card_data.summon_health	
+
+## Returns Current Health from CardData
 func get_health() -> int:
 	return card_data.current_health
+	
+## Returns Display Name from CardData
+func get_card_name() -> String:
+	return card_data.display_name
+	
+
 ## Flip card to front from back
 func animation_reveal():
 	# Check if card back is visible
@@ -179,7 +195,8 @@ func set_draggability(val: bool):
 	draggable = val
 	return
 	
-
+func print_debug():
+	card_data.print_debug()
 
 # Change card affects TODO: Decide if cards in cardslots need animations (go and add a new mask for animations, and separate from card detection)
 func card_affects(hovered: bool = false):
@@ -227,3 +244,15 @@ func card_affects(hovered: bool = false):
 			$".".z_index = Globals.Z_INDEX["card"]
 		# Pause Animation
 		animation_sprite.pause()
+
+
+## Set properties for inslot graphics
+func update_graphics_inslot(hovered: bool = false):
+	scale = Globals.CARD_SCALE_PlACED
+	z_index = Globals.Z_INDEX.card_in_slot
+	in_slot = true
+	visible = true
+	draggable = false
+	discarded = false
+	animation_reveal()
+	card_affects(hovered)

@@ -43,15 +43,32 @@ func update_graphic():
 	if(cards.size() == 0):
 		return
 	cards[0].position = $".".position
-	cards[0].scale = Globals.CARD_SCALE_PlACED
-	cards[0].z_index = Globals.Z_INDEX.card_in_slot
-	cards[0].in_slot = true
-	cards[0].visible = true
-	cards[0].animation_reveal()
-	cards[0].card_affects(false)
+	cards[0].update_graphics_inslot()
 
 func animate_dmg(A_SPEED = Globals.DEFAULT_ASPEED):
 	var tween = get_tree().create_tween()
 	tween.tween_property($".", "modulate", Color.RED, A_SPEED)
 	tween.tween_property($".", "modulate", Color.WHITE, A_SPEED)
 	#tween.tween_callback($".".queue_free)
+	
+	
+## Text output for debug testing of a CardSlot
+func get_debug_output():
+	var card: CardBase = get_card()
+	if !card:
+		return "Empty "
+	else:
+		card.print_debug()
+	var output: String = ""
+	output += card.get_card_name()
+	output += "("
+	output += str(cards.size())
+	output += "): "
+	output += str(card.get_health())
+	output += "hp."
+	return output
+
+## Empty cards and redo graphics
+func clear():
+	# TODO: Check that 
+	cards = []

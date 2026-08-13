@@ -21,7 +21,7 @@ func change_size(scale_factor: int = 2):
 	$PanelContainer.custom_minimum_size = scale_factor*Vector2(32,48)+ custom_margins*Vector2(1,1)
 
 func set_card(acard:CardBase):
-	if(!is_instance_valid($PanelContainer/CardBase)):
+	if(!has_node("PanelContainer/CardBase")):
 		var new_card: CardBase = preload(CARD_SCENE_PATH).instantiate()
 		$PanelContainer.add_child(new_card)
 	# import card data
@@ -41,5 +41,5 @@ func set_card(acard:CardBase):
 func recenter_card():
 	change_size()
 	$PanelContainer/CardBase.position = $PanelContainer.position + $PanelContainer.custom_minimum_size/2
-	print("position", $PanelContainer/CardBase.position, $PanelContainer.position, $PanelContainer.custom_minimum_size/2)
+	#print("position", $PanelContainer/CardBase.position, $PanelContainer.position, $PanelContainer.custom_minimum_size/2)
 	
