@@ -48,6 +48,8 @@ signal shuffle_deck
 signal on_shuffle_deck
 signal player_turn(state: bool)
 signal discard_card(card: CardBase)
+signal battle_clean_up_phase()
+signal scene_end(scene:String)
 
 # UI Signals
 signal display_dialogue(text_key)

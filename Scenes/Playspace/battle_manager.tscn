@@ -21,7 +21,6 @@ width = 4
 height = 4
 
 [node name="BattleManager" type="Node2D" unique_id=1704496626]
-position = Vector2(-1, 0)
 script = ExtResource("1_q4kp8")
 
 [node name="BattleTimer" type="Timer" parent="." unique_id=410800308]

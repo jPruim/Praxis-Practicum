@@ -33,6 +33,7 @@ func set_card(acard:CardBase):
 	$PanelContainer/CardBase.in_slot = false
 	$PanelContainer/CardBase.animation_reveal()
 	$PanelContainer/CardBase.scale = Globals.SCALE.card_hand
+	$PanelContainer/CardBase.original_scene = "card_display"
 	recenter_card()
 	
 

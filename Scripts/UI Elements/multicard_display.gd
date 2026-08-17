@@ -45,10 +45,10 @@ func add_card_display(card: CardBase):
 	var grid_container = $"MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/GridContainer"
 	grid_container.add_child(card_display)
 	grid_container.queue_sort()
-	
 	return
 
 # Close the display
 func _on_close_button_pressed() -> void:
+	SignalBus.emit_signal("scene_end", "card_display")
 	$".".queue_free()
 	pass # Replace with function body.

@@ -21,9 +21,17 @@ var default_tag_location = Vector2(-176, -80)
 var discarded: bool = false
 ## false for cards not in hand ideally, check consistency
 var draggable: bool = true
+
+## Set to delete on next cleanup
+var delete_me: bool = false
+## Originating scene
+var original_scene : String = "Collection"
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_default_data()
+	SignalBus.connect("battle_clean_up_phase", check_clean_up)
+	SignalBus.connect("scene_end", check_delete_conditions)
 	#get_parent().connect_card_signals(self)
 	pass
 
@@ -256,3 +264,17 @@ func update_graphics_inslot(hovered: bool = false):
 	discarded = false
 	animation_reveal()
 	card_affects(hovered)
+	
+## Check if card should be cleaned up
+func check_clean_up():
+	## TODO: Decide on more conditions?
+	if delete_me:
+		$".".queue_free()
+		
+		
+## Conditions to set delete_me to true
+func check_delete_conditions(scene: String):
+	if scene == original_scene:
+		delete_me = true
+	else:
+		delete_me = false
