@@ -30,7 +30,7 @@ var original_scene : String = "Collection"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_default_data()
-	SignalBus.connect("battle_clean_up_phase", check_clean_up)
+	SignalBus.connect("clean_up_nodes", check_clean_up)
 	SignalBus.connect("scene_end", check_delete_conditions)
 	#get_parent().connect_card_signals(self)
 	pass

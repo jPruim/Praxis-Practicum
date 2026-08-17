@@ -47,8 +47,11 @@ func add_card_display(card: CardBase):
 	grid_container.queue_sort()
 	return
 
-# Close the display
-func _on_close_button_pressed() -> void:
+## Close the display
+func _on_close_button_pressed() -> void:	
+	# Handle the possible memory leaks of cards being left behind unsure if needed
+	# Haven't seen any ill effects yet tho
 	SignalBus.emit_signal("scene_end", "card_display")
+	SignalBus.emit_signal("clean_up_nodes")
 	$".".queue_free()
 	pass # Replace with function body.
