@@ -55,6 +55,9 @@ signal scene_end(scene:String)
 signal display_dialogue(text_key)
 signal scale_change_card(new_value: int)
 
+# Sound Signals
+signal trigger_sound(type: SoundEffect.SOUND_EFFECT_TYPE, location: Vector2)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SoundEffect" format=3 uid="uid://d3q5v24grnfgn"]
+
+[ext_resource type="Script" uid="uid://bxjmv8t5oujjr" path="res://Scripts/Globals/SoundEffectSettings.gd" id="1_mdfue"]
+[ext_resource type="AudioStream" uid="uid://bdeg07md4fgnl" path="res://Assets/SoundEffects/coin.mp3" id="2_ycrlu"]
+
+[resource]
+script = ExtResource("1_mdfue")
+type = 2
+sound_effect = ExtResource("2_ycrlu")
+loop = true
+volume = 1.2120000000000033
+metadata/_custom_type_script = "uid://bxjmv8t5oujjr"

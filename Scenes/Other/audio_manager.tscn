@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dl65vfoe6smn3"]
+
+[ext_resource type="Script" uid="uid://duj4dch7ru7wx" path="res://Scripts/Managers/audio_manager.gd" id="1_wcdhc"]
+[ext_resource type="Script" uid="uid://bxjmv8t5oujjr" path="res://Scripts/Globals/SoundEffectSettings.gd" id="2_8sqf5"]
+[ext_resource type="Resource" uid="uid://c33m1y7ry48i1" path="res://Assets/SoundEffects/Resources/coins.tres" id="3_7t7mf"]
+[ext_resource type="Resource" uid="uid://d3q5v24grnfgn" path="res://Assets/SoundEffects/Resources/fire.tres" id="4_ippac"]
+[ext_resource type="Resource" uid="uid://s1xpxt663bvu" path="res://Assets/SoundEffects/Resources/main_music_1.tres" id="5_3yfp2"]
+
+[node name="AudioManager" type="Node2D" unique_id=1646456925]
+script = ExtResource("1_wcdhc")
+sound_effects = Array[ExtResource("2_8sqf5")]([ExtResource("3_7t7mf"), ExtResource("4_ippac"), ExtResource("5_3yfp2")])
