@@ -34,10 +34,10 @@ func create_2d_audio_at_location(type: SoundEffect.SOUND_EFFECT_TYPE, location: 
 			new_2D_audio.volume_db = sound_effect.volume
 			new_2D_audio.pitch_scale = sound_effect.pitch_scale
 			new_2D_audio.pitch_scale += randf_range(-sound_effect.pitch_randomness, sound_effect.pitch_randomness )
-			# handle looping
-			if(sound_effect.loop):
-				new_2D_audio.finished.connect(Callable(create_audio).bind(sound_effect))
 			new_2D_audio.finished.connect(sound_effect.on_audio_finished)
+			# handle looping #ineffectual atm
+			if(sound_effect.loop):
+				trigger_sound(type, location)
 			new_2D_audio.finished.connect(new_2D_audio.queue_free)
 			new_2D_audio.play()
 	else:
@@ -56,10 +56,10 @@ func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE) -> void:
 			new_audio.volume_db = sound_effect.volume
 			new_audio.pitch_scale = sound_effect.pitch_scale
 			new_audio.pitch_scale += randf_range(-sound_effect.pitch_randomness, sound_effect.pitch_randomness)
-			# handle looping
-			if(sound_effect.loop):
-				new_audio.finished.connect(Callable(create_audio).bind(sound_effect))
 			new_audio.finished.connect(sound_effect.on_audio_finished)
+			# handle looping #ineffectual atm
+			if(sound_effect.loop):
+				trigger_sound(type)
 			new_audio.finished.connect(new_audio.queue_free)
 			new_audio.play()
 	else:

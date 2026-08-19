@@ -16,6 +16,7 @@ func _process(delta: float) -> void:
 func appendweekone():
 	var this_week = []
 	this_week.append("CardBase: cleanup signals")
-	
-	
+	this_week.append("AudioManger: Setup class")
+	this_week.append("AudioManger: Setup signals")
+	this_week.append("AudioManger: Music now runs")
 	changelog.append(this_week)
