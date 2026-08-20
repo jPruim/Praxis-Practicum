@@ -5,10 +5,14 @@
 [ext_resource type="Texture2D" uid="uid://c8s8cpx4i88aq" path="res://Assets/Spritesheets/GUIArt/Deskv2-normal.png" id="3_ica48"]
 [ext_resource type="PackedScene" uid="uid://cfrcm5t8fut44" path="res://Scenes/Graphic Elements/candle.tscn" id="4_7a13h"]
 [ext_resource type="Texture2D" uid="uid://c72byvglymygs" path="res://Assets/Spritesheets/GUIArt/Cursor-quill-v2.png" id="5_fq8wr"]
+[ext_resource type="Texture2D" uid="uid://difrv6asiexm7" path="res://Assets/Spritesheets/Other/Inkwell.png" id="6_tqq4t"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_kcmv6"]
 diffuse_texture = ExtResource("2_5mdgl")
 normal_texture = ExtResource("3_ica48")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_de83b"]
+diffuse_texture = ExtResource("6_tqq4t")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_qk2o7"]
 diffuse_texture = ExtResource("5_fq8wr")
@@ -29,21 +33,30 @@ texture = SubResource("CanvasTexture_kcmv6")
 
 [node name="Decorations" type="Node2D" parent="." unique_id=325733838]
 
+[node name="Inkwell" type="Sprite2D" parent="Decorations" unique_id=195143380]
+position = Vector2(404, 127)
+scale = Vector2(2, 2)
+texture = SubResource("CanvasTexture_de83b")
+
 [node name="Candle" parent="Decorations" unique_id=1689751909 instance=ExtResource("4_7a13h")]
-position = Vector2(234, 148)
+position = Vector2(245, 118)
 flicker_variance = 0.3
-flicker_speed = 0.8
+flicker_speed = 0.3
 max_brightness = 6.1
 
 [node name="Candle2" parent="Decorations" unique_id=150924862 instance=ExtResource("4_7a13h")]
-position = Vector2(217, 134)
+position = Vector2(208, 130)
 flicker_variance = 0.3
-flicker_speed = 1.4000000000000001
+flicker_speed = 0.4
 max_brightness = 10.0
 
 [node name="Candle3" parent="Decorations" unique_id=1222274708 instance=ExtResource("4_7a13h")]
-position = Vector2(191, 149)
+position = Vector2(433, 136)
 flicker_variance = 0.3
+flicker_speed = 0.6
+max_brightness = 8.0
 
 [node name="Quill" type="Sprite2D" parent="Decorations" unique_id=1182313912]
+position = Vector2(548, 139)
+scale = Vector2(2, 2)
 texture = SubResource("CanvasTexture_qk2o7")

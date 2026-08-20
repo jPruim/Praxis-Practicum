@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://cfrcm5t8fut44"]
 
-[ext_resource type="Texture2D" uid="uid://cw6hhufq3yajv" path="res://Assets/Spritesheets/GUIArt/candle-v1-lit.png" id="1_3k1jj"]
-[ext_resource type="Texture2D" uid="uid://bqi2l0xpjkami" path="res://Assets/Spritesheets/GUIArt/candle-v1-norma.png" id="2_u15ur"]
+[ext_resource type="Texture2D" uid="uid://dyc8c2lg3gwq3" path="res://Assets/Spritesheets/Other/Candle-v2.png" id="1_3k1jj"]
+[ext_resource type="Texture2D" uid="uid://v2gjphgjbyv3" path="res://Assets/Spritesheets/Other/Candle-v2-normal.png" id="2_u15ur"]
 [ext_resource type="Script" uid="uid://dmftrrlihn20k" path="res://Scripts/UI Elements/candle.gd" id="3_p3mkt"]
+[ext_resource type="Texture2D" uid="uid://cpo6ip1rk5l3n" path="res://Assets/Spritesheets/Other/Candle-v2-fire.png" id="4_u15ur"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_86il2"]
+[sub_resource type="CanvasTexture" id="CanvasTexture_de83b"]
 diffuse_texture = ExtResource("1_3k1jj")
 normal_texture = ExtResource("2_u15ur")
 
@@ -20,12 +21,39 @@ fill = 1
 fill_from = Vector2(0.51282054, 0.46581197)
 fill_to = Vector2(1, 0.46153846)
 
+[sub_resource type="Gradient" id="Gradient_p3mkt"]
+offsets = PackedFloat32Array(0, 0.014925373, 0.11940298, 0.38507462, 0.99701494)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0.9733793, 0.9733793, 0.9733793, 1, 0.09176952, 0.09176952, 0.09176952, 1, 0.026865672, 0.026865672, 0.026865672, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_de83b"]
+gradient = SubResource("Gradient_p3mkt")
+fill = 1
+fill_from = Vector2(0.47863248, 0.525641)
+fill_to = Vector2(0.98717946, 0.53846157)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_qk2o7"]
+diffuse_texture = ExtResource("4_u15ur")
+
 [node name="Candle" type="Sprite2D" unique_id=1689751909]
-texture = SubResource("CanvasTexture_86il2")
+scale = Vector2(2, 2)
+texture = SubResource("CanvasTexture_de83b")
 script = ExtResource("3_p3mkt")
 
 [node name="Candlelight" type="PointLight2D" parent="." unique_id=1244754419]
-position = Vector2(1, -6.999999)
+position = Vector2(1, -7)
 scale = Vector2(1.1015625, 1.015625)
-color = Color(0.908699, 0.4889689, 0.1824727, 1)
+color = Color(0.9098039, 0.49019608, 0.18431373, 1)
 texture = SubResource("GradientTexture2D_qk2o7")
+height = 1.0
+
+[node name="CandleFlame" type="PointLight2D" parent="." unique_id=972417257]
+visible = false
+position = Vector2(0, -5)
+scale = Vector2(0.28515625, 0.21484374)
+color = Color(1, 0.9490196, 1, 1)
+energy = 16.0
+texture = SubResource("GradientTexture2D_de83b")
+height = 1.0
+
+[node name="Flame" type="Sprite2D" parent="." unique_id=1602908135]
+texture = SubResource("CanvasTexture_qk2o7")
