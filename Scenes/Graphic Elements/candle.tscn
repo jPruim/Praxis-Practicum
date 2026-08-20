@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://cfrcm5t8fut44"]
+
+[ext_resource type="Texture2D" uid="uid://cw6hhufq3yajv" path="res://Assets/Spritesheets/GUIArt/candle-v1-lit.png" id="1_3k1jj"]
+[ext_resource type="Texture2D" uid="uid://bqi2l0xpjkami" path="res://Assets/Spritesheets/GUIArt/candle-v1-norma.png" id="2_u15ur"]
+[ext_resource type="Script" uid="uid://dmftrrlihn20k" path="res://Scripts/UI Elements/candle.gd" id="3_p3mkt"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_86il2"]
+diffuse_texture = ExtResource("1_3k1jj")
+normal_texture = ExtResource("2_u15ur")
+
+[sub_resource type="Gradient" id="Gradient_7g1r7"]
+offsets = PackedFloat32Array(0, 0.40298507, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.7761194, 0.7761194, 0.7761194, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qk2o7"]
+gradient = SubResource("Gradient_7g1r7")
+width = 120
+height = 120
+fill = 1
+fill_from = Vector2(0.51282054, 0.46581197)
+fill_to = Vector2(1, 0.46153846)
+
+[node name="Candle" type="Sprite2D" unique_id=1689751909]
+texture = SubResource("CanvasTexture_86il2")
+script = ExtResource("3_p3mkt")
+
+[node name="Candlelight" type="PointLight2D" parent="." unique_id=1244754419]
+position = Vector2(1, -6.999999)
+scale = Vector2(1.1015625, 1.015625)
+color = Color(0.908699, 0.4889689, 0.1824727, 1)
+texture = SubResource("GradientTexture2D_qk2o7")
