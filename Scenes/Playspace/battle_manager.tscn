@@ -6,10 +6,7 @@
 [ext_resource type="Theme" uid="uid://dpn2t23n7kt45" path="res://Scenes/UI/default-theme.theme" id="4_p0ay2"]
 [ext_resource type="Script" uid="uid://ca12ogamlsvic" path="res://Scripts/UI Elements/pass_button.gd" id="5_hc2at"]
 [ext_resource type="PackedScene" uid="uid://brqd7qlj1sonb" path="res://Scenes/Cards/card_slot.tscn" id="5_jwt0r"]
-[ext_resource type="Script" uid="uid://bojjhktfy0ml7" path="res://Scripts/Managers/card_manager.gd" id="8_igyel"]
 [ext_resource type="PackedScene" uid="uid://bcsfohtmxascv" path="res://Scenes/Playspace/cast_time.tscn" id="8_vjwtq"]
-[ext_resource type="PackedScene" uid="uid://vlo6uno0t1dc" path="res://Scenes/Cards/player_hand.tscn" id="9_c2gkm"]
-[ext_resource type="Script" uid="uid://ccc03lltxqyc7" path="res://Scripts/Cards/card_database.gd" id="10_axl6h"]
 [ext_resource type="Script" uid="uid://bcnwmry2x85k2" path="res://input_manager.gd" id="11_3dc1d"]
 [ext_resource type="PackedScene" uid="uid://crv6rsiuh0gi1" path="res://Scenes/Playspace/opponent_manager.tscn" id="12_is4qh"]
 
@@ -64,19 +61,6 @@ position = Vector2(320, 26)
 
 [node name="OpponentCastTime" parent="Playspace" unique_id=94314171 instance=ExtResource("8_vjwtq")]
 position = Vector2(320, 26)
-
-[node name="CardManager" type="Node2D" parent="." unique_id=731625920]
-script = ExtResource("8_igyel")
-
-[node name="PlayerHand" parent="CardManager" unique_id=1936172669 instance=ExtResource("9_c2gkm")]
-z_index = 3
-position = Vector2(1014, 1151)
-
-[node name="OpponentHand" parent="CardManager" unique_id=563282807 instance=ExtResource("9_c2gkm")]
-position = Vector2(978, 43)
-
-[node name="CardDatabase" type="Node2D" parent="CardManager" unique_id=282669495]
-script = ExtResource("10_axl6h")
 
 [node name="InputManager" type="Node2D" parent="." unique_id=636276718]
 script = ExtResource("11_3dc1d")

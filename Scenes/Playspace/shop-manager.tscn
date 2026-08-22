@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://dsqsvuswiimac" path="res://Assets/Spritesheets/GUIArt/Deskv2.png" id="2_5mdgl"]
 [ext_resource type="Texture2D" uid="uid://c8s8cpx4i88aq" path="res://Assets/Spritesheets/GUIArt/Deskv2-normal.png" id="3_ica48"]
 [ext_resource type="PackedScene" uid="uid://cfrcm5t8fut44" path="res://Scenes/Graphic Elements/candle.tscn" id="4_7a13h"]
-[ext_resource type="Texture2D" uid="uid://c72byvglymygs" path="res://Assets/Spritesheets/GUIArt/Cursor-quill-v2.png" id="5_fq8wr"]
 [ext_resource type="Texture2D" uid="uid://difrv6asiexm7" path="res://Assets/Spritesheets/Other/Inkwell.png" id="6_tqq4t"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_kcmv6"]
@@ -13,9 +12,6 @@ normal_texture = ExtResource("3_ica48")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_de83b"]
 diffuse_texture = ExtResource("6_tqq4t")
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_qk2o7"]
-diffuse_texture = ExtResource("5_fq8wr")
 
 [node name="Shop" type="Node2D" unique_id=1330091734]
 script = ExtResource("1_25s7g")
@@ -55,8 +51,3 @@ position = Vector2(433, 136)
 flicker_variance = 0.3
 flicker_speed = 0.6
 max_brightness = 8.0
-
-[node name="Quill" type="Sprite2D" parent="Decorations" unique_id=1182313912]
-position = Vector2(548, 139)
-scale = Vector2(2, 2)
-texture = SubResource("CanvasTexture_qk2o7")

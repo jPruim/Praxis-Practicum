@@ -104,3 +104,7 @@ func _on_area_2d_mouse_exited() -> void:
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
 	pass
+
+func set_visibility(val: bool):
+	$MarginContainer.visible = val
+	$Area2D.visible = val

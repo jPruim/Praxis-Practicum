@@ -7,15 +7,13 @@ const CARD_SLOT_COLLISION_MASK = 2
 const DECK_COLLISION_MASK = 4
 
 # Properties
-var card_manager: CardManager
 var player_deck: Deck
 var player_hand
 var battle_manager: BattleManager
 
 
 func _ready() -> void:
-	card_manager = $"../CardManager"
-	player_hand = $"../CardManager/PlayerHand"
+	player_hand = CardManager.get_node("PlayerHand")
 	battle_manager = $"../"
 
 func _input(event: InputEvent) -> void:
@@ -31,11 +29,11 @@ func _input(event: InputEvent) -> void:
 			
 
 func raycast_check_at_cursor():
-	var card_found: CardBase = card_manager.raycast_check_for_card()
-	var deck_found: Deck = card_manager.raycast_check_for_deck()
-	player_deck = $"../CardManager/PlayerDeck"
+	var card_found: CardBase = CardManager.raycast_check_for_card()
+	var deck_found: Deck = CardManager.raycast_check_for_deck()
+	player_deck = CardManager.get_node("PlayerDeck")
 	if card_found:
-		card_manager.start_drag(card_found)
+		CardManager.start_drag(card_found)
 	elif deck_found:
-		card_manager.new_multicard_display(deck_found.deck)
+		CardManager.new_multicard_display(deck_found.deck)
 	return null	

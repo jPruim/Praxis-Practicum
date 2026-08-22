@@ -15,7 +15,7 @@ var opponent_caster: CardSlot
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	battle_manager = $".."
-	card_manager = $"../CardManager"
+	card_manager = CardManager
 	SignalBus.opponent_targeting_player.connect(_on_opponent_targeting_player)
 	SignalBus.opponent_targeting_self.connect(_on_opponent_targeting_self)
 	SignalBus.opponent_targeting_slot.connect(_on_opponent_targeting_slot)
@@ -181,12 +181,12 @@ func cast(card:CardBase, from_player: bool = false):
 	if (from_player):
 		location = Globals.PLAYER_CAST_POSITION
 		card.z_index = Globals.Z_INDEX.card_cast_player
-		$"../CardManager/PlayerHand".remove_card_from_hand(card)
+		CardManager.get_node("PlayerHand").remove_card_from_hand(card)
 		player_cast_time = card.card_data.cast_time
 	else:
 		location = Globals.ENEMY_CAST_POSITION
 		card.z_index = Globals.Z_INDEX.card_cast_enemy
-		$"../CardManager/OpponentHand".remove_card_from_hand(card)
+		CardManager.get_node("OpponentHand").remove_card_from_hand(card)
 	card.being_cast = true
 	card.scale = Globals.SCALE.card_cast
 	card.animate_card_to_position(location)

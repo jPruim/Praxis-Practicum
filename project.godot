@@ -33,6 +33,7 @@ DataManager="*res://Scripts/Managers/data_manager.gd"
 RelicManager="*res://Scripts/Managers/relic_manager.gd"
 TextReplacer="*res://Scripts/Managers/text_replacer.gd"
 AudioManager="*uid://dl65vfoe6smn3"
+CardManager="*uid://dhmx315pd8nrt"
 
 [debug]
 

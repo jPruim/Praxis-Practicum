@@ -15,7 +15,7 @@ var battle_manager: BattleManager
 func _ready() -> void:
 	timer = $OpponentTimer
 	timer.one_shot = true
-	opponent_hand = $"../CardManager/OpponentHand"
+	opponent_hand = CardManager.get_node("OpponentHand")
 	battle_manager = $"../"
 	spell_manager = $"../SpellManager"
 	pass # Replace with function body.
@@ -28,8 +28,8 @@ func _process(delta: float) -> void:
 
 # Any automatic "start of turn" affects (e.g. draw a card)
 func start_turn():
-	$"../CardManager/OpponentDeck".draw_card()
-	$"../CardManager/OpponentHand".update_hand_positions()
+	CardManager.get_node("OpponentDeck").draw_card()
+	CardManager.get_node("OpponentHand").update_hand_positions()
 
 
 # For furture end turn effects (currently there aren't any)

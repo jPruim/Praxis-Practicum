@@ -57,7 +57,7 @@ func setup_combat(run_data: RunData):
 	var enemy_type = run_data.assignment_list[run_data.assignment - 1]
 	var enemy_data = DataManager.load_enemy_game_data(enemy_type)
 	setup_enemy(enemy_data)
-	$CardManager.initialize_decks(run_data)
+	CardManager.initialize_decks(run_data)
 	phase = "start_turn"
 	time_loop()
 
@@ -166,8 +166,8 @@ func increment_time():
 # Hold the beginning of the time increment setup
 func start_turn():
 	# Handle Player Start turn
-	$"CardManager/".get_node("PlayerDeck").draw_card()
-	$"CardManager/PlayerHand".update_hand_positions()
+	CardManager.get_node("PlayerDeck").draw_card()
+	CardManager.get_node("PlayerHand").update_hand_positions()
 	
 	# Handle AI Start turn
 	$"OpponentManager".start_turn()

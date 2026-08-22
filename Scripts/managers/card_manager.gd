@@ -1,4 +1,3 @@
-class_name CardManager
 extends Node2D
 
 
@@ -150,7 +149,7 @@ func end_drag():
 	
 	var card_type = card_being_dragged.get_card_type()
 	# Check if Player can cast
-	if($"..".is_player_turn):
+	if($"..".get_node("GameManager").get_node("BattleManager").is_player_turn):
 		# Check if final location is a CardSlot
 		var card_slot = raycast_check_for_card_slot()
 		if (card_slot && card_slot.is_player):
@@ -265,3 +264,10 @@ func new_multicard_display(deck: Array[CardBase]):
 func on_shuffle_deck():
 	for card : CardBase in $PlayerDeck.deck:
 		card.animate_card_to_position($PlayerDeck.position)
+		
+func set_visibility_player_hand(val: bool):
+	$PlayerHand.set_visibility(val)
+
+func set_visibility_opponent_hand(val: bool):
+	$OpponentHand.set_visibility(val)
+	
