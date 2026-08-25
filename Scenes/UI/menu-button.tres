@@ -1,7 +1,6 @@
 [gd_resource type="Theme" format=3 uid="uid://cxef1cilx5oai"]
 
-[ext_resource type="FontFile" uid="uid://bhgvkig86iomx" path="res://Assets/Font/alagard.ttf" id="1_7eqdx"]
-[ext_resource type="FontFile" uid="uid://bhgvkig86iomx" path="res://Assets/font/alagard.ttf" id="2_hllc5"]
+[ext_resource type="FontFile" uid="uid://bhgvkig86iomx" path="res://Assets/Font/alagard.ttf" id="2_hllc5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3n3yq"]
 content_margin_left = 4.0
@@ -111,7 +110,7 @@ Button/constants/h_separation = 4
 Button/constants/icon_max_width = 0
 Button/constants/outline_size = 0
 Button/font_sizes/font_size = 16
-Button/fonts/font = ExtResource("1_7eqdx")
+Button/fonts/font = ExtResource("2_hllc5")
 Button/styles/disabled = SubResource("StyleBoxFlat_3n3yq")
 Button/styles/focus = SubResource("StyleBoxFlat_co140")
 Button/styles/hover = SubResource("StyleBoxFlat_4ch57")

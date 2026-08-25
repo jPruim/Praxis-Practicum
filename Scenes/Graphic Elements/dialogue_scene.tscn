@@ -1,16 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://1eqwy3y5qyt4"]
+[gd_scene format=3 uid="uid://1eqwy3y5qyt4"]
 
-[ext_resource type="Script" path="res://Scripts/UI Elements/dialogue_scene.gd" id="1_aviac"]
+[ext_resource type="Script" uid="uid://bw7ybqmel6xyl" path="res://Scripts/UI Elements/dialogue_scene.gd" id="1_aviac"]
 [ext_resource type="Texture2D" uid="uid://bo56tuwrojsaf" path="res://Assets/GUI/praxis-ui-ninepatch.png" id="2_qmqfd"]
 
 [sub_resource type="Theme" id="Theme_xkcnl"]
 
-[node name="DialogueScene" type="CanvasLayer"]
+[node name="DialogueScene" type="CanvasLayer" unique_id=1984575175]
 process_mode = 3
 layer = 4
 script = ExtResource("1_aviac")
 
-[node name="Background" type="NinePatchRect" parent="."]
+[node name="Background" type="NinePatchRect" parent="." unique_id=2035016276]
 modulate = Color(1, 1, 1, 0.705882)
 self_modulate = Color(1, 1, 1, 0.705882)
 texture_filter = 1
@@ -28,7 +28,7 @@ patch_margin_top = 4
 patch_margin_right = 4
 patch_margin_bottom = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="Background"]
+[node name="MarginContainer" type="MarginContainer" parent="Background" unique_id=691472191]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 1
 anchors_preset = -1
@@ -44,12 +44,12 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="DialogueText" type="Label" parent="Background/MarginContainer"]
+[node name="DialogueText" type="Label" parent="Background/MarginContainer" unique_id=428169632]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Basic Text"
 
-[node name="SpeakerLabel" type="NinePatchRect" parent="."]
+[node name="SpeakerLabel" type="NinePatchRect" parent="." unique_id=1680586077]
 self_modulate = Color(1, 1, 1, 0.705882)
 anchors_preset = -1
 anchor_left = 0.245
@@ -66,7 +66,7 @@ patch_margin_top = 4
 patch_margin_right = 4
 patch_margin_bottom = 4
 
-[node name="Speaker" type="Label" parent="SpeakerLabel"]
+[node name="Speaker" type="Label" parent="SpeakerLabel" unique_id=1245200557]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 15

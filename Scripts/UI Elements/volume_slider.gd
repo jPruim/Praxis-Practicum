@@ -23,7 +23,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 	
-## Handle slider changing
+## Handle slider changing 
 func _on_value_changed(val: float):
 	## TODO: Remove this comment
 	#print(labelText, ": ", str(linear_to_db(val)))	
