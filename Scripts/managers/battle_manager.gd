@@ -58,6 +58,7 @@ func setup_combat(run_data: RunData):
 	var enemy_data = DataManager.load_enemy_game_data(enemy_type)
 	setup_enemy(enemy_data)
 	CardManager.initialize_decks(run_data)
+	CardManager.display_scene(CardManager.Scenes.BATTLE)
 	phase = "start_turn"
 	time_loop()
 

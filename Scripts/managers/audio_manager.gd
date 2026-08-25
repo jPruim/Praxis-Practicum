@@ -22,13 +22,17 @@ func _ready() -> void:
 
 
 ## Creates a sound effect at a specific location if the limit has not been reached. 
-func create_2d_audio_at_location(type: SoundEffect.SOUND_EFFECT_TYPE, location: Vector2) -> void:
+func create_2d_audio_at_location(type: SoundEffect.SOUND_EFFECT_TYPE, location: Vector2, is_music:bool = false) -> void:
 	if sound_effect_dict.has(type):
 		var sound_effect: SoundEffect = sound_effect_dict[type]
 		if sound_effect.has_open_limit():
 			sound_effect.change_audio_count(1)
 			var new_2D_audio: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
 			add_child(new_2D_audio)
+			if is_music:
+				new_2D_audio.bus = "Background Music"
+			else:
+				new_2D_audio.bus = "SFX"
 			new_2D_audio.position = location
 			new_2D_audio.stream = sound_effect.sound_effect
 			new_2D_audio.volume_db = sound_effect.volume
@@ -45,13 +49,17 @@ func create_2d_audio_at_location(type: SoundEffect.SOUND_EFFECT_TYPE, location: 
 
 
 ## Creates a sound effect if the limit has not been reached. Pass [param type] for the SoundEffect to be queued.
-func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE) -> void:
+func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE, is_music:bool = false) -> void:
 	if sound_effect_dict.has(type):
 		var sound_effect: SoundEffect = sound_effect_dict[type]
 		if sound_effect.has_open_limit():
 			sound_effect.change_audio_count(1)
 			var new_audio: AudioStreamPlayer = AudioStreamPlayer.new()
 			add_child(new_audio)
+			if is_music:
+				new_audio.bus = "Background Music"
+			else:
+				new_audio.bus = "SFX"
 			new_audio.stream = sound_effect.sound_effect
 			new_audio.volume_db = sound_effect.volume
 			new_audio.pitch_scale = sound_effect.pitch_scale
@@ -66,12 +74,12 @@ func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE) -> void:
 		push_error("Audio Manager failed to find setting for type ", type)
 	
 ## Create sound from signal	
-func start_sound(type: SoundEffect.SOUND_EFFECT_TYPE, location: Vector2 = DEFAULT_LOCATION):
+func start_sound(type: SoundEffect.SOUND_EFFECT_TYPE, location: Vector2 = DEFAULT_LOCATION, is_music:bool = false):
 	if location == DEFAULT_LOCATION:
-		create_audio(type)
+		create_audio(type, is_music)
 	else:
-		create_2d_audio_at_location(type, location)
+		create_2d_audio_at_location(type, location, is_music)
 
 ## emit sound trigger
-func trigger_sound(type: SoundEffect.SOUND_EFFECT_TYPE, location: Vector2 = DEFAULT_LOCATION):
-	SignalBus.emit_signal("trigger_sound", type, location)
+func trigger_sound(type: SoundEffect.SOUND_EFFECT_TYPE, location: Vector2 = DEFAULT_LOCATION, is_music: bool = false):
+	SignalBus.emit_signal("trigger_sound", type, location, is_music)

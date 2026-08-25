@@ -11,7 +11,7 @@ func _ready() -> void:
 	connect_signals()
 	hide_game_ui()
 	$Menu.display_menu()
-	AudioManager.trigger_sound(SoundEffect.SOUND_EFFECT_TYPE.MAIN_MUSIC_1)
+	AudioManager.trigger_sound(SoundEffect.SOUND_EFFECT_TYPE.MAIN_MUSIC_1, AudioManager.DEFAULT_LOCATION, true)
 	pass # Replace with function body.
 
 

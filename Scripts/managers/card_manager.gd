@@ -9,6 +9,13 @@ var player_hand: PlayerHand
 var opponent_hand: PlayerHand
 var deck_scene
 
+enum Scenes {
+	DEFAULT,
+	BATTLE,
+	SHOP,
+	VICTORY
+}
+
 const MULTICARD_DISPLAY_SCENE = "res://Scenes/Cards/multicard_display.tscn"
 
 # Called when the node enters the scene tree for the first time.
@@ -25,6 +32,7 @@ func _ready() -> void:
 	screen_size = Globals.VIEWPORT_SIZE
 	SignalBus.connect("left_mouse_button_released", on_left_click_release)
 	connect_signals()
+	display_scene()
 	pass # Replace with function body.
 
 # Card Collision detector
@@ -270,4 +278,22 @@ func set_visibility_player_hand(val: bool):
 
 func set_visibility_opponent_hand(val: bool):
 	$OpponentHand.set_visibility(val)
+	
+func display_scene(scene: int = Scenes.DEFAULT):
+	match scene:
+		Scenes.DEFAULT:
+			set_visibility_opponent_hand(false)
+			set_visibility_player_hand(false)
+		Scenes.BATTLE:
+			set_visibility_opponent_hand(true)
+			set_visibility_player_hand(true)
+		Scenes.SHOP:
+			set_visibility_opponent_hand(false)
+			set_visibility_player_hand(true)
+		Scenes.VICTORY:
+			set_visibility_opponent_hand(false)
+			set_visibility_player_hand(false)
+		_:
+			display_scene(Scenes.DEFAULT)
+
 	

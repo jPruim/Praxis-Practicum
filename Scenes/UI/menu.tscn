@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dwxfl1wk5n4su" path="res://Assets/Spritesheets/GUIArt/book-3.png" id="2_vkt5i"]
 [ext_resource type="Texture2D" uid="uid://5xoq1uugxjum" path="res://Assets/Spritesheets/GUIArt/book-3-normal-2.png" id="3_b5i0v"]
 [ext_resource type="Theme" uid="uid://cxef1cilx5oai" path="res://Scenes/UI/menu-button.tres" id="3_kp7d6"]
+[ext_resource type="PackedScene" uid="uid://51hvknsvdnkp" path="res://Scenes/UI/volume_slider.tscn" id="6_ugp1d"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_yersk"]
 diffuse_texture = ExtResource("2_vkt5i")
@@ -109,12 +110,26 @@ offset_bottom = 228.0
 theme = ExtResource("3_kp7d6")
 theme_override_constants/separation = 10
 
-[node name="Volume" type="Button" parent="MenuContainer/Settings/MenuButtons/VBoxContainer" unique_id=1235573172]
+[node name="Mute" type="Button" parent="MenuContainer/Settings/MenuButtons/VBoxContainer" unique_id=1235573172]
+visible = false
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("3_kp7d6")
 text = "Mute"
 text_overrun_behavior = 3
+
+[node name="MasterVolumeSlider" parent="MenuContainer/Settings/MenuButtons/VBoxContainer" unique_id=1309906827 instance=ExtResource("6_ugp1d")]
+layout_mode = 2
+
+[node name="SFXVolumeSlider" parent="MenuContainer/Settings/MenuButtons/VBoxContainer" unique_id=1548406360 instance=ExtResource("6_ugp1d")]
+layout_mode = 2
+bus = "SFX"
+labelText = "SFX"
+
+[node name="MusicVolumeSlider" parent="MenuContainer/Settings/MenuButtons/VBoxContainer" unique_id=552005511 instance=ExtResource("6_ugp1d")]
+layout_mode = 2
+bus = "Background Music"
+labelText = "Music"
 
 [node name="Back" type="Button" parent="MenuContainer/Settings/MenuButtons/VBoxContainer" unique_id=1910053766]
 texture_filter = 1
@@ -138,6 +153,6 @@ height = 1.0
 [connection signal="pressed" from="MenuContainer/MainMenu/MenuButtons/VBoxContainer/SettingsBtn" to="MenuContainer" method="_on_settings_btn_pressed"]
 [connection signal="pressed" from="MenuContainer/MainMenu/MenuButtons/VBoxContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]
 [connection signal="pressed" from="MenuContainer/MainMenu/MenuButtons/VBoxContainer/QuitBtn" to="MenuContainer" method="_on_quit_btn_pressed"]
-[connection signal="pressed" from="MenuContainer/Settings/MenuButtons/VBoxContainer/Volume" to="MenuContainer" method="_on_resume_btn_pressed"]
+[connection signal="pressed" from="MenuContainer/Settings/MenuButtons/VBoxContainer/Mute" to="MenuContainer" method="_on_resume_btn_pressed"]
 [connection signal="pressed" from="MenuContainer/Settings/MenuButtons/VBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="MenuContainer/Settings/MenuButtons/VBoxContainer/Back" to="MenuContainer" method="_on_back_pressed"]
