@@ -8,17 +8,16 @@ var selected_text = []
 var in_progress = false
 var dialogue_json: JSON
 
-var speaker_label_offset = 75
 var dialogue_opacity = "ffffffb4" # 180 out of 255
 var a_reveal_speed = 0.1
 
 @onready var background = $Background
 @onready var dialogue_text = $Background/MarginContainer/DialogueText
 @onready var speaker_label = $SpeakerLabel
+@onready var player_label = $PlayerLabel
 
 func _ready():
 	animationless_hide()
-	position_elements()
 	scene_text = load_scene_text()
 	#SignalBus.connect("display_dialog", self, "on_display_dialog")
 
@@ -54,17 +53,7 @@ func animationless_hide():
 	background.visible = false
 	speaker_label.visible = false
 
-func position_elements(player_speaking: bool = false):
-	background.position = Vector2(Globals.VIEWPORT_SIZE.x /2, 50)
-	var new_position =  Vector2(background.position.x, background.position.y + background.size.y)
-	if player_speaking:
-		new_position.x -= speaker_label_offset
-	else:
-		new_position.x += speaker_label_offset
-	speaker_label.position = new_position
-
 func animation_reveal(player_speaking: bool = false):
-	position_elements()
 	var tween = get_tree().create_tween()
 	$".".modulate = "ffffff00"
 	tween.tween_property($".", "modulate", dialogue_opacity, a_reveal_speed)

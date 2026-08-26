@@ -23,6 +23,7 @@ func _on_new_game_btm_pressed() -> void:
 
 
 func _on_resume_btn_pressed() -> void:
+	SignalBus.emit_signal("menu_close")
 	SignalBus.emit_signal("run_resume")
 	hide_all()
 	pass # Replace with function body.
@@ -59,5 +60,6 @@ func _on_back_pressed() -> void:
 
 
 func _on_quit_btn_pressed() -> void:
+	SignalBus.emit_signal("menu_close")
 	get_tree().quit()
 	pass # Replace with function body.

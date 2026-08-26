@@ -14,8 +14,8 @@ script = ExtResource("1_aviac")
 modulate = Color(1, 1, 1, 0.705882)
 self_modulate = Color(1, 1, 1, 0.705882)
 texture_filter = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = -1
+anchor_top = 0.75
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -8.0
@@ -31,14 +31,11 @@ patch_margin_bottom = 4
 [node name="MarginContainer" type="MarginContainer" parent="Background" unique_id=691472191]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.01
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 1.937
-offset_left = -6.4
-offset_bottom = -7.496
+anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
@@ -49,34 +46,68 @@ layout_mode = 2
 size_flags_vertical = 1
 text = "Basic Text"
 
-[node name="SpeakerLabel" type="NinePatchRect" parent="." unique_id=1680586077]
+[node name="PlayerLabel" type="NinePatchRect" parent="." unique_id=1680586077]
 self_modulate = Color(1, 1, 1, 0.705882)
 anchors_preset = -1
-anchor_left = 0.245
-anchor_top = 0.592
-anchor_right = 0.245
-anchor_bottom = 0.592
-offset_left = -59.8
-offset_top = -18.12
-offset_right = 60.2
-offset_bottom = -0.119995
+anchor_top = 0.75
+anchor_bottom = 0.75
+offset_top = -32.0
+offset_right = 120.0
+offset_bottom = -12.0
+grow_vertical = 0
+size_flags_horizontal = 2
 texture = ExtResource("2_qmqfd")
 patch_margin_left = 4
 patch_margin_top = 4
 patch_margin_right = 4
 patch_margin_bottom = 4
 
-[node name="Speaker" type="Label" parent="SpeakerLabel" unique_id=1245200557]
+[node name="Speaker" type="Label" parent="PlayerLabel" unique_id=1245200557]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -0.5
+offset_right = -1.0
+offset_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_xkcnl")
-text = "Vincent
-"
+text = "Vincent"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="SpeakerLabel" type="NinePatchRect" parent="." unique_id=900819081]
+self_modulate = Color(1, 1, 1, 0.705882)
+anchors_preset = -1
+anchor_top = 0.75
+anchor_bottom = 0.75
+offset_top = -32.0
+offset_right = 120.0
+offset_bottom = -12.0
+grow_vertical = 0
+size_flags_horizontal = 2
+texture = ExtResource("2_qmqfd")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Speaker" type="Label" parent="SpeakerLabel" unique_id=668738407]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.5
+offset_right = -1.0
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_xkcnl")
+text = "Vincent"
 horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true

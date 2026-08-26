@@ -198,6 +198,7 @@ custom_minimum_size = Vector2(5, 0)
 layout_mode = 2
 
 [node name="LightingManager" type="Node2D" parent="." unique_id=677871602]
+process_mode = 3
 script = ExtResource("12_t4hrx")
 
 [node name="PlayerLight" type="PointLight2D" parent="LightingManager" unique_id=862998522]
@@ -222,6 +223,18 @@ color = Color(1, 1, 1, 0.643137)
 blend_mode = 1
 range_layer_max = 2
 range_item_cull_mask = 769
+texture = SubResource("GradientTexture2D_2cmpm")
+height = 100.0
+
+[node name="MenuAmbient" type="PointLight2D" parent="LightingManager" unique_id=1965477730]
+position = Vector2(329, 501)
+scale = Vector2(1.66979, 1.21615)
+color = Color(1, 1, 1, 0.643137)
+energy = 1.5
+blend_mode = 1
+range_layer_max = 2
+range_item_cull_mask = 769
+shadow_color = Color(0, 0, 0, 0.60784316)
 texture = SubResource("GradientTexture2D_2cmpm")
 height = 100.0
 

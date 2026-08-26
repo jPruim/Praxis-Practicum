@@ -143,4 +143,5 @@ func update_ascension(difference: int):
 func _on_menubutton_pressed() -> void:
 	$Menu.display_menu()
 	$Fog/Fog.visible = true
+	SignalBus.emit_signal("menu_button_pressed")
 	pass # Replace with function body.

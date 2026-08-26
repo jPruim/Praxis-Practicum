@@ -16,6 +16,7 @@ layer = 10
 script = ExtResource("1_pbacw")
 
 [node name="MenuContainer" type="Control" parent="." unique_id=1186134336]
+light_mask = 512
 z_index = 1000
 layout_mode = 3
 anchors_preset = 15
@@ -29,12 +30,14 @@ mouse_filter = 2
 
 [node name="Book" type="Sprite2D" parent="MenuContainer" unique_id=1122701917]
 physics_interpolation_mode = 1
+light_mask = 512
 texture_filter = 1
 position = Vector2(320, 180)
 scale = Vector2(2, 2)
 texture = SubResource("CanvasTexture_yersk")
 
 [node name="MainMenu" type="MarginContainer" parent="MenuContainer" unique_id=1759195943]
+light_mask = 512
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,12 +51,14 @@ size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="MenuButtons" type="Control" parent="MenuContainer/MainMenu" unique_id=845645932]
+light_mask = 512
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("1_ykmtr")
 theme_type_variation = &"Book"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/MainMenu/MenuButtons" unique_id=1648307205]
+light_mask = 512
 layout_mode = 0
 offset_left = 339.0
 offset_top = 101.0
@@ -63,6 +68,7 @@ theme = ExtResource("3_kp7d6")
 theme_override_constants/separation = 10
 
 [node name="ResumeBtn" type="Button" parent="MenuContainer/MainMenu/MenuButtons/VBoxContainer" unique_id=1653609169]
+light_mask = 512
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("3_kp7d6")
@@ -70,22 +76,26 @@ text = "Resume"
 text_overrun_behavior = 3
 
 [node name="NewGameBtm" type="Button" parent="MenuContainer/MainMenu/MenuButtons/VBoxContainer" unique_id=802887173]
+light_mask = 512
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("3_kp7d6")
 text = "New Game"
 
 [node name="SettingsBtn" type="Button" parent="MenuContainer/MainMenu/MenuButtons/VBoxContainer" unique_id=1740819314]
+light_mask = 512
 texture_filter = 1
 layout_mode = 2
 text = "Settings"
 
 [node name="QuitBtn" type="Button" parent="MenuContainer/MainMenu/MenuButtons/VBoxContainer" unique_id=1218831262]
+light_mask = 512
 texture_filter = 1
 layout_mode = 2
 text = "Quit"
 
 [node name="Settings" type="MarginContainer" parent="MenuContainer" unique_id=728329530]
+light_mask = 512
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -96,12 +106,14 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MenuButtons" type="Control" parent="MenuContainer/Settings" unique_id=1242563737]
+light_mask = 512
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("1_ykmtr")
 theme_type_variation = &"Book"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/Settings/MenuButtons" unique_id=602375504]
+light_mask = 512
 layout_mode = 0
 offset_left = 339.0
 offset_top = 102.0
@@ -112,6 +124,7 @@ theme_override_constants/separation = 10
 
 [node name="Mute" type="Button" parent="MenuContainer/Settings/MenuButtons/VBoxContainer" unique_id=1235573172]
 visible = false
+light_mask = 512
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("3_kp7d6")
@@ -119,19 +132,23 @@ text = "Mute"
 text_overrun_behavior = 3
 
 [node name="MasterVolumeSlider" parent="MenuContainer/Settings/MenuButtons/VBoxContainer" unique_id=1309906827 instance=ExtResource("6_ugp1d")]
+light_mask = 512
 layout_mode = 2
 
 [node name="SFXVolumeSlider" parent="MenuContainer/Settings/MenuButtons/VBoxContainer" unique_id=1548406360 instance=ExtResource("6_ugp1d")]
+light_mask = 512
 layout_mode = 2
 bus = "SFX"
 labelText = "SFX"
 
 [node name="MusicVolumeSlider" parent="MenuContainer/Settings/MenuButtons/VBoxContainer" unique_id=552005511 instance=ExtResource("6_ugp1d")]
+light_mask = 512
 layout_mode = 2
 bus = "Background Music"
 labelText = "Music"
 
 [node name="Back" type="Button" parent="MenuContainer/Settings/MenuButtons/VBoxContainer" unique_id=1910053766]
+light_mask = 512
 texture_filter = 1
 layout_mode = 2
 text = "Back"

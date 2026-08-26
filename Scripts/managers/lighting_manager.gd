@@ -17,24 +17,22 @@ func _process(delta: float) -> void:
 
 
 func initial_lighting():
-	$PlayerLight.visible = false
-	$EnemyLight.visible = false
-	$Ambient.visible = true
-	$CardAmbient.visible = true
-	$ShopLight.visible = false
-	$BoardLight.visible = false
+	reset_lights()
+	menu_lighting(true)
 	
 func connect_signals():
-	SignalBus.connect("menu_button_pressed", menu_lighting)
+	SignalBus.connect("menu_button_pressed", func(): menu_lighting(true))
+	SignalBus.connect("menu_close", func(): menu_lighting(false))
 	SignalBus.connect("fight_enter", battle_lighting)
 	SignalBus.connect("shop_enter", shop_lighting)
 	SignalBus.connect("player_turn", _pass_lighting)
 
-func menu_lighting():
-	reset_lights()
+func menu_lighting(val: bool):
+	print("MenuLighting: ", val)
+	$MenuAmbient.visible = val
 	
 	
-func _pass_lighting(state: bool):
+func _pass_lighting(state: bool = false):
 	$PassLight.visible = state
 
 func battle_lighting():
@@ -57,3 +55,4 @@ func reset_lights():
 	$ShopLight.visible = false
 	$PassLight.visible = false
 	$BoardLight.visible = false
+	$MenuAmbient.visible = false
