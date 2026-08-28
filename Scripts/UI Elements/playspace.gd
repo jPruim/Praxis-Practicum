@@ -1,3 +1,4 @@
+class_name PlaySpace
 extends Node2D
 
 #load
@@ -18,6 +19,17 @@ func _enter_tree() -> void:
 
 	pass
 
+## Get Slot from Vector2 position can return null
+func get_slot(location: Vector2):
+	# find slots
+	var slots: Array[CardSlot]
+	for x in get_children():
+		if x is CardSlot:
+			slots.append(x)
+	for slot in slots:
+		if slot.board_location == location:
+			return slot
+	return null
 
 func initialize_card_slots():
 	var newSlot: CardSlot

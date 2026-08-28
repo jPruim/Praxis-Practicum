@@ -13,6 +13,8 @@ var is_opponent = false # True if the card slot is representing the opponent
 ## The location in the board. Player summons attack y -=1....		
 var board_location: Vector2 = Vector2( -1, -1)
 
+@onready var play_space: PlaySpace = $".."
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$".".scale = Globals.SCALE.card
@@ -72,3 +74,28 @@ func get_debug_output():
 func clear():
 	# TODO: Check that 
 	cards = []
+	
+## If this card slot has a summon
+func has_summon():
+	if cards.size() > 0:
+		return true
+	else:
+		return false
+
+func calc_opposing_summon_location() -> Vector2:
+	var new_y
+	if board_location.y == 0:
+		new_y = 1
+	else:
+		new_y = 0
+	return Vector2(board_location.x, new_y)
+	
+## return opposing (positionally) slot
+func get_opposing_slot():
+	var slot = play_space.get_slot(calc_opposing_summon_location())
+	if slot != null:
+		return slot
+	else:
+		printerr("No opposing slot")
+		return null
+		
