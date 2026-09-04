@@ -16,7 +16,6 @@ const playerHand = preload("res://Scenes/Cards/player_hand.tscn")
 
 func _enter_tree() -> void:
 	# Needs to happen before some of the ready() functions of children
-
 	pass
 
 ## Get Slot from Vector2 position can return null
@@ -30,6 +29,16 @@ func get_slot(location: Vector2):
 		if slot.board_location == location:
 			return slot
 	return null
+
+## Get the Player CasterFrame Slot
+func get_player_slot() -> CardSlot:
+	return $PlayerSlot
+	
+## Get the Opponent CasterFrame Slot
+func get_opponent_slot() -> CardSlot:
+	return $OpponentSlot
+
+
 
 func initialize_card_slots():
 	var newSlot: CardSlot

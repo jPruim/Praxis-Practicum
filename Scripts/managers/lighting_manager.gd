@@ -28,7 +28,6 @@ func connect_signals():
 	SignalBus.connect("player_turn", _pass_lighting)
 
 func menu_lighting(val: bool):
-	print("MenuLighting: ", val)
 	$MenuAmbient.visible = val
 	
 	

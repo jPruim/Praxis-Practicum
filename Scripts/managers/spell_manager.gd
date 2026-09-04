@@ -118,28 +118,15 @@ func resolve_spell_effects_at(spell:CardBase, slot: CardSlot):
 	pass
 	
 func resolve_spell_dmg_at(spell:CardBase, slot: CardSlot):
-	# Return if target is invalid
-	if ( slot.cards.size() < 1):
-		return
-	
+	var dmg: Damage = Damage.new()
 	# Handle "flat" bonuses
-	var dmg:float = spell.card_data.direct_damage
-	dmg += RelicManager.get_spell_power_bonus()
-	
-	
-	# Handle "mult" bonuses
-	dmg = floor(dmg * RelicManager.get_spell_power_mult())
-	if spell.has_tag("fire") && slot.cards[0].has_effect("ice"):
-		dmg = dmg * RelicManager.get_melt_mult()
-	elif spell.has_tag("ice") && slot.cards[0].has_effect("fire"):
-		dmg = dmg * RelicManager.get_melt_mult()
-		
+	var val: float = spell.card_data.direct_damage
+	val += RelicManager.get_spell_power_bonus()
 	# turn dmg into int (no partial dmg)
-	var int_dmg: int = floor(dmg)
-	slot.cards[0].adjust_health(-1 * int_dmg)
-	
-	# update graphic
-	slot.update_graphic()
+	var int_dmg: int = floor(val)
+	dmg.set_dmg(int_dmg)
+	dmg.set_dmg_type(spell.card_data.damage_type)
+	slot.take_dmg(dmg)
 	pass
 
 func add_player_target(slot: CardSlot):

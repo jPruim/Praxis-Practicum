@@ -50,17 +50,44 @@ func update_graphic():
 func animate_dmg(A_SPEED = Globals.DEFAULT_ASPEED):
 	var tween = get_tree().create_tween()
 	tween.tween_property($".", "modulate", Color.RED, A_SPEED)
+	get_card().update_graphics()
 	tween.tween_property($".", "modulate", Color.WHITE, A_SPEED)
 	#tween.tween_callback($".".queue_free)
 	
+## Dmg equation for a cardslot that does dmg to its summon	
+func take_dmg(dmg: Damage, overflow = false, A_SPEED = Globals.DEFAULT_ASPEED) -> Damage:
+	
+	# Handle empty card slots without overflow
+	if !has_summon() && !overflow:
+		return dmg.set_dmg(0)
+	# Handle empty slots with overflow
+	elif !has_summon() && overflow:
+		return dmg
+	# TODO: Make sure that somewhere else is accepting overflow
+	# Handle "mult" bonuses
+	dmg.set_dmg(floor(dmg.dmg * RelicManager.get_spell_power_mult()))
+	if dmg.dmg_type == "FIRE" && get_card().has_effect("ICE"):
+		@warning_ignore("narrowing_conversion")
+		dmg.set_dmg(dmg.dmg * RelicManager.get_melt_mult())
+	elif dmg.dmg_type == "ICE" && get_card().has_effect("FIRE"):
+		@warning_ignore("narrowing_conversion")
+		dmg.set_dmg(dmg.dmg * RelicManager.get_melt_mult())
+		
+	# Check for Overflow and resolve dmg
+	if overflow && dmg.dmg > get_card().get_health():
+		dmg.set_dmg(dmg.dmg - get_card().get_health())
+		get_card().set_health(0)
+	else:
+		get_card().adjust_health(-1 * dmg.dmg)
+		dmg.set_dmg(0)
+	animate_dmg(A_SPEED)
+	return dmg
 	
 ## Text output for debug testing of a CardSlot
 func get_debug_output():
 	var card: CardBase = get_card()
 	if !card:
 		return "Empty "
-	else:
-		card.print_debug()
 	var output: String = ""
 	output += card.get_card_name()
 	output += "("

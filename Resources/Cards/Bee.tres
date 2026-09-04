@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://8vam1kq7wb83"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://8vam1kq7wb83"]
 
-[ext_resource type="Script" path="res://Resources/Types/CardData.gd" id="1_550oe"]
+[ext_resource type="Script" uid="uid://clpqupdicsrex" path="res://Resources/Types/CardData.gd" id="1_550oe"]
 
 [resource]
 script = ExtResource("1_550oe")
@@ -9,19 +9,8 @@ card_type = "summon"
 cast_time = 1
 summon_attack = 1
 summon_health = 1
-direct_damage = 0
 damage_type = "Nature"
-direct_block = 0
 card_text = "Attack matches health"
 animation = "Bee"
 stackable = true
-ally_target = "Single"
-enemy_target = "Single"
-current_block = 0
-current_health = 0
-current_attack = 0
-effects = Array[String]([])
-effect_strength = 0
-spell_level = 1
-spell_rarity = "Common"
 tags = Array[String](["Summon"])

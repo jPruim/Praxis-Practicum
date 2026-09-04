@@ -21,7 +21,7 @@ const DEFAULT_DELAY = 0.5
 var phase_list = ["start_turn","ai_decision", "player_decision","spell_cast", "clean_up", "end_step"]
 var phase: String
 var iterations: int = 5000 # TODO remove this, infinite loop catcher
-
+var play_space: PlaySpace
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	get_viewport().set_physics_object_picking_sort(true)
@@ -29,6 +29,7 @@ func _ready() -> void:
 	target_scene = preload("res://Scenes/Graphic Elements/target.tscn")
 	opponent_manager = $"OpponentManager"
 	spell_manager = $".".find_child("SpellManager")
+	play_space = $"Playspace"
 	SignalBus.opponent_targeting_player.connect(_on_opponent_targeting_player)
 	SignalBus.opponent_targeting_self.connect(_on_opponent_targeting_self)
 	SignalBus.opponent_targeting_slot.connect(_on_opponent_targeting_slot)
@@ -66,13 +67,11 @@ func setup_player(run_data: RunData):
 	player = caster_frame_base_scene.instantiate()
 	player.set_aloction()
 	player.set_default_data()
-	player.z_index = Globals.Z_INDEX["caster_frame"]
-	player.scale = Globals.SCALE.caster
-	player.set_display_name(run_data.name)
-	player.set_animation("Adventurer")
 	player.set_health(run_data.current_health)
 	player.position = Globals.PLAYER_POSITION
 	player.in_slot = true
+	player.set_display_name(run_data.name)
+	player.set_animation("Adventurer")
 	$"Playspace/PlayerSlot".cards.clear()
 	$"Playspace/PlayerSlot".cards.append(player)
 	player.animation_reveal()
@@ -180,17 +179,47 @@ func start_turn():
 ## Trigger Summon Attacks
 ## Prioritize "opposing" summon then the "enemy"
 func summon_attacks():
-	var dmg: int = 0
-	for i: CardSlot in ai_slots:
-		dmg = 0
-		if i.cards.size() > 0:
-			dmg += i.cards[0].card_data.current_attack
-	$Playspace/PlayerSlot.cards[0].adjust_health(-1 * dmg)
-	for i: CardSlot in player_slots:
-		dmg = 0
-		if i.cards.size() > 0:
-			dmg += i.cards[0].card_data.current_attack
-		$Playspace/OpponentSlot.cards[0].adjust_health(-1 * dmg)
+	var player_summon_slot: CardSlot
+	var opponent_summon_slot: CardSlot
+	
+	for x: int in play_space.boardDimensions.x:
+		# Summons
+		player_summon_slot = play_space.get_slot(Vector2(x, 1))
+		opponent_summon_slot = play_space.get_slot(Vector2(x, 0))
+		var player_dmg: Damage = Damage.new()
+		var opponent_dmg: Damage = Damage.new()
+		var overflow_dmg: Damage = Damage.new()
+		# Player summon attack
+		if player_summon_slot && player_summon_slot.has_summon():
+			# Attack opponent summon
+			if opponent_summon_slot && opponent_summon_slot.has_summon():
+				player_dmg.set_dmg(player_summon_slot.get_card().get_card_info().direct_damage)
+				player_dmg.set_dmg_type(player_summon_slot.get_card().get_card_info().damage_type)
+				overflow_dmg = opponent_summon_slot.take_dmg(player_dmg)
+				if overflow_dmg.dmg > 0:
+					play_space.get_opponent_slot().take_dmg(overflow_dmg)
+		# Opponent summon attack
+		if opponent_summon_slot && opponent_summon_slot.has_summon():
+			# Attack Player summon
+			if opponent_summon_slot && opponent_summon_slot.has_summon():
+				opponent_dmg.set_dmg(opponent_summon_slot.get_card().get_card_info().direct_damage)
+				opponent_dmg.set_dmg_type(opponent_summon_slot.get_card().get_card_info().damage_type)
+				overflow_dmg = player_summon_slot.take_dmg(player_dmg)
+				if overflow_dmg.dmg > 0:
+					play_space.get_player_slot().take_dmg(overflow_dmg)
+	
+	
+	# Old method
+	#for i: CardSlot in ai_slots:
+		#dmg = 0
+		#if i.cards.size() > 0:
+			#dmg += i.cards[0].card_data.current_attack
+	#$Playspace/PlayerSlot.cards[0].adjust_health(-1 * dmg)
+	#for i: CardSlot in player_slots:
+		#dmg = 0
+		#if i.cards.size() > 0:
+			#dmg += i.cards[0].card_data.current_attack
+		#$Playspace/OpponentSlot.cards[0].adjust_health(-1 * dmg)
 
 
 
@@ -329,7 +358,6 @@ func clean_up():
 	
 func check_game_end():
 	if(player.get_health() <= 0):
-		print("Player Health: ", player.get_health())
 		SignalBus.emit_signal("fight_loss")
 		in_combat = false
 	elif(enemy.get_health() <= 0):

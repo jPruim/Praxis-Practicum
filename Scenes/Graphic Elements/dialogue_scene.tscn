@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bw7ybqmel6xyl" path="res://Scripts/UI Elements/dialogue_scene.gd" id="1_aviac"]
 [ext_resource type="Texture2D" uid="uid://bo56tuwrojsaf" path="res://Assets/GUI/praxis-ui-ninepatch.png" id="2_qmqfd"]
+[ext_resource type="LabelSettings" uid="uid://dsqge5cvfurd0" path="res://Scenes/UI/Dialogue-label-settings.tres" id="3_0ry6w"]
 
 [sub_resource type="Theme" id="Theme_xkcnl"]
 
@@ -44,7 +45,49 @@ theme_override_constants/margin_bottom = 4
 [node name="DialogueText" type="Label" parent="Background/MarginContainer" unique_id=428169632]
 layout_mode = 2
 size_flags_vertical = 1
-text = "Basic Text"
+text = "Hey sleepyhead. You were out partying again. You sure you are ready for your practical exam next week?"
+label_settings = ExtResource("3_0ry6w")
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Background2" type="NinePatchRect" parent="." unique_id=16491757]
+visible = false
+modulate = Color(1, 1, 1, 0.705882)
+self_modulate = Color(1, 1, 1, 0.705882)
+texture_filter = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.25
+grow_horizontal = 2
+texture = ExtResource("2_qmqfd")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="Background2" unique_id=467163464]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="DialogueText" type="Label" parent="Background2/MarginContainer" unique_id=978743589]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Hey sleepyhead. You were out partying again. You sure you are ready for your practical exam next week?"
+label_settings = ExtResource("3_0ry6w")
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 3
 
 [node name="PlayerLabel" type="NinePatchRect" parent="." unique_id=1680586077]
 self_modulate = Color(1, 1, 1, 0.705882)
@@ -75,6 +118,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_xkcnl")
 text = "Vincent"
+label_settings = ExtResource("3_0ry6w")
 horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
@@ -82,11 +126,14 @@ clip_text = true
 [node name="SpeakerLabel" type="NinePatchRect" parent="." unique_id=900819081]
 self_modulate = Color(1, 1, 1, 0.705882)
 anchors_preset = -1
+anchor_left = 1.0
 anchor_top = 0.75
+anchor_right = 1.0
 anchor_bottom = 0.75
+offset_left = -120.0
 offset_top = -32.0
-offset_right = 120.0
 offset_bottom = -12.0
+grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 2
 texture = ExtResource("2_qmqfd")
@@ -107,7 +154,9 @@ offset_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_xkcnl")
-text = "Vincent"
+text = "Valerie"
+label_settings = ExtResource("3_0ry6w")
 horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
+text_overrun_behavior = 1

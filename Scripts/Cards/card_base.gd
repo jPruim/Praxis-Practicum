@@ -68,19 +68,27 @@ func _on_area_2d_mouse_exited() -> void:
 
 
 # Set Card from a CardData object
-func set_all(data: CardData):
+func set_all(data: CardData, reset_hp: bool = true):
 	card_data = data
+	if(reset_hp):
+		card_data.current_health = card_data.summon_health
 
 # Set Display and CardData from a CardData object
 func set_display(data: CardData):
+	card_data = data
+	update_graphics()
+	
+# Set display to current card data	
+func update_graphics():
 	# TODO: Make this dynamic (link to battle/run manager)
+	var data = card_data
 	var player_name = ""
 	var enemy_name = ""
 	var dmg: int = int(data.direct_damage)
 	var block: int = int(data.direct_block)
 	set_display_name(data.display_name)
 	$CardFront/Attack.text = str(data.summon_attack)
-	$CardFront/Health.text = str(data.summon_health)
+	$CardFront/Health.text = str(data.current_health)
 	$CardFront/Details.text = data.card_text.format(
 		TextReplacer.get_replacements(player_name, enemy_name, dmg, block)
 		)
@@ -105,6 +113,7 @@ func get_card_type():
 
 func set_animation(animation: String = "FireSparks"):
 	$CardFront/Container/AnimatedSprite2D.animation = animation # TODO: make an empty spriteframe at some point
+	card_data.animation = animation
 	
 @warning_ignore("shadowed_variable_base_class")
 func set_display_name(name: String):
