@@ -109,6 +109,7 @@ func time_loop():
 	if (iterations <= 0 || in_combat == false):
 		return
 	else:
+		# infinite loop catcher for debugging
 		iterations-=1
 	print_status()
 	if(phase == "start_turn"):
@@ -128,9 +129,9 @@ func time_loop():
 		increment_time() # Spell resolution
 		next_phase()
 	elif(phase == "clean_up"):
+		clean_up()
 		if Globals.DEBUG:
 			$Playspace.print_slots()
-		clean_up()
 		next_phase()
 	elif(phase == "end_step"):
 		end_step()
@@ -184,8 +185,8 @@ func summon_attacks():
 	
 	for x: int in play_space.boardDimensions.x:
 		# Summons
-		player_summon_slot = play_space.get_slot(Vector2(x, 1))
-		opponent_summon_slot = play_space.get_slot(Vector2(x, 0))
+		player_summon_slot = play_space.get_slot(Vector2(x, 2))
+		opponent_summon_slot = play_space.get_slot(Vector2(x, 1))
 		var player_dmg: Damage = Damage.new()
 		var opponent_dmg: Damage = Damage.new()
 		var overflow_dmg: Damage = Damage.new()
@@ -341,18 +342,16 @@ func clean_up():
 		clear_target(true)
 	if opponent_manager.cast_time == 0:
 		clear_target(false)
-	for slot: CardSlot in ai_slots:
-		slot.update_graphic()
-		if slot.cards.size() > 0 && slot.cards[0].get_health() <=0:
-			slot.cards[0].queue_free()
-			slot.cards = []
-		
-	for slot: CardSlot in player_slots:
-		slot.update_graphic()
-		if slot.cards.size() > 0 && slot.cards[0].get_health() <= 0:
-			slot.cards[0].queue_free()
-			slot.cards = []
-		
+	#var slots_checked = 0
+	for child in play_space.get_children(true):
+		if child is CardSlot:
+			var slot: CardSlot = child
+			#slots_checked += 1
+			slot.update_graphic()
+			if slot.cards.size() > 0 && slot.cards[0].get_health() <=0:
+				slot.cards[0].queue_free()
+				slot.cards = []
+	#print("Slots_checked in cleanup: ", slots_checked)
 	$Playspace/PlayerSlot.update_graphic()
 	$Playspace/OpponentSlot.update_graphic()
 	

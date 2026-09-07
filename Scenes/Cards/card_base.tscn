@@ -436,6 +436,7 @@ scale = Vector2(2.05, 2.05)
 shape = SubResource("RectangleShape2D_qs3p7")
 
 [node name="CardBack" type="Node2D" parent="." unique_id=725509777]
+visible = false
 z_index = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="CardBack" unique_id=1829128751]
@@ -457,7 +458,7 @@ texture_filter = 1
 offset_left = -30.0
 offset_top = 36.0
 offset_right = -8.0
-offset_bottom = 69.0
+offset_bottom = 48.0
 mouse_filter = 1
 theme = ExtResource("4_suoux")
 theme_override_font_sizes/normal_font_size = 16
@@ -476,8 +477,9 @@ theme = ExtResource("4_suoux")
 theme_override_font_sizes/normal_font_size = 16
 text = "0"
 scroll_active = false
+horizontal_alignment = 2
 selection_enabled = true
-text_direction = 2
+text_direction = 1
 
 [node name="Cost" type="RichTextLabel" parent="CardFront" unique_id=982006698]
 texture_filter = 1

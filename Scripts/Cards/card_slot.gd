@@ -56,10 +56,10 @@ func animate_dmg(A_SPEED = Globals.DEFAULT_ASPEED):
 	
 ## Dmg equation for a cardslot that does dmg to its summon	
 func take_dmg(dmg: Damage, overflow = false, A_SPEED = Globals.DEFAULT_ASPEED) -> Damage:
-	
 	# Handle empty card slots without overflow
 	if !has_summon() && !overflow:
-		return dmg.set_dmg(0)
+		dmg.set_dmg(0)
+		return dmg
 	# Handle empty slots with overflow
 	elif !has_summon() && overflow:
 		return dmg

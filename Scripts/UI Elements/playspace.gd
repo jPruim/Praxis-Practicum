@@ -66,7 +66,8 @@ func initialize_card_slots():
 			newSlot.visible = true
 			newSlot.board_location = Vector2(i,j+1) # Make row  0 be the opponent 
 			newSlot.update_graphic()
-			$".".add_child(newSlot)
+			newSlot.name = "CardSlot-" + str(newSlot.board_location.x) + "-" + str(newSlot.board_location.y)
+			add_child(newSlot, true)
 	$Centerpoint.position = centerPoint
 	
 
@@ -112,6 +113,6 @@ func print_slots():
 			output[0][0] = slot.get_debug_output()
 		else: # Slot is a card Slot
 			output[slot.board_location.y][slot.board_location.x] = slot.get_debug_output()
-	print("Current board: \n")
+	print("Current board:")
 	for row in output:
 		print("\t" + str(row))
