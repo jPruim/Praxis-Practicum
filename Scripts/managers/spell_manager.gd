@@ -8,14 +8,13 @@ var player_target_slots: Array[CardSlot] = []
 var opponent_target_slots: Array[CardSlot] = []
 var battle_manager: BattleManager
 var opponent_manager: OpponentManager
-var card_manager: CardManager
+var card_manager: CardManager = CardManager
 var summon_base = preload("res://Scenes/Cards/summon_card_base.tscn")
 var player_caster: CardSlot
 var opponent_caster: CardSlot
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	battle_manager = $".."
-	card_manager = CardManager
 	SignalBus.opponent_targeting_player.connect(_on_opponent_targeting_player)
 	SignalBus.opponent_targeting_self.connect(_on_opponent_targeting_self)
 	SignalBus.opponent_targeting_slot.connect(_on_opponent_targeting_slot)

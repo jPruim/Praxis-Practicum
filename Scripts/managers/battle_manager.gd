@@ -190,24 +190,32 @@ func summon_attacks():
 		var player_dmg: Damage = Damage.new()
 		var opponent_dmg: Damage = Damage.new()
 		var overflow_dmg: Damage = Damage.new()
+		
+		
 		# Player summon attack
 		if player_summon_slot && player_summon_slot.has_summon():
+			# Set player dmg
+			player_dmg.set_dmg(player_summon_slot.get_card().get_card_info().direct_damage)
+			player_dmg.set_dmg_type(player_summon_slot.get_card().get_card_info().damage_type)
 			# Attack opponent summon
 			if opponent_summon_slot && opponent_summon_slot.has_summon():
-				player_dmg.set_dmg(player_summon_slot.get_card().get_card_info().direct_damage)
-				player_dmg.set_dmg_type(player_summon_slot.get_card().get_card_info().damage_type)
 				overflow_dmg = opponent_summon_slot.take_dmg(player_dmg)
 				if overflow_dmg.dmg > 0:
 					play_space.get_opponent_slot().take_dmg(overflow_dmg)
+			else: # Attack opponent
+				play_space.get_opponent_slot().take_dmg(player_dmg)
+				
 		# Opponent summon attack
 		if opponent_summon_slot && opponent_summon_slot.has_summon():
+			opponent_dmg.set_dmg(opponent_summon_slot.get_card().get_card_info().direct_damage)
+			opponent_dmg.set_dmg_type(opponent_summon_slot.get_card().get_card_info().damage_type)
 			# Attack Player summon
-			if opponent_summon_slot && opponent_summon_slot.has_summon():
-				opponent_dmg.set_dmg(opponent_summon_slot.get_card().get_card_info().direct_damage)
-				opponent_dmg.set_dmg_type(opponent_summon_slot.get_card().get_card_info().damage_type)
+			if player_summon_slot && player_summon_slot.has_summon():
 				overflow_dmg = player_summon_slot.take_dmg(player_dmg)
 				if overflow_dmg.dmg > 0:
 					play_space.get_player_slot().take_dmg(overflow_dmg)
+			else: # Attack Player
+				play_space.get_player_slot().take_dmg(opponent_dmg)
 	
 	
 	# Old method

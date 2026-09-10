@@ -103,7 +103,7 @@ func clear():
 	cards = []
 	
 ## If this card slot has a summon
-func has_summon():
+func has_summon() -> bool:
 	if cards.size() > 0:
 		return true
 	else:

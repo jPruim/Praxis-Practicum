@@ -30,14 +30,14 @@ buses/default_bus_layout="uid://m3lxtp22teus"
 
 [autoload]
 
+DataManager="*res://Scripts/Managers/data_manager.gd"
 Globals="*res://Scripts/Globals/globals.gd"
+CardManager="*uid://dhmx315pd8nrt"
 SignalBus="*res://Scripts/Globals/signal_bus.gd"
 CardDatabase="*res://Scripts/Cards/card_database.gd"
-DataManager="*res://Scripts/Managers/data_manager.gd"
 RelicManager="*res://Scripts/Managers/relic_manager.gd"
 TextReplacer="*res://Scripts/Managers/text_replacer.gd"
 AudioManager="*uid://dl65vfoe6smn3"
-CardManager="*uid://dhmx315pd8nrt"
 
 [debug]
 

@@ -52,12 +52,6 @@ func _on_fight_won():
 func _on_fight_loss():
 	pass
 
-func setup_fight():
-	battleManager = battleManager_scene.instantiate()
-	#$".".add_child(battleManager)
-	#SignalBus.emit_signal("fight_start")
-	pass
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

@@ -6,6 +6,8 @@ var battle_manager: BattleManager
 var battle_manager_scene = preload("res://Scenes/Playspace/battle_manager.tscn")
 var shop_manager: ShopManager
 var shop_manager_scene = preload("res://Scenes/Playspace/shop-manager.tscn")
+
+@onready var run_manager: RunManager = $RunManager
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	connect_signals()
@@ -13,8 +15,6 @@ func _ready() -> void:
 	$Menu.display_menu()
 	AudioManager.trigger_sound(SoundEffect.SOUND_EFFECT_TYPE.MAIN_MUSIC_1, AudioManager.DEFAULT_LOCATION, true)
 	pass # Replace with function body.
-
-
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -36,6 +36,8 @@ func connect_signals() -> void:
 
 func initialize_fight():
 	show_game_ui()
+	if(battle_manager):
+		fight_cleanup()
 	battle_manager = battle_manager_scene.instantiate()
 	$".".add_child(battle_manager)
 	battle_manager.setup_combat(run_data)
@@ -59,9 +61,12 @@ func fight_won():
 	next_phase()
 	
 func fight_cleanup():
-	battle_manager.queue_free()
+	if battle_manager:
+		battle_manager.queue_free()
+	SignalBus.emit_signal("scene_end", "fight")
 
 func end_shop():
+	SignalBus.emit_signal("scene_end", "shop")
 	next_phase()
 
 func run_resume():
@@ -72,16 +77,13 @@ func run_start(resuming: bool = false):
 	$Fog/Fog.visible = false
 	if( !resuming ):
 		# Remove previous game from active scene
-		if(!(!(battle_manager))):
-			battle_manager.queue_free()
+		fight_cleanup()
 		run_data = DataManager.load_default_game_data()
-		first_assignment()
 	else:
 		if(run_data):
 			return
 		run_data = DataManager.load_game_data()
-		first_assignment()
-
+	first_assignment()
 
 
 func end_run(victory: bool):
@@ -111,7 +113,8 @@ func next_phase():
 func first_assignment():
 	run_data.phase = "assignment"
 	run_data.assignment = 1
-	SignalBus.emit_signal("fight_enter")
+	SignalBus.emit_signal("fight_enter") #Chains into initialize fight
+
 	
 func hide_game_ui():
 	$UI.visible = false

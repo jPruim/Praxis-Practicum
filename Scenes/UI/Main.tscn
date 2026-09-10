@@ -1,16 +1,10 @@
 [gd_scene format=3 uid="uid://5f8c2idfudc1"]
 
 [ext_resource type="Script" uid="uid://biax25cjf5duu" path="res://Scripts/Globals/world.gd" id="1_tofjt"]
-[ext_resource type="PackedScene" uid="uid://dl65vfoe6smn3" path="res://Scenes/Other/audio_manager.tscn" id="2_dfu8n"]
 [ext_resource type="PackedScene" uid="uid://c7mxxeb5gtpft" path="res://Scenes/UI/game_manager.tscn" id="2_q2fwe"]
-[ext_resource type="PackedScene" uid="uid://dhmx315pd8nrt" path="res://Scenes/Cards/card_manager.tscn" id="3_qyh0x"]
 
 [node name="Main" type="Node2D" unique_id=983024557]
 script = ExtResource("1_tofjt")
-
-[node name="AudioManager" parent="." unique_id=1646456925 instance=ExtResource("2_dfu8n")]
-
-[node name="CardManager" parent="." unique_id=47372969 instance=ExtResource("3_qyh0x")]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1990710878]
 offset = Vector2(320, 180)

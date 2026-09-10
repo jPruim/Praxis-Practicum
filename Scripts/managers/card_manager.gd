@@ -9,6 +9,7 @@ var player_hand: PlayerHand
 var opponent_hand: PlayerHand
 var deck_scene
 
+
 enum Scenes {
 	DEFAULT,
 	BATTLE,
@@ -156,8 +157,15 @@ func end_drag():
 	# card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
 	
 	var card_type = card_being_dragged.get_card_type()
-	# Check if Player can cast
-	if($"..".get_node("GameManager").get_node("BattleManager").is_player_turn):
+	var game_manager: GameManager = null
+	for node in $"..".get_children():
+		if node is GameManager:
+			game_manager = node
+	var battle_manager: BattleManager = null
+	for node in game_manager.get_children():
+		if node is BattleManager:
+			battle_manager = node
+	if(battle_manager.is_player_turn):
 		# Check if final location is a CardSlot
 		var card_slot = raycast_check_for_card_slot()
 		if (card_slot && card_slot.is_player):
