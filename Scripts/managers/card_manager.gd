@@ -157,6 +157,8 @@ func end_drag():
 	# card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
 	
 	var card_type = card_being_dragged.get_card_type()
+	
+	# Locate BattleManager in the tree
 	var game_manager: GameManager = null
 	for node in $"..".get_children():
 		if node is GameManager:

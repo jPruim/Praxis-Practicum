@@ -19,6 +19,7 @@ var board_location: Vector2 = Vector2( -1, -1)
 func _ready() -> void:
 	$".".scale = Globals.SCALE.card
 	$".".z_index = Globals.Z_INDEX.card_in_slot - 1
+	SignalBus.connect("scene_end", _on_scene_end)
 	pass # Replace with function body.
 
 
@@ -126,3 +127,9 @@ func get_opposing_slot():
 		printerr("No opposing slot")
 		return null
 		
+## Destroy cards on specific scene ends
+func _on_scene_end(scene: String):
+	if(scene == "fight" || scene == "shop"):
+		for card in cards:
+			card.delete_me = true
+			card.check_clean_up()

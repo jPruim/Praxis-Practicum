@@ -17,6 +17,7 @@ func _on_menu_button_pressed() -> void:
 	display_menu()
 
 func _on_new_game_btm_pressed() -> void:
+	SignalBus.emit_signal("menu_close")
 	SignalBus.emit_signal("run_start")
 	hide_all()
 	pass # Replace with function body.

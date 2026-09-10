@@ -73,7 +73,6 @@ func run_resume():
 	run_start(true) 
 
 func run_start(resuming: bool = false):
-	$Menu.hide_all()
 	$Fog/Fog.visible = false
 	if( !resuming ):
 		# Remove previous game from active scene
