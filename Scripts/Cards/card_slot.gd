@@ -12,7 +12,7 @@ var is_player = false # True if the card slot is representing the player
 var is_opponent = false # True if the card slot is representing the opponent
 ## The location in the board. Player summons attack y -=1....		
 var board_location: Vector2 = Vector2( -1, -1)
-
+var slot_effects: SlotEffects = SlotEffects.new()
 @onready var play_space: PlaySpace = $".."
 
 # Called when the node enters the scene tree for the first time.
@@ -42,7 +42,7 @@ func update_graphic():
 		$"CardSlotImage".texture = load("res://Assets/Cards/Card Borders etc/card-outline-blue.png")
 	elif(player_owned == false && $"CardSlotImage"):
 		$"CardSlotImage".texture = load("res://Assets/Cards/Card Borders etc/card-outline-grey.png")
-
+	update_slot_effects()
 	if(cards.size() == 0):
 		return
 	cards[0].position = $".".position
@@ -101,7 +101,9 @@ func get_debug_output():
 ## Empty cards and redo graphics
 func clear():
 	# TODO: Check that 
+	slot_effects.reset_values()
 	cards = []
+	update_graphic()
 	
 ## If this card slot has a summon
 func has_summon() -> bool:
@@ -133,3 +135,8 @@ func _on_scene_end(scene: String):
 		for card in cards:
 			card.delete_me = true
 			card.check_clean_up()
+
+## Update slot effects
+func update_slot_effects():
+	## TODO: Add full slot effect functionality
+	pass
