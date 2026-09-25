@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://cnsyqj7o2uopr"]
+
+[ext_resource type="Script" uid="uid://buk7ljdnv0hb2" path="res://Scripts/UI Elements/dialogue_choice.gd" id="1_f7q4u"]
+[ext_resource type="FontFile" uid="uid://bhgvkig86iomx" path="res://Assets/font/alagard.ttf" id="1_j0hj0"]
+[ext_resource type="StyleBox" uid="uid://dlkgkjd5daolx" path="res://Themes/new_style_box_texture-disabled.tres" id="2_f7q4u"]
+[ext_resource type="StyleBox" uid="uid://c40ppor3gvfty" path="res://Themes/dark-ui-ninepatch.tres" id="3_d08vb"]
+
+[sub_resource type="Theme" id="Theme_45cav"]
+Button/colors/font_disabled_color = Color(0.39232484, 0.3923257, 0.39232492, 0.5019608)
+Button/colors/font_hover_color = Color(0.9055605, 0.8465157, 0.8465157, 1)
+Button/fonts/font = ExtResource("1_j0hj0")
+Button/styles/disabled = ExtResource("2_f7q4u")
+Button/styles/normal = ExtResource("3_d08vb")
+
+[node name="DialogueChoice" type="HBoxContainer" unique_id=2059351420]
+offset_right = 95.0
+offset_bottom = 40.0
+script = ExtResource("1_f7q4u")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1900399115]
+custom_minimum_size = Vector2(12, 0)
+layout_mode = 2
+
+[node name="DialogueButton" type="Button" parent="." unique_id=1223982100]
+texture_filter = 1
+layout_mode = 2
+theme = SubResource("Theme_45cav")
+text = "ButtonText"
+
+[connection signal="pressed" from="DialogueButton" to="." method="_on_dialogue_button_pressed"]

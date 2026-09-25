@@ -12,6 +12,7 @@ layer = 4
 script = ExtResource("1_aviac")
 
 [node name="Background" type="NinePatchRect" parent="." unique_id=2035016276]
+visible = false
 modulate = Color(1, 1, 1, 0.705882)
 self_modulate = Color(1, 1, 1, 0.705882)
 texture_filter = 1
@@ -51,45 +52,8 @@ autowrap_mode = 3
 clip_text = true
 text_overrun_behavior = 3
 
-[node name="Background2" type="NinePatchRect" parent="." unique_id=16491757]
-visible = false
-modulate = Color(1, 1, 1, 0.705882)
-self_modulate = Color(1, 1, 1, 0.705882)
-texture_filter = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.25
-grow_horizontal = 2
-texture = ExtResource("2_qmqfd")
-region_rect = Rect2(0, 0, 32, 32)
-patch_margin_left = 4
-patch_margin_top = 4
-patch_margin_right = 4
-patch_margin_bottom = 4
-
-[node name="MarginContainer" type="MarginContainer" parent="Background2" unique_id=467163464]
-custom_minimum_size = Vector2(0, 80)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
-
-[node name="DialogueText" type="Label" parent="Background2/MarginContainer" unique_id=978743589]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Hey sleepyhead. You were out partying again. You sure you are ready for your practical exam next week?"
-label_settings = ExtResource("3_0ry6w")
-autowrap_mode = 3
-clip_text = true
-text_overrun_behavior = 3
-
 [node name="PlayerLabel" type="NinePatchRect" parent="." unique_id=1680586077]
+visible = false
 self_modulate = Color(1, 1, 1, 0.705882)
 anchors_preset = -1
 anchor_top = 0.75
@@ -124,6 +88,7 @@ vertical_alignment = 1
 clip_text = true
 
 [node name="SpeakerLabel" type="NinePatchRect" parent="." unique_id=900819081]
+visible = false
 self_modulate = Color(1, 1, 1, 0.705882)
 anchors_preset = -1
 anchor_left = 1.0
@@ -160,3 +125,132 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 text_overrun_behavior = 1
+
+[node name="SpeakerRight" type="NinePatchRect" parent="." unique_id=1215260332]
+self_modulate = Color(1, 1, 1, 0.705882)
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.55
+anchor_right = 1.0
+anchor_bottom = 0.55
+offset_left = -120.0
+offset_top = -32.0
+offset_bottom = -12.0
+grow_vertical = 0
+size_flags_horizontal = 2
+texture = ExtResource("2_qmqfd")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Speaker" type="Label" parent="SpeakerRight" unique_id=222633437]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.5
+offset_right = -1.0
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_xkcnl")
+text = "Vincent"
+label_settings = ExtResource("3_0ry6w")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="SpeakerLeft" type="NinePatchRect" parent="." unique_id=1133636811]
+self_modulate = Color(1, 1, 1, 0.705882)
+anchors_preset = -1
+anchor_top = 0.55
+anchor_bottom = 0.55
+offset_top = -32.0
+offset_right = 120.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 2
+texture = ExtResource("2_qmqfd")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Speaker" type="Label" parent="SpeakerLeft" unique_id=1336069194]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.5
+offset_right = -1.0
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_xkcnl")
+text = "Valerie"
+label_settings = ExtResource("3_0ry6w")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="TextArea" type="MarginContainer" parent="." unique_id=1339051166]
+anchors_preset = -1
+anchor_top = 0.55
+anchor_right = 1.0
+anchor_bottom = 0.85
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background2" type="NinePatchRect" parent="TextArea" unique_id=359408087]
+modulate = Color(1, 1, 1, 0.705882)
+self_modulate = Color(1, 1, 1, 0.705882)
+texture_filter = 1
+layout_mode = 2
+offset_transform_enabled = true
+texture = ExtResource("2_qmqfd")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="TextArea/Background2" unique_id=602702176]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="DialogueText" type="Label" parent="TextArea/Background2/MarginContainer" unique_id=2076953370]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Hey sleepyhead. You were out partying again. You sure you are ready for your practical exam next week?"
+label_settings = ExtResource("3_0ry6w")
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="ButtonArea" type="MarginContainer" parent="." unique_id=1510960214]
+anchors_preset = -1
+anchor_top = 0.85
+anchor_right = 1.0
+anchor_bottom = 0.95
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ButtonArea" unique_id=349125248]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
