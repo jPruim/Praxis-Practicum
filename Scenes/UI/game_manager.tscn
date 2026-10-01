@@ -13,6 +13,12 @@
 [ext_resource type="Texture2D" uid="uid://bj8afq7v5wd2n" path="res://Assets/Spritesheets/IconArt/Settings-icon.png" id="11_38tdi"]
 [ext_resource type="Script" uid="uid://m6iul0642y45" path="res://Scripts/Managers/lighting_manager.gd" id="12_t4hrx"]
 [ext_resource type="Shader" uid="uid://qdtpp85aj0x3" path="res://Scripts/Shaders/stars.gdshader" id="13_bi2jf"]
+[ext_resource type="Shader" uid="uid://cpcww5hhdvkx7" path="res://Scripts/Shaders/Fog.gdshader" id="14_kcb3n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qk2o7"]
+shader = ExtResource("13_bi2jf")
+shader_parameter/stars_speed = Vector2(0.2, 0.05)
+shader_parameter/stars_density = 0.002
 
 [sub_resource type="Theme" id="Theme_euek4"]
 
@@ -60,10 +66,25 @@ fill = 1
 fill_from = Vector2(0.5, 0.487179)
 fill_to = Vector2(0.880342, 0.162393)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qk2o7"]
-shader = ExtResource("13_bi2jf")
-shader_parameter/stars_speed = Vector2(0.2, 0.05)
-shader_parameter/stars_density = 0.002
+[sub_resource type="Gradient" id="Gradient_hyrd4"]
+offsets = PackedFloat32Array(0, 0.7887789)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_i4i5y"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_de83b"]
+noise = SubResource("FastNoiseLite_i4i5y")
+color_ramp = SubResource("Gradient_hyrd4")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_de83b"]
+shader = ExtResource("14_kcb3n")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_de83b")
+shader_parameter/strength = 0.25
+shader_parameter/inverse_density = 2.0
+shader_parameter/speed = Vector2(-0.01, -0.02)
+shader_parameter/pixelsx = 1920.0
+shader_parameter/pixelsy = 1920.0
+shader_parameter/number_of_shades = 24.0
 
 [node name="GameManager" type="Node2D" unique_id=1690411440]
 script = ExtResource("1_ypglt")
@@ -72,14 +93,23 @@ script = ExtResource("1_ypglt")
 position = Vector2(-46, -26)
 scale = Vector2(0.4, 0.4)
 
+[node name="ShaderTestLocation" type="CanvasLayer" parent="." unique_id=1495410184]
+layer = 4
+visible = false
+
+[node name="PanelContainer" type="PanelContainer" parent="ShaderTestLocation" unique_id=679211004]
+material = SubResource("ShaderMaterial_qk2o7")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="RunManager" type="Node2D" parent="." unique_id=1650311157]
 position = Vector2(0, 3)
 script = ExtResource("2_qus16")
 
 [node name="Fog" parent="." unique_id=1189836039 instance=ExtResource("5_e4tbf")]
-scale = Vector2(0.2, 0.2)
-transform = Transform2D(0.2, 0, 0, 0.2, 0, 0)
-follow_viewport_enabled = true
 
 [node name="Menu" parent="." unique_id=1078008813 instance=ExtResource("2_3q5x6")]
 
@@ -264,16 +294,28 @@ color = Color(1, 0.988235, 0.917647, 0.309804)
 texture = SubResource("GradientTexture2D_wf70c")
 height = 5.0
 
-[node name="ShaderTestLocation" type="CanvasLayer" parent="." unique_id=1495410184]
-layer = 1000
+[node name="SceneTransition" type="CanvasLayer" parent="." unique_id=2117041230]
+layer = 20
 visible = false
+follow_viewport_enabled = true
 
-[node name="PanelContainer" type="PanelContainer" parent="ShaderTestLocation" unique_id=679211004]
-material = SubResource("ShaderMaterial_qk2o7")
+[node name="Background" type="ColorRect" parent="SceneTransition" unique_id=1283805675]
+modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Fog" type="ColorRect" parent="SceneTransition/Background" unique_id=120573352]
+material = SubResource("ShaderMaterial_de83b")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.73300546, 0.7330054, 0.7330054, 1)
 
 [connection signal="pressed" from="UI/HeaderBar/NinePatchRect/HBoxContainer/VBoxContainer/Menubutton" to="." method="_on_menubutton_pressed"]

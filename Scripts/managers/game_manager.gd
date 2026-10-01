@@ -8,6 +8,8 @@ var shop_manager: ShopManager
 var shop_manager_scene = preload("res://Scenes/Playspace/shop-manager.tscn")
 
 @onready var run_manager: RunManager = $RunManager
+@onready var fog = $Fog
+@onready var scene_transition = $SceneTransition/Background
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	connect_signals()
@@ -73,7 +75,7 @@ func run_resume():
 	run_start(true) 
 
 func run_start(resuming: bool = false):
-	$Fog/Fog.visible = false
+	fog.visible = false
 	if( !resuming ):
 		# Remove previous game from active scene
 		fight_cleanup()
@@ -144,6 +146,19 @@ func update_ascension(difference: int):
 
 func _on_menubutton_pressed() -> void:
 	$Menu.display_menu()
-	$Fog/Fog.visible = true
+	fog.visible = true
 	SignalBus.emit_signal("menu_button_pressed")
 	pass # Replace with function body.
+
+func begin_scene_transition(A_SPEED = Globals.DEFAULT_ASPEED):
+	scene_transition.modulate = Vector4(255,255,255,0)
+	scene_transition.visible = true
+	var tween = get_tree().create_tween()
+	tween.tween_property(scene_transition, "modulate", Color.WHITE, A_SPEED)
+
+func end_scene_transition(A_SPEED = Globals.DEFAULT_ASPEED):
+	scene_transition.modulate = Vector4(255,255,255,255)
+	scene_transition.visible = true
+	var tween = get_tree().create_tween()
+	tween.tween_property(scene_transition, "modulate", Vector4(255,255,255,0), A_SPEED)
+	
