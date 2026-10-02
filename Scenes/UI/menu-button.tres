@@ -1,6 +1,6 @@
 [gd_resource type="Theme" format=3 uid="uid://cxef1cilx5oai"]
 
-[ext_resource type="FontFile" uid="uid://bhgvkig86iomx" path="res://Assets/Font/alagard.ttf" id="2_hllc5"]
+[ext_resource type="FontFile" uid="uid://bhgvkig86iomx" path="res://Assets/font/alagard.ttf" id="2_hllc5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3n3yq"]
 content_margin_left = 4.0

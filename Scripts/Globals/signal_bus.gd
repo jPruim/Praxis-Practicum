@@ -54,6 +54,7 @@ signal scene_end(scene:String)
 
 # UI Signals
 signal display_dialogue(text_key)
+signal dialogue_choice(choice: int)
 signal scale_change_card(new_value: int)
 
 # Sound Signals

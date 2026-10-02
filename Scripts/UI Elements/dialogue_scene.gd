@@ -58,3 +58,7 @@ func animation_reveal(player_speaking: bool = false):
 	$".".modulate = "ffffff00"
 	tween.tween_property($".", "modulate", dialogue_opacity, a_reveal_speed)
 	
+func animation_hide(player_speaking: bool = false):
+	var tween = get_tree().create_tween()
+	tween.tween_property($".", "modulate", "ffffff00", a_reveal_speed)
+	
